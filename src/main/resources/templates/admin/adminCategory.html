@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/category.css" rel="stylesheet"/>
+
+<!-- 헤더 -->
+<th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
+<div class="body">
+    <div class="container">
+        <div class="searchbar">
+            <h2>카테고리 관리</h2>
+        </div>
+        <div class="main">
+            <div class="aside">
+                <div class="category-kind">
+                    <h3>직업 카테고리</h3>
+                    <div class="cat-box">
+                        <a>test1t</a>
+                        <a>test2test</a>
+                        <a>test3</a>
+                        <a>test4t</a>
+                    </div>
+                    <button class="btn-add">직업 추가</button>
+                </div>
+                <div class="category-kind">
+                    <h3>비즈니스 카테고리</h3>
+                    <div class="cat-box">
+                        <a>test1te</a>
+                        <a>test2</a>
+                        <a>test3t</a>
+                        <a>test4</a>
+                    </div>
+                    <button class="btn-add">비즈니스 추가</button>
+                </div>
+                <div class="category-kind">
+                    <h3>분야 카테고리</h3>
+                    <div class="higher-category">
+                        <h5>대분류</h5>
+                        <div class="cat-box">
+                            <a>test1test</a>
+                            <a>test2</a>
+                            <a>test3</a>
+                        </div>
+                    </div>
+                    <div class="higher-category">
+                        <h5>대분류2</h5>
+                        <div class="cat-box">
+                            <a>test1testest</a>
+                            <a>test2</a>
+                            <a>test3tes</a>
+                            <a>test4</a>
+                            <a>test5teste</a>
+                        </div>
+                    </div>
+                    <div class="higher-category">
+                        <h5>대분류3</h5>
+                        <div class="cat-box">
+                            <a>test1te</a>
+                            <a>test2</a>
+                        </div>
+                    </div>
+                    <button class="btn-add">분야 추가</button>
+                </div>
+            </div>
+            <div class="section">section</div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
+</body>
+</html>
