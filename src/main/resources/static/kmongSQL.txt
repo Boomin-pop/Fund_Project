@@ -1,0 +1,84 @@
+use kmongDB;
+
+select * from serviceBasicInfo;
+
+create table serviceBasicInfo(
+	serviceNo int primary key not null auto_increment,
+	splId varchar(50) not null,
+	serviceTopCatCode varchar(30) not null,
+	serviceTopCatName varchar(100) not null,
+    serviceStatus varchar(100) not null default '승인대기'
+);
+
+drop table serviceTopCat;
+
+create table serviceTopCat(
+	serviceTopCatCode varchar(30) primary key,
+    serviceTopCatName varchar(100) not null,
+    serviceTypeChkCount int not null,
+    serviceTypeChkCode int unique auto_increment
+	-- foreign key (serviceTypeChk) references serviceType(serviceTypeCode)
+);
+
+drop table serviceTopCat;
+insert into serviceTopCat(
+	serviceTopCatCode, serviceTopCatName, serviceTypeChkCount, serviceTypeChkCode) values('tca01', '웹, 모바일 기획', 5, 'tca01'),
+    ('tca02', '기타 기획', 5, 'tca02'),('tca03', '홈페이지', 7, 'tca03'), ('tca04', '랜딩페이지', 7, 'tca04'), ('tca05', '프론트엔드·퍼블리싱', 5, 'tca05');
+select * from serviceTopCat;
+drop table serviceType;
+create table serviceType(
+	serviceTypeCode varchar(30) primary key,
+    serviceTypeName varchar(100) not null,
+    serviceTypeValue varchar(200) not null,
+    serviceTypeInput varchar(60) not null
+    );
+
+drop table serviceTypeChk;
+select * from serviceTypeChk;
+create table serviceTypeChk(
+	serviceTypeChkCode int primary key,
+    serviceTypeCode1 varchar(30),
+    serviceTypeCode2 varchar(30),
+    serviceTypeCode3 varchar(30),
+    serviceTypeCode4 varchar(30),
+    serviceTypeCode5 varchar(30),
+    serviceTypeCode6 varchar(30),
+    serviceTypeCode7 varchar(30),
+    serviceTypeCode8 varchar(30),
+    foreign key (serviceTypeChkCode) references serviceTopCat(serviceTypeChkCode)
+);
+
+insert into serviceTypeChk(
+	serviceTypeChkCode, serviceTypeCode1, serviceTypeCode2, serviceTypeCode3, serviceTypeCode4, serviceTypeCode5, serviceTypeCode6)
+ values	('tca01', 'stc1', 'stc2', 'sta1', 'sta2', 'sta3'),
+		('tca02', 'stc1', 'stc2', 'sta1', 'sta2', 'sta3'),
+		('tca03', 'stc1', 'stc2', 'stcat1', 'stdl1', 'stlib1', 'stfw1', 'stdb1'),
+		('tca04', 'stc1', 'stc2', 'stwb1', 'stdl1', 'stlib1', 'stfw1', 'stdb1'),
+		('tca05', 'stc1', 'stc2', 'stwb1', 'stdl1', 'stlib1', 'stfw1')
+ ;
+
+    drop table serviceTypeChk;
+    select * from serviceTypeChk;
+
+    insert into serviceType(
+		serviceTypeCode, serviceTypeName, serviceTypeValue, serviceTypeInput
+    ) values('stc1', '기술수준', '초급', 'selbox'),
+			('stc2', '팀규모', '2인 이상 50인 미만', 'selbox'),
+            ('sta1', '플랫폼', '웹', 'mulselbox'),
+            ('sta2', '기기', '콘솔', 'mulselbox'),
+            ('sta3', '작업분야', '화면설계서', 'mulselbox'),
+            ('stcat1', '카테고리', '개인홈페이지', 'mulselbox'),
+            ('stdl1', '개발언어', 'Fortran', 'mulselbox'),
+            ('stlib1', '라이브러리', 'Ajax', 'mulselbox'),
+            ('stfw1', '프레임워크', 'Vue.js', 'mulselbox'),
+            ('stdb1', '데이터베이스', 'MongoDB', 'mulselbox'),
+            ('stwb1', '웹빌더·CMS', '고스트', 'mulselbox')
+
+            ;
+
+            select * from serviceType;
+
+
+
+
+
