@@ -5,10 +5,20 @@
     box-sizing: border-box;
     border: 5px solid #000;
 }
-.category-kind h3{
+.category-kind .cat-kind-head{
+    display: flex;
+    width: 100%;
+}
+.category-kind .cat-kind-head h3{
     display: block;
 
     margin-top: 1px;
+}
+.category-kind .cat-kind-head .btn-expand{
+    margin-left: auto;
+    height: 30px;
+
+    background-color: 
 }
 .category-kind .cat-box{
 }
