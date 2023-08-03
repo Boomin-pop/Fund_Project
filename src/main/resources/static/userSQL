@@ -1,0 +1,32 @@
+use kmongDB;
+
+create table user(
+	userId varchar(50) primary key,
+    userPassword varchar(50) not null,
+    userName varchar(50) not null,
+    userNickname varchar(50) unique,
+    userEmail varchar(50) not null,
+    userJobId int,
+    userRegdate datetime default now(),
+    -- Job의 jobId를 외래키로 사용
+    foreign key(userJobId) references Job(jobId)
+);
+
+select * from user;
+drop table user;
+insert into user (userId, userPassword, userName, userNickname, userEmail, userJobId, userRegdate) values ('test','1234','홍길동','길동이','test@gmail.com',1,'2023-08-02');
+insert into user (userId, userPassword, userName, userNickname, userEmail, userJobId, userRegdate) values ('asd','1234','홍길동','길동','asd@gmail.com',2,'2023-08-02');
+
+create table Job(
+	jobId int primary key,
+    jobName varchar(50) not null
+);
+
+insert into Job (jobId, jobName) values (1,'프리랜서');
+insert into Job (jobId, jobName) values (2,'직장인');
+insert into Job (jobId, jobName) values (3,'소상공인');
+insert into Job (jobId, jobName) values (4,'스타트업창시자');
+insert into Job (jobId, jobName) values (5,'대학(원)생');
+insert into Job (jobId, jobName) values (6,'취업준비생');
+
+select * from Job;
