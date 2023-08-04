@@ -21,4 +21,8 @@
         )
     </insert>
 
+    <select id="idCheck" resultType="userDTO">
+        SELECT * FROM user WHERE userId=#{userId}
+    </select>
+
 </mapper>

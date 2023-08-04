@@ -17,6 +17,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JobMapper jmapper;
 
+
 //    @Autowired
 //    JavaMailSender mailsender;
 
@@ -35,5 +36,10 @@ public class UserServiceImpl implements UserService {
     public List<JobDTO> jobList() {
         System.out.println(jmapper.jobList());
         return jmapper.jobList();
+    }
+
+    @Override
+    public UserDTO idCheck(String uid) {
+        return umapper.idCheck(uid);
     }
 }
