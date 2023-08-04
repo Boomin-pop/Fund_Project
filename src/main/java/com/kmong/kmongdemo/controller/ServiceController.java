@@ -7,8 +7,7 @@ import com.kmong.kmongdemo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
@@ -26,49 +25,51 @@ public class ServiceController {
 
     @GetMapping("/serviceReg")
     public String serviceInput(Model model, HttpSession session) {
-
         List<CategoryDTO> topCatList = serviceService.topCatList();
         System.out.println("topCatList = " + topCatList);
         model.addAttribute("topCatList", topCatList);
-
-
         return "service/serviceInput";
     }
 
-    @GetMapping("/chkedServiceType/")
-    public void chkedServiceType(String code, Model model){
-            ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
-            System.out.println("stcDTO = " + stcDTO);
-            Map<String, String> selectedType = new HashMap<>();
-            String tc1 = stcDTO.getServiceTypeCode1();
-            String sttt = "getServiceTypeCode";
+    @PostMapping("/chkedServiceType")
+    public void chkedServiceType(@RequestBody CategoryDTO cDto, Model model){
+
+        String code = cDto.getServiceTopCatCode();
+          System.out.println("code = " + code);
+          ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
+            System.out.println("서비스타이프 체크된 코드들 = " + stcDTO);
+            //List<ServiceTypeDTO> = serviceService.serviceTypeList();
+            //Map<String, String> serviceTypeList = new HashMap<>();
+        Map<String, String> serviceTypeList = serviceService.serviceTypeList();
+
+         //       System.out.println("serviceTypeList = " + serviceTypeList);
+        Map<String, String> selectedType = new HashMap<>();
 
             try {
                 Object obj = stcDTO;
                 for (Field field : obj.getClass().getDeclaredFields()) {
                     field.setAccessible(true);
-                    Object value = field.get(obj);
-                    System.out.println(field.getName() + ", " + value);
+                    Object key = field.getName();
+                    Object objValue = field.get(obj);
+                    if(objValue.equals(""))
+                        break;
+
+                    System.out.println("key : " + key + ", value : " + objValue);
+
+                    if(!key.equals("serviceTypeChkCode") && !objValue.equals("")){
+                 //       for(String typeKey: serviceTypeList.keySet()){
+                          for(Map.Entry<String, String> typeList : serviceTypeList.entrySet()){
+                              if(objValue.equals(typeList.getKey())){
+                                selectedType.put(typeList.getKey(), typeList.getValue());
+                                       }
+                                   }
+                        }
+                    System.out.println("selectedType = " + selectedType);
                 }
             }catch (Exception e){
                 e.printStackTrace();
 
 
-           // serviceService.serviceTypeList(tc1);
-
-//        for(int i=0; i<chkedType.getServiceTypeChkCount(); i++){
-//
-//            String selCode = chkedType.getServiceTypeCode(i);
-//            ServiceTypeDTO stDTO = serviceService.selectedServiceType
-//            selectedType.put(chkedType.getServiceTypeCode1(), )
-//        }
-//        List<ServiceTypeDTO> serviceTypelist = serviceService.serviceTypeList();
-//
-//
-//        for(ServiceTypeDTO stDto : sreviceTypeList){
-//        selectedType.put(chkedType.getServiceTypeCode1(),
-//
-//        );
 
 
 
