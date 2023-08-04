@@ -7,9 +7,7 @@ import com.kmong.kmongdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +36,16 @@ public class UserController {
         model.addAttribute("jobList", jobList);
 
         return "user/joinClient";
+    }
+
+    @RequestMapping("/idcheck")
+    @ResponseBody
+    public String userIdcheck(@RequestParam("uid") String uid){
+        UserDTO dto = userService.idCheck(uid);
+        if(dto != null || "".equals(uid.trim())){
+            return "no";
+        }
+        return "yes";
     }
 
 

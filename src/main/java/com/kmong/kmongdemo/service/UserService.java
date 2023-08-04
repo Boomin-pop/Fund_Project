@@ -11,4 +11,6 @@ public interface UserService {
     int userRegister(UserDTO dto);
 
     List<JobDTO> jobList();
+
+    UserDTO idCheck(String uid);
 }
