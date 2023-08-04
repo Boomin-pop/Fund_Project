@@ -16,6 +16,8 @@ public class UserDTO {
 
     private String userEmail;
 
+    private String userTel;
+
     private int userJobId;
 
     private Timestamp userRegdate;
