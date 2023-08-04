@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFragment"></th:block>
+
+<!--  바디  -->
+
+<div class="container shadow-sm w-50 p-5 rounded mt-4">
+    <form class="form-join">
+        <div class="form-group">
+            <div><p><b>제목</b></p></div>
+            <div>
+                <input type="text" class="form-control" name="serviceTitle" id="serviceTitle"
+                       placeholder="서비스를 잘 드러낼 수 있는 제목을 입력해 주세요." required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div><p><b>1차 카테고리</b></p></div>
+            <div>
+                <select class="serviceTopCat" name="serviceTopCat" id="serviceTopCat" onchange="doChange(this)">
+                    <option value="">- 선택해 주세요 -</option>
+                    <option value="" disabled>----------------------</option>
+                    <th:block th:each="topCat : ${topCatList}">
+                    <option id="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>
+                    </th:block>
+                </select>
+            </div>
+
+        </div>
+    </form>
+
+    <button type="submit" id="btn-save" class="btn btn-success btn-lg">가입하기</button>
+
+</div>
+<script src="/js/user.js"></script>
+
+
+
+<!-- 푸터 -->
+<th:block th:replace="/inc/footer :: footerFragment"></th:block>
+</body>
+</html>

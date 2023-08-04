@@ -1,9 +1,8 @@
 package com.kmong.kmongdemo.service;
 
-import com.kmong.kmongdemo.domain.JobCategory;
-
 import java.util.List;
+import com.kmong.kmongdemo.domain.JobDTO;
 
 public interface AdminCategoryService {
-    List<JobCategory> getJob();
+    List<JobDTO> jobList();
 }
