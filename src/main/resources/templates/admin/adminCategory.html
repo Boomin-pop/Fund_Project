@@ -25,7 +25,7 @@
                         <div class="job-insert-box">
                             <form method="POST" onsubmit="return checkJob(event)" id="jobForm">
                                 <input type="text" id="jobName" name="jobName">
-                                <input type="button" onclick="return checkComment(event)" value="직업 추가" class="btn-add">
+                                <input type="button" id="add-job" value="직업 추가" class="btn-add">
                             </form>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="info-head">
                         <div class="info-elem">
                             <h4>카테고리 번호</h4>
-                            <input type="text" id="categoryId" name="categoryId" class="input"/>
+                            <input type="text" id="categoryId" name="categoryId" class="input" style="width:60px"/>
                         </div>
                         <div class="info-elem">
                             <h4>카테고리 이름</h4>
@@ -79,11 +79,10 @@
                     </div>
                 </div>
                 <div class="service-type">
-                    <div class="type-info">
-                        <input type="checkbox" id="typecheck" name="typecheck"/>
-                        <input type="text" id="typeName" name="typeName"/>
-                        <input type="text" id="typeVal" name="typeVal"/>
+                    <h4>서비스 타입 선택</h4>
+                    <div id="type-box">
                     </div>
+                    <input type="button" value="서비스 타입 추가" class="btn-add">
                 </div>
             </div>
             </div>
@@ -95,11 +94,8 @@
 </html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-    window.onload = () => {
-        findAllJob();
-    }
-
-    function findAllJob(){
+//ajax 스크립트
+    function findAllJob(){//모든 직업 카테고리 가져오기
         $.ajax({
             url: '/admin/category/job/list',
             type: 'get',
@@ -107,14 +103,75 @@
                 console.log(data);
                 let jobListHtml = '';
                 data.forEach(row => {
-                    console.log(row);
                     let name = row.jobName;
+                    let id = row.jobId;
                     jobListHtml += '<div class="cat-elem">';
                     jobListHtml += '<a>' + name + '</a>';
-                    jobListHtml += '<input type="button" value="삭제">';
+                    jobListHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
                     jobListHtml += '</div>';
-                    document.querySelector('#job-list').innerHTML = jobListHtml;
                 })
+                document.querySelector('#job-list').innerHTML = jobListHtml;
+            },
+            error: function(){
+                console.log("error")
+            }
+        })
+    }
+    function insertjob(jname){
+        $.ajax({
+            url:"/category/job/insert",
+            type: "post",
+            data: JSON.stringify(jname),
+            contentType: 'application/json; charset=utf-8',
+            dataType:'json',
+            success:function (result){
+                console.log(result);
+                findAllJob()
+            },
+                error:() => {alert("요청 실패!!!")}
+        });
+    }
+    function removejob(jid){
+        $.ajax({
+            url:'/admin/category/job/' + jid,
+            type:"delete",
+            success:function(result){
+                console.log(result);
+                findAllJob()
+            },
+            error:()=>{console.log('error')}
+        });
+    }
+
+    function findAllType(){
+        $.ajax({
+            url: '/admin/category/servicetype/list',
+            type: 'get',
+            success: function(data){
+                let typeHtml = '';
+                let i = 1;
+                data.forEach(row => {
+                    let name = row.serviceName;
+                    if(i%2==1){
+                        typeHtml += '<div class="type-box">';
+                        typeHtml += '<div class="type-info">';
+                        typeHtml += '<input type="checkbox" name="typecheck"/>';
+                        typeHtml += '<input type="text" name="typeName" value="' + name + '"/>';
+                        typeHtml += '</div>';
+
+                    }else{
+                        typeHtml += '<div class="type-info">';
+                        typeHtml += '<input type="checkbox" name="typecheck"/>';
+                        typeHtml += '<input type="text" name="typeName" value="' + name + '"/>';
+                        typeHtml += '</div>';
+                        typeHtml += '</div>';
+                    }
+                    i++;
+                })
+                if(i%2==0){
+                    typeHtml += '</div>';
+                }
+                document.querySelector('#type-box').innerHTML = typeHtml;
             },
             error: function(){
                 console.log("error")
@@ -149,5 +206,25 @@
             fbtn.value="보기";
         }
     }
+
+    window.onload = () => {
+        findAllJob();
+        findAllType();
+    }
+
+    document.getElementById("add-job").onclick = function(){
+        let name = document.getElementById("jobName").value;
+        if(name == null || name == ''){
+            alert("직업명을 작성하세요!!");
+            return;
+        }
+        console.log(name);
+        insertjob(name);
+    }
+
+    function deletejob(id){
+        removejob(id);
+    }
+
 </script>
 </html>
