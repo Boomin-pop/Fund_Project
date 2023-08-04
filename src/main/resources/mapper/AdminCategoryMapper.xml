@@ -4,8 +4,22 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kmong.kmongdemo.mapper.AdminCategoryMapper">
+<!--    job 관리 -->
+<!--    list 가져오기-->
     <select id="jobList" resultType="com.kmong.kmongdemo.domain.JobDTO">
         SELECT * FROM Job
     </select>
+<!--    삽입-->
+    <insert id="insertJob" parameterType="String">
+        INSERT INTO Job VALUES(#{jname})
+    </insert>
+<!--    삭제-->
+    <delete id="removeJob" >
+        DELETE FROM job WHERE jobId = #{jid}
+    </delete>
 
+<!--    service type 관리-->
+    <select id="typeList" resultType="com.kmong.kmongdemo.domain.AdminServiceTypeDTO">
+        SELECT * FROM AdminServiceType
+    </select>
 </mapper>

@@ -36,7 +36,7 @@
     color: #292929;
     line-height: 40px;
 }
-.category-kind .btn-add{
+.btn-add{
     background-color: #3184ff;
     color: white;
     border-radius: 15px;
@@ -83,10 +83,12 @@
 }
 /* 서비스 타입 */
 .section .service-type{
-    width: 100%;
-    border: 1px solid #000;
-}
-.section .service-type .type-info{
     width: 90%;
     margin: auto;
+}
+.section .service-type .type-box{
+    display:flex;
+}
+.section .service-type .type-info{
+    margin:auto;
 }
