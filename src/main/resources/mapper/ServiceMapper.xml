@@ -8,4 +8,9 @@
         SELECT * FROM serviceTopCat
     </select>
 
+    <select id="serviceTypeChkList" resultType="com.kmong.kmongdemo.domain.serviceTypeChkList">
+        SELECT * FROM serviceTypeChk WHERE serviceTypeChkCode=#{code}
+
+    </select>
+
 </mapper>

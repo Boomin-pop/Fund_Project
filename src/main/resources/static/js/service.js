@@ -6,9 +6,15 @@ let serviceObject= {
     },
 
     serviceTypeChk: function () {
-        let checkedCat={
-            serviceTopCatCode
+        let code={
+            serviceTopCatCode: $("#selectedCat").val()
         }
+        $.ajax({
+            type:"get",
+            url:"/service/serviceReg",
+            data:JSON.stringify(code),
+            contentType:"application/json; charset=utf-8"
+        })
     }
 
 
