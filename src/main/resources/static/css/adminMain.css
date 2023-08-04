@@ -1,0 +1,90 @@
+/* all */
+a{
+    text-decoration: none;
+}
+body{
+    margin: 0; padding: 0;
+}
+
+/* header */
+header{
+    margin: 0; padding: 0;
+    width: 100%;
+    background-color: rgb(245, 203, 14);
+    border-bottom: 3px solid #ffffff;
+
+    display: flex;
+    flex-direction: column;
+}
+header .header{
+    margin: auto;
+    width: 1280px;
+}
+nav{
+    margin: auto;
+    height: 60px; width: 1280px;
+}
+nav div{
+    width: 100%;
+
+    position: relative;
+    top: 100%;
+
+    transform: translate(0,-95%);
+
+    display: flex;
+}
+nav div a{
+    margin-right: -3px;
+
+    padding: 5px 10px;
+    border-radius: 10px 10px 0 0;
+    border: 3px solid #ffffff;
+    background-color: rgb(255, 217, 0);
+    color: rgb(0, 0, 0);
+}
+nav div a:hover{
+    background-color: rgb(243, 161, 8);
+    color: rgb(255, 255, 255);
+}
+
+/* body */
+.body{
+    background-color: #d1d1d1;
+}
+.container{
+    border: 3px solid #ffffff;
+    border-top: none;
+    width: 1280px; min-height: 800px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+/* body-top */
+.container .searchbar{
+    margin: 10px;
+    display: flex;
+}
+.container .main{
+    display: flex;
+}
+/* body-side */
+.container .aside{
+    background-color: #fff6c5;
+    margin: 10px;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+.container .aside a{
+    margin: 10px;
+}
+/* body-main */
+.container .section{
+    background-color: #fff;
+    margin: 10px;
+    margin-left: 0;
+    flex: 4;
+}

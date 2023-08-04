@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface JobMapper {
+public interface AdminCategoryMapper {
     List<JobDTO> jobList();
 }
