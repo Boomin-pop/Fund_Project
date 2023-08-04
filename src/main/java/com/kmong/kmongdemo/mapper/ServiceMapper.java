@@ -2,6 +2,7 @@ package com.kmong.kmongdemo.mapper;
 
 import com.kmong.kmongdemo.domain.CategoryDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
+import com.kmong.kmongdemo.domain.ServiceTypeDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import java.util.Map;
 public interface ServiceMapper {
     List<CategoryDTO> topCatList();
 
-    Map<Object, Object> serviceTypeList();
+    List<ServiceTypeDTO> serviceTypeList();
+    //Map<String, String> serviceTypeList();
 
     ServiceTypeChkDTO serviceTypeChkList(String code);
 }
