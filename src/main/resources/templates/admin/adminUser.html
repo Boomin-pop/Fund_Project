@@ -55,16 +55,19 @@
                         <th>삭제</th>
                     </tr>
                     </thead>
+                    <th:block th:each="user : ${userLists}">
                     <tr>
-                        <td>이름</td>
-                        <td>아이디</td>
-                        <td>닉네임</td>
-                        <td>전화번호</td>
-                        <td><button class="change" onclick="btn1()">변경</button></td>
+                        <td th:text="${user.userName}">이름</td>
+                        <td th:text="${user.userId}">아이디</td>
+                        <td th:text="${user.userNickname}">닉네임</td>
+                        <td th:text="${user.userTel}">전화번호</td>
+<!--                        <td><button class="change" th:onclick="btn1([[${user.userId}]])">변경</button></td>-->
+                        <td><button class="change" th:onclick="btn1([[${user.userId}]])">변경</button></td>
                         <td>최근 기록</td>
                         <td><button class="data" onclick="btn2()">정보 확인</button></td>
                         <td><button class="delete" onclick="btn3()">삭제</button></td>
                     </tr>
+                    </th:block>
                 </table>
             </div>
         </div>
@@ -80,7 +83,7 @@
         <table>
             <tr>
                 <td>이름</td>
-                <td><input type="text" placeholder="이름"></td>
+                <td><input type="text" placeholder="이름" id="name"></td>
             </tr>
             <tr>
                 <td>아이디</td>
@@ -100,7 +103,7 @@
             </tr>
             <tr>
                 <td>생년월일</td>
-                <td><input type="date" id="" name=""
+                <td><input type="date" name=""
                            value="2018-07-22"
                            min="2018-01-01" max="2018-12-31"></td>
             </tr>
@@ -114,7 +117,7 @@
             </tr>
             <tr>
                 <td>가입일</td>
-                <td><input type="date" id="" name=""
+                <td><input type="date" name=""
                            value="2018-07-22"
                            min="2018-01-01" max="2018-12-31"></td>
             </tr>
