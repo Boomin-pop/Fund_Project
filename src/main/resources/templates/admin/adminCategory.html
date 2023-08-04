@@ -12,65 +12,140 @@
         <div class="main">
             <div class="aside">
                 <div class="category-kind">
+<!--                    각 카테고리의 상단부분-->
                     <div class="cat-kind-head">
                         <h3>직업 카테고리</h3>
-                        <button class="btn-expand">보기</button>
+                        <input type="button" value="보기" id="btn-job" class="btn-expand"/>
                     </div>
-                    <div class="cat-box" th:each="job: ${jobList}">
-                        <a th:text="${job.getJobName()}"/>
+<!--                    직업 카테고리 ajax 처리-->
+                    <div id="box-job" class="cat-box">
+                        <div id="job-list">
+
+                        </div>
+                        <div class="job-insert-box">
+                            <form method="POST" onsubmit="return checkJob(event)" id="jobForm">
+                                <input type="text" id="jobName" name="jobName">
+                                <input type="button" onclick="return checkComment(event)" value="직업 추가" class="btn-add">
+                            </form>
+                        </div>
                     </div>
-                    <button class="btn-add">직업 추가</button>
-                </div>
-                <div class="category-kind">
-                    <div class="cat-kind-head">
-                        <h3>비즈니스 카테고리</h3>
-                        <button class="btn-expand">보기</button>
-                    </div>
-                    <div class="cat-box">
-                        <a>test1te</a>
-                        <a>test2</a>
-                        <a>test3t</a>
-                        <a>test4</a>
-                    </div>
-                    <button class="btn-add">비즈니스 추가</button>
                 </div>
                 <div class="category-kind">
                     <div class="cat-kind-head">
                         <h3>분야 카테고리</h3>
-                        <button class="btn-expand">보기</button>
+                        <input type="button" value="보기"  id="btn-field" class="btn-expand"/>
                     </div>
-                    <div class="higher-category">
-                        <h5>대분류</h5>
-                        <div class="cat-box">
-                            <a>test1test</a>
-                            <a>test2</a>
-                            <a>test3</a>
+                    <div id="box-field" class="cat-box">
+                        <div class="higher-category">
+                            <h5>대분류</h5>
+                            <div class="cat-inner-box">
+                                <div class="cat-elem">
+                                    <a>test1test</a>
+                                    <input type="button" value="삭제">
+                                </div>
+                                <div class="cat-elem">
+                                    <a>test1test</a>
+                                    <input type="button" value="삭제">
+                                </div>
+                                <div class="cat-elem">
+                                    <a>test1test</a>
+                                    <input type="button" value="삭제">
+                                </div>
+                            </div>
                         </div>
+                        <button class="btn-add">분야 추가</button>
                     </div>
-                    <div class="higher-category">
-                        <h5>대분류2</h5>
-                        <div class="cat-box">
-                            <a>test1testest</a>
-                            <a>test2</a>
-                            <a>test3tes</a>
-                            <a>test4</a>
-                            <a>test5teste</a>
-                        </div>
-                    </div>
-                    <div class="higher-category">
-                        <h5>대분류3</h5>
-                        <div class="cat-box">
-                            <a>test1te</a>
-                            <a>test2</a>
-                        </div>
-                    </div>
-                    <button class="btn-add">분야 추가</button>
                 </div>
             </div>
-            <div class="section">section</div>
+            <div class="section">
+                <div class="category-info">
+                    <div class="info-head">
+                        <div class="info-elem">
+                            <h4>카테고리 번호</h4>
+                            <input type="text" id="categoryId" name="categoryId" class="input"/>
+                        </div>
+                        <div class="info-elem">
+                            <h4>카테고리 이름</h4>
+                            <input type="text" id="categoryName" name="categoryName" class="input"/>
+                        </div>
+                        <div class="info-elem">
+                            <h4>상위 카테고리</h4>
+                            <input type="text" id="categoryUpperId" name="categoryUpperId" class="input"/>
+                        </div>
+                    </div>
+                    <div class="refund-box">
+                        <h4>환불 규정</h4>
+                        <textarea id="categoryRefund" name="categoryRefund" class="input"></textarea>
+                    </div>
+                </div>
+                <div class="service-type">
+                    <div class="type-info">
+                        <input type="checkbox" id="typecheck" name="typecheck"/>
+                        <input type="text" id="typeName" name="typeName"/>
+                        <input type="text" id="typeVal" name="typeVal"/>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
 </body>
 </html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    window.onload = () => {
+        findAllJob();
+    }
+
+    function findAllJob(){
+        $.ajax({
+            url: '/admin/category/job/list',
+            type: 'get',
+            success: function(data){
+                console.log(data);
+                let jobListHtml = '';
+                data.forEach(row => {
+                    console.log(row);
+                    let name = row.jobName;
+                    jobListHtml += '<div class="cat-elem">';
+                    jobListHtml += '<a>' + name + '</a>';
+                    jobListHtml += '<input type="button" value="삭제">';
+                    jobListHtml += '</div>';
+                    document.querySelector('#job-list').innerHTML = jobListHtml;
+                })
+            },
+            error: function(){
+                console.log("error")
+            }
+        })
+    }
+</script>
+<script>
+    let jbox = document.getElementById("box-job");
+    let jbtn = document.getElementById("btn-job");
+    let fbox = document.getElementById("box-field");
+    let fbtn = document.getElementById("btn-field");
+
+    jbox.style.display = "none";
+    fbox.style.display = "none";
+
+    jbtn.onclick = function(){
+        if(jbtn.value == "보기"){
+            jbox.style.display = "block";
+            jbtn.value="닫기";
+        }else{
+            jbox.style.display = "none";
+            jbtn.value="보기";
+        }
+    }
+    fbtn.onclick = function(){
+        if(fbtn.value == "보기"){
+            fbox.style.display = "block";
+            fbtn.value="닫기";
+        }else{
+            fbox.style.display = "none";
+            fbtn.value="보기";
+        }
+    }
+</script>
