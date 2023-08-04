@@ -42,4 +42,8 @@ public class UserServiceImpl implements UserService {
     public UserDTO idCheck(String uid) {
         return umapper.idCheck(uid);
     }
+
+    public UserDTO pwCheck(String password){
+        return umapper.pwCheck(password);
+    }
 }

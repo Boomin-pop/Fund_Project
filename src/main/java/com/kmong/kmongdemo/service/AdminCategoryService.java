@@ -9,12 +9,12 @@ import java.util.List;
 
 @Service
 public class AdminCategoryService {
-    @Autowired
-    AdminCateogryMapper acmapper;
-
-    public List<JobCategory> getJob(){
-        System.out.println("catService");
-        List<JobCategory> jlist = acmapper.getJob();
-        return jlist;
-    }
+//    @Autowired
+//    AdminCateogryMapper acmapper;
+//
+//    public List<JobCategory> getJob(){
+//        System.out.println("catService");
+//        List<JobCategory> jlist = acmapper.getJob();
+//        return jlist;
+//    }
 }

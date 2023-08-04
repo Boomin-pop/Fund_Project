@@ -35,24 +35,24 @@ public class ServiceController {
         return "service/serviceInput";
     }
 
-    @GetMapping("/chkedServiceType/")
-    public void chkedServiceType(String code, Model model){
-            ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
-            System.out.println("stcDTO = " + stcDTO);
-            Map<String, String> selectedType = new HashMap<>();
-            String tc1 = stcDTO.getServiceTypeCode1();
-            String sttt = "getServiceTypeCode";
-
-            try {
-                Object obj = stcDTO;
-                for (Field field : obj.getClass().getDeclaredFields()) {
-                    field.setAccessible(true);
-                    Object value = field.get(obj);
-                    System.out.println(field.getName() + ", " + value);
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-
+//    @GetMapping("/chkedServiceType/")
+//    public void chkedServiceType(String code, Model model){
+//            ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
+//            System.out.println("stcDTO = " + stcDTO);
+//            Map<String, String> selectedType = new HashMap<>();
+//            String tc1 = stcDTO.getServiceTypeCode1();
+//            String sttt = "getServiceTypeCode";
+//
+//            try {
+//                Object obj = stcDTO;
+//                for (Field field : obj.getClass().getDeclaredFields()) {
+//                    field.setAccessible(true);
+//                    Object value = field.get(obj);
+//                    System.out.println(field.getName() + ", " + value);
+//                }
+//            }catch (Exception e){
+//                e.printStackTrace();
+//
 
            // serviceService.serviceTypeList(tc1);
 
@@ -71,7 +71,7 @@ public class ServiceController {
 //        );
 
 
-
-        }
-    }
+//
+//        }
+//    }
 }

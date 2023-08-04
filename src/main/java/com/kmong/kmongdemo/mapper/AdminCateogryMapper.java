@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface AdminCateogryMapper {
-    @Select("SELECT * FROM job")
-    List<JobCategory> getJob();
+//    @Select("SELECT * FROM job")
+//    List<JobCategory> getJob();
 }

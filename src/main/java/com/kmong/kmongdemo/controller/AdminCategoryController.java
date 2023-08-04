@@ -15,10 +15,10 @@ public class AdminCategoryController {
     private AdminCategoryService acservice;
 
     // 카테고리 페이지로 이동 - 직업 카테고리, 비즈니스 카테고리, 분야 카테고리 리스트 전달
-    @GetMapping("admin/category")
-    public String adminCategory(Model model){
-        List<JobCategory> jlist = acservice.getJob();
-        model.addAttribute("jobList", jlist);
-        return "admin/adminCategory";
-    }
+//    @GetMapping("admin/category")
+//    public String adminCategory(Model model){
+//        List<JobCategory> jlist = acservice.getJob();
+//        model.addAttribute("jobList", jlist);
+//        return "admin/adminCategory";
+//    }
 }

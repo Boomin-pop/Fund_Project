@@ -12,4 +12,6 @@ public interface UserMapper {
     int userInsert(UserDTO dto);
 
     UserDTO idCheck(String uid);
+
+    UserDTO pwCheck(String password);
 }
