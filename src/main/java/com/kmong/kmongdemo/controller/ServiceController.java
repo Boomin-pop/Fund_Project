@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ServiceController {
 
     @GetMapping("/serviceReg")
     public String serviceInput(Model model, HttpSession session) {
+
         List<CategoryDTO> topCatList = serviceService.topCatList();
         System.out.println("topCatList = " + topCatList);
         model.addAttribute("topCatList", topCatList);
@@ -33,13 +35,26 @@ public class ServiceController {
         return "service/serviceInput";
     }
 
-    @GetMapping("/chkedServiceType")
+    @GetMapping("/chkedServiceType/")
     public void chkedServiceType(String code, Model model){
-            ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList();
+            ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
             System.out.println("stcDTO = " + stcDTO);
             Map<String, String> selectedType = new HashMap<>();
             String tc1 = stcDTO.getServiceTypeCode1();
-            serviceService.serviceTypeList(tc1);
+            String sttt = "getServiceTypeCode";
+
+            try {
+                Object obj = stcDTO;
+                for (Field field : obj.getClass().getDeclaredFields()) {
+                    field.setAccessible(true);
+                    Object value = field.get(obj);
+                    System.out.println(field.getName() + ", " + value);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+
+
+           // serviceService.serviceTypeList(tc1);
 
 //        for(int i=0; i<chkedType.getServiceTypeChkCount(); i++){
 //

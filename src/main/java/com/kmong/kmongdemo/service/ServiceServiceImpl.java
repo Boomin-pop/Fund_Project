@@ -1,6 +1,7 @@
 package com.kmong.kmongdemo.service;
 
 import com.kmong.kmongdemo.domain.CategoryDTO;
+import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
 import com.kmong.kmongdemo.mapper.ServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,9 @@ public class ServiceServiceImpl implements ServiceService{
     }
 
     @Override
-    public Map<String, String> serviceTypeList() {
-        for(int i=0; i< serviceMapper.serviceTypeList().size(); i++){
-            String key = serviceMapper.serviceTypeList().get(serviceTypeCode)
-
-        }
-
-        return null;
+    public ServiceTypeChkDTO serviceTypeChkList(String code) {
+        return serviceMapper.serviceTypeChkList(code);
     }
+
+
 }
