@@ -10,15 +10,20 @@
 
     <insert id="userInsert" parameterType="UserDTO">
         INSERT INTO user(userId, userPassword, userName,
-        userNickname, userEmail, userJobId, userRegdate)
+        userNickname, userEmail, userTel, userJobId, userRegdate)
         VALUES( #{userId},
         #{userPassword},
         #{userName},
         #{userNickname},
         #{userEmail},
+        #{userTel},
         #{userJobId},
         #{userRegdate}
         )
     </insert>
+
+    <select id="idCheck" resultType="userDTO">
+        SELECT * FROM user WHERE userId=#{userId}
+    </select>
 
 </mapper>
