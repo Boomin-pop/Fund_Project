@@ -1,6 +1,7 @@
 	function submitChk(){
 		let isIdChk = $("#isIdChk").val();
 		console.log("isIdChk : " + isIdChk);
+
 		if(isIdChk == "no"){
 			alert("아이디 중복체크를 확인해주세요!!");
 			$("#userId").select();
@@ -13,6 +14,7 @@
 			return false;
 		}
   }
+
 // 아이디 길이 체크
 	function idCheck(){
 
@@ -24,8 +26,8 @@
 			return;
 		}
 		$.ajax({
-        			url:'user/idcheck',
-        			type: "posr",
+        			url:'/user/idcheck',
+        			type: "post",
         			data:{"uid":uid}, // 서버에 전송할 데이터
         			success: function(responseData){
         				// responseData = "yes" or "no", yes:사용가능 no:사용불가
@@ -126,7 +128,7 @@ let serverUUID = "";
 					$("#confirmEmail").html('<div class="col-md-8">'
 							+'<input class="form-control mb-2" type="text" id="confirmUUID"/></div>'
 							+'<div class="col-md-4">'
-							+'<span class="btn btn-outline-secondary w-100" onclick="emailConfirm()"> 인증코드확인</span></div>'
+							+'<input type="button" onclick="emailConfirm()" class="checkEmail"   value="인증코드확인"></div>'
 						);
 				}else{
 					alert("이메일을 다시 확인하세요!!");

@@ -12,12 +12,11 @@
 </head>
 <body>
 <div class="container">
-    <a href="/home" class="logo">
+    <a href="/" class="logo">
         <img src="/imgs/kmong.svg" width="85px" height="26px" alt class="img">
     </a>
 
     <form class="main" onSubmit="submitChk()">
-        <form >
             <h1>딱 이것만 체크하면 가입완료!</h1>
 
             <div class="join">
@@ -81,7 +80,7 @@
                 <input type="button" onclick="emailCheck()" class="checkEmail"   value="인증하기">
                 <!-- 이메일 인증코드 확인하기 -->
             </div>
-            <div class="row" id="confirmEmail">
+            <div class="join" id="confirmEmail">
 
             </div>
 
@@ -99,11 +98,10 @@
                     직업
                 </div>
                 <div class="jobBox">
-                    <select class="content" name="jobName" id="jobName" onchange="doChange(this)">
+                    <select class="content" name="jobName" id="jobName">
                         <option value="" selected disabled>직업을 선택해주세요</option>
-
                         <th:block th:each="job : ${jobList}">
-                            <option th:value="${job.jobId}" th:text="${job.jobName}"></option>
+                            <option id="selectJob" th:value="${job.jobId}" th:text="${job.jobName}"></option>
                         </th:block>
                     </select>
 
@@ -112,7 +110,7 @@
 
             <!-- 동의 -->
             <div class="agreements">
-                <form action="/" method="POST" id="form__wrap">
+                <form action="/user/userInsert" method="POST" id="form__wrap">
                     <div class="allagree">
                         <label>
                             <input type="checkbox" id="chkall" onclick="checkAll()">
@@ -159,15 +157,16 @@
                             </div>
                         </div>
                     </div>
+                    <button type="submit" class="joinClear" id="joinclear" disabled>
+                        <span>버튼만 누르면 가입완료!</span>
+                    </button>
                 </form>
             </div>
 
-
-
-            <button type="submit" class="joinClear" id="joinclear"  disabled>
+            <button type="submit" class="joinClear" id="joinclear" disabled>
                 <span>버튼만 누르면 가입완료!</span>
             </button>
-        </form>
+
     </form>
     <p style="margin: 24px 0px;
         font-size: 13px;

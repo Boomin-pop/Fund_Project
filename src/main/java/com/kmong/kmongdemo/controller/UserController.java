@@ -34,16 +34,33 @@ public class UserController {
     @GetMapping("/joinChoice")
     public String userJoin2(){
 
-        return "user/userJoin2";
+        return "/user/userJoin2";
     }
 
     @GetMapping("/userRegister")
     public String joinClient(Model model){
         List<JobDTO> jobList = userService.jobList();
-        System.out.println("jobList = " + jobList);
         model.addAttribute("jobList", jobList);
 
         return "user/joinClient";
+    }
+
+
+    @PostMapping("/userInsert")
+    public String userInsert(UserDTO dto){
+        userService.userRegister(dto);
+        System.out.println("dto = " + dto);
+        System.out.println("dto = " + dto);
+
+
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/test")
+    public String test(){
+        System.out.println();
+        return "user/test";
     }
 
     @RequestMapping("/userAjaxList")
@@ -105,6 +122,7 @@ public class UserController {
 
         return "fail";
     }
+
 
 
 
