@@ -19,12 +19,20 @@
     </delete>
 
 <!--    service type 관리-->
+<!--    list 가져오기-->
     <select id="typeList" resultType="com.kmong.kmongdemo.domain.AdminServiceTypeDTO">
         SELECT * FROM AdminServiceType
     </select>
+<!--    타입 삽입-->
+    <insert id="insertType" parameterType="String">
+        INSERT INTO AdminServiceType(serviceTypeName) VALUES(#{tname})
+    </insert>
 
 <!--    category 관리-->
     <select id="categoryList" resultType="com.kmong.kmongdemo.domain.AdminCategoryDTO">
         SELECT * FROM category ORDER BY categoryUpperId
+    </select>
+    <select id="categoryView" resultType="com.kmong.kmongdemo.domain.AdminCategoryDTO">
+        SELECT * FROM category WHERE categoryId = #{cid}
     </select>
 </mapper>

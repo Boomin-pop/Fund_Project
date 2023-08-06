@@ -51,12 +51,23 @@ public class AdminCategoryController {
         List<AdminServiceTypeDTO> tlist = acservice.typeList();
         return tlist;
     }
+    @PostMapping("/category/servicetype/insert")
+    public @ResponseBody String typeInsert(@RequestBody String tname){
+        System.out.println("tname = " + tname);
+        int n = acservice.insertType(tname);
+        return n == 1 ? "success" : "fail";
+    }
 
     // ajax 분야 카테고리 관리
     @GetMapping("/category/list")
     public @ResponseBody List<AdminCategoryDTO> categoryList(){
-        List<AdminCategoryDTO> clist =acservice.categoryList();
+        List<AdminCategoryDTO> clist = acservice.categoryList();
         System.out.println("clist = " + clist);
         return clist;
+    }
+    @GetMapping("/category/{cid}")
+    public @ResponseBody AdminCategoryDTO categoryView(@PathVariable("cid") int cid){
+        AdminCategoryDTO cdto = acservice.categoryView(cid);
+        return cdto;
     }
 }

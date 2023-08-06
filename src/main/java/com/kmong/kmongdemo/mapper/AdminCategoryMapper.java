@@ -11,9 +11,12 @@ import java.util.List;
 public interface AdminCategoryMapper {
     List<JobDTO> jobList();
     int insertJob(String jname);
-    List<AdminServiceTypeDTO> typeList();
-
     int removeJob(int jid);
 
+    List<AdminServiceTypeDTO> typeList();
+    int insertType(String tname);
+
     List<AdminCategoryDTO> categoryList();
+    AdminCategoryDTO categoryView(int cid);
+
 }

@@ -35,7 +35,7 @@
 .category-kind .cat-box .a{
     background-color: #d3d3d3;
     border-radius: 40px;
-    padding: 0 10px; margin: 10px 10px;
+    padding: 0 10px; margin: 10px 5px;
     height: 2em;
 
     color: #292929;
@@ -44,6 +44,22 @@
 .category-kind .cat-box .cat-elem{
     width:100%;
     padding: 0;
+}
+.form-add{
+    margin-top: 10px; padding: 10px;
+
+    background-color: #ddffde;
+    border-radius: 15px;
+    border: 2px solid black;
+}
+.text-add{
+    margin-top: 10px;
+
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+
+    height: 1em;
 }
 .btn-add{
     background-color: #3184ff;
@@ -54,7 +70,7 @@
     left: 50%;
     transform: translate(-50%,0);
 
-    margin-top: 20px; margin-bottom: 6px;
+    margin-top: 5px; margin-bottom: 6px;
 }
 .btn-delete{
     margin-left:auto;
@@ -105,6 +121,7 @@
 }
 .section .service-type .type-box{
     display:flex;
+    height: 60px;
 }
 .section .service-type .type-info{
     margin:auto;

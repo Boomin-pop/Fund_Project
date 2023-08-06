@@ -14,7 +14,9 @@ public interface AdminCategoryService {
 
     // 서비스 타입 관리
     List<AdminServiceTypeDTO> typeList();
-
+    int insertType(String tname);
     // 카테고리 관리
     List<AdminCategoryDTO> categoryList();
+    AdminCategoryDTO categoryView(int cid);
+
 }
