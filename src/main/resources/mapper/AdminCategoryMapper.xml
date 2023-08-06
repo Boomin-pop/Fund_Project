@@ -11,7 +11,7 @@
     </select>
 <!--    삽입-->
     <insert id="insertJob" parameterType="String">
-        INSERT INTO Job VALUES(#{jname})
+        INSERT INTO Job(jobName) VALUES(#{jname})
     </insert>
 <!--    삭제-->
     <delete id="removeJob" >
@@ -21,5 +21,10 @@
 <!--    service type 관리-->
     <select id="typeList" resultType="com.kmong.kmongdemo.domain.AdminServiceTypeDTO">
         SELECT * FROM AdminServiceType
+    </select>
+
+<!--    category 관리-->
+    <select id="categoryList" resultType="com.kmong.kmongdemo.domain.AdminCategoryDTO">
+        SELECT * FROM category ORDER BY categoryUpperId
     </select>
 </mapper>

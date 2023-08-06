@@ -67,24 +67,26 @@ nav div a:hover{
     display: flex;
 }
 .container .main{
+    width:100%;
     display: flex;
+    flex-direction: row;
 }
 /* body-side */
-.container .aside{
+.container .main .aside{
     background-color: #fff6c5;
     margin: 10px;
-    flex: 1;
+    width:20%;
 
     display: flex;
     flex-direction: column;
 }
-.container .aside a{
+.container .main .aside a{
     margin: 10px;
 }
 /* body-main */
-.container .section{
+.container .main .section{
     background-color: #fff;
     margin: 10px;
     margin-left: 0;
-    flex: 4;
+    width: 80%;
 }

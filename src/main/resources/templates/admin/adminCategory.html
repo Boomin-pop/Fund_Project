@@ -20,7 +20,6 @@
 <!--                    직업 카테고리 ajax 처리-->
                     <div id="box-job" class="cat-box">
                         <div id="job-list">
-
                         </div>
                         <div class="job-insert-box">
                             <form method="POST" onsubmit="return checkJob(event)" id="jobForm">
@@ -36,26 +35,11 @@
                         <input type="button" value="보기"  id="btn-field" class="btn-expand"/>
                     </div>
                     <div id="box-field" class="cat-box">
-                        <div class="higher-category">
-                            <h5>대분류</h5>
-                            <div class="cat-inner-box">
-                                <div class="cat-elem">
-                                    <a>test1test</a>
-                                    <input type="button" value="삭제">
-                                </div>
-                                <div class="cat-elem">
-                                    <a>test1test</a>
-                                    <input type="button" value="삭제">
-                                </div>
-                                <div class="cat-elem">
-                                    <a>test1test</a>
-                                    <input type="button" value="삭제">
-                                </div>
-                            </div>
+                        <div id="category-list">
                         </div>
                         <button class="btn-add">분야 추가</button>
                     </div>
-                </div>
+                    </div>
             </div>
             <div class="section">
                 <div class="category-info">
@@ -85,7 +69,6 @@
                     <input type="button" value="서비스 타입 추가" class="btn-add">
                 </div>
             </div>
-            </div>
         </div>
     </div>
 </div>
@@ -100,38 +83,39 @@
             url: '/admin/category/job/list',
             type: 'get',
             success: function(data){
-                console.log(data);
                 let jobListHtml = '';
                 data.forEach(row => {
                     let name = row.jobName;
                     let id = row.jobId;
                     jobListHtml += '<div class="cat-elem">';
-                    jobListHtml += '<a>' + name + '</a>';
+                    jobListHtml += '<input type="button" value="' + name + '" class="a"/>';
                     jobListHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
                     jobListHtml += '</div>';
                 })
                 document.querySelector('#job-list').innerHTML = jobListHtml;
             },
             error: function(){
-                console.log("error")
+                console.log("job data load error")
             }
         })
     }
-    function insertjob(jname){
+    function insertjob(jname){//직업 카테고리 집어넣기
+        console.log(jname);
         $.ajax({
-            url:"/category/job/insert",
+            url:"/admin/category/job/insert",
             type: "post",
-            data: JSON.stringify(jname),
-            contentType: 'application/json; charset=utf-8',
-            dataType:'json',
+            data: jname,
+            contentType:'application/json; charset-utf-8',
             success:function (result){
                 console.log(result);
                 findAllJob()
             },
-                error:() => {alert("요청 실패!!!")}
+                error:  function(){
+                console.log("job data insert error")
+            }
         });
     }
-    function removejob(jid){
+    function removejob(jid){//직업 카테고리 삭제하기
         $.ajax({
             url:'/admin/category/job/' + jid,
             type:"delete",
@@ -143,7 +127,7 @@
         });
     }
 
-    function findAllType(){
+    function findAllType(){//서비스 타입 가져오기
         $.ajax({
             url: '/admin/category/servicetype/list',
             type: 'get',
@@ -172,6 +156,36 @@
                     typeHtml += '</div>';
                 }
                 document.querySelector('#type-box').innerHTML = typeHtml;
+            },
+            error: function(){
+                console.log("error")
+            }
+        })
+    }
+
+    function findAllCategory(){//분야 카테고리 가져오기
+        $.ajax({
+            url: '/admin/category/list',
+            type: 'get',
+            success: function(data){
+                console.log(data);
+                let categoryListHtml = '<div>';
+                data.forEach(row => {
+                    if(row.categoryId == row.categoryUpperId){
+                        categoryListHtml += '</div>';
+                        categoryListHtml += '<div class="higher-category">';
+                        categoryListHtml += '<h5>' + row.categoryName + '</h5>';
+                        categoryListHtml += '<div class="cat-inner-box">';
+                    } else {
+                        categoryListHtml += '<div class="cat-elem">';
+                        categoryListHtml += '<input type="hidden" value="' + row.categoryId + '">';
+                        categoryListHtml += '<input type="button" value="' + row.categoryName + '" class="a"/>';
+                        categoryListHtml += '<input type="button" value="삭제" class="btn-delete" >';
+                        categoryListHtml += '</div>';
+                    }
+                })
+                console.log(categoryListHtml);
+                document.querySelector('#category-list').innerHTML = categoryListHtml;
             },
             error: function(){
                 console.log("error")
@@ -209,17 +223,19 @@
 
     window.onload = () => {
         findAllJob();
-        findAllType();
+<!--        findAllType();-->
+        findAllCategory()
     }
 
     document.getElementById("add-job").onclick = function(){
-        let name = document.getElementById("jobName").value;
-        if(name == null || name == ''){
+
+        let name = document.getElementById("jobName");
+        if(name.value == null || name.value == ''){
             alert("직업명을 작성하세요!!");
             return;
         }
-        console.log(name);
-        insertjob(name);
+        insertjob(name.value);
+        name.value = '';
     }
 
     function deletejob(id){
