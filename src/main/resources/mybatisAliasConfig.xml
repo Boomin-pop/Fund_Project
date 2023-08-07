@@ -6,5 +6,6 @@
     <typeAliases>
         <!-- 별칭 설정  -->
         <typeAlias type="com.kmong.kmongdemo.domain.CategoryDTO" alias="categoryDTO"/>
+        <typeAlias type="com.kmong.kmongdemo.domain.ServiceTypeDTO" alias="stDTO"/>
     </typeAliases>
 </configuration>
