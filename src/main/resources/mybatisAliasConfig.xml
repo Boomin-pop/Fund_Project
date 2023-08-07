@@ -7,5 +7,6 @@
         <!-- 별칭 설정  -->
         <typeAlias type="com.kmong.kmongdemo.domain.CategoryDTO" alias="categoryDTO"/>
         <typeAlias type="com.kmong.kmongdemo.domain.UserDTO" alias="UserDTO"/>
+        <typeAlias type="com.kmong.kmongdemo.domain.JobDTO" alias="JobDTO"/>
     </typeAliases>
 </configuration>

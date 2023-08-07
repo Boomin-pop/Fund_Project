@@ -12,12 +12,11 @@
 </head>
 <body>
 <div class="container">
-    <a href="/home" class="logo">
+    <a href="/" class="logo">
         <img src="/imgs/kmong.svg" width="85px" height="26px" alt class="img">
     </a>
 
-    <form class="main" onSubmit="submitChk()">
-        <form action="/user/userInsert" method="POST" >
+        <form class="main" onSubmit="submitChk()" action="/user/userInsert" method="POST">
             <h1>딱 이것만 체크하면 가입완료!</h1>
 
             <div class="join">
@@ -37,11 +36,10 @@
                     비밀번호
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="password"  onkeyup="pwCheck()" placeholder="비밀번호를 입력해주세요.(6자리 이상)" id="password" name="password" autocomplete="password">
+                    <input class="txtBox" type="password" onkeyup="pwCheck()" placeholder="비밀번호를 입력해주세요.(6자리 이상)" id="password" name="password" autocomplete="password">
                 </div>
             </div>
             <p id="chkMsg2" class="mb-2"></p>
-
             <input type="hidden" id="isPwChk" value="no"/>
 
             <div class="joinPw">
@@ -50,7 +48,6 @@
                 </div>
             </div>
             <p id="chkMsg3" class="mb-2"></p>
-
             <input type="hidden" id="isRePwChk" value="no"/>
 
             <div class="join">
@@ -58,18 +55,22 @@
                     이름
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="name" placeholder="이름을 입력해주세요." name="name" autocomplete="name">
+                    <input class="txtBox" type="name" onkeyup="nameCheck()" laceholder="이름을 입력해주세요." id="name" name="name" autocomplete="name">
                 </div>
             </div>
+            <input type="hidden" id="isNameChk" value="no"/>
 
             <div class="join">
                 <div class="txt">
                     별명
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="nickname" placeholder="별명을 입력해주세요." name="nickname" autocomplete="nuckname">
+                    <input class="txtBox" onkeyup="nicknameCheck()" type="nickname" placeholder="별명을 입력해주세요." id="nickname" name="nickname" autocomplete="nickname">
                 </div>
             </div>
+            <p id="chkMsg4" class="mb-2"></p>
+
+            <input type="hidden" id="isNicknameChk" value="no"/>
 
             <div class="join">
                 <div class="txt">
@@ -84,22 +85,24 @@
             <div class="join" id="confirmEmail">
 
             </div>
+            <input type="hidden" id="isEmailChk" value="no"/>
 
             <div class="join">
                 <div class="txt">
                     전화번호
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="tel" placeholder="전화번호를 입력해주세요." name="tel" autocomplete="tel">
+                    <input class="txtBox" type="tel" onkeyup="telCheck()" placeholder="전화번호를 입력해주세요." name="tel" id="tel" autocomplete="tel">
                 </div>
             </div>
+            <input type="hidden" id="isTelChk" value="no"/>
 
             <div class="join">
                 <div class="txt">
                     직업
                 </div>
                 <div class="jobBox">
-                    <select class="content" name="jobName" id="jobName">
+                    <select class="content" onkeyup="jobNameCheck()" name="jobName" id="jobName" >
                         <option value="" selected disabled>직업을 선택해주세요</option>
 
                         <th:block th:each="job : ${jobList}">
@@ -109,6 +112,7 @@
 
                 </div>
             </div>
+            <input type="hidden" id="isJobNameChk" value="no"/>
 
             <!-- 동의 -->
             <div class="agreements">
@@ -160,12 +164,10 @@
                     </div>
             </div>
 
-            <button type="submit" class="joinClear" id="joinclear"  disabled>
+            <button type="submit" class="joinClear" id="joinclear"  disabled onclick="submitChk()">
                 <span>버튼만 누르면 가입완료!</span>
             </button>
 
-
-        </form>
     </form>
     <p style="margin: 24px 0px;
         font-size: 13px;

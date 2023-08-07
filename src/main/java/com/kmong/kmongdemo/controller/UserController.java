@@ -40,7 +40,6 @@ public class UserController {
     @GetMapping("/userRegister")
     public String joinClient(Model model){
         List<JobDTO> jobList = userService.jobList();
-        System.out.println("jobList = " + jobList);
         model.addAttribute("jobList", jobList);
 
         return "user/joinClient";
@@ -63,7 +62,7 @@ public class UserController {
         return userList;
     }
 
-    @RequestMapping("/idcheck")
+    @RequestMapping("/idCheck")
     @ResponseBody
     public String userIdcheck(@RequestParam("uid") String uid){
         System.out.println("uid : " + uid);
@@ -75,16 +74,18 @@ public class UserController {
         return "yes";
     }
 
-    @RequestMapping("/Pwcheck")
+    @RequestMapping("/nicknameCheck")
     @ResponseBody
-    public String userPwcheck(@RequestParam("password") String password){
-        UserDTO dto = userService.pwCheck(password);
+    public String userNicknameCheck(@RequestParam("nickname") String nickname){
+        System.out.println("nickname : " + nickname);
+        UserDTO dto = userService.nicknameCheck(nickname);
 
-        if(dto != null || "".equals(password.trim())){
+        if(dto != null || "".equals(nickname.trim())){
             return "no";
         }
         return "yes";
     }
+
 
     @RequestMapping("/userEmailCheck")
     @ResponseBody
