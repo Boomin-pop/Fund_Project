@@ -20,12 +20,12 @@
 <!--                    직업 카테고리 ajax 처리-->
                     <div id="box-job" class="cat-box">
                         <div id="job-list">
-
                         </div>
                         <div class="job-insert-box">
-                            <form method="POST" onsubmit="return checkJob(event)" id="jobForm">
-                                <input type="text" id="jobName" name="jobName">
-                                <input type="button" id="add-job" value="직업 추가" class="btn-add">
+                            <form method="POST" onsubmit="return checkJob(event)" id="jobForm" class="form-add">
+                                직업 추가하기
+                                <input type="text" id="jobName" name="jobName" class="text-add" placeholder="직업명">
+                                <input type="button" id="add-job" value="추가" class="btn-add">
                             </form>
                         </div>
                     </div>
@@ -33,29 +33,14 @@
                 <div class="category-kind">
                     <div class="cat-kind-head">
                         <h3>분야 카테고리</h3>
-                        <input type="button" value="보기"  id="btn-field" class="btn-expand"/>
+                        <input type="button" value="닫기"  id="btn-field" class="btn-expand"/>
                     </div>
                     <div id="box-field" class="cat-box">
-                        <div class="higher-category">
-                            <h5>대분류</h5>
-                            <div class="cat-inner-box">
-                                <div class="cat-elem">
-                                    <a>test1test</a>
-                                    <input type="button" value="삭제">
-                                </div>
-                                <div class="cat-elem">
-                                    <a>test1test</a>
-                                    <input type="button" value="삭제">
-                                </div>
-                                <div class="cat-elem">
-                                    <a>test1test</a>
-                                    <input type="button" value="삭제">
-                                </div>
-                            </div>
+                        <div id="category-list">
                         </div>
                         <button class="btn-add">분야 추가</button>
                     </div>
-                </div>
+                    </div>
             </div>
             <div class="section">
                 <div class="category-info">
@@ -82,149 +67,46 @@
                     <h4>서비스 타입 선택</h4>
                     <div id="type-box">
                     </div>
-                    <input type="button" value="서비스 타입 추가" class="btn-add">
+                    <form method="POST" onsubmit="return checkJob(event)" id="typeForm" class="form-add">
+                        서비스 타입 추가하기
+                        <input type="text" id="typeName" name="typeName" class="text-add" placeholder="서비스 타입 명">
+                        <input type="button" id="add-type" value="추가" class="btn-add">
+                    </form>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
+</div>
+<div id="categoryInput" class="modal">
+    <h3>카테고리 추가하기</h3>
+    <div class="modal-content">
+        <span class="close1" onclick="close-modal()">&times;</span>
+        <table>
+            <tr>
+                <td>카테고리 명</td>
+                <td><input type="text" placeholder="카테고리 명"></td>
+            </tr>
+            <tr>
+                <td>상위 카테고리</td>
+                <td>
+                    <select id="select-upperCategory">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>환불규정</td>
+                <td><textarea placeholder="전화번호"></textarea></td>
+            </tr>
+
+
+        </table>
+        <button class="btn-add" onclick="modify1()">추가</button>
     </div>
 </div>
 <th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
 </body>
 </html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
-//ajax 스크립트
-    function findAllJob(){//모든 직업 카테고리 가져오기
-        $.ajax({
-            url: '/admin/category/job/list',
-            type: 'get',
-            success: function(data){
-                console.log(data);
-                let jobListHtml = '';
-                data.forEach(row => {
-                    let name = row.jobName;
-                    let id = row.jobId;
-                    jobListHtml += '<div class="cat-elem">';
-                    jobListHtml += '<a>' + name + '</a>';
-                    jobListHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
-                    jobListHtml += '</div>';
-                })
-                document.querySelector('#job-list').innerHTML = jobListHtml;
-            },
-            error: function(){
-                console.log("error")
-            }
-        })
-    }
-    function insertjob(jname){
-        $.ajax({
-            url:"/category/job/insert",
-            type: "post",
-            data: JSON.stringify(jname),
-            contentType: 'application/json; charset=utf-8',
-            dataType:'json',
-            success:function (result){
-                console.log(result);
-                findAllJob()
-            },
-                error:() => {alert("요청 실패!!!")}
-        });
-    }
-    function removejob(jid){
-        $.ajax({
-            url:'/admin/category/job/' + jid,
-            type:"delete",
-            success:function(result){
-                console.log(result);
-                findAllJob()
-            },
-            error:()=>{console.log('error')}
-        });
-    }
-
-    function findAllType(){
-        $.ajax({
-            url: '/admin/category/servicetype/list',
-            type: 'get',
-            success: function(data){
-                let typeHtml = '';
-                let i = 1;
-                data.forEach(row => {
-                    let name = row.serviceName;
-                    if(i%2==1){
-                        typeHtml += '<div class="type-box">';
-                        typeHtml += '<div class="type-info">';
-                        typeHtml += '<input type="checkbox" name="typecheck"/>';
-                        typeHtml += '<input type="text" name="typeName" value="' + name + '"/>';
-                        typeHtml += '</div>';
-
-                    }else{
-                        typeHtml += '<div class="type-info">';
-                        typeHtml += '<input type="checkbox" name="typecheck"/>';
-                        typeHtml += '<input type="text" name="typeName" value="' + name + '"/>';
-                        typeHtml += '</div>';
-                        typeHtml += '</div>';
-                    }
-                    i++;
-                })
-                if(i%2==0){
-                    typeHtml += '</div>';
-                }
-                document.querySelector('#type-box').innerHTML = typeHtml;
-            },
-            error: function(){
-                console.log("error")
-            }
-        })
-    }
-</script>
-<script>
-    let jbox = document.getElementById("box-job");
-    let jbtn = document.getElementById("btn-job");
-    let fbox = document.getElementById("box-field");
-    let fbtn = document.getElementById("btn-field");
-
-    jbox.style.display = "none";
-    fbox.style.display = "none";
-
-    jbtn.onclick = function(){
-        if(jbtn.value == "보기"){
-            jbox.style.display = "block";
-            jbtn.value="닫기";
-        }else{
-            jbox.style.display = "none";
-            jbtn.value="보기";
-        }
-    }
-    fbtn.onclick = function(){
-        if(fbtn.value == "보기"){
-            fbox.style.display = "block";
-            fbtn.value="닫기";
-        }else{
-            fbox.style.display = "none";
-            fbtn.value="보기";
-        }
-    }
-
-    window.onload = () => {
-        findAllJob();
-        findAllType();
-    }
-
-    document.getElementById("add-job").onclick = function(){
-        let name = document.getElementById("jobName").value;
-        if(name == null || name == ''){
-            alert("직업명을 작성하세요!!");
-            return;
-        }
-        console.log(name);
-        insertjob(name);
-    }
-
-    function deletejob(id){
-        removejob(id);
-    }
-
-</script>
+<script src="/js/adminCategoryAjax.js"></script>
+<script src="/js/adminCategory.js"></script>
 </html>

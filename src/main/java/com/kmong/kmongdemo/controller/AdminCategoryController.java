@@ -1,5 +1,6 @@
 package com.kmong.kmongdemo.controller;
 
+import com.kmong.kmongdemo.domain.AdminCategoryDTO;
 import com.kmong.kmongdemo.domain.AdminServiceTypeDTO;
 import com.kmong.kmongdemo.domain.JobDTO;
 import lombok.RequiredArgsConstructor;
@@ -35,9 +36,8 @@ public class AdminCategoryController {
     }
     @PostMapping("/category/job/insert")
     public @ResponseBody String jobInsert(@RequestBody String jname){
-        System.out.println("controller jname = " + jname);
+        System.out.println("jname = " + jname);
         int n = acservice.insertJob(jname);
-        System.out.println("n = " + n);
         return n == 1 ? "success" : "fail";
     }
     @DeleteMapping("/category/job/{jid}")
@@ -45,10 +45,29 @@ public class AdminCategoryController {
         int n = acservice.removeJob(jid);
         return n == 1 ? "success" : "fail";
     }
-
+    // ajax 서비스 타입 관리
     @GetMapping("/category/servicetype/list")
-    public @ResponseBody List<AdminServiceTypeDTO> typeList(Model model){
+    public @ResponseBody List<AdminServiceTypeDTO> typeList(){
         List<AdminServiceTypeDTO> tlist = acservice.typeList();
         return tlist;
+    }
+    @PostMapping("/category/servicetype/insert")
+    public @ResponseBody String typeInsert(@RequestBody String tname){
+        System.out.println("tname = " + tname);
+        int n = acservice.insertType(tname);
+        return n == 1 ? "success" : "fail";
+    }
+
+    // ajax 분야 카테고리 관리
+    @GetMapping("/category/list")
+    public @ResponseBody List<AdminCategoryDTO> categoryList(){
+        List<AdminCategoryDTO> clist = acservice.categoryList();
+        System.out.println("clist = " + clist);
+        return clist;
+    }
+    @GetMapping("/category/{cid}")
+    public @ResponseBody AdminCategoryDTO categoryView(@PathVariable("cid") int cid){
+        AdminCategoryDTO cdto = acservice.categoryView(cid);
+        return cdto;
     }
 }

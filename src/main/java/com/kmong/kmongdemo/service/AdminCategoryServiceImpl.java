@@ -1,5 +1,6 @@
 package com.kmong.kmongdemo.service;
 
+import com.kmong.kmongdemo.domain.AdminCategoryDTO;
 import com.kmong.kmongdemo.domain.AdminServiceTypeDTO;
 import com.kmong.kmongdemo.domain.JobDTO;
 import com.kmong.kmongdemo.mapper.AdminCategoryMapper;
@@ -29,8 +30,19 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
 
     @Override
     public List<AdminServiceTypeDTO> typeList() {
-        List<AdminServiceTypeDTO> tlist = acmapper.typeList();
-        System.out.println("servicetlist = " + tlist);
-        return tlist;
+        return acmapper.typeList();
+    }
+    @Override
+    public int insertType(String tname) {
+        return acmapper.insertType(tname);
+    }
+
+    @Override
+    public List<AdminCategoryDTO> categoryList() {
+        return acmapper.categoryList();
+    }
+    @Override
+    public AdminCategoryDTO categoryView(int cid) {
+        return acmapper.categoryView(cid);
     }
 }
