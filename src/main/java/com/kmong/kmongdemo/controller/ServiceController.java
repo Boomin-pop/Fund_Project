@@ -32,7 +32,7 @@ public class ServiceController {
     }
 
     @PostMapping("/chkedServiceType")
-    public void chkedServiceType(@RequestBody CategoryDTO cDto, Model model){
+    public  @ResponseBody Map<String, String> chkedServiceType(@RequestBody CategoryDTO cDto, Model model){
 
         String code = cDto.getServiceTopCatCode();
           System.out.println("code = " + code);
@@ -43,7 +43,7 @@ public class ServiceController {
         Map<String, String> serviceTypeList = serviceService.serviceTypeList();
 
          //       System.out.println("serviceTypeList = " + serviceTypeList);
-        Map<String, String> selectedType = new HashMap<>();
+        Map<String, String> chkedServiceType = new HashMap<>();
 
             try {
                 Object obj = stcDTO;
@@ -60,19 +60,15 @@ public class ServiceController {
                  //       for(String typeKey: serviceTypeList.keySet()){
                           for(Map.Entry<String, String> typeList : serviceTypeList.entrySet()){
                               if(objValue.equals(typeList.getKey())){
-                                selectedType.put(typeList.getKey(), typeList.getValue());
+                                  chkedServiceType.put(typeList.getKey(), typeList.getValue());
                                        }
                                    }
                         }
-                    System.out.println("selectedType = " + selectedType);
+                    System.out.println("selectedType = " + chkedServiceType);
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                e.printStackTrace();}
 
-
-
-
-
-        }
+        return chkedServiceType;
     }
 }
