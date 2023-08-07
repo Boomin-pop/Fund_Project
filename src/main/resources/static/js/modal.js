@@ -14,8 +14,22 @@ function admission(){
 
 // modal1
 let modal1 = document.getElementById("Modal1");
-function btn1(){
-    modal1.style.display = "block";
+// let userId = document.getElementById("userId").val();
+
+function btn1(userId) {
+    $.ajax({
+        url: "/admin/user/"+userId,
+        type: "get",
+        success : function (data) {
+            modal1.style.display = "block";
+            console.log(data);
+            document.getElementById("name").value = data.userName;
+
+        },
+        error: function (error) {
+            alert(error);
+        }
+    });
 }
 function span1(){
     modal1.style.display = "none";

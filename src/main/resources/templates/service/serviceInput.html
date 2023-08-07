@@ -19,22 +19,27 @@
         <div class="form-group">
             <div><p><b>1차 카테고리</b></p></div>
             <div>
-                <select class="serviceTopCat" name="serviceTopCat" id="serviceTopCat" onchange="doChange(this)">
+                <select class="serviceTopCat" name="serviceTopCat" id="serviceTopCat">
                     <option value="">- 선택해 주세요 -</option>
                     <option value="" disabled>----------------------</option>
                     <th:block th:each="topCat : ${topCatList}">
-                    <option id="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>
+                    <option name="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>
                     </th:block>
                 </select>
+            </div>
+        </div>
+        <div><p><b>서비스 타입</b></p>
+            <div>
+                <th:block th:each="srvType : ${topCatList}">
             </div>
 
         </div>
     </form>
 
-    <button type="submit" id="btn-save" class="btn btn-success btn-lg">가입하기</button>
+    <button type="submit" id="btn-save" class="btn btn-success btn-lg">다음</button>
 
 </div>
-<script src="/js/user.js"></script>
+<script src="/js/service.js"></script>
 
 
 

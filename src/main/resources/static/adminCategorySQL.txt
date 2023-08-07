@@ -1,0 +1,50 @@
+use kmongdb;
+drop table job;
+create table Job(
+	jobId int primary key auto_increment,
+    jobName varchar(50) not null
+);
+
+drop table AdminServiceType;
+create table AdminServiceType(
+	serviceTypeId int primary key auto_increment,
+    serviceTypeName varchar(50) not null
+);
+
+drop table category;
+create table category(
+	categoryId int primary key auto_increment,
+    categoryName varchar(50) not null,
+    categoryUpperId int not null,
+    categoryRefund varchar(300),
+    serviceTypeId1 int,
+    serviceTypeId2 int,
+    serviceTypeId3 int,
+    serviceTypeId4 int,
+    serviceTypeId5 int,
+    serviceTypeId6 int,
+    serviceTypeId7 int,
+    serviceTypeId8 int
+);
+
+insert into job(jobName) values ('학생');
+insert into job(jobName) values ('직장인');
+
+insert into AdminServiceType(serviceTypeName) values ('팀 규모');
+insert into AdminServiceType(serviceTypeName) values ('기술수준');
+insert into AdminServiceType(serviceTypeName) values ('플랫폼');
+insert into AdminServiceType(serviceTypeName) values ('직업분야');
+
+insert into category(categoryName, categoryUpperId) values ('웹', 1);
+insert into category(categoryName, categoryUpperId) values ('UX기획', 2);
+insert into category(categoryName, categoryUpperId) values ('커머스', 3);
+insert into category(categoryName, categoryUpperId) values ('모바일', 4);
+insert into category(categoryName, categoryUpperId) values ('트랜드', 5);
+insert into category(categoryName, categoryUpperId) values ('하위1', 1);
+insert into category(categoryName, categoryUpperId) values ('하위2', 1);
+insert into category(categoryName, categoryUpperId) values ('하위3', 1);
+insert into category(categoryName, categoryUpperId) values ('하위4', 2);
+insert into category(categoryName, categoryUpperId) values ('하위5', 2);
+insert into category(categoryName, categoryUpperId) values ('하위6', 2);
+insert into category(categoryName, categoryUpperId) values ('하위7', 3);
+insert into category(categoryName, categoryUpperId) values ('하위8', 4);

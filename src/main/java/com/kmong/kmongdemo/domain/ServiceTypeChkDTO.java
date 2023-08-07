@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class ServiceTypeChkDTO {
     private String serviceTypeChkCode;
-    private int serviceTypeChkCount;
     private String serviceTypeCode1;
     private String serviceTypeCode2;
     private String serviceTypeCode3;
