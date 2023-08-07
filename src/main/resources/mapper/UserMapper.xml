@@ -26,4 +26,8 @@
         SELECT * FROM user WHERE userId=#{userId}
     </select>
 
+    <select id="nicknameCheck" resultType="userDTO">
+        SELECT * FROM user WHERE userNickname=#{userNickname}
+    </select>
+
 </mapper>
