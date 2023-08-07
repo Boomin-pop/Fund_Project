@@ -53,42 +53,60 @@
             url: '/admin/category/servicetype/list',
             type: 'get',
             success: function(data){
-                let typeHtml = '';
+                let typeHtml = '';  // aside에 삽입
+                let typeHtmlS = ''; // section에 삽입
+                let typeHtmlM = ''; // modal에 삽입
                 let i = 1;
                 data.forEach(row => {
                     let name = row.serviceTypeName;
+                    let Id = row.serviceTypeId;
+                    let M = row.serviceTypeMandatory;
                     if(i%2==1){
-                        typeHtml += '<div class="type-box">';
-                        typeHtml += '<div class="type-info">';
-                        typeHtml += '<input type="checkbox" name="typecheck"/>';
-                        typeHtml += '<input type="text" name="typeName" value="' + name + '" readonly/>';
-                        typeHtml += '</div>';
-
+                        typeHtmlM += '<tr>'
+                        typeHtmlM += '<td><input type="checkbox" name="typecheckM" value="' + Id + '" onclick="addCheckedTypeM(this)"/>';
+                        typeHtmlM += '<input type="text" name="typeName" value="' + name + '" readonly/></td>';
                     }else{
-                        typeHtml += '<div class="type-info">';
-                        typeHtml += '<input type="checkbox" name="typecheck"/>';
-                        typeHtml += '<input type="text" name="typeName" value="' + name + '" readonly/>';
-                        typeHtml += '</div>';
-                        typeHtml += '</div>';
+                        typeHtmlM += '<td><input type="checkbox" name="typecheckM" value="' + Id + '" onclick="addCheckedTypeM(this)"/>';
+                        typeHtmlM += '<input type="text" name="typeName" value="' + name + '" readonly/></td>';
+                        typeHtmlM += '</tr>'
                     }
+                    typeHtml += '<div class="cat-elem">';
+                    typeHtml += '<input type="button" value="' + name;
+                    if(M==1){
+                        typeHtml += '(필수)';
+                    }
+                    typeHtml += '" class="a"/><input type="button" value="삭제" class="btn-delete" onclick="deletetype('+Id+')">';
+                    typeHtml += '</div>';
+
+                    typeHtmlS += '<div class="type-info">';
+                    typeHtmlS += '<input type="checkbox" name="typecheck" value="' + Id + '" onclick="addCheckedType(this)"/>';
+                    typeHtmlS += '<input type="text" name="typeName" value="' + name + '" readonly/>';
+                    typeHtmlS += '</div>';
                     i++;
                 })
                 if(i%2==0){
                     typeHtml += '</div>';
+                    typeHtmlM += '</tr>'
                 }
-                document.querySelector('#type-box').innerHTML = typeHtml;
+                document.querySelector('#type-list').innerHTML = typeHtml;
+                document.querySelector('#type-box').innerHTML = typeHtmlS;
+                document.querySelector('#modal-type-list').innerHTML += typeHtmlM;
             },
             error: function(){
                 console.log("error")
             }
         })
     }
-     function inserttype(tname){//서비스 타입 카테고리 집어넣기
-        console.log(tname);
+     function inserttype(tname, check){//서비스 타입 카테고리 집어넣기
         $.ajax({
             url:"/admin/category/servicetype/insert",
             type: "post",
-            data: tname,
+            data: JSON.stringify(
+                {
+                    "serviceTypeName": tname,
+                    "serviceTypeMandatory": check
+                }
+            ),
             contentType:'application/json; charset-utf-8',
             success:function (result){
                 console.log(result);
@@ -99,13 +117,24 @@
             }
         });
     }
+    function removetype(tid){//직업 카테고리 삭제하기
+            $.ajax({
+                url:'/admin/category/servicetype/' + tid,
+                type:"delete",
+                success:function(result){
+                    findAllType()
+                },
+                error:()=>{console.log('error')}
+            });
+        }
 <!--    분야 카테고리-->
     function findAllCategory(){//분야 카테고리 리스트 가져오기
         $.ajax({
             url: '/admin/category/list',
             type: 'get',
             success: function(data){
-                let categoryListHtml = '<div>';
+                let categoryListHtml = '<div>';// aside에 삽입
+                let categoryListHtmlM = '<option>상위 카테고리로 추가</option>'; // modal에 삽입
                 data.forEach(row => {
                     let ID = row.categoryId;
                     let Name = row.categoryName;
@@ -114,6 +143,7 @@
                         categoryListHtml += '<div class="higher-category">';
                         categoryListHtml += '<h5>' + Name + '</h5>';
                         categoryListHtml += '<div class="cat-inner-box">';
+                        categoryListHtmlM += '<option value="' + ID + '">' + Name + '</>'
                     } else {
                         categoryListHtml += '<div class="cat-elem">';
                         categoryListHtml += '<input type="hidden" value="' + ID + '">';
@@ -125,6 +155,7 @@
                     }
                 })
                 document.querySelector('#category-list').innerHTML = categoryListHtml;
+                document.querySelector('#select-upperCategory').innerHTML = categoryListHtmlM;
             },
             error: function(){
                 console.log("error")
@@ -141,7 +172,7 @@
                 document.getElementById("categoryId").value = data.categoryId;
                 document.getElementById("categoryName").value = data.categoryName;
                 document.getElementById("categoryUpperId").value = data.categoryUpperId;
-                document.getElementById("categoryRefund").value = date.categoryRefund;
+                document.getElementById("categoryRefund").value = data.categoryRefund;
             },
             error: function(){
                 console.log("error")

@@ -121,8 +121,18 @@
 }
 .section .service-type .type-box{
     display:flex;
+    flex-direction : row;
+    height: 60px;
+}
+.section .service-type #type-box{
+    display:flex;
+    flex-direction : row;
+    flex-wrap : wrap;
     height: 60px;
 }
 .section .service-type .type-info{
-    margin:auto;
+    margin: 30px;
+    padding: 10px;
+    background-color: #aaccdd;
+    border: 3px solid: #668899
 }

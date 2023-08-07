@@ -8,11 +8,45 @@
     <div class="container">
         <div class="searchbar">
             <h2>거래 로그</h2>
+            <input type="text" placeholder="아이디">
+            <input type="button" value="검색">
+            <label for="log-sort">정렬 기준</label>
+            <select id="log-sort">
+                <option>거래 시간 순</option>
+                <option>거래 금액 순</option>
+            </select>
+            <select>
+                <option>오름차순</option>
+                <option>내림차순</option>
+            </select>
         </div>
         <div class="main">
             <div class="aside">
             </div>
             <div class="section">
+                1/10
+                <table class="table2">
+                    <thead>
+                        <tr class="thead">
+                            <th>거래 아이디</th>
+                            <th>구매자 아이디</th>
+                            <th>판매자 아이디</th>
+                            <th>서비스</th>
+                            <th>거래 금액</th>
+                            <th>거래 일시</th>
+                            <th>취소/승인</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>id</td>
+                        <td>user ID</td>
+                        <td>user ID</td>
+                        <td><button class="view" onclick="serviceView()">상세보기</button></td>
+                        <td>거래 금액</td>
+                        <td>2023.10.23 00:00:00</td>
+                        <td>승인</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

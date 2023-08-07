@@ -33,8 +33,12 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
         return acmapper.typeList();
     }
     @Override
-    public int insertType(String tname) {
-        return acmapper.insertType(tname);
+    public int insertType(AdminServiceTypeDTO tdto) {
+        return acmapper.insertType(tdto);
+    }
+    @Override
+    public int removeType(int tid) {
+        return acmapper.removeType(tid);
     }
 
     @Override
