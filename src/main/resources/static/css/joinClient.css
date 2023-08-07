@@ -141,6 +141,13 @@ input::placeholder{
     text-align: left;
 }
 
+.checkEmail{
+    width: 30%;
+    height: 30px;
+    border-box: #eee;
+    cursor: pointer;
+}
+
 .join .jobBox{
     align-items: center;
     background-color: transparent;
@@ -172,9 +179,6 @@ input::placeholder{
     align-content: center;
     border: none;
 }
-
-
-
 
 
 
@@ -293,7 +297,7 @@ input[type="checkbox"] {
   height: 1rem;
   cursor: pointer;
   background-color: #ddd;
-  background-image: url("/img/check2.png");
+  background-image: url("/imgs/check2.png");
 }
 
 input[type="checkbox"]:checked {

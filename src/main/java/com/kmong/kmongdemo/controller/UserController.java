@@ -34,7 +34,7 @@ public class UserController {
     @GetMapping("/joinChoice")
     public String userJoin2(){
 
-        return "user/userJoin2";
+        return "/user/userJoin2";
     }
 
     @GetMapping("/userRegister")
@@ -45,6 +45,17 @@ public class UserController {
 
         return "user/joinClient";
     }
+
+
+    @PostMapping("/userInsert")
+    public String userInsert(UserDTO dto){
+        userService.userRegister(dto);
+        System.out.println("dto = " + dto);
+
+
+        return "redirect:/";
+    }
+
 
     @RequestMapping("/userAjaxList")
     public @ResponseBody List<UserDTO> userAjaxList() {
