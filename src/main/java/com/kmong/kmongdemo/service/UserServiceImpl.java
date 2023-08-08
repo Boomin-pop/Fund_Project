@@ -41,11 +41,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO idCheck(String uid) {
-        return umapper.idCheck(uid);
+    public UserDTO idCheck(String userId) {
+        return umapper.idCheck(userId);
     }
 
-    public UserDTO nicknameCheck(String nickname){
-        return umapper.nicknameCheck(nickname);
+    public UserDTO nicknameCheck(String userNickname){
+        return umapper.nicknameCheck(userNickname);
     }
 }

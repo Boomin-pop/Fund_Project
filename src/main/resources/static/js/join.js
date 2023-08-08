@@ -67,6 +67,7 @@ function submitChk(){
             $("#JobName").select();
             return false;
         }
+        alert("회원가입이 완료 되었습니다.")
 
 
   }
@@ -74,17 +75,17 @@ function submitChk(){
 // 아이디 길이 체크
 	function idCheck(){
 
-		var uid = $("#userId").val();
-        console.log("######## : " + uid);
-		if(uid.length<3){
-			$("#chkMsg").html("아이디 길이는 3자리 이상이어야 합니다.")
+		var userId = $("#userId").val();
+        console.log("######## : " + userId);
+		if(userId.length<3){
+			$("#chkMsg").html("아이디 길이는 3자리 이상이어야 합니다.");
 			$("#chkMsg").css({"color":"red", "font-size":"13px"});
 			return;
 		}
 		$.ajax({
         			url:'/user/idCheck',
         			type: "post",
-        			data:{"uid":uid}, // 서버에 전송할 데이터
+        			data:{"userId":userId}, // 서버에 전송할 데이터
         			success: function(responseData){
         				// responseData = "yes" or "no", yes:사용가능 no:사용불가
 
@@ -107,10 +108,10 @@ function submitChk(){
 
 // 비밀번호 길이 체크
 function pwCheck(){
-		var password = $("#password").val();
+		var userPassword = $("#password").val();
 
-		if(password.length<6){
-			$("#chkMsg2").html("비밀번호는 6자리 이상이어야 합니다.")
+		if(userPassword.length<6){
+			$("#chkMsg2").html("비밀번호는 6자리 이상이어야 합니다.");
 			$("#chkMsg2").css({"color":"red", "font-size":"13px"});
             return;
 		}else{
@@ -123,11 +124,11 @@ function pwCheck(){
 
 // 비밀번호 확인
 function rePwCheck(){
-        var password = $("#password").val();
+        var userPassword = $("#password").val();
 		var repassword = $("#repassword").val();
 
-		if(password != repassword){
-			$("#chkMsg3").html("비밀번호를 확인해주세요.")
+		if(userPassword != repassword){
+			$("#chkMsg3").html("비밀번호를 확인해주세요.");
 			$("#chkMsg3").css({"color":"red", "font-size":"13px"});
             return;
 		}else{
@@ -140,13 +141,13 @@ function rePwCheck(){
 
 //이름 확인
 function nameCheck(){
-    var name = $("#name").val();
+    var userName = $("#name").val();
 
-    if(name == "" || name == null){
-        $('#isNameChk').val("no")
+    if(userName == "" || userName == null){
+        $('#isNameChk').val("no");
         return;
     }else{
-        $('#isNameChk').val("yes")
+        $('#isNameChk').val("yes");
         return;
     }
 }
@@ -154,12 +155,12 @@ function nameCheck(){
 
 // 별명 확인
 function nicknameCheck(){
-    var nickname = $("#nickname").val();
-    console.log("######## : " + nickname);
+    var userNickname = $("#nickname").val();
+    console.log("######## : " + userNickname);
    	$.ajax({
             url:'/user/nicknameCheck',
             type: "post",
-            data:{"nickname":nickname}, // 서버에 전송할 데이터
+            data:{"userNickname":userNickname}, // 서버에 전송할 데이터
             success: function(responseData){
                 // responseData = "yes" or "no", yes:사용가능 no:사용불가
 
@@ -216,12 +217,12 @@ function checkRequiredChoice(){
 let serverUUID = "";
 	let isEmailChk = false;
 	function emailCheck(){
-		let uEmail = $("#email").val();
+		let userEmail = $("#email").val();
 
 		$.ajax({
 			url:'/user/userEmailCheck',
 			type: "get",
-			data: {"uEmail":uEmail},
+			data: {"userEmail":userEmail},
 			success: function(uuid){
 				if(uuid != "fail"){
 					serverUUID = uuid;
@@ -258,32 +259,66 @@ function emailConfirm(){
         return;
 
     }
-
+}
 
 //전화번호 확인
-function telCheck(){
-    var tel = $("#tel").val();
 
-    if(tel == "" || tel == null){
-        $('#isTelChk').val("no")
-        return;
-    }else{
-        $('#isTelChk').val("yes")
-        return;
-    }
+    var autoHypenPhone = function(str){
+      str = str.replace(/[^0-9]/g, '');
+      var tmp = '';
+      if( str.length < 4){
+          return str;
+      }else if(str.length < 7){
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3);
+          return tmp;
+      }else if(str.length < 11){
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3, 3);
+          tmp += '-';
+          tmp += str.substr(6);
+          return tmp;
+   }else{
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3, 4);
+          tmp += '-';
+          tmp += str.substr(7);
+          return tmp;
+      }
+
+      return str;
+}
+
+
+var userTel = document.getElementById('tel');
+
+tel.onkeyup = function(){
+
+    this.value = autoHypenPhone( this.value ) ;
+      if(userTel == "" || tel == null){
+          $("#isTelChk").val("no");
+          return;
+      }else{
+          $("#isTelChk").val("yes");
+          return;
+      }
 }
 
 //직업 확인
 function jobNameCheck(){
-    var jobName = $("#jobName").val();
+    var userJobId = $("#jobName").val();
 
-    if(jobName == "" || jobName == null){
-        $('#isJobNameChk').val("no")
+    if(userJobId == "" || userJobId == null){
+        $("#isJobNameChk").val("no");
         return;
     }else{
-        $('#isJobNameChk').val("yes")
+        $("#isJobNameChk").val("yes");
         return;
     }
 }
-}
+
+
 

@@ -11,7 +11,7 @@ public interface UserMapper {
 
     int userInsert(UserDTO dto);
 
-    UserDTO idCheck(String uid);
+    UserDTO idCheck(String userId);
 
-    UserDTO nicknameCheck(String nickname);
+    UserDTO nicknameCheck(String userNickname);
 }

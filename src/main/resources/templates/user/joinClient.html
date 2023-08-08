@@ -24,7 +24,7 @@
                     아이디
                 </div>
                 <div class="input">
-                    <input class="txtBox" onkeyup="idCheck()" type="Id" placeholder="아이디를 입력해주세요." id="userId" name="uid" autocomplete="Id">
+                    <input class="txtBox" onkeyup="idCheck()" type="Id" placeholder="아이디를 입력해주세요." id="userId" name="userId" autocomplete="Id">
                 </div>
             </div>
             <p id="chkMsg" class="mb-2"></p>
@@ -36,7 +36,7 @@
                     비밀번호
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="password" onkeyup="pwCheck()" placeholder="비밀번호를 입력해주세요.(6자리 이상)" id="password" name="password" autocomplete="password">
+                    <input class="txtBox" type="password" onkeyup="pwCheck()" placeholder="비밀번호를 입력해주세요.(6자리 이상)" id="password" name="userPassword" autocomplete="password">
                 </div>
             </div>
             <p id="chkMsg2" class="mb-2"></p>
@@ -55,7 +55,7 @@
                     이름
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="name" onkeyup="nameCheck()" laceholder="이름을 입력해주세요." id="name" name="name" autocomplete="name">
+                    <input class="txtBox" type="name" onkeyup="nameCheck()" placeholder="이름을 입력해주세요." id="name" name="userName">
                 </div>
             </div>
             <input type="hidden" id="isNameChk" value="no"/>
@@ -65,7 +65,7 @@
                     별명
                 </div>
                 <div class="input">
-                    <input class="txtBox" onkeyup="nicknameCheck()" type="nickname" placeholder="별명을 입력해주세요." id="nickname" name="nickname" autocomplete="nickname">
+                    <input class="txtBox" onkeyup="nicknameCheck()" type="nickname" placeholder="별명을 입력해주세요." id="nickname" name="userNickname" >
                 </div>
             </div>
             <p id="chkMsg4" class="mb-2"></p>
@@ -77,7 +77,7 @@
                     이메일
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="email" placeholder="이메일을 입력해주세요." name="uEmail" id="email" autocomplete="email">
+                    <input class="txtBox" type="email" placeholder="이메일을 입력해주세요." name="userEmail" id="email" autocomplete="email">
                 </div>
                 <input type="button" onclick="emailCheck()" class="checkEmail"  value="인증하기">
                 <!-- 이메일 인증코드 확인하기 -->
@@ -92,7 +92,8 @@
                     전화번호
                 </div>
                 <div class="input">
-                    <input class="txtBox" type="tel" onkeyup="telCheck()" placeholder="전화번호를 입력해주세요." name="tel" id="tel" autocomplete="tel">
+                    <input class="txtBox" type="tel" maxlength="13"
+                           placeholder="전화번호를 입력해주세요." name="userTel" id="tel" >
                 </div>
             </div>
             <input type="hidden" id="isTelChk" value="no"/>
@@ -102,7 +103,7 @@
                     직업
                 </div>
                 <div class="jobBox">
-                    <select class="content" onkeyup="jobNameCheck()" name="jobName" id="jobName" >
+                    <select class="content" onclick="jobNameCheck()" name="userJobId" id="jobName" >
                         <option value="" selected disabled>직업을 선택해주세요</option>
 
                         <th:block th:each="job : ${jobList}">
@@ -164,7 +165,7 @@
                     </div>
             </div>
 
-            <button type="submit" class="joinClear" id="joinclear"  disabled onclick="submitChk()">
+            <button type="submit" class="joinClear" id="joinclear"  disabled>
                 <span>버튼만 누르면 가입완료!</span>
             </button>
 
@@ -179,31 +180,8 @@
         적절한 전자적 수단을 통해 제공되고 있습니다.
     </p>
 </div>
-</body>
-
-<!-- 아이디 중복체크 Modal-->
-<!--<div class="modal fade" id="chkModal">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-
-<!--            <%&#45;&#45;      Modal Header&#45;&#45;%>-->
-<!--            <div class="modal-header">-->
-<!--                <h4 class="modal-title">중복체크 확인</h4>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>-->
-<!--            </div>-->
-
-<!--            <%&#45;&#45;      Modal body&#45;&#45;%>-->
-<!--            <div class="modal-body text-center" id="chkMsg"></div>-->
-
-<!--            <%&#45;&#45;      Modal footer&#45;&#45;%>-->
-<!--            <div class="modal-footer">-->
-<!--                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>-->
-<!--            </div>-->
-
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <script src="/js/join.js"></script>
+</body>
 
 </html>
