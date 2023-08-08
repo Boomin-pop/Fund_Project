@@ -11,9 +11,12 @@ import java.util.Map;
 public interface ServiceService {
     List<CategoryDTO> topCatList();
 
-    Map<String, String> serviceTypeList();
+   // Map<String, String> serviceTypeList();
 
     ServiceTypeChkDTO serviceTypeChkList(String code);
 
-  //  List<ServiceTypeDTO> serviceTypeList();
+//    Map<String, Integer> serviceTypeMandList();
+
+
+      List<ServiceTypeDTO> serviceTypeList();
 }

@@ -28,20 +28,28 @@ public class ServiceServiceImpl implements ServiceService{
     }
 
     @Override
-  //  public List<ServiceTypeDTO> serviceTypeList() {
-    public Map<String, String> serviceTypeList() {
+    public List<ServiceTypeDTO> serviceTypeList() {
+    //public Map<String, String> serviceTypeList() {
+
         List<ServiceTypeDTO> stl = serviceMapper.serviceTypeList();
-        Map<String, String> serviceTypeListMap = new HashMap<>();
-        for(int i=0; i<stl.size(); i++){
-//        ServiceTypeDTO stDTO = new ServiceTypeDTO();
-//        stDTO.setServiceTypeCode(stl.get(i).getServiceTypeCode());
-//        stDTO.setServiceTypeName(stl.get(i).getServiceTypeName());
-            //serviceTypeListMap.put(stDTO.getServiceTypeCode(), stDTO.getServiceTypeName());
-          //  serviceTypeListMap.put(stDTO.getServiceTypeCode(), stDTO.getServiceTypeName());
-          serviceTypeListMap.put(stl.get(i).getServiceTypeCode(), stl.get(i).getServiceTypeName());
-        }
-        return serviceTypeListMap;
+//        Map<String, String> serviceTypeListMap = new HashMap<>();
+//        for(int i=0; i<stl.size(); i++){
+//          serviceTypeListMap.put(stl.get(i).getServiceTypeCode(), stl.get(i).getServiceTypeName());
+//        }
+        //return serviceTypeListMap;
+        return stl;
     }
+
+//    @Override
+//    public Map<String, Integer> serviceTypeMandList(){
+//        List<ServiceTypeDTO> stl = serviceMapper.serviceTypeList();
+//        Map<String, Integer> TypeListMandatoryMap = new HashMap<>();
+//        for(int i=0; i<stl.size(); i++){
+//            TypeListMandatoryMap.put(stl.get(i).getServiceTypeCode(), stl.get(i).getMandatoryInput());
+//        }
+//            return TypeListMandatoryMap;
+//    }
+
 
 
 }

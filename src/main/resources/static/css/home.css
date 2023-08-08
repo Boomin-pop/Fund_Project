@@ -1,0 +1,202 @@
+
+
+body {
+    /* font-family: 'Noto Sans KR', sans-serif; */
+    font-size: 13px;
+    line-height: inherit;
+    width: 100vw;
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.main {
+    height: 1700px;
+}
+
+.content-02 .inner-wrap .event .slide {
+    box-sizing: border-box;
+    padding-left: 0;
+    /* position: relative; */
+}
+
+.content-02 .inner-wrap .event .slide .slide_item{
+    /* border: 1px solid #000; */
+    /* padding: 0 50px; */
+    position: relative;
+    height: 380px;
+    padding: 0 100px;
+}
+
+.content-02 .inner-wrap .event .slide .slide_item img {
+    width: 94%;
+    margin: 0 100px;
+    border-radius: 25px;
+    position: absolute;
+    /* left: 16%; */
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+.recommend h4 {
+    padding-left: 55px;
+}
+
+.recommend ul {
+    width: inherit;
+    justify-content: space-around;
+}
+
+.recommend li {
+    /* border: 1px solid #000;
+    margin: 10px;
+    border-radius: 13px;
+    width: 214px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    row-gap: 3px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 3px;
+    width: 214px;
+    height: 80px;
+    border-radius: 8px;
+    background-color: rgb(242, 243, 247);
+    padding: 30px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.recommend li:hover {
+    background-color: rgb(228, 229, 237);
+}
+
+.recommend li span {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(114, 117, 133);
+}
+
+.recommend li strong {
+    font-size: 16px;
+    font-weight: bolder;
+    color: rgb(33, 34, 36);
+}
+
+.popularity {
+    margin-top: 80px;
+
+}
+
+.popularity h4 {
+    padding-left: 55px;
+}
+
+
+.popularity > div{
+    /* border: 1px solid #000; */
+    height: 606px;
+    /* position: absolute; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.popularity > div a {
+    /* border: 1px solid #000; */
+    width: 214px;
+    height: 279px;
+    overflow: hidden;
+}
+
+.popularity .thumbnail {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.popularity .thumbnail img {
+    width: 214px;
+    transition: 0.3s;
+}
+
+.popularity .thumbnail img:hover {
+    width: 230px;
+}
+
+.popularity h3 {
+    font-size: 14px;
+    margin: 16px 0;
+}
+
+.popularity .price {
+    font-size: 18px;
+    float: right;
+}
+
+
+/* .popularity .thumbnail .heart {
+  position: relative;
+  border: none;
+  background-color: #ffffff00;
+  left: 180px;
+  bottom: 150px;
+  width: 20px;
+  height: 20px;
+} */
+
+.rating > h2 {
+    padding-left: 55px;
+}
+.rating > p {
+    padding-left: 55px;
+}
+
+.rating .inner-wrap {
+    /* border: 1px solid #000; */
+    width: 1170px;
+    height: 557px;
+}
+
+.rating .inner-wrap > div {
+    /* border: 1px solid #000; */
+    width: 374px;
+    height: 557px;
+}
+
+.rating .inner-wrap > div .first {
+    border: 1px solid rgb(255, 212, 0);
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.rating .inner-wrap > div h3 {
+    background-color: rgb(255, 212, 0);
+    border-radius: 15px 15px 0 0;
+    height: 48px;
+}
+
+.rating .inner-wrap > div .first div {
+    height: 100px;
+}
+
+.rating .other {
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
+.rating .other > div {
+    padding: 20px 24px 20px 12px;
+    height: 97px;
+}
+
+.rating .other hr {
+    margin: 0 20px;
+}

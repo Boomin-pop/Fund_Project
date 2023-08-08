@@ -3,16 +3,21 @@
 
 <!-- 헤더 -->
 <th:block th:replace="/inc/header :: headerFragment"></th:block>
-
 <!--  바디  -->
-
+<div class="d-flex" style="width:80%">
+    <th:block th:replace="/inc/leftServiceInputNav :: asideFragment"></th:block>
 <div class="container shadow-sm w-50 p-5 rounded mt-4">
+
+
     <form class="form-join">
         <div class="form-group">
             <div><p><b>제목</b></p></div>
             <div>
                 <input type="text" class="form-control" name="serviceTitle" id="serviceTitle"
                        placeholder="서비스를 잘 드러낼 수 있는 제목을 입력해 주세요." required>
+            </div>
+            <div id="titleAlert" style="display:none;">
+                <p style="color:red;"><b>최소 10글자 이상, 30이하로 입력해주세요.</b></p>
             </div>
         </div>
 
@@ -23,24 +28,74 @@
                     <option value="">- 선택해 주세요 -</option>
                     <option value="" disabled>----------------------</option>
                     <th:block th:each="topCat : ${topCatList}">
-                    <option name="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>
+                        <option name="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>
                     </th:block>
                 </select>
             </div>
-        </div>
-        <div><p><b>서비스 타입</b></p>
-            <div>
-                <th:block th:each="srvType : ${topCatList}">
+            <div id="TopCatAlert" style="display:none;">
+                <p style="color:red;"><b>상위 카테고리를 선택해 주세요.</b></p>
             </div>
-
         </div>
-    </form>
 
-    <button type="submit" id="btn-save" class="btn btn-success btn-lg">다음</button>
+        <div class="form-group" id="serviceTypeDiv" style="display:none;">
+            <p><b>서비스 타입</b></p>
+            <div class="serviceType" name="serviceType" id="serviceType">
+                <div> <p name="typeName"></p></div>
+        <input type="text" name="typeInput" style="width:300px;"/>
+</div>
+</div>
+<div id="SrvTypeAlert" style="display:none;">
+    <p style="color:red;"><b>필수 서비스 타입을 설정해주세요</b></p>
+</div>
+<div class="mt-5">
+    <span>검색 키워드ㅤㅤㅤ</span><input type="text" name="typeInput" style="width:500px; line-height:50px; border:0" placeholder="키워드 입력"/><span>0/5</span><button>추가</button>
+</div>
+
+<button type="submit" id="btn-save" class="btn btn-success btn-lg">저장</button>
+<button type="submit" id="btn-next" class="btn btn-success btn-lg">다음</button>
+</form>
 
 </div>
+</div>
 <script src="/js/service.js"></script>
+<script>
+    $(document).ready(function (){
+        let serviceTypeArea = $(".serviceType");
+        let serviceTitle = $("#serviceTitle");
+        let titleAlert = $("#titleAlert");
+        let btnSave = $("#btn-save");
+        let btnNext = $("#btn-next");
+        //let topCatSel = $("select[name=serviceTopCat] > option:selected");
+        let topCat = document.getElementById("serviceTopCat");
+        let selectedCat = (topCat.options[topCat.selectedIndex].value);
 
+        btnSave.on("click", function(){
+            console.log(selectedCat);
+            if (serviceTitle.val().length < 10 || serviceTitle.val().length > 30) {
+                //titleAlert.style.display = 'block';
+                document.getElementById("titleAlert").style.display='block';
+                serviceTitle.focus();
+                return;
+            }
+
+            if (selectedCat == null || selectedCat.trim() == ""){
+                document.getElementById("TopCatAlert").style.display='block';
+                return;
+            }
+        })//btnSave.on
+
+        btnNext.on("click", function(){
+            if (serviceTitle.val().length < 10 || serviceTitle.val().length > 30) {
+                //titleAlert.style.display = 'block';
+                document.getElementById("titleAlert").style.display='block';
+                serviceTitle.focus();
+                return;
+            }
+        })//btnSave.on
+
+    })//readyFunction
+
+</script>
 
 
 <!-- 푸터 -->
