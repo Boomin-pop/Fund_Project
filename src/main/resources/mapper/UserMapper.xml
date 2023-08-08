@@ -10,15 +10,14 @@
 
     <insert id="userInsert" parameterType="UserDTO">
         INSERT INTO user(userId, userPassword, userName,
-        userNickname, userEmail, userTel, userJobId, userRegdate)
+        userNickname, userEmail, userTel, userJobId)
         VALUES(#{userId},
         #{userPassword},
         #{userName},
         #{userNickname},
         #{userEmail},
         #{userTel},
-        #{userJobId},
-        #{userRegdate}
+        #{userJobId}
         )
     </insert>
 
