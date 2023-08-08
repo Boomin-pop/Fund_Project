@@ -12,7 +12,7 @@ public interface UserService {
 
     List<JobDTO> jobList();
 
-    UserDTO idCheck(String uid);
+    UserDTO idCheck(String userId);
 
-    UserDTO nicknameCheck(String nickname);
+    UserDTO nicknameCheck(String userNickname);
 }

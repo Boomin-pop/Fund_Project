@@ -64,11 +64,11 @@ public class UserController {
 
     @RequestMapping("/idCheck")
     @ResponseBody
-    public String userIdcheck(@RequestParam("uid") String uid){
-        System.out.println("uid : " + uid);
-        UserDTO dto = userService.idCheck(uid);
+    public String userIdcheck(@RequestParam("userId") String userId){
+        System.out.println("userId : " + userId);
+        UserDTO dto = userService.idCheck(userId);
 
-        if(dto != null || "".equals(uid.trim())){
+        if(dto != null || "".equals(userId.trim())){
             return "no";
         }
         return "yes";
@@ -76,11 +76,11 @@ public class UserController {
 
     @RequestMapping("/nicknameCheck")
     @ResponseBody
-    public String userNicknameCheck(@RequestParam("nickname") String nickname){
-        System.out.println("nickname : " + nickname);
-        UserDTO dto = userService.nicknameCheck(nickname);
+    public String userNicknameCheck(@RequestParam("userNickname") String userNickname){
+        System.out.println("userNickname : " + userNickname);
+        UserDTO dto = userService.nicknameCheck(userNickname);
 
-        if(dto != null || "".equals(nickname.trim())){
+        if(dto != null || "".equals(userNickname.trim())){
             return "no";
         }
         return "yes";
@@ -89,8 +89,8 @@ public class UserController {
 
     @RequestMapping("/userEmailCheck")
     @ResponseBody
-    public String emailCheck(@RequestParam("uEmail") String uEmail){
-        System.out.println("uEmail = " + uEmail);
+    public String emailCheck(@RequestParam("userEmail") String userEmail){
+        System.out.println("userEmail = " + userEmail);
 
         // 인증코드 생성
         String uuid = UUID.randomUUID().toString().substring(0, 6);
@@ -107,7 +107,7 @@ public class UserController {
             mail.setText(mailContents, "utf-8", "html");
 
             // 상대방 메일 셋팅
-            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(uEmail));
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
 
             mailSender.send(mail);
             return uuid;
