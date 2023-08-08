@@ -15,6 +15,7 @@
             <div>
                 <input type="text" class="form-control" name="serviceTitle" id="serviceTitle"
                        placeholder="서비스를 잘 드러낼 수 있는 제목을 입력해 주세요." required>
+<!--                <input type="hidden" name="titleCheck" id="titleCheck" value="false">-->
             </div>
             <div id="titleAlert" style="display:none;">
                 <p style="color:red;"><b>최소 10글자 이상, 30이하로 입력해주세요.</b></p>
@@ -32,6 +33,7 @@
                     </th:block>
                 </select>
             </div>
+<!--            <input type="hidden" name="topCatCheck" id="topCatCheck" value="false">-->
             <div id="TopCatAlert" style="display:none;">
                 <p style="color:red;"><b>상위 카테고리를 선택해 주세요.</b></p>
             </div>
@@ -48,7 +50,7 @@
     <p style="color:red;"><b>필수 서비스 타입을 설정해주세요</b></p>
 </div>
 <div class="mt-5">
-    <span>검색 키워드ㅤㅤㅤ</span><input type="text" name="typeInput" style="width:500px; line-height:50px; border:0" placeholder="키워드 입력"/><span>0/5</span><button>추가</button>
+    <span>검색 키워드ㅤㅤㅤ</span><input type="text" name="keywordInput" style="width:500px; line-height:50px; border:0" placeholder="키워드 입력"/><span>0/5</span><button>추가</button>
 </div>
 
 <button type="submit" id="btn-save" class="btn btn-success btn-lg">저장</button>
@@ -59,29 +61,106 @@
 </div>
 <script src="/js/service.js"></script>
 <script>
+    let titleChk = "";
+    let topCatChk = "";
+    let srvTypeChk = "";
+
     $(document).ready(function (){
         let serviceTypeArea = $(".serviceType");
         let serviceTitle = $("#serviceTitle");
         let titleAlert = $("#titleAlert");
         let btnSave = $("#btn-save");
         let btnNext = $("#btn-next");
-        //let topCatSel = $("select[name=serviceTopCat] > option:selected");
+        let serviceTopCat =$("select[name=serviceTopCat]");
+
+        // let typeInputdiv = $("div[name=typeInputdiv]");
+        // let typeInput =$("input[name=typeInput]:required");
+      //  let serviceType = $("div[name=serviceType]");
+
+
         let topCat = document.getElementById("serviceTopCat");
-        let selectedCat = (topCat.options[topCat.selectedIndex].value);
+       let selectedCat = (topCat.options[topCat.selectedIndex].value);
+        //
+        // let typeInput =$("input[name=typeInput]").attr("required", true);
+        // let typeInput =$("input[name=typeInput]");
+        // console.log(typeInput);
+        //
+        // console.log(typeInput.length);
+
+        serviceTitle.on("change", function(){
+            if (serviceTitle.val().length < 30 || serviceTitle.val().length > 10) {
+                document.getElementById("titleAlert").style.display='none';
+                titleChk = "true";
+                console.log("제목 작성여부 : "+titleChk);
+            }
+            });
+
+      //  카테고리 선택 유효성 검사
+        serviceTopCat.on("change", function (){
+
+            // console.log(typeInput.length());
+            // console.log(typeInput.length);
+            let topCatSel = $("select[name=serviceTopCat] > option:selected");
+            console.log("topcatsel : " + topCatSel.val());
+            if(topCatSel.val().trim()!="" || topCatSel.val().length>3){
+                document.getElementById("TopCatAlert").style.display='none';
+                topCatChk="true";
+                console.log("카테고리 선택 여부 : "+topCatChk);
+            }
+            if(topCatSel.val().trim()==""){
+                topCatChk="false";
+                console.log(document.getElementById("serviceTypeDiv"));
+                document.getElementById("serviceTypeDiv").style.display="none";
+                console.log("카테고리 선택 여부 : "+topCatChk);
+            }
+        })
+        //     typeInput.on("change", function(){
+        //     console.log("servicetypeInput 감지")
+        // })
+
+
+
 
         btnSave.on("click", function(){
-            console.log(selectedCat);
+            let topCatSel = $("select[name=serviceTopCat] > option:selected");
+            let typeInput =$("input[name=typeInput]:required");
+            let srvCnt = 0;
+            for(var i=0; i<typeInput.length; i++){
+                console.log(i+"번째 입력값 : "+typeInput[i].value);
+                if(typeInput[i].value.length > 4){
+                    srvCnt++;
+                }
+            }
+            console.log("서비스 인풋 카운터 : " +srvCnt);
+            console.log("필수입력 서비스타입 갯수 : " + typeInput.length)
+
+            if(srvCnt == typeInput.length){
+                srvTypeChk = "true";
+                console.log("서비스타입 필수입력값 입력여부 : " + srvTypeChk)
+                document.getElementById("SrvTypeAlert").style.display='none';
+            }
+
+            // console.log(selectedCat);
+            console.log(topCatSel.val());
             if (serviceTitle.val().length < 10 || serviceTitle.val().length > 30) {
                 //titleAlert.style.display = 'block';
+
                 document.getElementById("titleAlert").style.display='block';
                 serviceTitle.focus();
+            }
+
+            if (topCatSel.val() == null || topCatSel.val().trim() == ""){
+                document.getElementById("TopCatAlert").style.display='block';
+            }
+
+            if(typeInput.val()==null || typeInput.val().trim()==""){
+                document.getElementById("SrvTypeAlert").style.display='block';
+            }
+
+            if(topCatChk=="true" && titleChk=="true" &&srvTypeChk=="true"){
                 return;
             }
 
-            if (selectedCat == null || selectedCat.trim() == ""){
-                document.getElementById("TopCatAlert").style.display='block';
-                return;
-            }
         })//btnSave.on
 
         btnNext.on("click", function(){
