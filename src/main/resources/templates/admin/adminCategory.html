@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<link href="/css/category.css" rel="stylesheet"/>
+<link href="/css/adminCategory.css" rel="stylesheet"/>
 
 <!-- 헤더 -->
 <th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
@@ -59,14 +59,13 @@
                     <div id="box-field" class="cat-box">
                         <div id="category-list">
                         </div>
-                        <button class="btn-add">카테고리 추가</button>
+                        <button class="btn-add" onclick="showmodal()">카테고리 추가</button>
                     </div>
                     </div>
             </div>
             <div class="section">
                 <div class="category-info">
                     <div class="info-head">
-                        <button class="btn-modify">수정하기</button>
                         <div class="info-elem">
                             <h4>카테고리 번호</h4>
                             <input type="text" id="categoryId" name="categoryId" class="input" style="width:60px"/>
@@ -77,8 +76,11 @@
                         </div>
                         <div class="info-elem">
                             <h4>상위 카테고리</h4>
-                            <input type="text" id="categoryUpperId" name="categoryUpperId" class="input"/>
+                            <select id="categoryUpperId" name="categoryUpperId" class="select">
+                                <option>카테고리</option>
+                            </select>
                         </div>
+                        <button class="btn-modify">수정하기</button>
                     </div>
                     <div class="refund-box">
                         <h4>환불 규정</h4>
@@ -95,10 +97,12 @@
     </div>
 </div>
 <div id="categoryInput" class="modal">
-    <h3>카테고리 추가하기</h3>
     <div class="modal-content">
-        <span class="close1" onclick="close-modal()">&times;</span>
-        <table id="modal-type-list">
+        <div class="modal-head">
+            <div><h3>카테고리 추가하기</h3></div>
+            <span class="btn-delete" onclick="closemodal()">&nbsp;&nbsp;&times;&nbsp;&nbsp;</span>
+        </div>
+        <table>
             <tr>
                 <td>카테고리 명</td>
                 <td><input type="text" placeholder="카테고리 명"></td>
@@ -117,8 +121,9 @@
             <tr>
                 <td>서비스 타입</td>
             </tr>
-
         </table>
+        <div id="modal-type-list">
+        </div>
         <button class="btn-add" onclick="addcategory()">추가</button>
     </div>
 </div>

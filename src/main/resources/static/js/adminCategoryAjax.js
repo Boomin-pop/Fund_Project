@@ -1,4 +1,5 @@
 //ajax 스크립트
+var ucats = ['0'];
 <!--    직업 카테고리-->
     function findAllJob(){//모든 직업 카테고리 가져오기
         $.ajax({
@@ -55,7 +56,7 @@
             success: function(data){
                 let typeHtml = '';  // aside에 삽입
                 let typeHtmlS = ''; // section에 삽입
-                let typeHtmlM = ''; // modal에 삽입
+                let typeHtmlM = '<table>'; // modal에 삽입
                 let i = 1;
                 data.forEach(row => {
                     let name = row.serviceTypeName;
@@ -90,7 +91,7 @@
                 }
                 document.querySelector('#type-list').innerHTML = typeHtml;
                 document.querySelector('#type-box').innerHTML = typeHtmlS;
-                document.querySelector('#modal-type-list').innerHTML += typeHtmlM;
+                document.querySelector('#modal-type-list').innerHTML = typeHtmlM + '</table>';
             },
             error: function(){
                 console.log("error")
@@ -134,15 +135,18 @@
             type: 'get',
             success: function(data){
                 let categoryListHtml = '<div>';// aside에 삽입
+                let categoryListHtmlS = '<option>카테고리</option><option value=0>상위 카테고리로 변경</option>';
                 let categoryListHtmlM = '<option>상위 카테고리로 추가</option>'; // modal에 삽입
                 data.forEach(row => {
                     let ID = row.categoryId;
                     let Name = row.categoryName;
                     if(ID == row.categoryUpperId){
+
                         categoryListHtml += '</div>';
                         categoryListHtml += '<div class="higher-category">';
                         categoryListHtml += '<h5>' + Name + '</h5>';
                         categoryListHtml += '<div class="cat-inner-box">';
+                        categoryListHtmlS += '<option value="' + ID + '">' + Name + '</>'
                         categoryListHtmlM += '<option value="' + ID + '">' + Name + '</>'
                     } else {
                         categoryListHtml += '<div class="cat-elem">';
@@ -155,6 +159,7 @@
                     }
                 })
                 document.querySelector('#category-list').innerHTML = categoryListHtml;
+                document.querySelector('#categoryUpperId').innerHTML = categoryListHtmlS;
                 document.querySelector('#select-upperCategory').innerHTML = categoryListHtmlM;
             },
             error: function(){

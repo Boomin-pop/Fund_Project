@@ -41,9 +41,9 @@ fbtn.onclick = function(){
 
 <!--처음 페이지 열때-->
     window.onload = () => {
-        findAllJob();
-        findAllType();
         findAllCategory();
+        findAllType();
+        findAllJob();
     }
 
 <!--직업 관련 함수-->
@@ -98,7 +98,7 @@ function countCheckedType(){
     }
     return j;
 }
-function addCheckedType(elem){
+function addCheckedType(elem){// 최대 선택 가능한 서비스 타입 개수 제한
     if (elem.checked)
         checkType += 1; // totalChecked 증가
     else // 체크가 아니면
@@ -110,7 +110,7 @@ function addCheckedType(elem){
         elem.checked = false;
     }
 }
-function addCheckedTypeM(elem){
+function addCheckedTypeM(elem){// 카테고리 추가시 최대 타입 개수 제한
     if (elem.checked)
         checkTypeM += 1; // totalChecked 증가
     else // 체크가 아니면
@@ -121,5 +121,11 @@ function addCheckedTypeM(elem){
         checkTypeM -= 1;
         elem.checked = false;
     }
+}
+function showmodal(){
+    document.getElementById("categoryInput").style.display = "block";
+}
+function closemodal(){
+    document.getElementById("categoryInput").style.display = "none";
 }
 

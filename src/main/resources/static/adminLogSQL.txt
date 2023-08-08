@@ -1,0 +1,11 @@
+drop table transactionLog;
+create table transactionLog(
+	transactionId int primary key auto_increment,
+    transactionBuyerId varchar(50),
+    transactionSellerId varchar(50),
+    transactionServiceId int,
+    transactionPrice int,
+    transactionTransTime timestamp,
+    transactionKind varchar(20)
+);
+

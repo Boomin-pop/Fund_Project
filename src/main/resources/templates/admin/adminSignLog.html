@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/category.css" rel="stylesheet"/>
 <link href="/css/adminLog.css" rel="stylesheet"/>
 
 <!-- 헤더 -->
@@ -9,12 +10,11 @@
         <div class="searchbar">
             <h2>기록 관리</h2>
             <div class="searchbox">
-                <form id="form-transac" action="">
+                <form action="">
                     <input type="search" placeholder="아이디" class="search">
                     <input type="submit" value="검색" class="search"/>
                     <select class="search">
-                        <option value="tranceTime">거래 시간 순</option>
-                        <option value="trancePrice">거래 금액 순</option>
+                        <option value="tranceTime">최근 접속</option>
                     </select>
                     <select class="search">
                         <option value="asc">오름차순</option>
@@ -33,32 +33,29 @@
                 <table class="table">
                     <thead>
                         <tr class="thead">
-                            <th>거래 아이디</th>
-                            <th>구매자 아이디</th>
-                            <th>판매자 아이디</th>
-                            <th>서비스</th>
-                            <th>거래 금액</th>
-                            <th>거래 일시</th>
-                            <th>취소/승인</th>
+                            <th>아이디</th>
+                            <th>가입일</th>
+                            <th>기록 시간</th>
+                            <th>로그인/로그아웃</th>
                         </tr>
                     </thead>
                     <tr>
-                        <td>id</td>
                         <td><button class="view" onclick="userView()">User Id</button></td>
-                        <td><button class="view" onclick="userView()">User Id</button></td>
-                        <td><button class="view" onclick="serviceView()">상세보기</button></td>
-                        <td>거래 금액</td>
+                        <td>2023.10.23</td>
                         <td>2023.10.23 00:00:00</td>
-                        <td>승인</td>
+                        <td>로그인</td>
                     </tr>
-                    <tr th:each="trlog : ${transactionList}">
-                        <td th:text="${trlog.transactionId}">username</td>
-                        <td><button th:text="${trlog.transactionBuyerId}" class="view" onclick="userView()"></button></td>
-                        <td><button th:text="${trlog.transactionSellerId}" class="view" onclick="userView()"></button></td>
-                        <td><button class="view" onclick="serviceView()">상세보기</button></td>
-                        <td th:text="${trlog.transactionPrice}">0</td>
-                        <td th:text="${trlog.transactionTransTime}">0</td>
-                        <td th:text="${trlog.transactionKind}">0</td>
+                    <tr>
+                        <td><button class="view" onclick="userView()">User Id</button></td>
+                        <td>2023.10.23</td>
+                        <td>2023.10.24 00:00:00</td>
+                        <td>로그아웃</td>
+                    </tr>
+                    <tr>
+                        <td><button class="view" onclick="userView()">User Id</button></td>
+                        <td>2023.10.23</td>
+                        <td>2023.10.25 00:00:00</td>
+                        <td>로그인</td>
                     </tr>
                 </table>
             </div>
@@ -69,6 +66,4 @@
 </body>
 </html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
-</script>
 </html>
