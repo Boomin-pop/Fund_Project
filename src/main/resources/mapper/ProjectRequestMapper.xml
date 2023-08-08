@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kmong.kmongdemo.mapper.ProjectRequestMapper">
+    <select id="projectList" resultType="com.kmong.kmongdemo.domain.ProjectRequestDTO">
+        SELECT * FROM projectRequest WHERE userId = #{id}
+    </select>
+    <insert id="uploadProject">
+        INSERT INTO projectRequest
+        (projectRequestCategory, projectRequestTitle, projectRequestWork, projectRequestRequest, projectRequestBudget, projectRequestWanted, projectRequestClose, projectRequestTerm, userId)
+        VALUES
+        (#{category},#{title},#{work},#{requested},#{budget},#{wanted},#{close},#{term},#{id})
+    </insert>
+</mapper>
