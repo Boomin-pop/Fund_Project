@@ -10,5 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface AdminLogMapper {
-    List<TransactionLogDTO> transactionList();
+    int transactionCount();
+    List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query);
+
 }

@@ -17,7 +17,11 @@ public class AdminLogServiceImpl implements AdminLogService {
     private AdminLogMapper almapper;
 
     @Override
-    public List<TransactionLogDTO> transactionList() {
-        return almapper.transactionList();
+    public int transactionCount() {
+        return almapper.transactionCount();
+    }
+    @Override
+    public List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query) {
+        return almapper.transactionList(startIndex, pageSize, query);
     }
 }

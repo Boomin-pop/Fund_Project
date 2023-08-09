@@ -8,5 +8,7 @@ import com.kmong.kmongdemo.domain.TransactionLogDTO;
 import java.util.List;
 
 public interface AdminLogService {
-    List<TransactionLogDTO> transactionList();
+    int transactionCount();
+    List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query);
+
 }
