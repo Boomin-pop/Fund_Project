@@ -1,6 +1,5 @@
 package com.kmong.kmongdemo.controller;
 
-import com.kmong.kmongdemo.domain.CategoryDTO;
 import com.kmong.kmongdemo.domain.JobDTO;
 import com.kmong.kmongdemo.domain.UserDTO;
 import com.kmong.kmongdemo.service.UserService;
