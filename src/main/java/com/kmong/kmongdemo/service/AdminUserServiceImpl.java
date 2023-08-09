@@ -1,7 +1,6 @@
 package com.kmong.kmongdemo.service;
 
 import com.kmong.kmongdemo.domain.UserDTO;
-import com.kmong.kmongdemo.domain.UserDeleteDTO;
 import com.kmong.kmongdemo.mapper.AdminUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,10 +27,6 @@ public class AdminUserServiceImpl implements AdminUserService{
         return adminUserMapper.userModify(userDTO);
     }
 
-    @Override
-    public UserDeleteDTO userDelete(UserDeleteDTO userDeleteDTO) {
-        return adminUserMapper.userDelete(userDeleteDTO);
-    }
 
 
 }

@@ -1,7 +1,6 @@
 package com.kmong.kmongdemo.controller;
 
 import com.kmong.kmongdemo.domain.UserDTO;
-import com.kmong.kmongdemo.domain.UserDeleteDTO;
 import com.kmong.kmongdemo.service.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,11 +34,6 @@ public class AdminUserController {
         return null;
     }
 
-    @PutMapping("/admin/user/{userId}")
-    public  @ResponseBody String aminUserModify(@RequestBody UserDeleteDTO userDeleteDTO){
-        adminUserService.userDelete(userDeleteDTO);
-        return null;
-    }
 
 }
 
