@@ -40,8 +40,13 @@ public class PagingDTO {//페이징 처리를 위한 DTO, 최대한 어떤 데�
         }
 
         setPrevPage(currentBlock * pagePerBlock - pagePerBlock); // 이전 블럭의 마지막 페이지
+        if(prevPage < 1){
+            setPrevPage(1);
+        }// 계산된 이전 페이지가 0이하이면 1로 고정
         setNextPage(currentBlock * pagePerBlock + 1); // 다음 블럭의 첫 페이지
-
+        if(nextPage > pageTotalNum){
+            setNextPage(pageTotalNum);
+        }// 계산된 다음 페이지가 최대 페이지보다 크다면 최대 페이지로 고정
         setIndex((currentPage-1) * dataPerPage);
     }
 

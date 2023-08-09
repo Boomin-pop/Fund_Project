@@ -21,6 +21,7 @@ public class AdminLogController {
     @GetMapping("/transactionLog")
     public String adminTransaction(Model model, @RequestParam(defaultValue = "1") int page
                                               , @RequestParam(defaultValue = "ORDER BY transactionId") String query){
+        System.out.println("page = " + page);
         int totalLogCnt = alservice.transactionCount();
         PagingDTO paging = new PagingDTO(totalLogCnt, page, 20, 5);
 
@@ -28,7 +29,7 @@ public class AdminLogController {
         int pageSize = paging.getDataPerPage();
 
         List<TransactionLogDTO> trlist = alservice.transactionList(startIndex, pageSize, query);
-
+        System.out.println("trlist = " + trlist);
         model.addAttribute("transactionList", trlist);
         model.addAttribute("LogPage", paging);
         return "admin/adminTransaction";

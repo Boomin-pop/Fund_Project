@@ -61,6 +61,20 @@
                         <td th:text="${trlog.transactionKind}">0</td>
                     </tr>
                 </table>
+                <div class="paging">
+                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=1)}'|" value="처음">
+                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=${LogPage.prevPage})}'|" value="<">
+                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=${LogPage.nextPage})}'|" value=">">
+                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=${LogPage.pageTotalNum})}'|" value="마지막">
+                    <th:block  th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link" th:href="@{transactionLog?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                </div>
+
             </div>
         </div>
     </div>
