@@ -23,7 +23,7 @@ function btn1(userId) {
         success : function (data) {
             modal1.style.display = "block";
             console.log(data);
-            document.getElementById("name").value = data.userName;
+            document.getElementsByClassName("name").value = data.userName;
 
         },
         error: function (error) {
