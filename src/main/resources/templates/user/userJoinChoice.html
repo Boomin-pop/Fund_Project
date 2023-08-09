@@ -7,12 +7,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/userJoin2.css">
+    <link rel="stylesheet" href="/css/userJoinChoice.css">
 </head>
 
 <body>
     <div class="container">
-        <a href="#" class="logo">
+        <a href="/" class="logo">
             <img src="/imgs/kmong.svg" width="85px" height="26px" alt class="img">
         </a>
 
@@ -28,25 +28,14 @@
             </p>
 
             <div style="cursor: default;">
-                <h2>서비스를 의뢰하고 싶다면</h2>
+                <h2>서비스를 의뢰하고 내 전문성을 판매하고 싶다면</h2>
                 <button role="button" th:onclick="|location.href='@{/user/userRegister}'|"class="joinBtn" >
                     <span class="check">
                         <img src="/imgs/check.png"  alt class="img">
                     </span>
-                    <span style="font-weight: 600;">의뢰인으로 가입</span>
-                </button>
-            </div> 
-
-            <div style="margin-top: 48px; cursor: default;" >
-                <h2>내 전문성을 판매하고 싶다면</h2>
-                <button role="button" th:onclick="|location.href='@{/user/joinExpert}'|" class="joinBtn" >
-                    <span class="check">
-                        <img src="/imgs/check.png"  alt class="img">
-                    </span>
-                    <span style="font-weight: 600;">전문가로 가입</span>
+                    <span style="font-weight: 600;">의뢰인 / 전문가로 가입</span>
                 </button>
             </div>
-        </div>
         
     </div>
 </body>
