@@ -1,6 +1,7 @@
 package com.kmong.kmongdemo.service;
 
 import com.kmong.kmongdemo.domain.UserDTO;
+import com.kmong.kmongdemo.domain.UserDeleteDTO;
 
 import java.util.List;
 
@@ -8,4 +9,8 @@ public interface AdminUserService {
     List<UserDTO> userLists();
 
     UserDTO userInfo(String userId);
+
+    int userModify(UserDTO userDTO);
+
+    UserDeleteDTO userDelete(UserDeleteDTO userDeleteDTO);
 }

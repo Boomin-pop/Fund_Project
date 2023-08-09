@@ -1,6 +1,7 @@
 package com.kmong.kmongdemo.mapper;
 
 import com.kmong.kmongdemo.domain.UserDTO;
+import com.kmong.kmongdemo.domain.UserDeleteDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,4 +12,8 @@ public interface AdminUserMapper {
     List<UserDTO> userLists();
 
     UserDTO userInfo(String userId);
+
+    int userModify(UserDTO userDTO);
+
+    UserDeleteDTO userDelete(UserDeleteDTO userDeleteDTO);
 }

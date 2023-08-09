@@ -12,5 +12,12 @@
         SELECT * FROM user WHERE userId=#{userId}
     </select>
 
+    <update id="userModify">
+        UPDATE user SET userPassword=#{userPassword}, userName=#{userName}, userNickname=#{userNickname}, userEmail=#{userEmail}, userTel=#{userTel}, userJobId=#{userJobId} WHERE userId=#{userId}
+    </update>
+
+    <insert id="userDelete">
+        INSERT IN TO user(userId, userPassword, userName, userNickname, userEmail, userJobId, userRegdate)
+    </insert>
 
 </mapper>

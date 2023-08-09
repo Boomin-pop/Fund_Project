@@ -19,7 +19,6 @@ insert into user (userId, userPassword, userName, userNickname,userEmail, userTe
 
 select * from user;
 
-
 create table Job(
 	jobId int auto_increment primary key,
     jobName varchar(50) not null
