@@ -10,13 +10,14 @@
             <h2>기록 관리</h2>
             <div class="searchbox">
                 <form id="form-transac" action="">
-                    <input type="search" placeholder="아이디" class="search">
+                    <input id="id" type="search" placeholder="아이디" class="search">
                     <input type="submit" value="검색" class="search"/>
-                    <select class="search">
-                        <option value="tranceTime">거래 시간 순</option>
-                        <option value="trancePrice">거래 금액 순</option>
+                    <select class="search" id="by" th:onchange="pageMove(1)">
+                        <option value="transactionId">거래 아이디 순</option>
+                        <option value="transactionTransTime">거래 시간 순</option>
+                        <option value="transactionPrice">거래 금액 순</option>
                     </select>
-                    <select class="search">
+                    <select class="search" id="ud" th:onchange="pageMove(1)">
                         <option value="asc">오름차순</option>
                         <option value="desc">내림차순</option>
                     </select>
@@ -42,15 +43,6 @@
                             <th>취소/승인</th>
                         </tr>
                     </thead>
-                    <tr>
-                        <td>id</td>
-                        <td><button class="view" onclick="userView()">User Id</button></td>
-                        <td><button class="view" onclick="userView()">User Id</button></td>
-                        <td><button class="view" onclick="serviceView()">상세보기</button></td>
-                        <td>거래 금액</td>
-                        <td>2023.10.23 00:00:00</td>
-                        <td>승인</td>
-                    </tr>
                     <tr th:each="trlog : ${transactionList}">
                         <td th:text="${trlog.transactionId}">username</td>
                         <td><button th:text="${trlog.transactionBuyerId}" class="view" onclick="userView()"></button></td>
@@ -62,17 +54,17 @@
                     </tr>
                 </table>
                 <div class="paging">
-                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=1)}'|" value="처음">
-                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=${LogPage.prevPage})}'|" value="<">
-                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=${LogPage.nextPage})}'|" value=">">
-                    <input type="button" th:onclick="|location.href='@{transactionLog?(page=${LogPage.pageTotalNum})}'|" value="마지막">
+                    <input class="edge" type="button" th:onclick="pageMove(1)" value="처음">
+                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.prevPage}]])" value="<">
+
                     <th:block  th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}">
-                        <li class="page-item"
-                            th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}"
-                            th:each="pageButton : ${#numbers.sequence(start, end)}">
-                            <a class="page-link" th:href="@{transactionLog?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
-                        </li>
+                        <input class="btn" th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}"
+                               th:each="pageButton : ${#numbers.sequence(start, end)}"
+                        type="button" th:onclick="pageMove([[${pageButton}]])" th:value=${pageButton}>
                     </th:block>
+
+                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.nextPage}]])" value=">">
+                    <input class="edge" type="button" th:onclick="pageMove([[${LogPage.pageTotalNum}]])" value="마지막">
                 </div>
 
             </div>
@@ -83,6 +75,12 @@
 </body>
 </html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/adminLog.js"></script>
 <script>
+window.onload = () => {
+    document.getElementById("id").value = "[[${id}]]";
+    document.getElementById("by").value = "[[${by}]]";
+    document.getElementById("ud").value = "[[${ud}]]";
+}
 </script>
 </html>

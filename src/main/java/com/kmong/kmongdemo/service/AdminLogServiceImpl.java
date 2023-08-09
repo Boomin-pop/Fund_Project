@@ -21,7 +21,7 @@ public class AdminLogServiceImpl implements AdminLogService {
         return almapper.transactionCount();
     }
     @Override
-    public List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query) {
-        return almapper.transactionList(startIndex, pageSize, query);
+    public List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query, String id) {
+        return almapper.transactionList(startIndex, pageSize, query, id);
     }
 }

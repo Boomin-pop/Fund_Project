@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface AdminLogService {
     int transactionCount();
-    List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query);
+    List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query, String id);
 
 }

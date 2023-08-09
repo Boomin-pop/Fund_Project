@@ -27,3 +27,25 @@
 .section .table td{
      text-align: center;
 }
+
+.section .paging{
+    margin: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+.section .paging .edge{
+    margin: auto 7px;
+
+    height: 2em;
+}
+.section .paging .move{
+     margin: auto 5px;
+
+     height: 2em;
+}
+.section .paging .btn{
+     margin: auto 0;
+
+     height: 2em;
+}
