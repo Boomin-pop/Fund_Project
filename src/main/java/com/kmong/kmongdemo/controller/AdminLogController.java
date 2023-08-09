@@ -31,12 +31,14 @@ public class AdminLogController {
         int pageSize = paging.getDataPerPage();
 
         List<TransactionLogDTO> trlist = alservice.transactionList(startIndex, pageSize, query, id);
+
         model.addAttribute("transactionList", trlist);
         model.addAttribute("LogPage", paging);
         model.addAttribute("by", by);
         model.addAttribute("ud",ud);
         model.addAttribute("id", id);
-        return "admin/adminTransaction";
+
+        return "admin/adminTransactionLog";
     }
     @GetMapping("/signLog")
     public String adminSign(Model model){

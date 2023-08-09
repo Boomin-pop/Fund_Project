@@ -11,7 +11,7 @@
             <div class="searchbox">
                 <form id="form-transac" action="">
                     <input id="id" type="search" placeholder="아이디" class="search">
-                    <input type="submit" value="검색" class="search"/>
+                    <input type="button" value="검색" class="search" th:onclick="pageMove(1)"/>
                     <select class="search" id="by" th:onchange="pageMove(1)">
                         <option value="transactionId">거래 아이디 순</option>
                         <option value="transactionTransTime">거래 시간 순</option>

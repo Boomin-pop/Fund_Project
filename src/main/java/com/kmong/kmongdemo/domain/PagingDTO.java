@@ -1,6 +1,8 @@
 package com.kmong.kmongdemo.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class PagingDTO {//페이징 처리를 위한 DTO, 최대한 어떤 데이터든 사용할 수 있도록 작성

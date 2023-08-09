@@ -12,6 +12,9 @@
 <!--    list 가져오기-->
     <select id="transactionList" resultType="com.kmong.kmongdemo.domain.TransactionLogDTO">
         SELECT * FROM transactionLog
+        <if test="id != ''">
+            WHERE transactionBuyerId LIKE '%${id}%' OR transactionSellerId LIKE '%${id}%'
+        </if>
         ${query}
         LIMIT #{startIndex}, #{pageSize}
     </select>
