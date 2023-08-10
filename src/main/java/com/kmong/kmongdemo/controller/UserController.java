@@ -27,13 +27,13 @@ public class UserController {
     @GetMapping("/joinMethod")
     public String userJoin() {
 
-    return "/user/userJoin";
+    return "/user/userJoinMethod";
 }
 
     @GetMapping("/joinChoice")
     public String userJoin2(){
 
-        return "/user/userJoin2";
+        return "/user/userJoinChoice";
     }
 
     @GetMapping("/userRegister")
@@ -41,7 +41,7 @@ public class UserController {
         List<JobDTO> jobList = userService.jobList();
         model.addAttribute("jobList", jobList);
 
-        return "user/joinClient";
+        return "user/userJoin";
     }
 
 
