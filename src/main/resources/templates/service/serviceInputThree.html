@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="bodyPage3">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"
+            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+            integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
+
+    <!-- language pack -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
+            integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <style>
+
+        .thirdServiceTextInput{
+            display:flex;
+            margin-top:50px;
+        }
+
+        .thirdServiceTextInput > label{
+            display:flex;
+            font-weight: bolder;
+            width: 200px;
+            justify-content: end;
+            line-height:50px;
+            margin-right : 50px;
+        }
+
+        .thirdTextArea{
+            border:0;
+
+        }
+
+        .thirdTextTracer{
+            display:flex;
+            justify-content: end;
+        }
+
+        .thirdTextTracer > p{
+            color:#dddddd;
+        }
+
+        .trdRegulationBtn{
+            width:600px;
+            background-color: white;
+            border:1px solid #dddddd;
+            font-weight: bolder;
+            font-size : 15px;
+            height : 50px;
+        }
+        .modal-content{
+                width: 600px;
+        }
+        .modal-header{
+            display:inline;
+        }
+
+        .modal-header > p{
+            text-align: center;
+            font-weight: bolder;
+        }
+
+        .modal-body{
+            height:600px;
+            word-wrap: break-word;
+            word-break: keep-all;
+
+        }
+
+        .modal-body > p{
+            font-size:18px;
+            font-weight: bolder;
+            word-wrap: break-word;
+            word-break: keep-all;
+
+        }
+
+        .modal-footer{
+            display:inline;
+            text-align: center;
+        }
+
+        .modal-footer > button {
+            width: 500px;
+            height: 50px;
+            background-color: white;
+            border:1px solid #dddddd;
+        }
+
+    </style>
+
+    <div class="container shadow-sm w-50% p-5 rounded mt-4">
+
+        <div class="form-group thirdServiceTextInput">
+            <label for="summernote1" >서비스 설명</label>
+            <textarea id="summernote1" class="thirdTextArea" name="thirdTextArea"></textarea>
+        </div>
+        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
+
+        <div class="form-group thirdServiceTextInput">
+            <label for="summernote2">서비스 제공절차</label>
+            <textarea id="summernote2" class="thirdTextArea" name="thirdTextArea"></textarea>
+        </div>
+        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
+
+        <div class="form-group thirdServiceTextInput">
+            <label for="summernote3">의뢰인 준비사항</label>
+            <textarea id="summernote3" class="thirdTextArea" name="thirdTextArea"></textarea>
+        </div>
+        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
+        <div class="thirdServiceTextInput">
+            <label for="trdInpBtn">취소 및 환불 규정</label>
+            <button class="trdRegulationBtn" id="trdInpBtn" data-bs-toggle="modal" data-bs-target="#trdShowModal">취소 및 환불 규정 보기</button>
+        </div>
+        <div class="modal fade" id="trdShowModal" tabindex="-1" aria-labelledby="RegulationLabelOnModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <p class="modal-title text-center" id="RegulationLabelOnModal">취소 및 환불 규정 보기</p>
+                    </div>
+                    <div class="modal-body">
+                        <p>가. 기본 환불 규정<br>
+                       1. 전문가와 의뢰인의 상호 협의하에 청약 철회 및 환불이 가능합니다.
+                            2. 작업이 완료된 이후 또는 자료, 프로그램 등 서비스가 제공된 이후에는 환불이 불가합니다.
+                            ( 소비자보호법 17조 2항의 5조. 용역 또는 「문화산업진흥 기본법」 제2조 제5호의 디지털콘텐츠의 제공이 개시된 경우에 해당) </p>
+                        <br> <br>
+                        <p>나. 전문가 책임 사유<br>
+                        1. 전문가의 귀책사유로 당초 약정했던 서비스 미이행 혹은 보편적인 관점에서 심각하게 잘못 이행한 경우 결제 금액 전체 환불이 가능합니다. </p>
+                        <br> <br>
+                        <p>다. 의뢰인 책임 사유<br>
+                        1. 서비스 진행 도중 의뢰인의 귀책사유로 인해 환불을 요청할 경우, 사용 금액을 아래와 같이 계산 후 총 금액의 10%를 공제하여 환불합니다. <br>
+                        총 작업량의 1/3 경과 전 : 이미 납부한 요금의 2/3해당액<br>
+                        총 작업량의 1/2 경과 전 : 이미 납부한 요금의 1/2해당액<br>
+                        총 작업량의 1/2 경과 후 : 반환하지 않음 </p>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button type="button" data-bs-dismiss="modal">확인</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    Modal Area    -->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+
+
+
+    <script>
+        var testBtn = function (context) {
+            var ui = $.summernote.ui;
+            var notBtn = ui.button({contents: '서비스 설명'});
+         //   notBtn.style.border='0, none, white';
+            return notBtn.render();
+        }
+
+        $(document).ready(function() {
+            // $("textarea[name=thirdTextArea]").summernote({
+            //     toolbar: [
+            //      //   ['mybutton', ['test']],
+            //         ['style', ['style']],
+            //         ['style', ['bold', 'italic', 'underline']],
+            //         ['para', ['paragraph']]
+            //     ],
+            //     buttons: {test: testBtn},
+            //     height:300,
+            //     width:600,
+            //     // dialogsInBody: true,
+            //     lang: 'ko-KR'
+            // });
+
+
+            $('#summernote1').summernote({
+                placeholder:' 전문가 소개 (경력과 이력), 작업 가능 분야, 작업 제공 절차, 서비스 특징에 대해서 의뢰인이 이해하기 쉽도록 정확하게 작성해 주세요.\n' +
+                    '• 외부 연락처 (전화번호, 카톡ID, 이메일, 외부링크 등)는 노출하실 수 없습니다.\n' +
+                    '• 안드로이드 OS에서는 글자 크기 조절 및 정렬 기능을 제외한 에디터 기능만 지원되며, 나머지 기능은 추후 지원 예정입니다.',
+                toolbar: [
+                            ['style', ['style']],
+                            ['style', ['bold', 'italic', 'underline']],
+                            ['para', ['paragraph']]
+                        ],
+                height:300,
+                width:600,
+                lang: 'ko-KR'
+            });
+
+
+          $('#summernote2').summernote({
+              toolbar: [
+                  ['style', ['style']],
+                  ['style', ['bold', 'italic', 'underline']],
+                  ['para', ['paragraph']]
+              ],
+              height:300,
+              width:600,
+              lang: 'ko-KR',
+              placeholder:' • 상담, 결제, 1차 결과물, 중간 수정 반영, 구매확정 등 의뢰인이 서비스가 어떻게 진행되는지 알 수 있도록 서비스 진행과정에 대해서 작성해주세요.'
+
+
+          });
+
+          $('#summernote3').summernote({
+              toolbar: [
+                  ['style', ['style']],
+                  ['style', ['bold', 'italic', 'underline']],
+                  ['para', ['paragraph']]
+              ],
+              height:300,
+              width:600,
+              lang: 'ko-KR',
+              placeholder:'• 상담 전 또는 작업 착수 전에 의뢰인이 미리 준비해야 하는 사항에 대해서 작성해주세요.\n'
+          });
+
+
+
+
+        });
+    </script>
+</th:block>
+</html>

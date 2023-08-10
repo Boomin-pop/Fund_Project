@@ -25,10 +25,19 @@ let serviceObject= {
 
 
     serviceTypeChk: function () {
+        let ServiceType;
         let code={
             serviceTopCatCode : $("select[name=serviceTopCat] > option:selected").val()
         }
+        console.log(code);
+        if(code.serviceTopCatCode==0){
+            let str="";
+            ServiceType = document.getElementById("serviceType");
+            str += '';
+            ServiceType.innerHTML = str;
 
+            return;
+        }
         alert(code.serviceTopCatCode)
         $.ajax({
             type:"post",
@@ -39,7 +48,7 @@ let serviceObject= {
                 console.log("불러온 데이터 : " +data);
                 let str = "";
                 let serviceTypeDiv = document.getElementById("serviceTypeDiv");
-                let ServiceType = document.getElementById("serviceType");
+                ServiceType = document.getElementById("serviceType");
                 serviceTypeDiv.style.display="block";
                 //ObjectMapper mapper = new ObjectMapper();
 
@@ -64,6 +73,9 @@ let serviceObject= {
                                 + '<div style="width:200px; height:50px; line-height:100px"><p name="typeName" value="' + serviceTypeCode + '">' + serviceTypeName + '</p></div>'
                                 + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요."></div>'
                                 + '</div>'
+                        }
+                        if(serviceTypeCode=null){
+                            str +=''
                         }
                         ServiceType.innerHTML = str;
                     })

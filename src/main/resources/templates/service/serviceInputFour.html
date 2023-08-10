@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="bodyPage4">
+    <style>
+        .mainImgTitle{
+            display:flex;
+            font-weight: bolder;
+        }
+
+        .imgUploadBox{
+            border:1px solid #dddddd;
+            width:251px;
+            height:186px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .imgUploadTipModal{
+            width: 900px;
+            border:1px solid skyblue;
+            margin : 20px 0;
+            padding : 10px;
+            background-color: lightblue;
+
+            justify-content: space-between;
+        }
+        .fthModalwrapper{
+            display: flex;
+            width: 800px;
+        }
+
+        .imgModalTipTxtArea{
+
+            margin-left:50px;
+
+        }
+
+        .vidUpload{
+            width:251px;
+            height:60px;
+            border:1px solid #dddddd;
+            text-decoration: none;
+            background-color: white;
+        }
+
+
+
+    </style>
+    <div class="container shadow-sm p-5 rounded mt-4" style="width:1000px">
+        <div class="form-group">
+        <div class="mainImgTitle"><p>메인이미지등록(필수)</p><p>0/1</p></div>
+        <div class="imgUploadBox"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></div>
+        </div>
+        <div class="imgUploadTipModal">
+            <div class="fthModalwrapper">
+                <div clas><h4>TIP</h4></div>
+                <div class="ms-5"><img src="/imgs/modalTipImg.png"></div>
+                <div class="imgModalTipTxtArea">
+                   <p>• 이미지 권장 사이즈: 652 x 488px (4:3 비율)<br>
+                       <b>• 사용 제한 이미지</b>
+                       저작권 침해 (무단복제, 도용) 이미지<br>
+                       프로필 사진과 동일한 이미지<br>
+                       가격, 연락처, 서비스와 관련 없는 홍보성 문구<br>
+                       임의로 제작된 인증 마크, 라벨, 할인표기<br>
+                       검증 불가 내용 (최초, 유일, 무제한, 1위, 누적의뢰 수/금액 표기 등)<br>
+                       <br>
+                       ※ 등록하신 이미지는 이용약관에 의거, 판매 활성화를 위한 광고 소재로 활용될 수 있습니다.<br>
+                </p>
+            </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p>0/9</p></div>
+            <div class="imgUploadBox"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></div>
+        </div>
+
+        <div class="imgUploadTipModal">
+            <div class="fthModalwrapper">
+              <div><h4>TIP</h4></div>
+              <div class="imgModalTipTxtArea">
+                    <p>• 등록하신 이미지는 이용약관에 의거, 판매 활성화를 위한 광고 소재로 활용될 수 있습니다.<br>
+                        • 이미지 권장 사이즈: 가로 652px 이상, 세로 3000px 이하<br>
+                        • 상세이미지에 제공 가능한 서비스 샘플 이미지를 등록할 수 있습니다.<br>
+                        • 상업적인 이용 및 허가에 대한 부분을 확인하시어 등록해주시길 바랍니다.<br>
+                        • 무단/부정한 이용으로 제3자의 권리를 침해하는 이미지는 등록할 수 없습니다.<br>
+                        • 상세 이미지는 서비스 상세 페이지 하단에 등록하신 순서대로 노출됩니다.<br>
+                        • 이미지를 여러 장 첨부할 경우 각 이미지 사이를 구분하는 여백을 고려하여 등록하시길 바랍니다.<br>
+                        <br>
+                        ※ 등록하신 이미지는 이용약관에 의거, 판매 활성화를 위한 광고 소재로 활용될 수 있습니다.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="mainImgTitle"><p>동영상등록(선택)</p><p>0/6</p></div>
+            <div class="vidUploadBox">
+                <button class="vidUpload">비디오 업로드</button>
+            </div>
+        </div>
+
+        <div class="imgUploadTipModal">
+            <div class="fthModalwrapper">
+                <div><h4>TIP</h4></div>
+                <div class="imgModalTipTxtArea">
+                    <p>• 합계 500mb 이하의 mp4 파일을 등록하실 수 있습니다.<br>
+                        • 개인 연락처 혹은 홍보 동영상은 등록하실 수 없습니다.<br>
+                        • 상업적인 이용 및 허가에 대한 부분을 확인하시어 등록해주시기 바랍니다.<br>
+                        • 무단/부정한 이용으로 제3자의 권리를 침해하는 동영상은 등록할 수 없습니다.<br>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</th:block>
+</html>

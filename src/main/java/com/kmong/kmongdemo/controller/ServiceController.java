@@ -25,7 +25,7 @@ public class ServiceController {
         List<CategoryDTO> topCatList = serviceService.topCatList();
         System.out.println("topCatList = " + topCatList);
         model.addAttribute("topCatList", topCatList);
-        return "service/serviceInput";
+        return "service/serviceBody";
     }
 
     @PostMapping("/chkedServiceType")

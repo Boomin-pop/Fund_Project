@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<!--       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+     layout:decorate="/service/serviceBody">-->
 
-<!-- 헤더 -->
-<th:block th:replace="/inc/header :: headerFragment"></th:block>
-<!--  바디  -->
-<div class="d-flex" style="width:80%">
-    <th:block th:replace="/inc/leftServiceInputNav :: asideFragment"></th:block>
-<div class="container shadow-sm w-50 p-5 rounded mt-4">
+<!--<th:block layout:fragment="bodyPage1">-->
+<th:block th:fragment="bodyPage1">
+<div class="container shadow-sm w-50% p-5 rounded mt-4">
 
-
-    <form class="form-join">
         <div class="form-group">
+<!--          <div class="firstPage">  -->
             <div><p><b>제목</b></p></div>
             <div>
                 <input type="text" class="form-control" name="serviceTitle" id="serviceTitle"
@@ -26,7 +24,7 @@
             <div><p><b>1차 카테고리</b></p></div>
             <div>
                 <select class="serviceTopCat" name="serviceTopCat" id="serviceTopCat">
-                    <option value="">- 선택해 주세요 -</option>
+                    <option value=0>- 선택해 주세요 -</option>
                     <option value="" disabled>----------------------</option>
                     <th:block th:each="topCat : ${topCatList}">
                         <option name="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>
@@ -52,10 +50,9 @@
 <div class="mt-5">
     <span>검색 키워드ㅤㅤㅤ</span><input type="text" name="keywordInput" style="width:500px; line-height:50px; border:0" placeholder="키워드 입력"/><span>0/5</span><button>추가</button>
 </div>
-
+<a>다음</a>
 <button type="submit" id="btn-save" class="btn btn-success btn-lg">저장</button>
 <button type="submit" id="btn-next" class="btn btn-success btn-lg">다음</button>
-</form>
 
 </div>
 </div>
@@ -107,7 +104,7 @@
                 topCatChk="true";
                 console.log("카테고리 선택 여부 : "+topCatChk);
             }
-            if(topCatSel.val().trim()==""){
+            if(topCatSel.value==0){
                 topCatChk="false";
                 console.log(document.getElementById("serviceTypeDiv"));
                 document.getElementById("serviceTypeDiv").style.display="none";
@@ -175,9 +172,5 @@
     })//readyFunction
 
 </script>
+</th:block>
 
-
-<!-- 푸터 -->
-<th:block th:replace="/inc/footer :: footerFragment"></th:block>
-</body>
-</html>
