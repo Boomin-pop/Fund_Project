@@ -16,11 +16,15 @@ public class AdminUserController {
 
     @GetMapping("/admin/user")
     public String adminUser(Model model){
+
         List<UserDTO> userLists = adminUserService.userLists();
         model.addAttribute("userLists", userLists);
+        List<UserDTO> userDeleteLists=adminUserService.userDeleteLists();
+        model.addAttribute("userDeleteLists", userDeleteLists);
 
         return "admin/adminUser";
     }
+
 
     @GetMapping("/admin/user/{userId}")
     public @ResponseBody UserDTO adminUserInfo(@PathVariable("userId") String userId, Model model){
@@ -34,6 +38,23 @@ public class AdminUserController {
         return null;
     }
 
+    @PostMapping("/admin/user/{userId}")
+    public @ResponseBody String adminUserDeleteR(@RequestBody UserDTO userDTO){
+        adminUserService.userDeleteR(userDTO);
+        return null;
+    }
 
+    @DeleteMapping("/admin/user/{userId}")
+    public @ResponseBody String deleteUser(@RequestBody UserDTO userDTO){
+        adminUserService.deleteUser(userDTO);
+        System.out.println("userDTO = " + userDTO);
+        return null;
+    }
+
+//    @PutMapping("/admin/user/{userId}")
+//    public  @ResponseBody String userCancle(@RequestBody UserDTO userDTO){
+//        adminUserService.userCancle(userDTO);
+//        return null;
+//    }
 }
 

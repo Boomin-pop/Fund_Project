@@ -18,6 +18,11 @@ public class AdminUserServiceImpl implements AdminUserService{
     }
 
     @Override
+    public List<UserDTO> userDeleteLists() {
+        return adminUserMapper.userDeleteLists();
+    }
+
+    @Override
     public UserDTO userInfo(String userId) {
         return adminUserMapper.userInfo(userId);
     }
@@ -27,6 +32,19 @@ public class AdminUserServiceImpl implements AdminUserService{
         return adminUserMapper.userModify(userDTO);
     }
 
+    @Override
+    public int userDeleteR(UserDTO userDTO) {
+        return adminUserMapper.userDeleteR(userDTO);
+    }
 
+    @Override
+    public int deleteUser(UserDTO userDTO) {
+        return adminUserMapper.deleteUser(userDTO);
+    }
+
+    @Override
+    public int userCancle(UserDTO userDTO) {
+        return adminUserMapper.userCancle(userDTO);
+    }
 
 }

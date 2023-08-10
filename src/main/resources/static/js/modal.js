@@ -1,6 +1,26 @@
 //update
 function update(){
-    alert("업데이트하시겠습니까?")
+    let userId = document.getElementById("id3").textContent;
+    let chk = [];
+    $( "input[name = 'user']:checked").each(function (i){
+        chk.push($(this).val());
+    })
+    let allData = {"userId":userId , "chkArray":chk};
+    $.ajax({
+        url: "/admin/user/"+ userId,
+        type: "delete",
+        contentType: "application/json; charset=utf-8",
+        dataType: "text",
+        data: allData,
+        success : function (data){
+            console.log(data);
+            alert("업데이트 완료");
+            location.replace("/admin/user");
+        },
+        error: function (error){
+            alert(error)
+        }
+    });
 }
 
 //cancle
@@ -110,6 +130,7 @@ function btn3(userId){
             console.log(data);
             document.getElementById("name3").textContent=data.userName;
             document.getElementById("id3").textContent=data.userId;
+            document.getElementById("delete").value=data.userDelete;
         },
         error: function (error){
             alert(error);
@@ -125,10 +146,10 @@ function modify2(){
     let del = document.getElementById("delete").value;
     $.ajax({
         url: "/admin/user/"+ userId,
-        type: "put",
+        type: "post",
         contentType: "application/json; charset=utf-8",
         dataType: "text",
-        data: JSON.stringify(),
+        data: JSON.stringify({userId: userId, userDelete: del}),
         success : function (data){
             modal1.style.display = "none";
             console.log(data);
