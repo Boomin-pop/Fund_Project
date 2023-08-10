@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/adminLog.css" rel="stylesheet"/>
+
+<!-- 헤더 -->
+<th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
+<div class="body">
+    <div class="container">
+        <div class="searchbar">
+            <h2>기록 관리</h2>
+            <div class="searchbox">
+                <form id="form-transac" action="">
+                    <input id="id" type="search" placeholder="아이디" class="search">
+                    <input type="button" value="검색" class="search" th:onclick="pageMove(1)"/>
+                    <select class="search" id="by" th:onchange="pageMove(1)">
+                        <option value="transactionId">거래 아이디 순</option>
+                        <option value="transactionTransTime">거래 시간 순</option>
+                        <option value="transactionPrice">거래 금액 순</option>
+                    </select>
+                    <select class="search" id="ud" th:onchange="pageMove(1)">
+                        <option value="asc">오름차순</option>
+                        <option value="desc">내림차순</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="main">
+            <div class="aside">
+                <input type="button" value="거래 기록" onclick="location.href='/admin/transactionLog'"/>
+                <input type="button" value="접속 기록" onclick="location.href='/admin/signLog'"/>
+            </div>
+            <div class="section">
+                1/10
+                <table class="table">
+                    <thead>
+                        <tr class="thead">
+                            <th>거래 아이디</th>
+                            <th>구매자 아이디</th>
+                            <th>판매자 아이디</th>
+                            <th>서비스</th>
+                            <th>거래 금액</th>
+                            <th>거래 일시</th>
+                            <th>취소/승인</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="trlog : ${transactionList}">
+                        <td th:text="${trlog.transactionId}">username</td>
+                        <td><button th:text="${trlog.transactionBuyerId}" class="view" onclick="userView()"></button></td>
+                        <td><button th:text="${trlog.transactionSellerId}" class="view" onclick="userView()"></button></td>
+                        <td><button class="view" onclick="serviceView()">상세보기</button></td>
+                        <td th:text="${trlog.transactionPrice}">0</td>
+                        <td th:text="${trlog.transactionTransTime}">0</td>
+                        <td th:text="${trlog.transactionKind}">0</td>
+                    </tr>
+                </table>
+                <div class="paging">
+                    <input class="edge" type="button" th:onclick="pageMove(1)" value="처음">
+                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.prevPage}]])" value="<">
+
+                    <th:block  th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}">
+                        <input class="btn" th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}"
+                               th:each="pageButton : ${#numbers.sequence(start, end)}"
+                        type="button" th:onclick="pageMove([[${pageButton}]])" th:value=${pageButton}>
+                    </th:block>
+
+                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.nextPage}]])" value=">">
+                    <input class="edge" type="button" th:onclick="pageMove([[${LogPage.pageTotalNum}]])" value="마지막">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
+</body>
+</html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/adminLog.js"></script>
+<script>
+window.onload = () => {
+    document.getElementById("id").value = "[[${id}]]";
+    document.getElementById("by").value = "[[${by}]]";
+    document.getElementById("ud").value = "[[${ud}]]";
+}
+</script>
+</html>
