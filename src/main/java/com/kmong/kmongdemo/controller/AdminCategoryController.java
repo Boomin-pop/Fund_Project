@@ -75,4 +75,10 @@ public class AdminCategoryController {
         AdminCategoryDTO Cdto = acservice.categoryView(cid);
         return Cdto;
     }
+    // 카테고리 제거
+    @DeleteMapping("/category/{cid}")
+    public @ResponseBody String categoryRemove(@PathVariable("cid") int cid){
+        int n = acservice.removeCategory(cid);
+        return n == 1 ? "success" : "fail";
+    }
 }

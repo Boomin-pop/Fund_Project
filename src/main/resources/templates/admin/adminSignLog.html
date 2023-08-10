@@ -11,11 +11,11 @@
             <div class="searchbox">
                 <form id="form-transac" action="">
                     <input id="id" type="search" placeholder="아이디" class="search">
-                    <input type="button" value="검색" class="search" th:onclick="pageMove(1)"/>
-                    <select class="search" id="by" th:onchange="pageMove(1)">
-                        <option value="signTransTime">최근 접속 순</option>
+                    <input type="button" value="검색" class="search" th:onclick="pageMoveS(1)"/>
+                    <select class="search" id="by" th:onchange="pageMoveS(1)">
+                        <option value="signLogTime">최근 접속 순</option>
                     </select>
-                    <select class="search" id="ud" th:onchange="pageMove(1)">
+                    <select class="search" id="ud" th:onchange="pageMoveS(1)">
                         <option value="asc">오름차순</option>
                         <option value="desc">내림차순</option>
                     </select>
@@ -31,6 +31,7 @@
                 <table class="table">
                     <thead>
                     <tr class="thead">
+                        <th>로그아이디</th>
                         <th>아이디</th>
                         <th>가입일</th>
                         <th>기록 시간</th>
@@ -38,27 +39,25 @@
                     </tr>
                     </thead>
                     <tr th:each="slog : ${signList}">
-                        <td th:text="${slog.signId}">username</td>
-                        <td><button th:text="${slog.signBuyerId}" class="view" onclick="userView()"></button></td>
-                        <td><button th:text="${slog.signSellerId}" class="view" onclick="userView()"></button></td>
-                        <td><button class="view" onclick="serviceView()">상세보기</button></td>
-                        <td th:text="${slog.signPrice}">0</td>
-                        <td th:text="${slog.signTransTime}">0</td>
+                        <td th:text="${slog.signId}">0</td>
+                        <td><button th:text="${slog.signUserId}" class="view" onclick="userView()"></button></td>
+                        <td th:text="${slog.signRegDate}">0</td>
+                        <td th:text="${slog.signLogTime}">0</td>
                         <td th:text="${slog.signKind}">0</td>
                     </tr>
                 </table>
                 <div class="paging">
-                    <input class="edge" type="button" th:onclick="pageMove(1)" value="처음">
-                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.prevPage}]])" value="<">
+                    <input class="edge" type="button" th:onclick="pageMoveS(1)" value="처음">
+                    <input class="move" type="button" th:onclick="pageMoveS([[${LogPage.prevPage}]])" value="<">
 
                     <th:block  th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}">
                         <input class="btn" th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}"
                                th:each="pageButton : ${#numbers.sequence(start, end)}"
-                               type="button" th:onclick="pageMove([[${pageButton}]])" th:value=${pageButton}>
+                               type="button" th:onclick="pageMoveS([[${pageButton}]])" th:value=${pageButton}>
                     </th:block>
 
-                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.nextPage}]])" value=">">
-                    <input class="edge" type="button" th:onclick="pageMove([[${LogPage.pageTotalNum}]])" value="마지막">
+                    <input class="move" type="button" th:onclick="pageMoveS([[${LogPage.nextPage}]])" value=">">
+                    <input class="edge" type="button" th:onclick="pageMoveS([[${LogPage.pageTotalNum}]])" value="마지막">
                 </div>
 
             </div>

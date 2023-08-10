@@ -82,21 +82,9 @@ function deletetype(id){
 <!--  분야 상세보기  -->
 function viewCategory(id){
     findCategory(id);
-    checkType = countCheckedType();
 }
 function deleteCategory(id){
     removeCategory(id);
-}
-function countCheckedType(){
-    let types;
-    types = document.getElementsByName("typecheck");
-    let j = 0;
-    for(i=0;i<types.length;i++){
-        if(types[i].checked){
-            j++;
-        }
-    }
-    return j;
 }
 function addCheckedType(elem){// 최대 선택 가능한 서비스 타입 개수 제한
     if (elem.checked)

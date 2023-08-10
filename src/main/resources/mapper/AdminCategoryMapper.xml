@@ -39,4 +39,7 @@
     <select id="categoryView" resultType="com.kmong.kmongdemo.domain.AdminCategoryDTO">
         SELECT * FROM category WHERE categoryId = #{cid}
     </select>
+    <delete id="removeCategory" >
+        DELETE FROM category WHERE categoryId = #{cid}
+    </delete>
 </mapper>

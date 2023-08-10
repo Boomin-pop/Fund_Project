@@ -1,8 +1,8 @@
 package com.kmong.kmongdemo.controller;
 
 import com.kmong.kmongdemo.domain.PagingDTO;
+import com.kmong.kmongdemo.domain.SignLogDTO;
 import com.kmong.kmongdemo.domain.TransactionLogDTO;
-import com.kmong.kmongdemo.service.AdminCategoryService;
 import com.kmong.kmongdemo.service.AdminLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,8 +41,25 @@ public class AdminLogController {
         return "admin/adminTransactionLog";
     }
     @GetMapping("/signLog")
-    public String adminSign(Model model){
+    public String adminSign(Model model, @RequestParam(defaultValue = "1") int page
+                                       , @RequestParam(defaultValue = "signLogTime") String by
+                                       , @RequestParam(defaultValue = "desc") String ud
+                                       , @RequestParam(defaultValue = "") String id){
 
+        String query = "ORDER BY " + by+ " " + ud;
+        int totalLogCnt = alservice.SignCount();
+        PagingDTO paging = new PagingDTO(totalLogCnt, page, 20, 5);
+
+        int startIndex = paging.getIndex();
+        int pageSize = paging.getDataPerPage();
+
+        List<SignLogDTO> slist = alservice.SignList(startIndex, pageSize, query, id);
+
+        model.addAttribute("signList", slist);
+        model.addAttribute("LogPage", paging);
+        model.addAttribute("by", by);
+        model.addAttribute("ud",ud);
+        model.addAttribute("id", id);
         return "admin/adminSignLog";
     }
 }

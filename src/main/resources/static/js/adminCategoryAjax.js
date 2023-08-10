@@ -1,27 +1,27 @@
 //ajax 스크립트
 var ucats = ['0'];
 <!--    직업 카테고리-->
-    function findAllJob(){//모든 직업 카테고리 가져오기
-        $.ajax({
-            url: '/admin/category/job/list',
-            type: 'get',
-            success: function(data){
-                let jobListHtml = '';
-                data.forEach(row => {
-                    let name = row.jobName;
-                    let id = row.jobId;
-                    jobListHtml += '<div class="cat-elem">';
-                    jobListHtml += '<input type="button" value="' + name + '" class="a"/>';
-                    jobListHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
-                    jobListHtml += '</div>';
-                })
-                document.querySelector('#job-list').innerHTML = jobListHtml;
-            },
-            error: function(){
-                console.log("job data load error")
-            }
-        })
-    }
+function findAllJob(){//모든 직업 카테고리 가져오기
+    $.ajax({
+        url: '/admin/category/job/list',
+        type: 'get',
+        success: function(data){
+            let jobListHtml = '';
+            data.forEach(row => {
+                let name = row.jobName;
+                let id = row.jobId;
+                jobListHtml += '<div class="cat-elem">';
+                jobListHtml += '<input type="button" value="' + name + '" class="a"/>';
+                jobListHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
+                jobListHtml += '</div>';
+            })
+            document.querySelector('#job-list').innerHTML = jobListHtml;
+        },
+        error: function(){
+            console.log("job data load error")
+        }
+    })
+}
     function insertjob(jname){//직업 카테고리 집어넣기
         console.log(jname);
         $.ajax({
@@ -38,16 +38,16 @@ var ucats = ['0'];
             }
         });
     }
-    function removejob(jid){//직업 카테고리 삭제하기
-        $.ajax({
-            url:'/admin/category/job/' + jid,
-            type:"delete",
-            success:function(result){
-                findAllJob()
-            },
-            error:()=>{console.log('error')}
-        });
-    }
+function removejob(jid){//직업 카테고리 삭제하기
+    $.ajax({
+        url:'/admin/category/job/' + jid,
+        type:"delete",
+        success:function(result){
+            findAllJob()
+        },
+        error:()=>{console.log('error')}
+    });
+}
 <!--    서비스 타입 카테고리-->
     function findAllType(){//서비스 타입 가져오기
         $.ajax({
@@ -80,7 +80,7 @@ var ucats = ['0'];
                     typeHtml += '</div>';
 
                     typeHtmlS += '<div class="type-info">';
-                    typeHtmlS += '<input type="checkbox" name="typecheck" value="' + Id + '" onclick="addCheckedType(this)"/>';
+                    typeHtmlS += '<input type="checkbox" name="typecheckS" value="' + Id + '" onclick="addCheckedType(this)"/>';
                     typeHtmlS += '<input type="text" name="typeName" value="' + name + '" readonly/>';
                     typeHtmlS += '</div>';
                     i++;
@@ -98,7 +98,7 @@ var ucats = ['0'];
             }
         })
     }
-     function inserttype(tname, check){//서비스 타입 카테고리 집어넣기
+    function inserttype(tname, check){//서비스 타입 카테고리 집어넣기
         $.ajax({
             url:"/admin/category/servicetype/insert",
             type: "post",
@@ -167,20 +167,48 @@ var ucats = ['0'];
             }
         })
     }
-    function findCategory(cid){//분야 카테고리 개별 가져오기
-        console.log(cid);
-        $.ajax({
-            url: '/admin/category/' + cid,
-            type: 'get',
-            success: function(data){
-                console.log(data);
-                document.getElementById("categoryId").value = data.categoryId;
-                document.getElementById("categoryName").value = data.categoryName;
-                document.getElementById("categoryUpperId").value = data.categoryUpperId;
-                document.getElementById("categoryRefund").value = data.categoryRefund;
+function findCategory(cid){//분야 카테고리 개별 가져오기
+    var types = document.getElementsByName("typecheckS");
+    $.ajax({
+        url: '/admin/category/' + cid,
+        type: 'get',
+        success: function(data){
+            document.getElementById("categoryId").value = data.categoryId;
+            document.getElementById("categoryName").value = data.categoryName;
+            document.getElementById("categoryUpperId").value = data.categoryUpperId;
+            document.getElementById("categoryRefund").value = data.categoryRefund;
+            let j = 0;
+            types.forEach((stype) => {
+                    if(stype.value == data.serviceTypeId1 ||
+                                       stype.value == data.serviceTypeId2 ||
+                                       stype.value == data.serviceTypeId3 ||
+                                       stype.value == data.serviceTypeId4 ||
+                                       stype.value == data.serviceTypeId5 ||
+                                       stype.value == data.serviceTypeId6 ||
+                                       stype.value == data.serviceTypeId7 ||
+                                       stype.value == data.serviceTypeId8){
+                                        j++;
+                                        stype.checked = true;
+                                       }
+                    else{
+                        stype.checked = false;
+                    }
+                });
+                console.log(j);
+                    return j;
+        },
+        error: function(){
+            console.log("error")
+        }
+    })
+}
+function removeCategory(cid){
+    $.ajax({
+            url:'/admin/category/' + cid,
+            type:"delete",
+            success:function(result){
+                findAllCategory()
             },
-            error: function(){
-                console.log("error")
-            }
-        })
-    }
+            error:()=>{console.log('error')}
+        });
+}

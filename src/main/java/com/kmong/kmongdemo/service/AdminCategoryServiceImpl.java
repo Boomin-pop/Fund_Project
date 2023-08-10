@@ -49,4 +49,8 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
     public AdminCategoryDTO categoryView(int cid) {
         return acmapper.categoryView(cid);
     }
+    @Override
+    public int removeCategory(int cid) {
+        return acmapper.removeCategory(cid);
+    }
 }
