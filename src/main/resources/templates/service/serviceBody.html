@@ -1,0 +1,222 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--&lt;!&ndash; 헤더 &ndash;&gt;-->
+<!--<th:block th:replace="/inc/header :: headerFragment"></th:block>-->
+<!--&lt;!&ndash;  바디  &ndash;&gt;-->
+<!--<body>-->
+<!--<div class="d-flex" style="width:80%">-->
+<!--    <th:block th:replace="/inc/leftServiceInputNav :: asideFragment"></th:block>-->
+
+<!--    &lt;!&ndash; 본문 &ndash;&gt;-->
+<!--    <th:block th:replace="/service/serviceInput :: bodyPage1"></th:block>-->
+
+
+
+
+<!--</div>-->
+<!--&lt;!&ndash; 푸터 &ndash;&gt;-->
+<!--<th:block th:replace="/inc/footer :: footerFragment"></th:block>-->
+
+<!--================================================================================-->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFragment"></th:block>
+<style>
+    a{text-decoration: none;
+        color:black;
+    }
+</style>
+<!--  바디  -->
+<div class="d-flex" style="width:80%">
+    <!--    <aside th:replace="/inc/leftServiceInputNav :: asideFragment"></aside>-->
+
+    <aside class="side-container border-end" style="width:200px; margin-left:30%;">
+        <button id="btn-one" class="left-btns" onclick="choice(this)"><div class="d-flex mt-5">
+            <table class="me-5">
+                <tr>
+                    <td id="num1" style="border: 1px solid black; width:30px; height:30px; text-align:center;">1</td>
+                    <td>ㅤ기본정보</td>
+                </tr>
+            </table>
+        </div></button>
+
+        <button id="btn-two" class="left-btns" onclick="choice(this)"><div class="d-flex mt-4">
+            <table class="me-5" style="font-weight:bolder">
+                <tr>
+                    <td id="num2"  style="border: 1px solid black; width:30px; height:30px; text-align:center;">2</td>
+                    <td>ㅤ가격설정</td>
+                </tr>
+            </table>
+        </div></button>
+        <button id="btn-three" class="left-btns" onclick="choice(this)"><div class="d-flex mt-4">
+            <table class="me-5">
+                <tr>
+                    <td id="num3" style="border: 1px solid black; width:30px; height:30px; text-align:center;">3</td>
+                    <td>ㅤ서비스 설명</td>
+                </tr>
+            </table>
+        </div></button>
+        <button id="btn-four" class="left-btns" onclick="choice(this)"><div class="d-flex mt-4">
+            <table class="me-5">
+                <tr>
+                    <td id="num4" style="border: 1px solid black; width:30px; height:30px; text-align:center;">4</td>
+                    <td>ㅤ이미지</td>
+                </tr>
+            </table>
+        </div></button>
+        <button id="btn-five" class="left-btns" onclick="choice(this)"><div class="d-flex mt-4">
+            <table class="me-5">
+                <tr>
+                    <td id="num5" style="border: 1px solid black; width:30px; height:30px; text-align:center;">5</td>
+                    <td>ㅤ요청사항</td>
+                </tr>
+            </table>
+        </div></button>
+
+    </aside>
+    <div class="contents-area">
+        <form class="form-join">
+
+            <div class="svcInput btn-one" id="firstInput" style="display:block;">
+                <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
+                <!--             <th:block layout:fragment="bodyPage1"></th:block>-->
+                <!--             <section th:replace="/service/serviceInput :: bodyPage1"></section>-->
+            </div>
+
+            <div class="svcInput btn-two" id="secondInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputTwo :: bodyPage2"></th:block>
+            </div>
+
+            <div class="svcInput btn-three" id="thirdInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputThree :: bodyPage3"></th:block>
+            </div>
+            <div class="svcInput btn-four" id="forthInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputFour :: bodyPage4"></th:block>
+            </div>
+            <div class="svcInput btn-five" id="fifthInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputFive :: bodyPage5"></th:block>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- 푸터 -->
+<footer th:replace="/inc/footer :: footerFragment"></footer>
+
+
+<script>
+    // let btnOne = $("#btn-one");
+    // let btnTwo = $("#btn-two");
+    // let btnThree = $("#btn-three");
+    // let btnFour = $("#btn-four");
+    // let btnFive = $("#btn-five");
+    // let firstInput = $("#firstInput");
+
+    function choice(ojt) {
+        console.log(ojt.id);
+        let btns = document.querySelectorAll(".left-btns");
+        for (let i = 0; i < btns.length; i++) {
+            btns.item(i).style.color='black';
+        }
+        ojt.style.color="blue";
+        let svcInput = document.querySelectorAll(".svcInput");
+        console.log("svcInput : "+svcInput);
+        console.log("svcInput length : "+svcInput.length);
+        for (let j = 0; j < svcInput.length; j++){
+            console.log("svcInput j : "+ svcInput.item(j));
+            svcInput.item(j).style.display='none';
+        }
+        document.querySelector("."+ojt.id).style.display='block';
+    }
+
+
+    // $(document).ready(function (){
+    //     btnOne.on("click", function(){
+    //         //firstInput.style.display='none';
+    //         document.getElementById("btn-one").style.fontWeight='bolder';
+    //         document.getElementById("btn-two").style.fontWeight='normal';
+    //         document.getElementById("btn-three").style.fontWeight='normal';
+    //         document.getElementById("btn-four").style.fontWeight='normal';
+    //         document.getElementById("btn-five").style.fontWeight='normal';
+    //
+    //         document.getElementById("num1").innerText='V';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         // 이거 깔끔하게 쓰는법 아시는분?
+    //         document.getElementById("firstInput").style.display='block';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='none';
+    //
+    //     })
+    //
+    //     btnTwo.on("click", function(){
+    //         //firstInput.style.display='none';
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='V';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='block';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='none';
+    //     })
+    //
+    //     btnThree.on("click", function(){
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='V';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='block';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='none';
+    //     })
+    //
+    //     btnFour.on("click", function(){
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='V';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='block';
+    //         document.getElementById("fifthInput").style.display='none';
+    //     })
+    //
+    //     btnFive.on("click", function(){
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='V';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='block';
+    //     })
+    // })
+
+
+</script>
+</body>
+</html>
