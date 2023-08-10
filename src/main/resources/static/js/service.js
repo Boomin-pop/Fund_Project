@@ -38,7 +38,7 @@ let serviceObject= {
 
             return;
         }
-        alert(code.serviceTopCatCode)
+        alert("서비스 탑캣코드 찍어보기 : "+code.serviceTopCatCode);
         $.ajax({
             type:"post",
             url:"/service/chkedServiceType",

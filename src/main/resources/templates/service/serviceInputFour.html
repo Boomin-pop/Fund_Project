@@ -16,11 +16,12 @@
             align-items: center;
         }
         .imgUploadTipModal{
+            color: rgb(11, 82, 167);
             width: 900px;
-            border:1px solid skyblue;
+            border:1px solid lightblue;
             margin : 20px 0;
             padding : 10px;
-            background-color: lightblue;
+            background-color: rgb(247, 251, 255);
 
             justify-content: space-between;
         }
@@ -49,13 +50,15 @@
     <div class="container shadow-sm p-5 rounded mt-4" style="width:1000px">
         <div class="form-group">
         <div class="mainImgTitle"><p>메인이미지등록(필수)</p><p>0/1</p></div>
-        <div class="imgUploadBox"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></div>
+        <div class="imgUploadBox" id="imgMainBox"><img src="/imgs/imageupload.png" style="width:88px; height:64px;">
+            <button id="imgUpBtn" style="display:none">이미지 업로드</button></div>
         </div>
-        <div class="imgUploadTipModal">
+
+        <div class="imgUploadTipModal" id="fthTip1" style="display: none;">
             <div class="fthModalwrapper">
                 <div clas><h4>TIP</h4></div>
                 <div class="ms-5"><img src="/imgs/modalTipImg.png"></div>
-                <div class="imgModalTipTxtArea">
+                <div class="imgModalTipTxtArea" >
                    <p>• 이미지 권장 사이즈: 652 x 488px (4:3 비율)<br>
                        <b>• 사용 제한 이미지</b>
                        저작권 침해 (무단복제, 도용) 이미지<br>
@@ -72,10 +75,10 @@
 
         <div class="form-group">
             <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p>0/9</p></div>
-            <div class="imgUploadBox"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></div>
+            <div class="imgUploadBox" id="detailImgUpload"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></div>
         </div>
 
-        <div class="imgUploadTipModal">
+        <div class="imgUploadTipModal" id="fthTip2" style="display: none;">
             <div class="fthModalwrapper">
               <div><h4>TIP</h4></div>
               <div class="imgModalTipTxtArea">
@@ -95,12 +98,12 @@
 
         <div class="form-group">
             <div class="mainImgTitle"><p>동영상등록(선택)</p><p>0/6</p></div>
-            <div class="vidUploadBox">
+            <div class="vidUploadBox" id="vidUpBtn">
                 <button class="vidUpload">비디오 업로드</button>
             </div>
         </div>
 
-        <div class="imgUploadTipModal">
+        <div class="imgUploadTipModal" id="fthTip3" style="display: none;">
             <div class="fthModalwrapper">
                 <div><h4>TIP</h4></div>
                 <div class="imgModalTipTxtArea">
@@ -113,9 +116,60 @@
                 </div>
             </div>
         </div>
-
     </div>
+<script>
+    let imgbox = $(".imgUploadBox");
+    let vidUploadBox = $(".vidUploadBox");
 
+    function hov(yogo){
+        console.log(yogo.id);
+        if(yogo.firstChild.style.display==='none'){
+            yogo.firstChild.style.display='block';
+        }else{
+            yogo.firstChild.style.display='none';
+        }
+    }
+
+
+    $(document).ready(function () {
+        var imgMainBox =  document.getElementById("imgMainBox");
+        var detailImgUpload = document.getElementById("detailImgUpload");
+        var imgUpBtn = document.getElementById("imgUpBtn");
+        var vidUpBtn = document.getElementById("vidUpBtn");
+        var fthTip1 = document.getElementById("fthTip1");
+        var fthTip2 = document.getElementById("fthTip2");
+        var fthTip3 = document.getElementById("fthTip3");
+
+      //  $("#imgMainBox").on("mouseover", function(){
+            imgMainBox.addEventListener("mouseover", function(){
+                imgMainBox.firstChild.style.display='none';
+                imgUpBtn.style.display='block';
+                fthTip1.style.display='block';
+                fthTip2.style.display='none';
+                fthTip3.style.display='none';
+
+            });
+
+            imgMainBox.addEventListener("mouseout", function(){
+                imgMainBox.firstChild.style.display='block';
+                imgUpBtn.style.display='none';
+            });
+
+            detailImgUpload.addEventListener("mouseover", function(){
+                fthTip1.style.display='none';
+                fthTip2.style.display='block';
+                fthTip3.style.display='none';
+            });
+
+            vidUpBtn.addEventListener("mouseover", function(){
+                fthTip1.style.display='none';
+                fthTip2.style.display='none';
+                fthTip3.style.display='block';
+            });
+    })
+
+
+</script>
 
 </th:block>
 </html>
