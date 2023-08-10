@@ -1,0 +1,14 @@
+create table projectRequest (
+	projectRequestNo int primary key auto_increment, -- Request Number
+	projectRequestCategory varchar(50) not null, -- Request Category(카테고리)
+    projectRequestTitle varchar(500) not null, -- Request Title(프로젝트 제목)
+    projectRequestWork varchar(50) not null, -- Request Work(프로젝트 업무)
+    projectRequestRequest varchar(5000) not null, -- Request Request(프로젝트 요구하상)
+    projectRequestBudget int not null, -- Request Budget(프로젝트 예산)
+    projectRequestWanted varchar(100) not null, -- Request Wanted(프로젝트 모집 마감일)
+    projectRequestClose varchar(100) not null, -- Request Close(프로젝트 종료일)
+    projectRequestTerm int not null, -- Request Term(프로젝트 작업기간)
+    userId varchar(50) not null, -- Request UserId(프로젝트 의뢰인 아이디)
+    projectRequestUpload timestamp not null default current_timestamp,
+    foreign key(userId) references user(userId)
+);

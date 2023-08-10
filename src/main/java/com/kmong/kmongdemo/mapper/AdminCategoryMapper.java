@@ -1,21 +1,21 @@
-package com.kmong.kmongdemo.service;
-
-import java.util.List;
+package com.kmong.kmongdemo.mapper;
 
 import com.kmong.kmongdemo.domain.AdminCategoryDTO;
 import com.kmong.kmongdemo.domain.AdminServiceTypeDTO;
 import com.kmong.kmongdemo.domain.JobDTO;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface AdminCategoryService {
-    // 직업 관리
+import java.util.List;
+
+@Mapper
+public interface AdminCategoryMapper {
     List<JobDTO> jobList();
     int insertJob(String jname);
     int removeJob(int jid);
 
-    // 서비스 타입 관리
     List<AdminServiceTypeDTO> typeList();
     int insertType(String tname);
-    // 카테고리 관리
+
     List<AdminCategoryDTO> categoryList();
     AdminCategoryDTO categoryView(int cid);
 

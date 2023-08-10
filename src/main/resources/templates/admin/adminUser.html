@@ -55,16 +55,19 @@
                         <th>삭제</th>
                     </tr>
                     </thead>
+                    <th:block th:each="user : ${userLists}">
                     <tr>
-                        <td>이름</td>
-                        <td>아이디</td>
-                        <td>닉네임</td>
-                        <td>전화번호</td>
-                        <td><button class="change" onclick="btn1()">변경</button></td>
+                        <td th:text="${user.userName}">이름</td>
+                        <td th:text="${user.userId}">아이디</td>
+                        <td th:text="${user.userNickname}">닉네임</td>
+                        <td th:text="${user.userTel}">전화번호</td>
+<!--                        <td><button class="change" th:onclick="btn1([[${user.userId}]])">변경</button></td>-->
+                        <td><button class="change" th:onclick="btn1([[${user.userId}]])">변경</button></td>
                         <td>최근 기록</td>
-                        <td><button class="data" onclick="btn2()">정보 확인</button></td>
-                        <td><button class="delete" onclick="btn3()">삭제</button></td>
+                        <td><button class="data" th:onclick="btn2([[${user.userId}]])">정보 확인</button></td>
+                        <td><button class="delete" th:onclick="btn3([[${user.userId}]])">삭제</button></td>
                     </tr>
+                    </th:block>
                 </table>
             </div>
         </div>
@@ -80,43 +83,43 @@
         <table>
             <tr>
                 <td>이름</td>
-                <td><input type="text" placeholder="이름"></td>
+                <td><input type="text" placeholder="이름" id="name1"></td>
             </tr>
             <tr>
                 <td>아이디</td>
-                <td><input type="text" placeholder="아이디"></td>
+                <td><input type="text" placeholder="아이디" id="id1"></td>
             </tr>
             <tr>
                 <td>비밀번호</td>
-                <td><input type="text" placeholder="비밀번호"></td>
+                <td><input type="text" placeholder="비밀번호" id="pw1"></td>
             </tr>
             <tr>
                 <td>별명</td>
-                <td><input type="text" placeholder="별명"></td>
+                <td><input type="text" placeholder="별명" id="nick1"></td>
             </tr>
             <tr>
                 <td>이메일</td>
-                <td><input type="text" placeholder="이메일"></td>
+                <td><input type="text" placeholder="이메일" id="email1"></td>
             </tr>
             <tr>
                 <td>생년월일</td>
-                <td><input type="date" id="" name=""
+                <td><input type="date" name=""
                            value="2018-07-22"
                            min="2018-01-01" max="2018-12-31"></td>
             </tr>
             <tr>
                 <td>전화번호</td>
-                <td><input type="text" placeholder="전화번호"></td>
+                <td><input type="text" placeholder="전화번호" id="tel1"></td>
             </tr>
             <tr>
                 <td>직업</td>
-                <td><input type="text" placeholder="직업"></td>
+                <td><input type="text" placeholder="직업" id="job1"></td>
             </tr>
             <tr>
                 <td>가입일</td>
-                <td><input type="date" id="" name=""
+                <td><input type="date" name=""
                            value="2018-07-22"
-                           min="2018-01-01" max="2018-12-31"></td>
+                           min="2018-01-01" max="2018-12-31" id="reg1"></td>
             </tr>
         </table>
         <button class="modify" onclick="modify1()">변경 완료</button>
@@ -130,39 +133,39 @@
         <table>
             <tr>
                 <td>이름</td>
-                <td>이름</td>
+                <td id="name2">이름</td>
             </tr>
             <tr>
                 <td>아이디</td>
-                <td>아이디</td>
+                <td id="id2">아이디</td>
             </tr>
             <tr>
                 <td>비밀번호</td>
-                <td>비밀번호</td>
+                <td id="pw2">비밀번호</td>
             </tr>
             <tr>
                 <td>별명</td>
-                <td>별명</td>
+                <td id="nick2">별명</td>
             </tr>
             <tr>
                 <td>이메일</td>
-                <td>이메일</td>
+                <td id="email2">이메일</td>
             </tr>
             <tr>
                 <td>생년월일</td>
-                <td>생년월일</td>
+                <td id="bir2">생년월일</td>
             </tr>
             <tr>
                 <td>전화번호</td>
-                <td>전화번호</td>
+                <td id="tel2">전화번호</td>
             </tr>
             <tr>
                 <td>직업</td>
-                <td>직업</td>
+                <td id="job2">직업</td>
             </tr>
             <tr>
                 <td>가입일</td>
-                <td>가입일</td>
+                <td id="reg2">가입일</td>
             </tr>
         </table>
     </div>
@@ -173,11 +176,19 @@
         <span class="close2" onclick="span3()">&times;</span>
         <table>
             <tr>
+                <td>이름</td>
+                <td id="name3"></td>
+            </tr>
+            <tr>
+                <td>아이디</td>
+                <td id="id3"></td>
+            </tr>
+            <tr>
                 <td>삭제 사유 : </td>
-                <td><input type="text" placeholder="삭제 사유"></td>
+                <td><input type="text" placeholder="삭제 사유" id="delete"></td>
             </tr>
         </table>
-        <button class="modify" onclick="modify2()">변경 완료</button>
+        <button class="modify" onclick="modify2()">삭제 실행</button>
     </div>
 </div>
 

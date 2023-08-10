@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="inc/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/projectRequest.css">
+
+
+<div class="container mt-3" style="height:1200px">
+    <h1>kmong projectRuest Test</h1>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        프로젝트 의뢰하기
+    </button>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">프로젝트 등록</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <!-- 분야 선택 -->
+            <form id="requestForm" onsubmit="chk()" action="/project/request" method="POST">
+                <div class="progress">
+                    <div class="progress-bar bg-warning" style="width: 0%">
+                        <div class="progress-value"></div>
+                        <input type="hidden" id="progressVal" value="" readonly>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="input-area">
+                        <div class="" id="step1">
+                            <h1>필요한 업무를 설명해주세요.</h1>
+                            <h4>관련분야 선택</h4>
+                            <select name="category" id="category">
+                                <option value="" selected="selected">카테고리 선택</option>
+                                <option value="cat1">카테고리01</option>
+                                <option value="cat2">카테고리02</option>
+                                <option value="cat3">카테고리03</option>
+                                <option value="cat4">카테고리04</option>
+                            </select>
+                            <h4>필요한 서비스의 제목을 작성해주세요</h4>
+                            <input type="text" id="title" name="title" placeholder="예)OOO분야의 솔루션을 요청드립니다">
+                        </div>
+
+                        <!-- 준비 상황 -->
+                        <div class="" id="step2" style="display: none">
+                            <h4>필요한 업무를 설명해주세요.</h4>
+                            <input type="radio" id="idea" name="work" value="idea">
+                            <label for="idea">아이디어만 있음</label><br>
+                            <input type="radio" id="planning" name="work" value="planning">
+                            <label for="planning">기획서 보유</label><br>
+                            <input type="radio" id="design" name="work" value="design">
+                            <label for="design">디자인 보유</label><br>
+                            <input type="radio" id="environment" name="work" value="environment">
+                            <label for="environment">개발환경 보유</label>
+                        </div>
+
+                        <!-- 개발 요청사항 -->
+                        <div class="" id="step3" style="display: none">
+                            <h4>개발을 요청하실 의뢰사항을 구체적으로 적어주세요</h4>
+                            <textarea name="requested" id="requested" cols="30" rows="10"></textarea>
+                        </div>
+
+                        <!-- 프로젝트 예산 -->
+                        <div class="" id="step4" style="display: none">
+                            <h4>프로젝트 예산을 기제해주세요</h4>
+                            <input type="number" id="budget" name="budget" placeholder="최소 10,000원"> 원
+                        </div>
+
+                        <!-- 마감일자 -->
+                        <div class="" id="step5" style="display: none">
+                            <h4>모집 마감 일자를 선택해주세요</h4>
+                            <input type="date" id="wanted" name="wanted" min="" placeholder="선택해주세요" required>
+                            <h4>프로젝트 마감 일자를 선택해주세요</h4>
+                            <input type="date" id="close" name="close" min="" required>
+                            <h4>작업 기간을 입력해주세요(일단위)</h4>
+                            <input type="number" id="term" name="term">
+                        </div>
+
+
+                        <!-- 등록 완료 -->
+                        <div class="" id="step6" style="display: none">
+                            <h1>프로젝트 등록 완료</h1>
+                        </div>
+                    </div>
+
+                    <div class="view-area">
+                        <h6>카테고리</h6>
+                        <input type="text" id="category-v" disabled>
+                        <h6>제목</h6>
+                        <input type="text" id="title-v" disabled>
+                        <h6>업무</h6>
+                        <input type="text" id="work-v" disabled>
+                        <h6>요구사항</h6>
+<!--                        <input type="text" id="requested-v" disabled style="overflow: scroll">-->
+                        <textarea name="" id="requested-v" cols="21" rows="5" style="overflow: auto"></textarea>
+                        <h6>예산</h6>
+                        <input type="text" id="budget-v" disabled>원
+                        <h6>모집 마감일</h6>
+                        <input type="text" id="wanted-v" disabled>
+                        <h6>프로젝트 마감일</h6>
+                        <input type="text" id="close-v" disabled>
+                        <h6>작업기간</h6>
+                        <input type="text" id="term-v" disabled>일
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="prevBtn" class="btn btn-success">이전</button>
+                    <button type="button" id="nextBtn" class="btn btn-success">다음</button>
+                    <button type="submit" id="submit" class="btn btn-primary" disabled="true">등록</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/projectRequest.js"></script></script>
+
+<!-- 푸터 -->
+<th:block th:replace="inc/footer :: footerFragment"></th:block>
+</body>
+</html>

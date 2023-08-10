@@ -12,65 +12,101 @@
         <div class="main">
             <div class="aside">
                 <div class="category-kind">
+<!--                    각 카테고리의 상단부분-->
                     <div class="cat-kind-head">
                         <h3>직업 카테고리</h3>
-                        <button class="btn-expand">보기</button>
+                        <input type="button" value="보기" id="btn-job" class="btn-expand"/>
                     </div>
-                    <div class="cat-box" th:each="job: ${jobList}">
-                        <a th:text="${job.getJobName()}"/>
+<!--                    직업 카테고리 ajax 처리-->
+                    <div id="box-job" class="cat-box">
+                        <div id="job-list">
+                        </div>
+                        <div class="job-insert-box">
+                            <form method="POST" onsubmit="return checkJob(event)" id="jobForm" class="form-add">
+                                직업 추가하기
+                                <input type="text" id="jobName" name="jobName" class="text-add" placeholder="직업명">
+                                <input type="button" id="add-job" value="추가" class="btn-add">
+                            </form>
+                        </div>
                     </div>
-                    <button class="btn-add">직업 추가</button>
-                </div>
-                <div class="category-kind">
-                    <div class="cat-kind-head">
-                        <h3>비즈니스 카테고리</h3>
-                        <button class="btn-expand">보기</button>
-                    </div>
-                    <div class="cat-box">
-                        <a>test1te</a>
-                        <a>test2</a>
-                        <a>test3t</a>
-                        <a>test4</a>
-                    </div>
-                    <button class="btn-add">비즈니스 추가</button>
                 </div>
                 <div class="category-kind">
                     <div class="cat-kind-head">
                         <h3>분야 카테고리</h3>
-                        <button class="btn-expand">보기</button>
+                        <input type="button" value="닫기"  id="btn-field" class="btn-expand"/>
                     </div>
-                    <div class="higher-category">
-                        <h5>대분류</h5>
-                        <div class="cat-box">
-                            <a>test1test</a>
-                            <a>test2</a>
-                            <a>test3</a>
+                    <div id="box-field" class="cat-box">
+                        <div id="category-list">
+                        </div>
+                        <button class="btn-add">분야 추가</button>
+                    </div>
+                    </div>
+            </div>
+            <div class="section">
+                <div class="category-info">
+                    <div class="info-head">
+                        <div class="info-elem">
+                            <h4>카테고리 번호</h4>
+                            <input type="text" id="categoryId" name="categoryId" class="input" style="width:60px"/>
+                        </div>
+                        <div class="info-elem">
+                            <h4>카테고리 이름</h4>
+                            <input type="text" id="categoryName" name="categoryName" class="input"/>
+                        </div>
+                        <div class="info-elem">
+                            <h4>상위 카테고리</h4>
+                            <input type="text" id="categoryUpperId" name="categoryUpperId" class="input"/>
                         </div>
                     </div>
-                    <div class="higher-category">
-                        <h5>대분류2</h5>
-                        <div class="cat-box">
-                            <a>test1testest</a>
-                            <a>test2</a>
-                            <a>test3tes</a>
-                            <a>test4</a>
-                            <a>test5teste</a>
-                        </div>
+                    <div class="refund-box">
+                        <h4>환불 규정</h4>
+                        <textarea id="categoryRefund" name="categoryRefund" class="input"></textarea>
                     </div>
-                    <div class="higher-category">
-                        <h5>대분류3</h5>
-                        <div class="cat-box">
-                            <a>test1te</a>
-                            <a>test2</a>
-                        </div>
+                </div>
+                <div class="service-type">
+                    <h4>서비스 타입 선택</h4>
+                    <div id="type-box">
                     </div>
-                    <button class="btn-add">분야 추가</button>
+                    <form method="POST" onsubmit="return checkJob(event)" id="typeForm" class="form-add">
+                        서비스 타입 추가하기
+                        <input type="text" id="typeName" name="typeName" class="text-add" placeholder="서비스 타입 명">
+                        <input type="button" id="add-type" value="추가" class="btn-add">
+                    </form>
                 </div>
             </div>
-            <div class="section">section</div>
         </div>
+    </div>
+</div>
+<div id="categoryInput" class="modal">
+    <h3>카테고리 추가하기</h3>
+    <div class="modal-content">
+        <span class="close1" onclick="close-modal()">&times;</span>
+        <table>
+            <tr>
+                <td>카테고리 명</td>
+                <td><input type="text" placeholder="카테고리 명"></td>
+            </tr>
+            <tr>
+                <td>상위 카테고리</td>
+                <td>
+                    <select id="select-upperCategory">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>환불규정</td>
+                <td><textarea placeholder="전화번호"></textarea></td>
+            </tr>
+
+
+        </table>
+        <button class="btn-add" onclick="modify1()">추가</button>
     </div>
 </div>
 <th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
 </body>
+</html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/adminCategoryAjax.js"></script>
+<script src="/js/adminCategory.js"></script>
 </html>

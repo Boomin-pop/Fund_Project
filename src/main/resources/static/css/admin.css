@@ -1,0 +1,128 @@
+/* searchbar */
+.searchbar form{
+    margin: 0 auto;
+}
+.searchbar form button{
+    border: 1px solid #ddd;
+    color: black;
+}
+
+/* aside */
+.aside{
+    text-align: center;
+}
+.table1{
+    width: 80%;
+    height: 200px;
+    overflow: auto;
+    overflow-x: hidden;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    position: relative;
+}
+.update{
+    position: absolute;
+    border: 1px solid skyblue;
+    background-color: skyblue;
+    right: 0;
+}
+.cancle{
+    position: absolute;
+    border: 1px solid red;
+    background-color: red;
+    left: 0;
+}
+.table1 table{
+    width: 100%;
+    border: 0;
+}
+
+/* section */
+.table2{
+    border: 1px solid black;
+    margin: 10px auto;
+    width: 80%;
+    text-align: center;
+}
+.aside{
+    border-bottom: 1px solid black;
+}
+button{
+    color: white;
+    border-radius: 10%;
+}
+.change{
+    background-color: green;
+    border: 1px solid green;
+}
+.data{
+    background-color: orange;
+    border: 1px solid orange;
+}
+.delete{
+    background-color: red;
+    border: 1px solid red;
+}
+.admission{
+    background-color: blue;
+    border: 1px solid blue;
+}
+
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+.modal-content table{
+    margin: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.modal-content table tr td{
+    border: 1px solid black;
+    padding: 10px;
+}
+.modify{
+    border: 1px solid green;
+    background-color: green;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+/* The Close Button */
+.close1,
+.close2 {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close1:hover,
+.close2:hover,
+.close1:focus,
+.close2:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -10,15 +10,23 @@
 
     <insert id="userInsert" parameterType="UserDTO">
         INSERT INTO user(userId, userPassword, userName,
-        userNickname, userEmail, userJobId, userRegdate)
-        VALUES( #{userId},
+        userNickname, userEmail, userTel, userJobId)
+        VALUES(#{userId},
         #{userPassword},
         #{userName},
         #{userNickname},
         #{userEmail},
-        #{userJobId},
-        #{userRegdate}
+        #{userTel},
+        #{userJobId}
         )
     </insert>
+
+    <select id="idCheck" resultType="userDTO">
+        SELECT * FROM user WHERE userId=#{userId}
+    </select>
+
+    <select id="nicknameCheck" resultType="userDTO">
+        SELECT * FROM user WHERE userNickname=#{userNickname}
+    </select>
 
 </mapper>
