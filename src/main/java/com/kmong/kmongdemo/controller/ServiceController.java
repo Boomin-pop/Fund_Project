@@ -23,7 +23,7 @@ public class ServiceController {
     @GetMapping("/serviceReg")
     public String serviceInput(Model model, HttpSession session) {
         List<CategoryDTO> topCatList = serviceService.topCatList();
-        System.out.println("topCatList = " + topCatList);
+      //  System.out.println("topCatList = " + topCatList);
         model.addAttribute("topCatList", topCatList);
         return "service/serviceBody";
     }
@@ -34,7 +34,7 @@ public class ServiceController {
         String code = cDto.getServiceTopCatCode();
           System.out.println("code = " + code);
           ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
-            System.out.println("서비스타입 체크된 코드들 = " + stcDTO);
+            System.out.println("서비스타입 체크된 코드들 = " + stcDTO +"\n");
             //List<ServiceTypeDTO> = serviceService.serviceTypeList();
             //Map<String, String> serviceTypeList = new HashMap<>();
         //Map<String, String> serviceTypeList = serviceService.serviceTypeList();
