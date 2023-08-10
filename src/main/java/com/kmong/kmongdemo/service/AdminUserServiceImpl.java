@@ -22,4 +22,11 @@ public class AdminUserServiceImpl implements AdminUserService{
         return adminUserMapper.userInfo(userId);
     }
 
+    @Override
+    public int userModify(UserDTO userDTO) {
+        return adminUserMapper.userModify(userDTO);
+    }
+
+
+
 }

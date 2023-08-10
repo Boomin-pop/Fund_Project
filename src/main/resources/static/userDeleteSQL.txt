@@ -1,0 +1,16 @@
+drop table userDelete;
+
+create table userDelete(
+	userDeleteNo int primary key auto_increment,
+	userId varchar(50),
+    userPassword varchar(50) not null,
+    userName varchar(50) not null,
+    userNickname varchar(50) unique,
+    userEmail varchar(50) not null,
+    userJobId int,
+    userDelete varchar(50),
+    userRegdate datetime default current_timestamp(),
+    -- Job의 jobId를 외래키로 사용
+    foreign key(userJobId) references Job(jobId),
+    foreign key(userId) references user(userId)
+);

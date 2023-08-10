@@ -28,4 +28,12 @@ public class AdminUserController {
         return userInfo;
     }
 
+    @PutMapping("/admin/user/{userId}")
+    public @ResponseBody String aminUserModify(@RequestBody UserDTO userDTO){
+        adminUserService.userModify(userDTO);
+        return null;
+    }
+
+
 }
+

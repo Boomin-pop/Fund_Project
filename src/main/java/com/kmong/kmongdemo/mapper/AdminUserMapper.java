@@ -11,4 +11,6 @@ public interface AdminUserMapper {
     List<UserDTO> userLists();
 
     UserDTO userInfo(String userId);
+
+    int userModify(UserDTO userDTO);
 }

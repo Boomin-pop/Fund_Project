@@ -8,4 +8,6 @@ public interface AdminUserService {
     List<UserDTO> userLists();
 
     UserDTO userInfo(String userId);
+
+    int userModify(UserDTO userDTO);
 }
