@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="bodyPage4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@500&display=swap" rel="stylesheet">
     <style>
         .mainImgTitle{
             display:flex;
@@ -14,7 +17,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
         }
+
         .imgUploadTipModal{
             color: rgb(11, 82, 167);
             width: 900px;
@@ -30,18 +35,42 @@
             width: 800px;
         }
 
+        #detailImgUpload, #vidUpBtn{
+            cursor:pointer;
+        }
+
         .imgModalTipTxtArea{
 
             margin-left:50px;
+        }
 
+        .imgUpBtn{
+            padding: 5px;
+            border:1px solid #dddddd;
+            text-align: center;
+            width:195px;
+            height:45px;
+            line-height: 35px;
+            font-size:14px;
+            font-weight: bolder;
+            font-family: 'Noto Emoji', sans-serif;
+            background-color: transparent;
+            cursor:pointer;
         }
 
         .vidUpload{
             width:251px;
             height:60px;
+            line-height: 60px;
+            text-align: center;
             border:1px solid #dddddd;
             text-decoration: none;
             background-color: white;
+            cursor:pointer;
+        }
+
+        .detailImgCard{
+            display: flex;
         }
 
 
@@ -51,7 +80,11 @@
         <div class="form-group">
         <div class="mainImgTitle"><p>메인이미지등록(필수)</p><p>0/1</p></div>
         <div class="imgUploadBox" id="imgMainBox"><img src="/imgs/imageupload.png" style="width:88px; height:64px;">
-            <button id="imgUpBtn" style="display:none">이미지 업로드</button></div>
+<!--            <button id="imgUpBtn" style="display:none">이미지 업로드</button>-->
+            <label for="mainImg">
+            <div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div></label>
+            <input type="file" name="mainImg" id="mainImg" style="display:none">
+        </div>
         </div>
 
         <div class="imgUploadTipModal" id="fthTip1" style="display: none;">
@@ -75,8 +108,27 @@
 
         <div class="form-group">
             <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p>0/9</p></div>
-            <div class="imgUploadBox" id="detailImgUpload"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></div>
-        </div>
+                <div class="detailImgCard">
+                    <label>
+                        <div class="imgUploadBox" id="detailImgUpload">
+                                <input type="file" name="detailImg" style="display:none">
+                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">
+                         </div>
+                     </label>
+                    <label>
+                        <div class="imgUploadBox" id="detailImgUpload">
+                            <input type="file" name="detailImg" style="display:none">
+                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">
+                        </div>
+                    </label>
+                    <label>
+                        <div class="imgUploadBox" id="detailImgUpload">
+                            <input type="file" name="detailImg" style="display:none">
+                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">
+                        </div>
+                    </label>
+
+                </div>
 
         <div class="imgUploadTipModal" id="fthTip2" style="display: none;">
             <div class="fthModalwrapper">
@@ -99,7 +151,11 @@
         <div class="form-group">
             <div class="mainImgTitle"><p>동영상등록(선택)</p><p>0/6</p></div>
             <div class="vidUploadBox" id="vidUpBtn">
-                <button class="vidUpload">비디오 업로드</button>
+                <label>
+                <div class="vidUpload">비디오 업로드
+                    <input type="file" name="vid" style="display:none">
+                </div>
+                </label>
             </div>
         </div>
 
@@ -120,6 +176,18 @@
 <script>
     let imgbox = $(".imgUploadBox");
     let vidUploadBox = $(".vidUploadBox");
+    var cnt = 1;
+    function fileAppend(){
+        var appendedDetailImg =
+            ' <label>\n' +
+            '<div class="imgUploadBox" id="detailImgUpload">\n' +
+            '                                <input type="file" name="detailImg" style="display:none">\n' +
+            '                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">\n' +
+            '                         </div>\n' +
+            '                     </label>'
+        $("#div-file").append(fileElement);
+        cnt++;
+    }
 
     function hov(yogo){
         console.log(yogo.id);
@@ -166,6 +234,33 @@
                 fthTip2.style.display='none';
                 fthTip3.style.display='block';
             });
+
+        function preViewImg(pic){
+            console.log(pic.files);
+            var imgTag = pic.nextSibling;  // 다음 줄(다음 형제요소)
+            console.log(imgTag);
+
+            if(pic.files && pic.files[0]){
+                // filereader = 자바스크립트 라이브러리 객체
+                var fileReader = new FileReader();
+                //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
+                fileReader.onload = function(e){
+                    imgTag.height=100;
+                    imgTag.width=100;
+                    // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
+                    imgTag.src = e.target.result;
+                }
+                // 파일의 종류는 크게 2가지
+                //1. 바이너리 파일 : 데이터를 있는 그대로 읽고 쓰는 파일
+                //2. 텍스트 파일 : 데이터를 문자로 변환한 파일
+                // base64는 6비트 기반 이걸 8비트(아스키코드) 기반 텍스트로 손실없이 안전하게 인코딩함.
+                // 바이너리 데이터의 훼손없이 정확하게 데이터를 전달할 수 있다.
+
+                //불러온 바이너리 파일을 http 메시지 규격에 맞는 base64 형식으로 변환
+                fileReader.readAsDataURL(obj.files[0]);
+            }
+
+        }
     })
 
 
