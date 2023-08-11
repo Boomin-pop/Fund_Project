@@ -15,6 +15,9 @@ create table user(
     foreign key(userJobId) references Job(jobId)
 );
 
+--userDelete 칼럼 추가
+alter table user add userDelete varchar(50);
+
 insert into user (userId, userPassword, userName, userNickname,userEmail, userTel, userJobId, userRegdate) values ('test','12345678','홍길동','길동이','test@gmail.com','01012341234',2,'2023-08-04');
 
 select * from user;
