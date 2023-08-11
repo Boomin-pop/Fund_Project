@@ -22,4 +22,9 @@ public class ProjectRequestServiceImpl implements ProjectRequestService {
     public void uploadProject(String category, String title, String work, String requested, String budget, String wanted, String close, String term, String id) {
         prMapper.uploadProject(category, title, work, requested, budget, wanted, close, term, id);
     }
+
+    @Override
+    public void delete(int no) {
+        prMapper.delete(no);
+    }
 }
