@@ -18,14 +18,15 @@ public class AdminBoardController {
 
     // 카테고리 페이지로 이동 - 직업 카테고리, 비즈니스 카테고리, 분야 카테고리 리스트 전달
     @GetMapping("/board")
-    public String adminBoard(Model model){
+    public String adminBoard(Model model) {
         List<BoardCategoryDTO> bclist = abservice.categoryList();
-        model.addAttribute("bclist",bclist);
+        model.addAttribute("bclist", bclist);
 
         return "admin/adminBoard";
     }
-    @GetMapping("/board/section/{cid}")
-    public @ResponseBody List<BoardSectionDTO> sectionList(@PathVariable("cid") int cid){
+
+    @PostMapping("/board/section/list")
+    public @ResponseBody List<BoardSectionDTO> sectionList(@RequestBody int cid){
         System.out.println("cid = " + cid);
         List<BoardSectionDTO> bslist = abservice.sectionList(cid);
 

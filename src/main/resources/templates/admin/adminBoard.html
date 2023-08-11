@@ -37,17 +37,19 @@ function showSection(cid){
 function sectionList(cid){
     console.log(cid);
     $.ajax({
-        url: '/admin/board/section/'+{cid},
+        url: '/admin/board/section/list',
         type: 'post',
+        data: JSON.stringify(cid),
+        contentType:'application/json; charset-utf-8',
         success: function(data){
             let boardSectionHtml = '';
             data.forEach(row => {
                 let name = row.boardSectionName;
                 let id = row.boardSectionId;
-                jobListHtml += '<div class="sec-elem">';
-                jobListHtml += '<input type="button" value="' + name + '" class="a"/>';
-                jobListHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
-                jobListHtml += '</div>';
+                boardSectionHtml += '<div class="sec-elem">';
+                boardSectionHtml += '<input type="button" value="' + name + '" class="a"/>';
+                boardSectionHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
+                boardSectionHtml += '</div>';
             })
             document.querySelector('#sec-list').innerHTML = boardSectionHtml;
         },
