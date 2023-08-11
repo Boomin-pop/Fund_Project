@@ -24,9 +24,13 @@
         SELECT * FROM AdminServiceType
     </select>
 <!--    타입 삽입-->
-    <insert id="insertType" parameterType="String">
-        INSERT INTO AdminServiceType(serviceTypeName) VALUES(#{tname})
+    <insert id="insertType" parameterType="com.kmong.kmongdemo.domain.AdminServiceTypeDTO">
+        INSERT INTO AdminServiceType(serviceTypeName, serviceTypeMandatory) VALUES(#{serviceTypeName}, #{serviceTypeMandatory})
     </insert>
+<!--    타입 삭제-->
+    <delete id="removeType" >
+        DELETE FROM AdminServiceType WHERE serviceTypeId = #{tid}
+    </delete>
 
 <!--    category 관리-->
     <select id="categoryList" resultType="com.kmong.kmongdemo.domain.AdminCategoryDTO">

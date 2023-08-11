@@ -12,10 +12,10 @@
         SELECT * FROM serviceTypeChk WHERE serviceTypeChkCode=#{code}
     </select>
 
-    <select id="serviceTypeList" resultType="stDTO">
-        SELECT * FROM serviceType
+<!--    <select id="serviceTypeList" resultType="stDTO">-->
+<!--        SELECT * FROM serviceType-->
 
-    </select>
+<!--    </select>-->
 
 
 </mapper>
