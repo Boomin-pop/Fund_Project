@@ -20,6 +20,10 @@
 <!--                    직업 카테고리 ajax 처리-->
                     <div id="box-job" class="cat-box">
                         <div id="job-list">
+                            <div th:each="job : ${jlist}" class="cat-elem">
+                                <input type="button" th:value="${job.jobName}" class="a"/>
+                                <input type="button" value="삭제" class="btn-delete" th:onclick="deletejob([[${job.jobId}]])">
+                            </div>
                         </div>
                         <div class="job-insert-box">
                             <form method="POST" onsubmit="return checkJob(event)" id="jobForm" class="form-add">
@@ -39,6 +43,11 @@
                     <!--                    직업 카테고리 ajax 처리-->
                     <div id="box-type" class="cat-box">
                         <div id="type-list">
+                            <div th:each="type : ${tlist}" class="cat-elem">
+                                <input th:if="${type.serviceTypeMandatory==1}" type="button" th:value="${type.serviceTypeName}+'(필수)'" class="a">
+                                <input th:if="${type.serviceTypeMandatory!=1}" type="button" th:value="${type.serviceTypeName}" class="a">
+                                <input type="button" value="삭제" class="btn-delete" th:onclick="deletetype([[${type.serviceTypeId}]])">
+                            </div>
                         </div>
                         <div class="job-insert-box">
                             <form method="POST" onsubmit="return checkJob(event)" id="typeForm" class="form-add">
@@ -54,10 +63,23 @@
                 <div class="category-kind">
                     <div class="cat-kind-head">
                         <h3>카테고리 관리</h3>
-                        <input type="button" value="닫기"  id="btn-field" class="btn-expand"/>
                     </div>
                     <div id="box-field" class="cat-box">
                         <div id="category-list">
+                            <div th:each="ucat : ${culist}" class="higher-category">
+                                <div class="div">
+                                    <div style="width: 60%;"><h5><th:block th:text="${ucat.categoryName}"></th:block></h5></div>
+                                    <input type="button" value="삭제" class="btn-delete" th:onclick="deleteCategoryU([[${ucat.categoryId}]])"/>
+                                </div>
+                                <div class="cat-inner-box">
+                                    <th:block th:each="dcat: ${cdlist}">
+                                        <div th:if="${ucat.categoryUpperId == dcat.categoryUpperId}" class="cat-elem">
+                                            <input type="button" th:value="${dcat.categoryName}" class="a" th:onclick="viewCategory([[${dcat.categoryId}]])"/>
+                                            <input type="button" th:value="삭제" class="btn-delete" th:onclick="deleteCategory([[${dcat.categoryId}]])"/>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
                         </div>
                         <button class="btn-add" onclick="showmodal()">카테고리 추가</button>
                     </div>
@@ -68,7 +90,7 @@
                     <div class="info-head">
                         <div class="info-elem">
                             <h4>카테고리 번호</h4>
-                            <input type="text" id="categoryId" name="categoryId" class="input" style="width:60px"/>
+                            <input type="text" id="categoryId" name="categoryId" class="input" style="width:60px" readonly/>
                         </div>
                         <div class="info-elem">
                             <h4>카테고리 이름</h4>
@@ -78,18 +100,24 @@
                             <h4>상위 카테고리</h4>
                             <select id="categoryUpperId" name="categoryUpperId" class="select">
                                 <option>카테고리</option>
+                                <option value="0">상위 카테고리로 변경</option>
+                                <option th:each="ucat : ${culist}" th:value="${ucat.categoryId}" th:text="${ucat.categoryName}"></option>
                             </select>
                         </div>
-                        <button class="btn-modify">수정하기</button>
+                        <button class="btn-modify" th:onclick="updateCategory()">수정하기</button>
                     </div>
                     <div class="refund-box">
                         <h4>환불 규정</h4>
-                        <textarea id="categoryRefund" name="categoryRefund" class="input"></textarea>
+                        <textarea id="categoryRefund" maxlength="300" name="categoryRefund" class="input"></textarea>
                     </div>
                 </div>
                 <div class="service-type">
                     <h4>서비스 타입 선택</h4>
                     <div id="type-box">
+                        <div th:each="type : ${tlist}" class="type-info">
+                            <input type="checkbox" name="typecheckS" th:value="${type.serviceTypeId}" onclick="addCheckedType(this)"/>
+                            <input type="text" name="typeName" th:value="${type.serviceTypeName}" readonly/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,26 +133,34 @@
         <table>
             <tr>
                 <td>카테고리 명</td>
-                <td><input type="text" placeholder="카테고리 명"></td>
+                <td><input id="m-cat-name" type="text" placeholder="카테고리 명"></td>
             </tr>
             <tr>
                 <td>상위 카테고리</td>
                 <td>
-                    <select id="select-upperCategory">
+                    <select id="select-upperCategory" th:onchange="changemodal(this.value)">
+                        <option value="0">상위 카테고리로 추가</option>
+                        <option th:each="ucat : ${culist}" th:value="${ucat.categoryId}" th:text="${ucat.categoryName}"></option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>환불규정</td>
-                <td><textarea maxlength="300" placeholder="환불규정"></textarea></td>
+                <td><textarea id="m-cat-refund" maxlength="300" placeholder="환불규정" style="display:none;"></textarea></td>
             </tr>
             <tr>
                 <td>서비스 타입</td>
             </tr>
         </table>
-        <div id="modal-type-list">
+        <div id="modal-type-list" style="display:none;">
+            <tr th:each="type : ${tlist}">
+                <td>
+                    <input type="checkbox" name="typecheckM" th:value="${type.serviceTypeId}" onclick="addCheckedTypeM(this)"/>
+                    <input type="text" name="typeName" th:value="${type.serviceTypeName}" readonly/>
+                </td>
+            </tr>
         </div>
-        <button class="btn-add" onclick="addcategory()">추가</button>
+        <button class="btn-add" onclick="addmodal()">추가</button>
     </div>
 </div>
 <th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>

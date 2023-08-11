@@ -13,7 +13,7 @@
                     <input id="id" type="search" placeholder="아이디" class="search">
                     <input type="button" value="검색" class="search" th:onclick="pageMoveS(1)"/>
                     <select class="search" id="by" th:onchange="pageMoveS(1)">
-                        <option value="signLogTime">최근 접속 순</option>
+                        <option value="signLogTime">최근 기록 순</option>
                     </select>
                     <select class="search" id="ud" th:onchange="pageMoveS(1)">
                         <option value="asc">오름차순</option>
@@ -24,7 +24,7 @@
         </div>
         <div class="main">
             <div class="aside">
-                <input type="button" value="거래 기록" onclick="location.href='/admin/signLog'"/>
+                <input type="button" value="거래 기록" onclick="location.href='/admin/transactionLog'"/>
                 <input type="button" value="접속 기록" onclick="location.href='/admin/signLog'"/>
             </div>
             <div class="section">
@@ -40,7 +40,7 @@
                     </thead>
                     <tr th:each="slog : ${signList}">
                         <td th:text="${slog.signId}">0</td>
-                        <td><button th:text="${slog.signUserId}" class="view" onclick="userView()"></button></td>
+                        <td><button th:text="${slog.signUserId}" class="view" th:onclick="userView([[${slog.signUserId}]])"></button></td>
                         <td th:text="${slog.signRegDate}">0</td>
                         <td th:text="${slog.signLogTime}">0</td>
                         <td th:text="${slog.signKind}">0</td>

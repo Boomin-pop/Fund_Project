@@ -20,7 +20,7 @@ public class AdminLogController {
     // 카테고리 페이지로 이동 - 직업 카테고리, 비즈니스 카테고리, 분야 카테고리 리스트 전달
     @GetMapping("/transactionLog")
     public String adminTransaction(Model model, @RequestParam(defaultValue = "1") int page
-                                              , @RequestParam(defaultValue = "transactionid") String by
+                                              , @RequestParam(defaultValue = "transactionId") String by
                                               , @RequestParam(defaultValue = "desc") String ud
                                               , @RequestParam(defaultValue = "") String id){
         String query = "ORDER BY " + by+ " " + ud;

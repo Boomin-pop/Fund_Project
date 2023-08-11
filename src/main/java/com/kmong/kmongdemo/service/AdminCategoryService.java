@@ -20,5 +20,9 @@ public interface AdminCategoryService {
     // 카테고리 관리
     List<AdminCategoryDTO> categoryList();
     AdminCategoryDTO categoryView(int cid);
+    int insertCategory(AdminCategoryDTO cdto);
+    int modifyCategory(AdminCategoryDTO cdto);
     int removeCategory(int cid);
+    int removeCategoryU(int cid);
+
 }

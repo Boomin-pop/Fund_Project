@@ -10,3 +10,6 @@ function pageMoveS(page){
     let id = document.getElementById("id").value;
     location.href="signLog?page=" + page + "&by=" + by + "&ud=" + ud + "&id=" + id;
 }
+function userView(id){
+
+}
