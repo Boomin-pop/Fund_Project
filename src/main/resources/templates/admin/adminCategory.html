@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<link href="/css/category.css" rel="stylesheet"/>
+<link href="/css/adminCategory.css" rel="stylesheet"/>
 
 <!-- 헤더 -->
 <th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
@@ -14,7 +14,7 @@
                 <div class="category-kind">
 <!--                    각 카테고리의 상단부분-->
                     <div class="cat-kind-head">
-                        <h3>직업 카테고리</h3>
+                        <h3>직업 관리</h3>
                         <input type="button" value="보기" id="btn-job" class="btn-expand"/>
                     </div>
 <!--                    직업 카테고리 ajax 처리-->
@@ -31,14 +31,35 @@
                     </div>
                 </div>
                 <div class="category-kind">
+                    <!--                    각 카테고리의 상단부분-->
                     <div class="cat-kind-head">
-                        <h3>분야 카테고리</h3>
+                        <h3>서비스 타입 관리</h3>
+                        <input type="button" value="보기" id="btn-type" class="btn-expand"/>
+                    </div>
+                    <!--                    직업 카테고리 ajax 처리-->
+                    <div id="box-type" class="cat-box">
+                        <div id="type-list">
+                        </div>
+                        <div class="job-insert-box">
+                            <form method="POST" onsubmit="return checkJob(event)" id="typeForm" class="form-add">
+                                서비스 타입 추가하기
+                                <input type="text" id="typeName" name="typeName" class="text-add" placeholder="서비스 타입 명">
+                                <label for="typeMandatory">필수 여부</label>
+                                <input type="checkbox" id="typeMandatory" name="typeMadatory">
+                                <input type="button" id="add-type" value="추가" class="btn-add" style="margin-left: 30px; left: 0; transform: translate(0,0);">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-kind">
+                    <div class="cat-kind-head">
+                        <h3>카테고리 관리</h3>
                         <input type="button" value="닫기"  id="btn-field" class="btn-expand"/>
                     </div>
                     <div id="box-field" class="cat-box">
                         <div id="category-list">
                         </div>
-                        <button class="btn-add">분야 추가</button>
+                        <button class="btn-add" onclick="showmodal()">카테고리 추가</button>
                     </div>
                     </div>
             </div>
@@ -55,8 +76,11 @@
                         </div>
                         <div class="info-elem">
                             <h4>상위 카테고리</h4>
-                            <input type="text" id="categoryUpperId" name="categoryUpperId" class="input"/>
+                            <select id="categoryUpperId" name="categoryUpperId" class="select">
+                                <option>카테고리</option>
+                            </select>
                         </div>
+                        <button class="btn-modify">수정하기</button>
                     </div>
                     <div class="refund-box">
                         <h4>환불 규정</h4>
@@ -67,20 +91,17 @@
                     <h4>서비스 타입 선택</h4>
                     <div id="type-box">
                     </div>
-                    <form method="POST" onsubmit="return checkJob(event)" id="typeForm" class="form-add">
-                        서비스 타입 추가하기
-                        <input type="text" id="typeName" name="typeName" class="text-add" placeholder="서비스 타입 명">
-                        <input type="button" id="add-type" value="추가" class="btn-add">
-                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div id="categoryInput" class="modal">
-    <h3>카테고리 추가하기</h3>
     <div class="modal-content">
-        <span class="close1" onclick="close-modal()">&times;</span>
+        <div class="modal-head">
+            <div><h3>카테고리 추가하기</h3></div>
+            <span class="btn-delete" onclick="closemodal()">&nbsp;&nbsp;&times;&nbsp;&nbsp;</span>
+        </div>
         <table>
             <tr>
                 <td>카테고리 명</td>
@@ -95,12 +116,15 @@
             </tr>
             <tr>
                 <td>환불규정</td>
-                <td><textarea placeholder="전화번호"></textarea></td>
+                <td><textarea maxlength="300" placeholder="환불규정"></textarea></td>
             </tr>
-
-
+            <tr>
+                <td>서비스 타입</td>
+            </tr>
         </table>
-        <button class="btn-add" onclick="modify1()">추가</button>
+        <div id="modal-type-list">
+        </div>
+        <button class="btn-add" onclick="addcategory()">추가</button>
     </div>
 </div>
 <th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>

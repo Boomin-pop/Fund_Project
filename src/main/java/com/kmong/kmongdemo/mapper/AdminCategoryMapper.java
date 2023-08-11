@@ -14,9 +14,11 @@ public interface AdminCategoryMapper {
     int removeJob(int jid);
 
     List<AdminServiceTypeDTO> typeList();
-    int insertType(String tname);
+    int insertType(AdminServiceTypeDTO tdto);
+    int removeType(int tid);
 
     List<AdminCategoryDTO> categoryList();
     AdminCategoryDTO categoryView(int cid);
+
 
 }

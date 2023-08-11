@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kmong.kmongdemo.mapper.AdminLogMapper">
+<!--    거래 기록 관리 -->
+<!--    거래 로그 총 개수 구하기-->
+    <select id="transactionCount" resultType="int">
+        SELECT COUNT(*) FROM transactionLog
+    </select>
+<!--    list 가져오기-->
+    <select id="transactionList" resultType="com.kmong.kmongdemo.domain.TransactionLogDTO">
+        SELECT * FROM transactionLog
+        <if test="id != ''">
+            WHERE transactionBuyerId LIKE '%${id}%' OR transactionSellerId LIKE '%${id}%'
+        </if>
+        ${query}
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
+</mapper>

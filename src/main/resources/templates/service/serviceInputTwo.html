@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="bodyPage2">
+<style>
+    .appendArea{
+        width:900px;
+    }
+
+    .tailored{
+        background-color: rgb(250, 250, 252);
+        padding:50px;
+    }
+
+    .tailedTitle > p{
+        width:150px;
+        height:50px;
+        line-height:50px;
+    }
+    .tailedInput{
+        display:flex;
+        height:50px;
+        line-height:50px;
+    }
+
+    .tailedInput > input{
+        width:590px;
+        border:0;
+        background-color: rgb(250, 250, 252);
+    }
+
+</style>
+<div class="container shadow-sm w-50% p-5 rounded mt-4">
+         <div><p><b>가격정보</b></p></div>
+      <div class="standard">
+          <h6><b>STANDARD<hr></b></h6>
+
+          <div class="form-group">
+              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
+                  <div style="width:200px; height:50px; line-height:100px">
+                      <p name="typeName" value="priceTitle">제목</p>
+                  </div>
+                  <div>
+                  <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
+                  <div style="width:200px; height:50px; line-height:100px">
+                      <p name="typeName" value="priceExplain">설명</p>
+                  </div>
+                  <div>
+                      <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
+                  <div style="width:200px; height:50px; line-height:100px">
+                      <p name="typeName" value="priceExplain">금액(VAT 포함)</p>
+                  </div>
+                  <div>
+                      <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
+                  <div style="width:200px; height:50px; line-height:100px">
+                      <p name="typeName" value="priceExplain">작업 기간</p>
+                  </div>
+                  <div>
+                      <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                  </div>
+              </div>
+          </div>
+
+              <div class="form-group">
+                  <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
+                      <div style="width:200px; height:50px; line-height:100px">
+                          <p name="typeName" value="priceExplain">수정 횟수</p>
+                      </div>
+                      <div>
+                          <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                      </div>
+                  </div>
+              </div>
+        <div class="addPrcOpt">
+            <div><p><b>추가 옵션</b></p></div>
+            <div class="appendArea"></div>
+            <div class="addbtn border border-secondary p-2 h-50 mt-5" id="addbtn"><b>+ 맞춤옵션 추가</b></div>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+<script>
+    function chk(obj) {
+
+        if(obj.lastChild.checked==false)
+           {obj.lastChild.checked=true;}
+        else{obj.lastChild.checked=false;}
+
+        if(obj.nextSibling.style.display==='none')
+           {obj.nextSibling.style.display='block';}
+        else{obj.nextSibling.style.display='none';}
+    }
+
+    $(document).ready(function (){
+        var cnt = 0;
+        var addForm = '<div class="tailor-option">'
+            +'<div class="mt-5 d-flex" onclick="chk(this)"><p class="me-auto"><b>맞춤옵션</b></p>'
+            +'<input type="checkbox" style="width:25px;" checked></div>'
+            +'<div class="tailored"><div class="d-flex">'
+            +'<div class="tailedTitle"><p name="added_title"><b>제목</b></p></div>'
+            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="제목을 입력해주세요"><span>경우</span></div>'
+            +'</div><div class="d-flex">'
+            +'<div class="tailedTitle"><p name="added_title"><b>설명</b></p></div>'
+            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="설명을 입력해주세요"></div>'
+            +'</div><div class="d-flex">'
+            +'<div class="tailedTitle"><p name="added_title"><b>추가금액</b></p></div>'
+            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="최소 1,000"><span>추가시</span></div>'
+            +'</div><div class="d-flex">'
+            +'<div class="tailedTitle"><p name="added_title"><b>추가작업일</b></p></div>'
+            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="최대 30일"><span>일 추가</span></div>'
+            +'</div></div></div>';
+
+        $(".addbtn").on("click", function (){
+            $(".appendArea").append(addForm);
+            cnt++;
+            console.log("cnt값:"+cnt);
+            if(cnt===10){
+                document.getElementById("addbtn").style.display='none';
+            }
+        })
+
+
+
+    })
+
+</script>
+
+
+
+</th:block>
+</html>

@@ -14,4 +14,6 @@ public interface UserMapper {
     UserDTO idCheck(String userId);
 
     UserDTO nicknameCheck(String userNickname);
+
+    UserDTO userLogin(UserDTO dto);
 }
