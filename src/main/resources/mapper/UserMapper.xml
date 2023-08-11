@@ -29,4 +29,8 @@
         SELECT * FROM user WHERE userNickname=#{userNickname}
     </select>
 
+    <select id="userLogin" resultType="userDTO">
+        SELECT userId, userPassword, UserName FROM user WHERE userId=#{userId}
+    </select>
+
 </mapper>
