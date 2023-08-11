@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kmong.kmongdemo.mapper.AdminBoardMapper">
+<!--    게시판 관리 -->
+<!--    게시판 카테고리 구하기-->
+    <select id="categoryList" resultType="com.kmong.kmongdemo.domain.BoardCategoryDTO">
+        SELECT * FROM boardCategory
+    </select>
+<!--    게시판 섹션 구하기-->
+    <select id="sectionList" resultType="com.kmong.kmongdemo.domain.BoardSectionDTO">
+        SELECT * FROM boardSection WHERE boardCategoryId = #{cid}
+    </select>
+</mapper>

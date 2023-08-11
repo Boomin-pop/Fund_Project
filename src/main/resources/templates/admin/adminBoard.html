@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--<link href="/css/adminCategory.css" rel="stylesheet"/>-->
+
+<!-- 헤더 -->
+<th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
+<div class="body">
+    <div class="container">
+        <div class="searchbar">
+            <h2>게시판 관리</h2>
+        </div>
+        <div class="main">
+            <div class="aside">
+                <h4>게시판 카테고리 관리</h4>
+                <div id="board-cat-list">
+                    <div th:each="cat : ${bclist}" class="category">
+                        <input type="button" class="cat-head" th:value="${cat.boardCategoryName}" th:onclick="showSection([[${cat.boardCategoryId}]])">
+                        <div id="sec-list" class="section">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <h4>게시글 보기</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
+</body>
+</html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+function showSection(cid){
+    sectionList(cid);
+}
+function sectionList(cid){
+    console.log(cid);
+    $.ajax({
+        url: '/admin/board/section/'+{cid},
+        type: 'post',
+        success: function(data){
+            let boardSectionHtml = '';
+            data.forEach(row => {
+                let name = row.boardSectionName;
+                let id = row.boardSectionId;
+                jobListHtml += '<div class="sec-elem">';
+                jobListHtml += '<input type="button" value="' + name + '" class="a"/>';
+                jobListHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
+                jobListHtml += '</div>';
+            })
+            document.querySelector('#sec-list').innerHTML = boardSectionHtml;
+        },
+        error: function(){
+            console.log("section data load error")
+        }
+    })
+}
+</script>
+</html>

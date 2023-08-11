@@ -1,0 +1,9 @@
+create table boardCategory(
+	boardCategoryId int primary key auto_increment,
+    boardCategoryName varchar(50)
+);
+create table boardSection(
+	boardSectionId int primary key auto_increment,
+    boardCategoryId int,
+    boardSectionName varchar(50)
+);
