@@ -9,10 +9,10 @@
     }
 </style>
 <!--  바디  -->
-<div class="d-flex" style="width:90%">
+<div class="d-flex m-auto" style="width:90vw">
     <!--    <aside th:replace="/inc/leftServiceInputNav :: asideFragment"></aside>-->
 
-    <aside class="side-container border-end" style="width:200px; margin-left:30%">
+    <aside class="side-container border-end" style="width:200px; margin-left:10%;">
 
         <a href="#" id="btn-one" name="aside-btn">
             <div class="d-flex mt-5">
@@ -71,7 +71,7 @@
     </aside>
 
     <div class="contents-area">
-        <form class="form-join">
+        <form class="form-join" method="post" enctype="multipart/form-data">
 
             <div class="firstInput" id="firstInput" style="display:block;">
                 <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
