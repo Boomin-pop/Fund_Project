@@ -34,10 +34,10 @@
                         <th:block th:each="user : ${userDeleteLists}">
                         <tr>
                             <td>
-                                <input type="checkbox" id="test1" name="user">
+                                <input type="checkbox" id="test1" name="user" th:value="${user.userId}" >
                                 <label for="test1" th:text="${user.userName}">회원명</label>
                                 <label for="test1" th:text="${user.userId}">아이디</label>
-                                <label for="test1" th:text="${user.userDelete}">사유</label>
+                                <label for="test1" id="reason" th:text="${user.userDelete}">사유</label>
                             </td>
                         </tr>
                         </th:block>
