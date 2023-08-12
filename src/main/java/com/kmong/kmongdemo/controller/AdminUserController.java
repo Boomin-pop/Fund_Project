@@ -35,6 +35,7 @@ public class AdminUserController {
     @PutMapping("/admin/user/{userId}")
     public @ResponseBody String aminUserModify(@RequestBody UserDTO userDTO){
         adminUserService.userModify(userDTO);
+//        adminUserService.userCancle(userDTO);
         return null;
     }
 
@@ -44,17 +45,25 @@ public class AdminUserController {
         return null;
     }
 
-    @DeleteMapping("/admin/user/{userId}")
-    public @ResponseBody String deleteUser(@RequestBody UserDTO userDTO){
-        adminUserService.deleteUser(userDTO);
-        System.out.println("userDTO = " + userDTO);
+    @PostMapping("/admin/user/delete")
+    public @ResponseBody String deleteUser(
+            @RequestBody List<UserDTO> list){
+
+        for (UserDTO userDTO : list){
+            System.out.println("dto = " + userDTO);
+            adminUserService.deleteUser(userDTO);
+//            adminUserService.deleteUser(str);
+//            System.out.println("str" + str);
+        }
         return null;
     }
 
-//    @PutMapping("/admin/user/{userId}")
-//    public  @ResponseBody String userCancle(@RequestBody UserDTO userDTO){
-//        adminUserService.userCancle(userDTO);
-//        return null;
-//    }
+    @PostMapping("/admin/user/cancle")
+    public @ResponseBody String userCancle(@RequestBody List<UserDTO> list){
+        for (UserDTO userDTO : list){
+            adminUserService.userCancle(userDTO);
+        }
+        return null;
+    }
 }
 

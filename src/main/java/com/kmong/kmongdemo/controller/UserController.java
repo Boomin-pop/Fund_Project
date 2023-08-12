@@ -8,10 +8,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.UUID;
 
@@ -117,10 +120,28 @@ public class UserController {
         return "fail";
     }
 
+    @GetMapping("/userLogin")
+    public String loginForm(){
+        return "/user/userLogin";
+    }
 
+    @PostMapping("/login")
+    public String userLogin(UserDTO dto, HttpServletRequest req
+            , RedirectAttributes rttr){
+        boolean result = userService.userLogin(dto, req);
 
+        if(!result){ // 로그인 실패
+            rttr.addAttribute("result", 0);
+            return "redirect:/user/userLogin"; // redirect는 GET 방식
+        }
+        return "redirect:/";
+    }
 
-
+    @GetMapping("/logout.do")
+    public String userLogout(HttpSession session){
+        session.invalidate();// 세션 초기화
+        return "redirect:/";
+    }
 
 
 

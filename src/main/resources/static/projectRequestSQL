@@ -8,7 +8,9 @@ create table projectRequest (
     projectRequestWanted varchar(100) not null, -- Request Wanted(프로젝트 모집 마감일)
     projectRequestClose varchar(100) not null, -- Request Close(프로젝트 종료일)
     projectRequestTerm int not null, -- Request Term(프로젝트 작업기간)
-    userId varchar(50) not null, -- Request UserId(프로젝트 의뢰인 아이디)
-    projectRequestUpload timestamp not null default current_timestamp,
-    foreign key(userId) references user(userId)
+    userId varchar(50), -- Request UserId(프로젝트 의뢰인 아이디)
+    projectRequestUpload timestamp not null default current_timestamp, -- 프로젝트 등록 날짜
+    projectRequestApprove int default 0, -- 승인 여부(기본값 0:승인 전, 1:승인, 2:반려)
+    constraint projectRequestApprove check (projectRequestApprove >= 0 AND projectRequestApprove <=2) -- projectRequestApprove 에 대한 제약조건
+    -- foreign key(userId) references user(userId)
 );

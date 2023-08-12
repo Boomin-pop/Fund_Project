@@ -3,6 +3,7 @@ package com.kmong.kmongdemo.service;
 import com.kmong.kmongdemo.domain.JobDTO;
 import com.kmong.kmongdemo.domain.UserDTO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface UserService {
@@ -15,4 +16,6 @@ public interface UserService {
     UserDTO idCheck(String userId);
 
     UserDTO nicknameCheck(String userNickname);
+
+    boolean userLogin(UserDTO dto, HttpServletRequest req);
 }

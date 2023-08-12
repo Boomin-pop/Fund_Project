@@ -1,19 +1,18 @@
 //update
 function update(){
-    let userId = document.getElementById("id3").textContent;
     let chk = [];
-    $( "input[name = 'user']:checked").each(function (i){
-        chk.push($(this).val());
+    $( "input[name = 'user']:checked").each(function (){
+        chk.push({userId:$(this).val()});
+        console.log(chk)
     })
-    let allData = {"userId":userId , "chkArray":chk};
+
     $.ajax({
-        url: "/admin/user/"+ userId,
-        type: "delete",
+        url: "/admin/user/delete",
+        type: "post",
         contentType: "application/json; charset=utf-8",
-        dataType: "text",
-        data: allData,
-        success : function (data){
-            console.log(data);
+        data: JSON.stringify(chk),
+        success : function (result){
+            console.log(result);
             alert("업데이트 완료");
             location.replace("/admin/user");
         },
@@ -23,9 +22,29 @@ function update(){
     });
 }
 
+
 //cancle
 function cancle(){
-    alert("취소하시겠습니까?")
+    let chk = [];
+    $( "input[name = 'user']:checked").each(function (){
+        chk.push({userId:$(this).val()});
+        console.log(chk)
+    })
+
+    $.ajax({
+        url: "/admin/user/cancle",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(chk),
+        success : function (result){
+            console.log(result);
+            alert("업데이트 취소 완료");
+            location.replace("/admin/user");
+        },
+        error: function (error){
+            alert(error)
+        }
+    });
 }
 // admission
 function admission(){
