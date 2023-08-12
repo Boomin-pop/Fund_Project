@@ -72,7 +72,7 @@
         .detailImgCard{
             display: flex;
             cursor:pointer;
-            margin : 50px 0;
+
         }
 
         .detailCardArea{
@@ -83,6 +83,7 @@
 
         .cardLabel{
             cursor:pointer;
+            margin:10px;
         }
 
 
@@ -90,12 +91,8 @@
     <div class="container shadow-sm p-5 rounded mt-4" style="width:1000px">
         <div class="form-group">
         <div class="mainImgTitle"><p>메인이미지등록(필수)</p><p>0/1</p></div>
-        <div class="imgUploadBox" id="imgMainBox"><img src="/imgs/imageupload.png" style="width:250px; height:64px;">
-<!--            <button id="imgUpBtn" style="display:none">이미지 업로드</button>-->
-            <label for="mainImg">
-            <div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div></label>
-            <input type="file" name="mainImg" id="mainImg" style="display:none">
-        </div>
+            <div class="imgUploadBox" id="imgMainBox"><label for="mainImg"><div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div>
+            <input type="file" name="mainImg" id="mainImg" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></label></div>
         </div>
 
         <div class="imgUploadTipModal" id="fthTip1" style="display: none;">
@@ -121,9 +118,9 @@
 
         <div class="form-group">
             <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p>0/9</p></div>
-            <div class="detailCardArea" id="detailImgUpload" style="border:3px solid green">
-                <div class="detailImgCard" style="border:3px solid blue">
-                    <label class="cardLabel border border-warning">
+            <div class="detailCardArea" id="detailImgUpload" >
+                <div class="detailImgCard" id="imgCardSec1" >
+                    <label class="cardLabel">
                             <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">
                     </label>
 <!--                    <label class="cardLabel">-->
@@ -133,8 +130,8 @@
 <!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">-->
 <!--                    </label>-->
                  </div>
-
-
+                <div class="detailImgCard" id="imgCardSec2" ></div>
+                <div class="detailImgCard" id="imgCardSec3"  ></div>
 
                 <!--                    <label class="cardLabel">-->
                 <!--                        <div class="imgUploadBox">-->
@@ -193,7 +190,7 @@
 <script>
     let imgbox = $(".imgUploadBox");
     let vidUploadBox = $(".vidUploadBox");
-    var cnt =0;
+    var cnt =1;
     // function fileAppend(){
     //     if(cnt%3 == 0) {
     //         console.log("카드 돌아감 현재 cnt : "+cnt)
@@ -220,32 +217,48 @@
     function fileAppend(){
 
         cnt++;
-        if(cnt > 0 && cnt%3 === 0) {
-            console.log("새로운 라인 cnt : "+cnt)
-            var appendedDetailImg = '닫혀라 좀'
-                + '</div>닫히는 구간 <div class="detailImgCard" style="border:3px solid red">닫고 열음'
-                + '<label class="cardLabel">'
-                + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
-                + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
-                + '</label> 나눠서 넣은 첫번째';
-            $(".detailImgCard").append(appendedDetailImg);
+        // if(cnt > 0 && cnt%3 === 0) {
+        //     console.log("새로운 라인 cnt : "+cnt)
+        //     var appendedDetailImg = '닫혀라 좀'
+        //         + '</div>닫히는 구간 <div class="detailImgCard" style="border:3px solid red">닫고 열음'
+        //         + '<label class="cardLabel">'
+        //         + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+        //         + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
+        //         + '</label> 나눠서 넣은 첫번째';
+        //     $(".detailImgCard").append(appendedDetailImg);
+        //
+        //     console.log("cnt : "+cnt);
+        // }
+        // else{
+        //     console.log("동일 라인 현재 cnt : "+cnt)
+        //     var appendedDetailImg = '<label class="cardLabel">'
+        //         + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+        //         + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
+        //         + '</label>';
+        //     $(".detailImgCard").append(appendedDetailImg);
+        //
+        //     console.log("cnt : "+cnt);
+        // }
+        var appendedDetailImg = '<label class="cardLabel">'
+            + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+            + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
+            + '</label>';
 
-            console.log("cnt : "+cnt);
+        if(cnt < 4){
+            $("#imgCardSec1").append(appendedDetailImg);
         }
-        else{
-            console.log("동일 라인 현재 cnt : "+cnt)
-            var appendedDetailImg = '<label class="cardLabel">'
-                + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
-                + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
-                + '</label>';
-            $(".detailImgCard").append(appendedDetailImg);
+        if(cnt>3 && cnt<7){
+            $("#imgCardSec2").append(appendedDetailImg);
+        }
+        if(cnt>6 && cnt<10){
+            $("#imgCardSec3").append(appendedDetailImg);
+        }
 
-            console.log("cnt : "+cnt);
-        }
     }
 
     function previewImg(pic){
         console.log("pic의 firstChild는?" +pic.firstChild);
+        console.log("pic의 이름 : " + pic.name)
         console.log("pic : "+pic);
         console.log("pic의 노드네임 : "+pic.nodeName);
         console.log("sibling의 nodeName : "+pic.nextSibling.nodeName);
@@ -264,7 +277,10 @@
                 imgTag.width=186;
                 // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
                 imgTag.src = e.target.result;
-                fileAppend();
+                if(pic.name!="mainImg"){
+                    fileAppend();
+                }
+
             }
 
             // 파일의 종류는 크게 2가지
@@ -290,7 +306,7 @@
         var fthTip2 = document.getElementById("fthTip2");
         var fthTip3 = document.getElementById("fthTip3");
 
-      //  $("#imgMainBox").on("mouseover", function(){
+        //  $("#imgMainBox").on("mouseover", function(){
 
         // $(".concealedInput").on("change", function(){
         //
@@ -298,31 +314,38 @@
 
 
 
-            imgMainBox.addEventListener("mouseover", function(){
-                imgMainBox.firstChild.style.display='none';
-                imgUpBtn.style.display='block';
-                fthTip1.style.display='block';
-                fthTip2.style.display='none';
-                fthTip3.style.display='none';
+        imgMainBox.addEventListener("mouseover", function(){
+            console.log("imgMainBox이름 : "+imgMainBox.name);
+            console.log("imgMainBox의 노드이름 : "+imgMainBox.nodeName);
+            console.log("first name"+imgMainBox.firstChild.name);
+            console.log("first node name"+imgMainBox.firstChild.nodeName);
+            console.log("last name"+imgMainBox.lastChild.name);
+            console.log("last node name"+imgMainBox.lastChild.nodeName);
 
-            });
+            imgMainBox.firstChild.lastChild.style.display='none';
 
-            imgMainBox.addEventListener("mouseout", function(){
-                imgMainBox.firstChild.style.display='block';
-                imgUpBtn.style.display='none';
-            });
+            imgUpBtn.style.display='block';
+            fthTip1.style.display='block';
+            fthTip2.style.display='none';
+            fthTip3.style.display='none';
+        });
 
-            detailImgUpload.addEventListener("mouseover", function(){
-                fthTip1.style.display='none';
-                fthTip2.style.display='block';
-                fthTip3.style.display='none';
-            });
+        imgMainBox.addEventListener("mouseout", function(){
+            imgMainBox.firstChild.lastChild.style.display='block';
+            imgUpBtn.style.display='none';
+        });
 
-            vidUpBtn.addEventListener("mouseover", function(){
-                fthTip1.style.display='none';
-                fthTip2.style.display='none';
-                fthTip3.style.display='block';
-            });
+        detailImgUpload.addEventListener("mouseover", function(){
+            fthTip1.style.display='none';
+            fthTip2.style.display='block';
+            fthTip3.style.display='none';
+        });
+
+        vidUpBtn.addEventListener("mouseover", function(){
+            fthTip1.style.display='none';
+            fthTip2.style.display='none';
+            fthTip3.style.display='block';
+        });
 
 
     })
