@@ -71,15 +71,26 @@
 
         .detailImgCard{
             display: flex;
+            cursor:pointer;
+            margin : 50px 0;
         }
 
+        .detailCardArea{
+            cursor: pointer;
+            display: block;
+
+        }
+
+        .cardLabel{
+            cursor:pointer;
+        }
 
 
     </style>
     <div class="container shadow-sm p-5 rounded mt-4" style="width:1000px">
         <div class="form-group">
         <div class="mainImgTitle"><p>메인이미지등록(필수)</p><p>0/1</p></div>
-        <div class="imgUploadBox" id="imgMainBox"><img src="/imgs/imageupload.png" style="width:88px; height:64px;">
+        <div class="imgUploadBox" id="imgMainBox"><img src="/imgs/imageupload.png" style="width:250px; height:64px;">
 <!--            <button id="imgUpBtn" style="display:none">이미지 업로드</button>-->
             <label for="mainImg">
             <div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div></label>
@@ -106,29 +117,32 @@
             </div>
         </div>
 
+<!--                  상세 이미지                            -->
+
         <div class="form-group">
             <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p>0/9</p></div>
-                <div class="detailImgCard">
-                    <label>
-                        <div class="imgUploadBox" id="detailImgUpload">
-                                <input type="file" name="detailImg" style="display:none">
-                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">
-                         </div>
-                     </label>
-                    <label>
-                        <div class="imgUploadBox" id="detailImgUpload">
-                            <input type="file" name="detailImg" style="display:none">
-                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">
-                        </div>
+            <div class="detailCardArea" id="detailImgUpload" style="border:3px solid green">
+                <div class="detailImgCard" style="border:3px solid blue">
+                    <label class="cardLabel border border-warning">
+                            <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">
                     </label>
-                    <label>
-                        <div class="imgUploadBox" id="detailImgUpload">
-                            <input type="file" name="detailImg" style="display:none">
-                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">
-                        </div>
-                    </label>
+<!--                    <label class="cardLabel">-->
+<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">-->
+<!--                    </label>-->
+<!--                    <label class="cardLabel">-->
+<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">-->
+<!--                    </label>-->
+                 </div>
 
-                </div>
+
+
+                <!--                    <label class="cardLabel">-->
+                <!--                        <div class="imgUploadBox">-->
+                <!--                            <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload.png" style="width:88px; height:64px;">-->
+                <!--                         </div>-->
+                <!--                     </label>-->
+                <!--                </div>-->
+        </div>
 
         <div class="imgUploadTipModal" id="fthTip2" style="display: none;">
             <div class="fthModalwrapper">
@@ -173,30 +187,98 @@
             </div>
         </div>
     </div>
+    </div>
+
+
 <script>
     let imgbox = $(".imgUploadBox");
     let vidUploadBox = $(".vidUploadBox");
-    var cnt = 1;
-    function fileAppend(){
-        var appendedDetailImg =
-            ' <label>\n' +
-            '<div class="imgUploadBox" id="detailImgUpload">\n' +
-            '                                <input type="file" name="detailImg" style="display:none">\n' +
-            '                            <img src="/imgs/imageupload.png" style="width:88px; height:64px;">\n' +
-            '                         </div>\n' +
-            '                     </label>'
-        $("#div-file").append(fileElement);
-        cnt++;
-    }
+    var cnt =0;
+    // function fileAppend(){
+    //     if(cnt%3 == 0) {
+    //         console.log("카드 돌아감 현재 cnt : "+cnt)
+    //         var appendedDetailImg = '</div><div class="detailImgCard">'
+    //         + '<label class="cardLabel"><div class="imgUploadBox">'
+    //         + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+    //         + '<img src="/imgs/imageupload2.png" style="width:88px; height:64px;">'
+    //         + '</div></label>';
+    //         $(".detailImgCard").append(appendedDetailImg);
+    //         cnt++;
+    //         console.log("cnt : "+cnt);
+    //     }else{
+    //         console.log("카드 안돌아감 현재 cnt : "+cnt)
+    //         var appendedDetailImg = '<label class="cardLabel"><div class="imgUploadBox">'
+    //             + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+    //             + '<img src="/imgs/imageupload2.png" style="width:88px; height:64px;">'
+    //             + '</div></label>';
+    //         $(".detailImgCard").append(appendedDetailImg);
+    //         cnt++;
+    //         console.log("cnt : "+cnt);
+    //     }
+    // }
 
-    function hov(yogo){
-        console.log(yogo.id);
-        if(yogo.firstChild.style.display==='none'){
-            yogo.firstChild.style.display='block';
-        }else{
-            yogo.firstChild.style.display='none';
+    function fileAppend(){
+
+        cnt++;
+        if(cnt > 0 && cnt%3 === 0) {
+            console.log("새로운 라인 cnt : "+cnt)
+            var appendedDetailImg = '닫혀라 좀'
+                + '</div>닫히는 구간 <div class="detailImgCard" style="border:3px solid red">닫고 열음'
+                + '<label class="cardLabel">'
+                + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+                + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
+                + '</label> 나눠서 넣은 첫번째';
+            $(".detailImgCard").append(appendedDetailImg);
+
+            console.log("cnt : "+cnt);
+        }
+        else{
+            console.log("동일 라인 현재 cnt : "+cnt)
+            var appendedDetailImg = '<label class="cardLabel">'
+                + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+                + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
+                + '</label>';
+            $(".detailImgCard").append(appendedDetailImg);
+
+            console.log("cnt : "+cnt);
         }
     }
+
+    function previewImg(pic){
+        console.log("pic의 firstChild는?" +pic.firstChild);
+        console.log("pic : "+pic);
+        console.log("pic의 노드네임 : "+pic.nodeName);
+        console.log("sibling의 nodeName : "+pic.nextSibling.nodeName);
+        // console.log("sibling의 시블링의 노드네임 : "+pic.nextSibling.nextSibling.nodeName);
+        console.log("pic.files : "+pic.files);
+        var imgTag = pic.nextSibling;  //
+
+        // fileAppend();
+
+        if(pic.files && pic.files[0]){
+            // filereader = 자바스크립트 라이브러리 객체
+            var fileReader = new FileReader();
+            //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
+            fileReader.onload = function(e){
+                imgTag.height=251;
+                imgTag.width=186;
+                // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
+                imgTag.src = e.target.result;
+                fileAppend();
+            }
+
+            // 파일의 종류는 크게 2가지
+            //1. 바이너리 파일 : 데이터를 있는 그대로 읽고 쓰는 파일
+            //2. 텍스트 파일 : 데이터를 문자로 변환한 파일
+            // base64는 6비트 기반 이걸 8비트(아스키코드) 기반 텍스트로 손실없이 안전하게 인코딩함.
+            // 바이너리 데이터의 훼손없이 정확하게 데이터를 전달할 수 있다.
+
+            //불러온 바이너리 파일을 http 메시지 규격에 맞는 base64 형식으로 변환
+            fileReader.readAsDataURL(pic.files[0]);
+        }
+
+    };
+
 
 
     $(document).ready(function () {
@@ -209,6 +291,13 @@
         var fthTip3 = document.getElementById("fthTip3");
 
       //  $("#imgMainBox").on("mouseover", function(){
+
+        // $(".concealedInput").on("change", function(){
+        //
+        // });
+
+
+
             imgMainBox.addEventListener("mouseover", function(){
                 imgMainBox.firstChild.style.display='none';
                 imgUpBtn.style.display='block';
@@ -235,32 +324,7 @@
                 fthTip3.style.display='block';
             });
 
-        function preViewImg(pic){
-            console.log(pic.files);
-            var imgTag = pic.nextSibling;  // 다음 줄(다음 형제요소)
-            console.log(imgTag);
 
-            if(pic.files && pic.files[0]){
-                // filereader = 자바스크립트 라이브러리 객체
-                var fileReader = new FileReader();
-                //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
-                fileReader.onload = function(e){
-                    imgTag.height=100;
-                    imgTag.width=100;
-                    // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
-                    imgTag.src = e.target.result;
-                }
-                // 파일의 종류는 크게 2가지
-                //1. 바이너리 파일 : 데이터를 있는 그대로 읽고 쓰는 파일
-                //2. 텍스트 파일 : 데이터를 문자로 변환한 파일
-                // base64는 6비트 기반 이걸 8비트(아스키코드) 기반 텍스트로 손실없이 안전하게 인코딩함.
-                // 바이너리 데이터의 훼손없이 정확하게 데이터를 전달할 수 있다.
-
-                //불러온 바이너리 파일을 http 메시지 규격에 맞는 base64 형식으로 변환
-                fileReader.readAsDataURL(obj.files[0]);
-            }
-
-        }
     })
 
 
