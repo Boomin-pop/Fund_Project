@@ -19,20 +19,21 @@
                     <img src="/imgs/kmong.svg" style="width: 85px; height: 26px;" alt class="img">
                 </a>
 
-                <form class="loginMain">
+                <form class="loginMain" th:action="@{/user/login}" method="POST">
 
                     <div class="input">
-                        <input class="log" type="id" placeholder="아이디 입력해주세요" name="id"><br>
+                        <input class="log" type="id" placeholder="아이디 입력해주세요" name="userId" id="userId"><br>
                     </div>
                     <div class="input">
-                        <input class="log" type="password" placeholder="비밀번호를 입력해주세요" name="password" autocomplete="off"><br>
+                        <input class="log" type="password" placeholder="비밀번호를 입력해주세요" name="userPassword" id="userPassword" autocomplete="off"><br>
                     </div>
 
-                    <button class="loginButton" role="button" color="yellow" type="submit" onclick="uLogin()">로그인</button>
+                    <input class="loginButton" type="submit" value="로그인" onclick="login();">
+                    <!--                    <button class="loginButton" role="button" color="yellow" type="submit" onclick="login()">로그인</button>-->
 
                     <div class="loginMenu">
                         <div class="find">
-                            <a href="#" class="findMenu">
+                            <a href="/user/idpwFind" class="findMenu">
                                 <p>아이디·비밀번호 찾기</p>
                             </a>
                         </div>
