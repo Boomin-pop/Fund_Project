@@ -7,12 +7,26 @@
     a{text-decoration: none;
         color:black;
     }
+    .ServiceInputFooterArea{
+        background-color: white;
+        display:flex;
+        border-top : 2px solid rgb(228, 229, 237);
+        height:70px;
+        position: fixed;
+
+    }
+    .svcNextBtn{
+        margin-top:15px;
+        background-color: white;
+        border:1px solid rgb(228, 229, 237);
+        width:55px; height:40px;
+    }
 </style>
 <!--  바디  -->
-<div class="d-flex m-auto" style="width:90vw">
+<div class="totalwrap">
     <!--    <aside th:replace="/inc/leftServiceInputNav :: asideFragment"></aside>-->
-
-    <aside class="side-container border-end" style="width:200px; margin-left:10%;">
+    <div class="middlewrap d-flex m-auto w-90 h-90">
+    <aside class="side-container border-end" style="width:200px; margin-left:15%;">
 
         <a href="#" id="btn-one" name="aside-btn">
             <div class="d-flex mt-5">
@@ -70,35 +84,41 @@
         </a>
     </aside>
 
-    <div class="contents-area">
+    <div class="contents-area d-block">
         <form class="form-join" method="post" enctype="multipart/form-data">
-
-            <div class="firstInput" id="firstInput" style="display:block;">
+            <div class="firstInput" id="firstInput" style="display:block; width:900px">
                 <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
                 <!--             <th:block layout:fragment="bodyPage1"></th:block>-->
                 <!--             <section th:replace="/service/serviceInput :: bodyPage1"></section>-->
             </div>
 
-            <div class="secondInput" id="secondInput" style="display:none;">
+            <div class="secondInput" id="secondInput" style="display:none; width:900px">
                 <th:block th:replace="/service/serviceInputTwo :: bodyPage2"></th:block>
             </div>
 
-            <div class="secondInput" id="thirdInput" style="display:none;">
+            <div class="secondInput" id="thirdInput" style="display:none; width:900px">
                 <th:block th:replace="/service/serviceInputThree :: bodyPage3"></th:block>
             </div>
-            <div class="secondInput" id="forthInput" style="display:none;">
+            <div class="secondInput" id="forthInput" style="display:none; width:900px">
                 <th:block th:replace="/service/serviceInputFour :: bodyPage4"></th:block>
             </div>
-            <div class="secondInput" id="fifthInput" style="display:none;">
+            <div class="secondInput" id="fifthInput" style="display:none; width:900px">
                 <th:block th:replace="/service/serviceInputFive :: bodyPage5"></th:block>
             </div>
         </form>
-    </div>
-</div>
+    </div>  <!--contents-area-->
+        <footer class="ServiceInputFooterArea container-fluid sticky-bottom">
+            <div class="emptyAside" style="border:3px solid red; width:200px; margin-left:15%"></div>
+            <div style="padding-left:850px">
+                <button class="svcNextBtn">다음</button>
+            </div>
+        </footer>
+    </div> <!--middle wrap-->
+</div><!--total wrap-->
+
 
 
 <!-- 푸터 -->
-<footer th:replace="/inc/footer :: footerFragment"></footer>
 
 </body>
 <script>
