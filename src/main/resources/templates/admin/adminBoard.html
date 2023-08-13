@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<!--<link href="/css/adminCategory.css" rel="stylesheet"/>-->
+<link href="/css/adminBoard.css" rel="stylesheet"/>
 
 <!-- 헤더 -->
 <th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
@@ -8,20 +8,63 @@
     <div class="container">
         <div class="searchbar">
             <h2>게시판 관리</h2>
+            <form>
+                <select class="search" id="cat" th:onchange="pageMove(1)">
+                    <option value="0">카테고리</option>
+                    <option th:each="cat : ${bclist}" th:value="${cat.boardCategoryId}" th:text="${cat.boardCategoryName}"></option>
+                </select>
+                <input id="title" type="search" placeholder="제목" class="search">
+                <input type="button" value="검색" class="search" th:onclick="pageMove(1)"/>
+                <select class="search" id="by" th:onchange="pageMove(1)">
+                    <option value="boardUploadTime">등록순</option>
+                </select>
+                <select class="search" id="ud" th:onchange="pageMove(1)">
+                    <option value="asc">오름차순</option>
+                    <option value="desc">내림차순</option>
+                </select>
+            </form>
         </div>
         <div class="main">
-            <div class="aside">
-                <h4>게시판 카테고리 관리</h4>
-                <div id="board-cat-list">
-                    <div th:each="cat : ${bclist}" class="category">
-                        <input type="button" class="cat-head" th:value="${cat.boardCategoryName}" th:onclick="showSection([[${cat.boardCategoryId}]])">
-                        <div id="sec-list" class="section">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <th:block th:replace="admin/adminInc/adminBoardAside :: adBoardAsideFragment"></th:block>
             <div class="section">
-                <h4>게시글 보기</h4>
+                <div style="display:flex">
+                    <h4>게시글 보기</h4>
+                    <input type="button" class="btn-move" value="글쓰기" th:onclick="location.href='board/register';">
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr class="thead">
+                            <th>상세보기</th>
+                            <th>카테고리</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="board : ${boardList}">
+                        <td><button class="view" onclick="boardView()">상세보기</button></td>
+                        <td th:text="${board.boardCategoryName}">0</td>
+                        <td th:text="'['+${board.boardSectionName} + ']' + ${board.boardTitle}">0</td>
+                        <td th:text="${board.boardWriter}">0</td>
+                        <td th:text="${board.boardUploadTime}">0</td>
+                        <td><button class="btn-delete" onclick="userView()">삭제</button></td>
+                    </tr>
+                </table>
+                <div class="paging">
+                    <input class="edge" type="button" th:onclick="pageMove(1)" value="처음">
+                    <input class="move" type="button" th:onclick="pageMove([[${boardPage.prevPage}]])" value="<">
+
+                    <th:block  th:with="start = ${boardPage.startPage}, end = ${boardPage.endPage}">
+                        <input class="btn" th:with="start = ${boardPage.startPage}, end = ${boardPage.endPage}"
+                               th:each="pageButton : ${#numbers.sequence(start, end)}"
+                               type="button" th:onclick="pageMove([[${pageButton}]])" th:value=${pageButton}>
+                    </th:block>
+
+                    <input class="move" type="button" th:onclick="pageMove([[${boardPage.nextPage}]])" value=">">
+                    <input class="edge" type="button" th:onclick="pageMove([[${boardPage.pageTotalNum}]])" value="마지막">
+                </div>
             </div>
         </div>
     </div>
@@ -30,33 +73,14 @@
 </body>
 </html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/adminBoard.js"></script>
+<script src="/js/adminBoardAjax.js"></script>
 <script>
-function showSection(cid){
-    sectionList(cid);
-}
-function sectionList(cid){
-    console.log(cid);
-    $.ajax({
-        url: '/admin/board/section/list',
-        type: 'post',
-        data: JSON.stringify(cid),
-        contentType:'application/json; charset-utf-8',
-        success: function(data){
-            let boardSectionHtml = '';
-            data.forEach(row => {
-                let name = row.boardSectionName;
-                let id = row.boardSectionId;
-                boardSectionHtml += '<div class="sec-elem">';
-                boardSectionHtml += '<input type="button" value="' + name + '" class="a"/>';
-                boardSectionHtml += '<input type="button" value="삭제" class="btn-delete" onclick="deletejob('+id+')">';
-                boardSectionHtml += '</div>';
-            })
-            document.querySelector('#sec-list').innerHTML = boardSectionHtml;
-        },
-        error: function(){
-            console.log("section data load error")
-        }
-    })
+window.onload = () => {
+    document.getElementById("title").value = "[[${title}]]";
+    document.getElementById("by").value = "[[${by}]]";
+    document.getElementById("ud").value = "[[${ud}]]";
+    document.getElementById("cat").value = "[[${cid}]]";
 }
 </script>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/adminBoard.css" rel="stylesheet"/>
+
+<!-- 헤더 -->
+<th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
+<div class="body">
+    <div class="container">
+        <div class="searchbar">
+            <h2>게시판 관리</h2>
+        </div>
+        <div class="main">
+            <div class="aside">
+
+            </div>
+            <div class="section">
+                <form action="/admin/board/insert" method="post">
+                    <div style="display:flex">
+                        <h4>게시글 쓰기</h4>
+                        <input type="submit" class="btn-move" value="등록">
+                    </div>
+                    <div>
+                        <select id="cat" th:onchange="">
+                            <option value="0">카테고리</option>
+                            <option th:each="cat : ${bclist}" th:value="${cat.boardCategoryId}" th:text="${cat.boardCategoryName}"></option>
+                        </select>
+                        <select>
+                            <option value="0">섹션</option>
+                        </select>
+                        <input type="text" placeholder="제목" name="boardTitle">
+                    </div>
+                    <textarea placeholder="내용" name="boardContent"></textarea>
+                    <input type="text" placeholder="이미지1" name="boardImg1">
+                    <input type="text" placeholder="이미지2" name="boardImg1">
+                    <input type="text" placeholder="이미지3" name="boardImg1">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
+</body>
+</html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/adminBoard.js"></script>
+<script src="/js/adminBoardAjax.js"></script>
+<script>
+window.onload = () => {
+    document.getElementById("title").value = "[[${title}]]";
+    document.getElementById("by").value = "[[${by}]]";
+    document.getElementById("ud").value = "[[${ud}]]";
+    document.getElementById("cat").value = "[[${cid}]]";
+}
+</script>
+</html>

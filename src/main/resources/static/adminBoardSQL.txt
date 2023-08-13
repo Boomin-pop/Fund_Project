@@ -7,3 +7,14 @@ create table boardSection(
     boardCategoryId int,
     boardSectionName varchar(50)
 );
+create table board(
+	boardId int primary key auto_increment,
+    boardSectionId int,
+    boardWriter varchar(50),
+    boardUploadTime timestamp default now(),
+    boardTitle varchar(50),
+    boardContent varchar(1000),
+    boardImg1 varchar(300),
+    boardImg2 varchar(300),
+    boardImg3 varchar(300)
+);

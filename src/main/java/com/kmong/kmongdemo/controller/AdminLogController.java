@@ -23,7 +23,7 @@ public class AdminLogController {
                                               , @RequestParam(defaultValue = "transactionId") String by
                                               , @RequestParam(defaultValue = "desc") String ud
                                               , @RequestParam(defaultValue = "") String id){
-        String query = "ORDER BY " + by+ " " + ud;
+        String query = "ORDER BY " + by + " " + ud;
         int totalLogCnt = alservice.transactionCount();
         PagingDTO paging = new PagingDTO(totalLogCnt, page, 20, 5);
 

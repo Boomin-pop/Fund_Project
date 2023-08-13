@@ -9,8 +9,44 @@
     <select id="categoryList" resultType="com.kmong.kmongdemo.domain.BoardCategoryDTO">
         SELECT * FROM boardCategory
     </select>
+    <insert id="insertCategory" parameterType="com.kmong.kmongdemo.domain.BoardCategoryDTO">
+        INSERT INTO boardCategory(boardCategoryName) VALUES(#{name})
+    </insert>
+    <delete id="deleteSectionList" >
+        DELETE FROM boardSection WHERE boardCategoryId = #{cid}
+    </delete>
+    <delete id="deleteCategory" >
+        DELETE FROM boardCategory WHERE boardCategoryId = #{cid}
+    </delete>
+
 <!--    게시판 섹션 구하기-->
     <select id="sectionList" resultType="com.kmong.kmongdemo.domain.BoardSectionDTO">
         SELECT * FROM boardSection WHERE boardCategoryId = #{cid}
+    </select>
+    <insert id="insertSection" parameterType="com.kmong.kmongdemo.domain.BoardSectionDTO">
+        INSERT INTO boardSection(boardCategoryId, boardSectionName) VALUES(#{boardCategoryId} ,#{boardSectionName})
+    </insert>
+    <delete id="deleteSection" >
+        DELETE FROM boardSection WHERE boardSectionId = #{sid}
+    </delete>
+
+<!--    게시판 관리-->
+    <select id="boardCount" resultType="int">
+        SELECT COUNT(*) FROM board
+    </select>
+    <select id="boardList" resultType="com.kmong.kmongdemo.domain.BoardDTO">
+        SELECT boardId, boardTitle, boardWriter, boardUploadTime
+                      , (SELECT boardSectionName FROM boardSection WHERE boardSectionId = b.boardSectionId) as boardSectionName
+                      , (SELECT boardCategoryName FROM boardCategory WHERE boardCategoryId = (SELECT boardCategoryId FROM boardSection WHERE boardSectionId = b.boardSectionId)) as boardCategoryName
+        FROM board as b
+        WHERE 1 = 1
+        <if test="title != ''">
+            AND boardTitle LIKE '%${title}%'
+        </if>
+        <if test="cid != 0">
+            AND boardSectionId = (SELECT boardSectionId FROM boardSection WHERE boardCategoryId = #{cid})
+        </if>
+        ${query}
+        LIMIT #{startIndex}, #{pageSize}
     </select>
 </mapper>

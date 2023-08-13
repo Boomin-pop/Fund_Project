@@ -203,18 +203,18 @@ function findCategory(cid){//분야 카테고리 개별 가져오기
 }
 function insertCategory(putData){
     $.ajax({
-                url:"/admin/category/insert",
-                type: "post",
-                data: JSON.stringify(putData),
-                contentType:'application/json; charset-utf-8',
-                success:function (result){
-                    console.log(result);
-                    findAllCategory()
-                },
-                    error:  function(){
-                    console.log("service data insert error")
-                }
-            });
+        url:"/admin/category/insert",
+        type: "post",
+        data: JSON.stringify(putData),
+        contentType:'application/json; charset-utf-8',
+        success:function (result){
+            console.log(result);
+            findAllCategory()
+        },
+        error:  function(){
+            console.log("service data insert error")
+        }
+    });
 }
 function modifyCategory(putData){
     $.ajax({
