@@ -62,8 +62,8 @@ nav{
     cursor: pointer;
 }
 
-.menu:hover{
-    text-decoration: solid;
+.menu:after{
+    text-decoration: underline;
 }
 
 .find{
@@ -72,7 +72,6 @@ nav{
     flex-direction: column;
     row-gap: 32px;
 }
-
 
 h2{
     font-size: 19px;
