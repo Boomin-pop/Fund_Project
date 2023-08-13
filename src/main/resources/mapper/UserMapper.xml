@@ -33,4 +33,14 @@
         SELECT userId, userPassword, UserName FROM user WHERE userId=#{userId}
     </select>
 
+    <!-- ifnull()는 오라클의 nvl()과 같다.	-->
+    <select id="findId" resultType="String">
+        SELECT IFNULL(userId, 0) FROM user WHERE userName = #{userName} AND userTel = #{userTel}
+    </select>
+
+    <update id="findPw" parameterType="Map">
+        UPDATE user SET userPassword=#{param3}
+        WHERE userId= #{param1} AND userEmail = #{param2}
+    </update>
+
 </mapper>
