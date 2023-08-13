@@ -137,7 +137,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/logout.do")
+    @GetMapping("/logout")
     public String userLogout(HttpSession session){
         session.invalidate();// 세션 초기화
         return "redirect:/";
@@ -146,6 +146,7 @@ public class UserController {
     @GetMapping("/idpwFind")
     public String idpwFind(String find, Model m){
         m.addAttribute("find", find);
+
         return "/user/idpwFind";
     }
 

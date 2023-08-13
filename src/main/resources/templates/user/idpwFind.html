@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/idpwFind.css">
 </head>
@@ -53,30 +54,36 @@
             <h2>아이디 찾기</h2>
             <p style="margin: 4px 0px 0px; font-size: 15px; color: rgb(114, 117, 133);">가입시 아이디와 전화번호를 입력하세요.</p>
 
-            <form class="find" th:action="@{/user/findId}" method="POST">
-                <div id="findIdSuccess" style="display:none" class="px-4">
-                    <p class="text-center mt-4">가입시 아이디는 <b>
-                        <span id="resultId"></span></b>입니다.</p>
-                    <a type="button" href="/user/login"/>로그인</a>
+            <form class="find">
+                <div id="findIdSuccess" style="display:none">
+                    <div class="input">
+                        <p class="text-center">가입시 아이디는 <b>
+                            <span id="resultId"></span></b>입니다.</p>
+                        <a type="button" href="/user/userLogin"/>로그인</a>
+                    </div>
                 </div>
 
-                <section>
-                    <label class="id">이름</label>
-                    <div class="input">
-                        <input type="txt" placeholder="이름을 입력해주세요" class="inputbox">
+                <div id="findIdBefore" style="display: flex;
+    flex-direction: column; row-gap: 32px;">
+                    <section>
+                            <label class="id">이름</label>
+                            <div class="input">
+                                <input type="txt" placeholder="이름을 입력해주세요"
+                                       class="inputbox" name="userName" id="name">
+                            </div>
+                    </section>
+                    <section>
+                        <label class="id">전화번호</label>
+                        <div class="input">
+                            <input class="inputbox" type="tel" maxlength="13"
+                                   placeholder="전화번호를 입력해주세요" name="userTel" id="tel">
+                        </div>
+                    </section>
+                    <div>
+                        <button type="button" class="btn" id="idBtn" onclick="idFind(); showContent('findIdSuccess')" >
+                            <span>아이디 찾기</span>
+                        </button>
                     </div>
-                </section>
-                <section>
-                    <label class="id">전화번호</label>
-                    <div class="input">
-                        <input class="inputbox" type="txt" maxlength="13"
-                               placeholder="전화번호를 입력해주세요" name="userTel" id="tel" onkeyup="telCheck()">
-                    </div>
-                </section>
-                <div>
-                    <button type="submit" class="btn" id="idBtn" onclick="idfInd()">
-                        <span>아이디 찾기</span>
-                    </button>
                 </div>
             </form>
         </section>
@@ -85,25 +92,40 @@
             <h2>비밀번호 찾기</h2>
             <p>가입시 아이디와 이메일을 입력하세요.</p>
 
-            <form class="find" th:action="@{/user/findPw}" method="POST">
-                <section>
-                    <label class="id">아이디</label>
+            <form class="find">
+                <div id="findPwSuccess" style="display:none">
                     <div class="input">
-                        <input type="txt" placeholder="아이디를 입력해주세요" class="inputbox">
+                        <p class="text-center">해당 이메일로 임시 비밀번호를 보냈습니다.</p>
+                        <a type="button" href="/user/userLogin"/>로그인</a>
                     </div>
-                </section>
-                <section>
-                    <label class="id">이메일</label>
-                    <div class="input">
-                        <input type="txt" placeholder="이메일을 입력해주세요" class="inputbox">
-                    </div>
-                </section>
-                <div>
-                    <button type="submit" class="btn" id="pwBtn">
-                        <span>비밀번호 찾기</span>
-                    </button>
                 </div>
+
+                <form class="find">
+                    <div id="findPwBefore" style="display: flex;
+        flex-direction: column; row-gap: 32px;">
+                        <section>
+                            <label class="id">아이디</label>
+                            <div class="input">
+                                <input type="txt" placeholder="아이디를 입력해주세요"
+                                       class="inputbox" name="uid" id="uid">
+                            </div>
+                        </section>
+                        <section>
+                            <label class="id">이메일</label>
+                            <div class="input">
+                                <input type="txt" placeholder="이메일을 입력해주세요"
+                                       class="inputbox" name="uEmail" id="email">
+                            </div>
+                        </section>
+                        <div>
+                            <button type="button" class="btn" id="pwBtn" onclick="pwFind(); showContent('findPwSuccess')">
+                                <span>비밀번호 찾기</span>
+                            </button>
+                        </div>
+                  </div>
+                </form>
             </form>
+
         </section>
     </section>
 </div>
