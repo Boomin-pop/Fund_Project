@@ -49,4 +49,19 @@
         ${query}
         LIMIT #{startIndex}, #{pageSize}
     </select>
+    <insert id="insertBoard"  parameterType="com.kmong.kmongdemo.domain.BoardDTO">
+        INSERT INTO board(boardSectionId, boardWriter, boardTitle, boardContent, boardImg1, boardImg2, boardImg3)
+        VALUES(#{boardSectionId}, "관리자", #{boardTitle}, #{boardContent}, #{boardImg1}, #{boardImg2}, #{boardImg3})
+    </insert>
+    <select id="getBoard" resultType="com.kmong.kmongdemo.domain.BoardDTO">
+        SELECT boardId, boardTitle, boardWriter, boardUploadTime, boardSectionId
+                      , (SELECT boardSectionName FROM boardSection WHERE boardSectionId = b.boardSectionId) as boardSectionName
+                      , (SELECT boardCategoryName FROM boardCategory WHERE boardCategoryId = (SELECT boardCategoryId FROM boardSection WHERE boardSectionId = b.boardSectionId)) as boardCategoryName
+                      , boardImg1, boardImg2, boardImg3
+        FROM board b
+        WHERE boardId = #{bid}
+    </select>
+    <delete id="delBoard">
+        DELETE FROM board WHERE boardId = #{bid}
+    </delete>
 </mapper>

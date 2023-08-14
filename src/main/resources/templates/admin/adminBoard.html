@@ -44,12 +44,12 @@
                         </tr>
                     </thead>
                     <tr th:each="board : ${boardList}">
-                        <td><button class="view" onclick="boardView()">상세보기</button></td>
+                        <td><button class="view" th:onclick="location.href='board/view?bid=[[${board.boardId}]]';">상세보기</button></td>
                         <td th:text="${board.boardCategoryName}">0</td>
                         <td th:text="'['+${board.boardSectionName} + ']' + ${board.boardTitle}">0</td>
                         <td th:text="${board.boardWriter}">0</td>
                         <td th:text="${board.boardUploadTime}">0</td>
-                        <td><button class="btn-delete" onclick="userView()">삭제</button></td>
+                        <td><button class="btn-delete" th:onclick="location.href='board/delete?bid=[[${board.boardId}]]';">삭제</button></td>
                     </tr>
                 </table>
                 <div class="paging">
