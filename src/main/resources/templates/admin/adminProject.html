@@ -32,12 +32,15 @@
             </tr>
             </thead>
             <tbody>
+            <th:block th:each="pr : ${projectAdmissionLists}">
             <tr>
               <td>
                 <input type="checkbox" id="test4" name="">
-                <label for="test4">프로젝트 명</label>
+                <label for="test4" th:text="${pr.userId}">의뢰인 아이디</label>
+                <label for="test4" th:text="${pr.projectRequestTitle}">프로젝트 명</label>
               </td>
             </tr>
+            </th:block>
             </tbody>
           </table>
         </div>
@@ -51,11 +54,15 @@
             </tr>
             </thead>
             <tbody>
+            <th:block th:each="pr : ${projectDeleteLists}">
             <tr>
               <td><input type="checkbox" id="test5" name="">
-                <label for="test5">프로젝트 명 : 사유</label>
+                <label for="test5" th:text="${pr.userId}">의뢰인 아이디</label>
+                <label for="test5" th:text="${pr.projectRequestTitle}">프로젝트 명</label>
+                <label for="test5" th:text="${pr.projectRequestDelete}">삭제 사유</label>
               </td>
             </tr>
+            </th:block>
             </tbody>
           </table>
         </div>
@@ -65,27 +72,29 @@
           <thead>
           <tr class="thead">
             <th>프로젝트 명</th>
-            <th>고객명</th>
-            <th>아이디</th>
-            <th>전화번호</th>
+            <th>고객 아이디</th>
+            <th>예산</th>
+            <th>모집 마감일</th>
             <th>변경</th>
-            <th>최근 기록</th>
+            <th>승인 여부</th>
             <th>정보</th>
             <th>삭제</th>
             <th>승인</th>
           </tr>
           </thead>
+          <th:block th:each="pr : ${projectLists}">
           <tr>
-            <td>프로젝트 명</td>
-            <td>고객명</td>
-            <td>아이디</td>
-            <td>전화번호</td>
-            <td><button class="change" onclick="btn1()">변경</button></td>
-            <td>최근 기록</td>
-            <td><button class="data" onclick="btn2()">정보 확인</button></td>
-            <td><button class="delete" onclick="btn3()">삭제</button></td>
-            <td><button class="admission" onclick="admission()">승인</button></td>
+            <td th:text="${pr.projectRequestTitle}">프로젝트 명</td>
+            <td th:text="${pr.userId}">고객 아이디</td>
+            <td th:text="${pr.projectRequestBudget}">예산</td>
+            <td th:text="${pr.projectRequestWanted}">모집 마감일</td>
+            <td><button class="change" th:onclick="btn1([[${pr.projectRequestNo}]])">변경</button></td>
+            <td th:text="${pr.projectRequestApprove}">승인 여부</td>
+            <td><button class="data" th:onclick="btn2([[${pr.projectRequestNo}]])">정보 확인</button></td>
+            <td><button class="delete" th:onclick="btn3([[${pr.projectRequestNo}]])">삭제</button></td>
+            <td><button class="admission" th:onclick="admission([[${pr.projectRequestNo}]])">승인</button></td>
           </tr>
+          </th:block>
         </table>
       </div>
     </div>
@@ -98,50 +107,56 @@
     <span class="close1" onclick="span1()">&times;</span>
     <table>
       <tr>
+        <td>식별번호</td>
+        <td id="no1">식별번호</td>
+      </tr>
+      <tr>
+        <td>카테고리</td>
+        <td><input type="text" placeholder="카테고리" id="category1"></td>
+      </tr>
+      <tr>
         <td>프로젝트 명</td>
-        <td><input type="text" placeholder="서비스 명"></td>
+        <td><input type="text" placeholder="프로젝트 명" id="projectName1"></td>
       </tr>
       <tr>
-        <td>고객명</td>
-        <td><input type="text" placeholder="판매자"></td>
+        <td>업무</td>
+        <td><input type="text" placeholder="업무" id="work1"></td>
       </tr>
       <tr>
-        <td>아이디</td>
-        <td><input type="text" placeholder="아이디"></td>
+        <td>요구사항</td>
+        <td><input type="text" placeholder="요구사항" id="request1"></td>
       </tr>
       <tr>
-        <td>전화번호</td>
-        <td><input type="text" placeholder="전화번호"></td>
+        <td>예산</td>
+        <td><input type="text" placeholder="예산" id="budget1"></td>
       </tr>
       <tr>
-        <td>이메일</td>
-        <td><input type="text" placeholder="이메일"></td>
-      </tr>
-      <tr>
-        <td>프로젝트 투입일</td>
-        <td><input type="date" id="" name=""
+        <td>프로젝트 모집 마감일</td>
+        <td><input type="date" id="wanted1" name=""
                    value="2018-07-22"
                    min="2018-01-01" max="2018-12-31"></td>
       </tr>
       <tr>
-        <td>가격</td>
-        <td><input type="text" placeholder="가격"></td>
-      </tr>
-      <tr>
-        <td>프로젝트 마감일</td>
-        <td><input type="date" id="" name=""
+        <td>프로젝트 종료일</td>
+        <td><input type="date" id="close1" name=""
                    value="2018-07-22"
                    min="2018-01-01" max="2018-12-31"></td>
       </tr>
       <tr>
-        <td>프로젝트 상태</td>
-        <td>
-          <select>
-            <option>프로젝트 예정</option>
-            <option>프로젝트 중</option>
-            <option>프로젝트 중단</option>
-          </select>
-        </td>
+        <td>작업 기간</td>
+        <td><input type="text" placeholder="작업 기간" id="requestTerm1"></td>
+      </tr>
+      <tr>
+        <td>의뢰인 아이디</td>
+        <td><input type="text" placeholder="의뢰인 아이디" id="userId1"></td>
+      </tr>
+      <tr>
+        <td>등록일</td>
+        <td id="upload1"></td>
+      </tr>
+      <tr>
+        <td>진행상황</td>
+        <td id="approve1">진행상황</td>
       </tr>
     </table>
     <button class="modify" onclick="modify1()">변경 완료</button>
@@ -154,40 +169,52 @@
     <span class="close2" onclick="span2()">&times;</span>
     <table>
       <tr>
+        <td>식별 번호</td>
+        <td id="no2">식별 번호</td>
+      </tr>
+      <tr>
+        <td>카테고리</td>
+        <td id="category2">카테고리</td>
+      </tr>
+      <tr>
         <td>프로젝트 명</td>
-        <td>프로젝트 명</td>
+        <td id="projectName2">프로젝트 명</td>
       </tr>
       <tr>
-        <td>고객명</td>
-        <td>고객명</td>
+        <td>업무</td>
+        <td id="work2">업무</td>
       </tr>
       <tr>
-        <td>아이디</td>
-        <td>아이디</td>
+        <td>요구사항</td>
+        <td id="request2">요구사항</td>
       </tr>
       <tr>
-        <td>전화번호</td>
-        <td>전화번호</td>
+        <td>예산</td>
+        <td id="budget2">예산</td>
       </tr>
       <tr>
-        <td>이메일</td>
-        <td>이메일</td>
+        <td>프로젝트 모집 마감일</td>
+        <td id="wanted2">프로젝트 모집 마감일</td>
       </tr>
       <tr>
-        <td>프로젝트 투입일</td>
-        <td>프로젝트 투입일</td>
+        <td>프로젝트 종료일</td>
+        <td id="close2">프로젝트 종료일</td>
       </tr>
       <tr>
-        <td>가격</td>
-        <td>가격</td>
+        <td>작업 기간</td>
+        <td id="requestTerm2">작업 기간</td>
       </tr>
       <tr>
-        <td>프로젝트 마감일</td>
-        <td>프로젝트 마감일</td>
+        <td>의뢰인 아이디</td>
+        <td id="userId2">의뢰인 아이디</td>
       </tr>
       <tr>
-        <td>프로젝트 상태</td>
-        <td>프로젝트 상태</td>
+        <td>등록일</td>
+        <td id="upload2">등록일</td>
+      </tr>
+      <tr>
+        <td>진행상황</td>
+        <td id="approve2">진행상황</td>
       </tr>
     </table>
   </div>
@@ -198,11 +225,23 @@
     <span class="close2" onclick="span3()">&times;</span>
     <table>
       <tr>
+        <td>식별 번호</td>
+        <td id="no3">식별 번호</td>
+      </tr>
+      <tr>
+        <td>의뢰인 아이디</td>
+        <td id="userId3">의뢰인 아이디</td>
+      </tr>
+      <tr>
+        <td>프로젝트 명</td>
+        <td id="projectName3">프로젝트 명</td>
+      </tr>
+      <tr>
         <td>삭제 사유 : </td>
-        <td><input type="text" placeholder="삭제 사유"></td>
+        <td><input type="text" placeholder="삭제 사유" id="delete"></td>
       </tr>
     </table>
-    <button class="modify" onclick="modify2()">변경 완료</button>
+    <button class="modify" onclick="modify2()">삭제 실행</button>
   </div>
 </div>
 
