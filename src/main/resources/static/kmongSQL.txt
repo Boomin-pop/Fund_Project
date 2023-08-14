@@ -1,6 +1,13 @@
-use kmongDB;
+=== root 권한에서 ====
 
-select * from serviceBasicInfo;
+create database kmongDB;
+create user 'kmong'@'localhost' identified by '1234';
+grant all privileges on kmongDB.* to 'kmong'@'localhost';
+
+ === 후 User and privileages -> kmong 선택 -> administrative roles 탭 -> DBA 체크
+
+use kmongDB;
+drop table serviceBasicInfo;
 
 create table serviceBasicInfo(
 	serviceNo int primary key not null auto_increment,
@@ -9,6 +16,8 @@ create table serviceBasicInfo(
 	serviceTopCatName varchar(100) not null,
     serviceStatus varchar(100) not null default '승인대기'
 );
+
+select * from serviceBasicInfo;
 
 drop table serviceTopCat;
 
@@ -20,76 +29,56 @@ create table serviceTopCat(
 	-- foreign key (serviceTypeChk) references serviceType(serviceTypeCode)
 );
 
-drop table serviceTopCat;
-insert into serviceTopCat(
-	serviceTopCatCode, serviceTopCatName, serviceTypeChkCount, serviceTypeChkCode) values('tca01', '웹, 모바일 기획', 5, 'tca01'),
-    ('tca02', '기타 기획', 5, 'tca02'),('tca03', '홈페이지', 7, 'tca03'), ('tca04', '랜딩페이지', 7, 'tca04'), ('tca05', '프론트엔드·퍼블리싱', 5, 'tca05');
-
  drop table serviceTypeSeq;
  create table serviceTypeSeq(
  serviceTypeCode int not null auto_increment primary key);
  select * from serviceTypeSeq;
 
-
-
-select * from serviceTopCat;
 drop table serviceType;
+
 create table serviceType(
 	serviceTypeCode varchar(30) primary key DEFAULT '0',
     serviceTypeName varchar(100) not null,
-    serviceTypeInput varchar(60) not null default 'selbox'
+    mandatoryInput int default 0
     );
 
-
-
+    select * from serviceType;
 
 drop table serviceTypeChk;
-select * from serviceTypeChk;
+
 create table serviceTypeChk(
-	serviceTypeChkCode int primary key,
-    serviceTypeCode1 varchar(30),
-    serviceTypeCode2 varchar(30),
-    serviceTypeCode3 varchar(30),
-    serviceTypeCode4 varchar(30),
-    serviceTypeCode5 varchar(30),
-    serviceTypeCode6 varchar(30),
-    serviceTypeCode7 varchar(30),
-    serviceTypeCode8 varchar(30),
-    foreign key (serviceTypeChkCode) references serviceTopCat(serviceTypeChkCode)
+	serviceTypeChkCode varchar(30) primary key,
+    serviceTypeCode1 varchar(30) default '',
+    serviceTypeCode2 varchar(30) default '',
+    serviceTypeCode3 varchar(30) default '',
+    serviceTypeCode4 varchar(30) default '',
+    serviceTypeCode5 varchar(30) default '',
+    serviceTypeCode6 varchar(30) default '',
+    serviceTypeCode7 varchar(30) default '',
+    serviceTypeCode8 varchar(30) default '',
+    serviceTypeCode9 varchar(30) default '',
+    serviceTypeCode10 varchar(30) default ''
+--    foreign key (serviceTypeChkCode) references serviceTopCat(serviceTypeChkCode)
 );
 
+select * from serviceTypeChk;
+
 insert into serviceTypeChk(
-	serviceTypeChkCode, serviceTypeCode1, serviceTypeCode2, serviceTypeCode3, serviceTypeCode4, serviceTypeCode5, serviceTypeCode6)
- values	('tca01', 'stc1', 'stc2', 'sta1', 'sta2', 'sta3'),
-		('tca02', 'stc1', 'stc2', 'sta1', 'sta2', 'sta3'),
-		('tca03', 'stc1', 'stc2', 'stcat1', 'stdl1', 'stlib1', 'stfw1', 'stdb1'),
-		('tca04', 'stc1', 'stc2', 'stwb1', 'stdl1', 'stlib1', 'stfw1', 'stdb1'),
-		('tca05', 'stc1', 'stc2', 'stwb1', 'stdl1', 'stlib1', 'stfw1')
+	serviceTypeChkCode, serviceTypeCode1, serviceTypeCode2, serviceTypeCode3, serviceTypeCode4, serviceTypeCode5, serviceTypeCode6,  serviceTypeCode7,  serviceTypeCode8,  serviceTypeCode9,  serviceTypeCode10)
+ values	('tca01', 'stc01', 'stc02', 'stc13', 'stc14', 'stcl7', 'stcl8', '', '', '', ''),
+		('tca02', 'stc01', 'stc02', 'stc12', 'stc15', 'stcl7', 'stcl9', '', '', '', ''),
+		('tca03', 'stc01', 'stc02', 'stc11', 'stc15', 'stcl7', 'stcl9', 'stc27', 'stc31', '', ''),
+		('tca04', 'stc01', 'stc02', 'stc10', 'stc15', 'stc21', 'stc22', 'stc23', 'stc24', '', ''),
+		('tca05', 'stc01', 'stc02', 'stc23', 'stc15', 'stc27', 'stc28', 'stc31', '', '', ''),
+		('tca06', 'stc01', 'stc02', 'stc24', 'stc25', 'stc26', 'stc27', 'stc31', '', '', ''),
+		('tca07', 'stc01', 'stc02', 'stc25', 'stc15', 'stcl7', 'stcl8', 'stcl9', '', '', ''),
+		('tca08', 'stc01', 'stc02', 'stc26', 'stc15', 'stc27', 'stc13', 'stc19', 'stc31', 'stc32', 'stc33'),
+		('tca09', 'stc01', 'stc02', 'stc27', 'stc15', 'stc31', 'stc32', 'stc33', '', '', ''),
+		('tca10', 'stc01', 'stc02', 'stc28', 'stc15', 'stcl7', 'stcl9', 'stc21', '', '', ''),
+		('tca11', 'stc01', 'stc02', 'stc29', 'stc15', 'stc30', 'stc31', 'stc32', '', '', '')
  ;
 
-    drop table serviceTypeChk;
     select * from serviceTypeChk;
-
-    drop table serviceType;
-    SELECT * FROM serviceType;
-    insert into serviceType(
-		serviceTypeCode, serviceTypeName, serviceTypeValue, serviceTypeInput
-    ) values('stc1', '기술수준', '초급', 'selbox'),
-			('stc2', '팀규모', '2인 이상 50인 미만', 'selbox'),
-            ('sta1', '플랫폼', '웹', 'mulselbox'),
-            ('sta2', '기기', '콘솔', 'mulselbox'),
-            ('sta3', '작업분야', '화면설계서', 'mulselbox'),
-            ('stcat1', '카테고리', '개인홈페이지', 'mulselbox'),
-            ('stdl1', '개발언어', 'Fortran', 'mulselbox'),
-            ('stlib1', '라이브러리', 'Ajax', 'mulselbox'),
-            ('stfw1', '프레임워크', 'Vue.js', 'mulselbox'),
-            ('stdb1', '데이터베이스', 'MongoDB', 'mulselbox'),
-            ('stwb1', '웹빌더·CMS', '고스트', 'mulselbox')
-
-            ;
-
-            select * from serviceType;
-
 
 drop trigger serviceType_insert;
 
@@ -103,46 +92,45 @@ SET NEW.serviceTypeCode = CONCAT('stc', LPAD(LAST_INSERT_ID(), 2, '0'));
 END$$
 DELIMITER ;
 
-drop table serviceType;
-select * from serviceType;
-
     insert into serviceType(
-		serviceTypeName
+		serviceTypeName, mandatoryInput
     ) values
 --     ('기술수준', '초급', 'selbox');
-('기술수준'),
-('팀규모'),
-('플랫폼'),
-('기기'),
-('작업 분야'),
-('개발언어'),
-('라이브러리'),
-('프레임워크'),
-('데이터베이스'),
-('웹빌더 · CMS'),
-('채널'),
-('서비스'),
-('작업분야'),
-('업종'),
-('앱 분류'),
-('운영체제'),
-('앱 기능'),
-('애플리케이션 분류'),
-('기능설명'),
-('소프트웨어'),
-('작업 분야'),
-('AI엔진'),
-('노코드 카테고리'),
-('노코드 소프트웨어'),
-('노코드 플러그인'),
-('메타버스 플랫폼'),
-('블록체인 NFT 기능'),
-('데이터 형태'),
-('데이터 분야'),
-('데이터베이스 작업 분야'),
-('테스트'),
-('시작파일'),
-('변환파일');
+('기술수준', 1),
+('팀규모', 1),
+('플랫폼', 1),
+('기기', 0),
+('작업 분야', 1),
+('개발언어', 0),
+('라이브러리', 0),
+('프레임워크', 0),
+('데이터베이스', 0),
+('웹빌더 · CMS', 0),
+('채널', 1),
+('서비스', 1),
+('작업분야', 1),
+('업종', 0),
+('앱 분류', 1),
+('운영체제', 0),
+('앱 기능', 1),
+('애플리케이션 분류', 1),
+('기능설명', 0),
+('소프트웨어', 0),
+('작업 분야', 1),
+('AI엔진', 0),
+('노코드 카테고리', 0),
+('노코드 소프트웨어', 0),
+('노코드 플러그인', 0),
+('메타버스 플랫폼', 1),
+('블록체인 NFT 기능', 0),
+('데이터 형태', 1),
+('데이터 분야', 0),
+('데이터베이스 작업 분야', 1),
+('테스트', 0),
+('시작파일', 0),
+('변환파일', 0);
+
+select * from serviceType;
 
 insert into serviceTopCat(
 	serviceTopCatCode, serviceTopCatName, serviceTypeChkCount, serviceTypeChkCode)
@@ -184,4 +172,3 @@ insert into serviceTopCat(
 ('tca36', '기타', 2, 'tca36');
 
 select * from serviceTopCat;
-

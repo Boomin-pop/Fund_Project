@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="bodyPage4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@500&display=swap" rel="stylesheet">
+    <style>
+        .mainImgTitle{
+            display:flex;
+            font-weight: bolder;
+        }
+
+        .imgUploadBox{
+            border:1px solid #dddddd;
+            width:251px;
+            height:186px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .imgUploadTipModal{
+            color: rgb(11, 82, 167);
+            width: 900px;
+            border:1px solid lightblue;
+            margin : 20px 0;
+            padding : 10px;
+            background-color: rgb(247, 251, 255);
+
+            justify-content: space-between;
+        }
+        .fthModalwrapper{
+            display: flex;
+            width: 800px;
+        }
+
+        #detailImgUpload, #vidUpBtn{
+            cursor:pointer;
+        }
+
+        .imgModalTipTxtArea{
+
+            margin-left:50px;
+        }
+
+        .imgUpBtn{
+            padding: 5px;
+            border:1px solid #dddddd;
+            text-align: center;
+            width:195px;
+            height:45px;
+            line-height: 35px;
+            font-size:14px;
+            font-weight: bolder;
+            font-family: 'Noto Emoji', sans-serif;
+            background-color: transparent;
+            cursor:pointer;
+        }
+
+        .vidUpload{
+            width:251px;
+            height:60px;
+            line-height: 60px;
+            text-align: center;
+            border:1px solid #dddddd;
+            text-decoration: none;
+            background-color: white;
+            cursor:pointer;
+        }
+
+        .detailImgCard{
+            display: flex;
+            cursor:pointer;
+            margin : 50px 0;
+        }
+
+        .detailCardArea{
+            cursor: pointer;
+            display: block;
+
+        }
+
+        .cardLabel{
+            cursor:pointer;
+        }
+
+
+    </style>
+    <div class="container shadow-sm p-5 rounded mt-4" style="width:1000px">
+        <div class="form-group">
+        <div class="mainImgTitle"><p>메인이미지등록(필수)</p><p>0/1</p></div>
+        <div class="imgUploadBox" id="imgMainBox"><img src="/imgs/imageupload.png" style="width:250px; height:64px;">
+<!--            <button id="imgUpBtn" style="display:none">이미지 업로드</button>-->
+            <label for="mainImg">
+            <div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div></label>
+            <input type="file" name="mainImg" id="mainImg" style="display:none">
+        </div>
+        </div>
+
+        <div class="imgUploadTipModal" id="fthTip1" style="display: none;">
+            <div class="fthModalwrapper">
+                <div clas><h4>TIP</h4></div>
+                <div class="ms-5"><img src="/imgs/modalTipImg.png"></div>
+                <div class="imgModalTipTxtArea" >
+                   <p>• 이미지 권장 사이즈: 652 x 488px (4:3 비율)<br>
+                       <b>• 사용 제한 이미지</b>
+                       저작권 침해 (무단복제, 도용) 이미지<br>
+                       프로필 사진과 동일한 이미지<br>
+                       가격, 연락처, 서비스와 관련 없는 홍보성 문구<br>
+                       임의로 제작된 인증 마크, 라벨, 할인표기<br>
+                       검증 불가 내용 (최초, 유일, 무제한, 1위, 누적의뢰 수/금액 표기 등)<br>
+                       <br>
+                       ※ 등록하신 이미지는 이용약관에 의거, 판매 활성화를 위한 광고 소재로 활용될 수 있습니다.<br>
+                </p>
+            </div>
+            </div>
+        </div>
+
+<!--                  상세 이미지                            -->
+
+        <div class="form-group">
+            <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p>0/9</p></div>
+            <div class="detailCardArea" id="detailImgUpload" style="border:3px solid green">
+                <div class="detailImgCard" style="border:3px solid blue">
+                    <label class="cardLabel border border-warning">
+                            <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">
+                    </label>
+<!--                    <label class="cardLabel">-->
+<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">-->
+<!--                    </label>-->
+<!--                    <label class="cardLabel">-->
+<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">-->
+<!--                    </label>-->
+                 </div>
+
+
+
+                <!--                    <label class="cardLabel">-->
+                <!--                        <div class="imgUploadBox">-->
+                <!--                            <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload.png" style="width:88px; height:64px;">-->
+                <!--                         </div>-->
+                <!--                     </label>-->
+                <!--                </div>-->
+        </div>
+
+        <div class="imgUploadTipModal" id="fthTip2" style="display: none;">
+            <div class="fthModalwrapper">
+              <div><h4>TIP</h4></div>
+              <div class="imgModalTipTxtArea">
+                    <p>• 등록하신 이미지는 이용약관에 의거, 판매 활성화를 위한 광고 소재로 활용될 수 있습니다.<br>
+                        • 이미지 권장 사이즈: 가로 652px 이상, 세로 3000px 이하<br>
+                        • 상세이미지에 제공 가능한 서비스 샘플 이미지를 등록할 수 있습니다.<br>
+                        • 상업적인 이용 및 허가에 대한 부분을 확인하시어 등록해주시길 바랍니다.<br>
+                        • 무단/부정한 이용으로 제3자의 권리를 침해하는 이미지는 등록할 수 없습니다.<br>
+                        • 상세 이미지는 서비스 상세 페이지 하단에 등록하신 순서대로 노출됩니다.<br>
+                        • 이미지를 여러 장 첨부할 경우 각 이미지 사이를 구분하는 여백을 고려하여 등록하시길 바랍니다.<br>
+                        <br>
+                        ※ 등록하신 이미지는 이용약관에 의거, 판매 활성화를 위한 광고 소재로 활용될 수 있습니다.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="mainImgTitle"><p>동영상등록(선택)</p><p>0/6</p></div>
+            <div class="vidUploadBox" id="vidUpBtn">
+                <label>
+                <div class="vidUpload">비디오 업로드
+                    <input type="file" name="vid" style="display:none">
+                </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="imgUploadTipModal" id="fthTip3" style="display: none;">
+            <div class="fthModalwrapper">
+                <div><h4>TIP</h4></div>
+                <div class="imgModalTipTxtArea">
+                    <p>• 합계 500mb 이하의 mp4 파일을 등록하실 수 있습니다.<br>
+                        • 개인 연락처 혹은 홍보 동영상은 등록하실 수 없습니다.<br>
+                        • 상업적인 이용 및 허가에 대한 부분을 확인하시어 등록해주시기 바랍니다.<br>
+                        • 무단/부정한 이용으로 제3자의 권리를 침해하는 동영상은 등록할 수 없습니다.<br>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+<script>
+    let imgbox = $(".imgUploadBox");
+    let vidUploadBox = $(".vidUploadBox");
+    var cnt =0;
+    // function fileAppend(){
+    //     if(cnt%3 == 0) {
+    //         console.log("카드 돌아감 현재 cnt : "+cnt)
+    //         var appendedDetailImg = '</div><div class="detailImgCard">'
+    //         + '<label class="cardLabel"><div class="imgUploadBox">'
+    //         + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+    //         + '<img src="/imgs/imageupload2.png" style="width:88px; height:64px;">'
+    //         + '</div></label>';
+    //         $(".detailImgCard").append(appendedDetailImg);
+    //         cnt++;
+    //         console.log("cnt : "+cnt);
+    //     }else{
+    //         console.log("카드 안돌아감 현재 cnt : "+cnt)
+    //         var appendedDetailImg = '<label class="cardLabel"><div class="imgUploadBox">'
+    //             + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+    //             + '<img src="/imgs/imageupload2.png" style="width:88px; height:64px;">'
+    //             + '</div></label>';
+    //         $(".detailImgCard").append(appendedDetailImg);
+    //         cnt++;
+    //         console.log("cnt : "+cnt);
+    //     }
+    // }
+
+    function fileAppend(){
+
+        cnt++;
+        if(cnt > 0 && cnt%3 === 0) {
+            console.log("새로운 라인 cnt : "+cnt)
+            var appendedDetailImg = '닫혀라 좀'
+                + '</div>닫히는 구간 <div class="detailImgCard" style="border:3px solid red">닫고 열음'
+                + '<label class="cardLabel">'
+                + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+                + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
+                + '</label> 나눠서 넣은 첫번째';
+            $(".detailImgCard").append(appendedDetailImg);
+
+            console.log("cnt : "+cnt);
+        }
+        else{
+            console.log("동일 라인 현재 cnt : "+cnt)
+            var appendedDetailImg = '<label class="cardLabel">'
+                + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
+                + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
+                + '</label>';
+            $(".detailImgCard").append(appendedDetailImg);
+
+            console.log("cnt : "+cnt);
+        }
+    }
+
+    function previewImg(pic){
+        console.log("pic의 firstChild는?" +pic.firstChild);
+        console.log("pic : "+pic);
+        console.log("pic의 노드네임 : "+pic.nodeName);
+        console.log("sibling의 nodeName : "+pic.nextSibling.nodeName);
+        // console.log("sibling의 시블링의 노드네임 : "+pic.nextSibling.nextSibling.nodeName);
+        console.log("pic.files : "+pic.files);
+        var imgTag = pic.nextSibling;  //
+
+        // fileAppend();
+
+        if(pic.files && pic.files[0]){
+            // filereader = 자바스크립트 라이브러리 객체
+            var fileReader = new FileReader();
+            //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
+            fileReader.onload = function(e){
+                imgTag.height=251;
+                imgTag.width=186;
+                // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
+                imgTag.src = e.target.result;
+                fileAppend();
+            }
+
+            // 파일의 종류는 크게 2가지
+            //1. 바이너리 파일 : 데이터를 있는 그대로 읽고 쓰는 파일
+            //2. 텍스트 파일 : 데이터를 문자로 변환한 파일
+            // base64는 6비트 기반 이걸 8비트(아스키코드) 기반 텍스트로 손실없이 안전하게 인코딩함.
+            // 바이너리 데이터의 훼손없이 정확하게 데이터를 전달할 수 있다.
+
+            //불러온 바이너리 파일을 http 메시지 규격에 맞는 base64 형식으로 변환
+            fileReader.readAsDataURL(pic.files[0]);
+        }
+
+    };
+
+
+
+    $(document).ready(function () {
+        var imgMainBox =  document.getElementById("imgMainBox");
+        var detailImgUpload = document.getElementById("detailImgUpload");
+        var imgUpBtn = document.getElementById("imgUpBtn");
+        var vidUpBtn = document.getElementById("vidUpBtn");
+        var fthTip1 = document.getElementById("fthTip1");
+        var fthTip2 = document.getElementById("fthTip2");
+        var fthTip3 = document.getElementById("fthTip3");
+
+      //  $("#imgMainBox").on("mouseover", function(){
+
+        // $(".concealedInput").on("change", function(){
+        //
+        // });
+
+
+
+            imgMainBox.addEventListener("mouseover", function(){
+                imgMainBox.firstChild.style.display='none';
+                imgUpBtn.style.display='block';
+                fthTip1.style.display='block';
+                fthTip2.style.display='none';
+                fthTip3.style.display='none';
+
+            });
+
+            imgMainBox.addEventListener("mouseout", function(){
+                imgMainBox.firstChild.style.display='block';
+                imgUpBtn.style.display='none';
+            });
+
+            detailImgUpload.addEventListener("mouseover", function(){
+                fthTip1.style.display='none';
+                fthTip2.style.display='block';
+                fthTip3.style.display='none';
+            });
+
+            vidUpBtn.addEventListener("mouseover", function(){
+                fthTip1.style.display='none';
+                fthTip2.style.display='none';
+                fthTip3.style.display='block';
+            });
+
+
+    })
+
+
+</script>
+
+</th:block>
+</html>

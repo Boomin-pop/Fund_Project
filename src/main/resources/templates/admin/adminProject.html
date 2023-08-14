@@ -24,8 +24,8 @@
         <h3>프로젝트 관리</h3>
         <div class="table1">
           <table>
-            <button class="update">업데이트</button>
-            <button class="cancell">취소</button>
+            <button class="update" onclick="update()">업데이트</button>
+            <button class="cancle" onclick="cancle()">취소</button>
             <thead>
             <tr>
               <th>승인</th>
@@ -34,32 +34,8 @@
             <tbody>
             <tr>
               <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명</label>
+                <input type="checkbox" id="test4" name="">
+                <label for="test4">프로젝트 명</label>
               </td>
             </tr>
             </tbody>
@@ -67,8 +43,8 @@
         </div>
         <div class="table1">
           <table>
-            <button class="update">업데이트</button>
-            <button class="cancell">취소</button>
+            <button class="update" onclick="update()">업데이트</button>
+            <button class="cancle" onclick="cancle()">취소</button>
             <thead>
             <tr>
               <th>삭제</th>
@@ -76,32 +52,8 @@
             </thead>
             <tbody>
             <tr>
-              <td><input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명 : 사유</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명 : 사유</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명 : 사유</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명 : 사유</label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" id="test" name="">
-                <label for="test">프로젝트 명 : 사유</label>
+              <td><input type="checkbox" id="test5" name="">
+                <label for="test5">프로젝트 명 : 사유</label>
               </td>
             </tr>
             </tbody>
@@ -112,8 +64,8 @@
         <table class="table2">
           <thead>
           <tr class="thead">
-            <th>서비스 명</th>
-            <th>판매자</th>
+            <th>프로젝트 명</th>
+            <th>고객명</th>
             <th>아이디</th>
             <th>전화번호</th>
             <th>변경</th>
@@ -124,21 +76,137 @@
           </tr>
           </thead>
           <tr>
-            <td>서비스 명</td>
-            <td>판매자</td>
+            <td>프로젝트 명</td>
+            <td>고객명</td>
             <td>아이디</td>
             <td>전화번호</td>
-            <td><button class="change">변경</button></td>
+            <td><button class="change" onclick="btn1()">변경</button></td>
             <td>최근 기록</td>
-            <td><button class="data">정보 확인</button></td>
-            <td><button class="delete">삭제</button></td>
-            <td><button class="admission">승인</button></td>
+            <td><button class="data" onclick="btn2()">정보 확인</button></td>
+            <td><button class="delete" onclick="btn3()">삭제</button></td>
+            <td><button class="admission" onclick="admission()">승인</button></td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal 1 -->
+<div id="Modal1" class="modal">
+  <div class="modal-content">
+    <span class="close1" onclick="span1()">&times;</span>
+    <table>
+      <tr>
+        <td>프로젝트 명</td>
+        <td><input type="text" placeholder="서비스 명"></td>
+      </tr>
+      <tr>
+        <td>고객명</td>
+        <td><input type="text" placeholder="판매자"></td>
+      </tr>
+      <tr>
+        <td>아이디</td>
+        <td><input type="text" placeholder="아이디"></td>
+      </tr>
+      <tr>
+        <td>전화번호</td>
+        <td><input type="text" placeholder="전화번호"></td>
+      </tr>
+      <tr>
+        <td>이메일</td>
+        <td><input type="text" placeholder="이메일"></td>
+      </tr>
+      <tr>
+        <td>프로젝트 투입일</td>
+        <td><input type="date" id="" name=""
+                   value="2018-07-22"
+                   min="2018-01-01" max="2018-12-31"></td>
+      </tr>
+      <tr>
+        <td>가격</td>
+        <td><input type="text" placeholder="가격"></td>
+      </tr>
+      <tr>
+        <td>프로젝트 마감일</td>
+        <td><input type="date" id="" name=""
+                   value="2018-07-22"
+                   min="2018-01-01" max="2018-12-31"></td>
+      </tr>
+      <tr>
+        <td>프로젝트 상태</td>
+        <td>
+          <select>
+            <option>프로젝트 예정</option>
+            <option>프로젝트 중</option>
+            <option>프로젝트 중단</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <button class="modify" onclick="modify1()">변경 완료</button>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div id="Modal2" class="modal">
+  <div class="modal-content">
+    <span class="close2" onclick="span2()">&times;</span>
+    <table>
+      <tr>
+        <td>프로젝트 명</td>
+        <td>프로젝트 명</td>
+      </tr>
+      <tr>
+        <td>고객명</td>
+        <td>고객명</td>
+      </tr>
+      <tr>
+        <td>아이디</td>
+        <td>아이디</td>
+      </tr>
+      <tr>
+        <td>전화번호</td>
+        <td>전화번호</td>
+      </tr>
+      <tr>
+        <td>이메일</td>
+        <td>이메일</td>
+      </tr>
+      <tr>
+        <td>프로젝트 투입일</td>
+        <td>프로젝트 투입일</td>
+      </tr>
+      <tr>
+        <td>가격</td>
+        <td>가격</td>
+      </tr>
+      <tr>
+        <td>프로젝트 마감일</td>
+        <td>프로젝트 마감일</td>
+      </tr>
+      <tr>
+        <td>프로젝트 상태</td>
+        <td>프로젝트 상태</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div id="Modal3" class="modal">
+  <div class="modal-content">
+    <span class="close2" onclick="span3()">&times;</span>
+    <table>
+      <tr>
+        <td>삭제 사유 : </td>
+        <td><input type="text" placeholder="삭제 사유"></td>
+      </tr>
+    </table>
+    <button class="modify" onclick="modify2()">변경 완료</button>
+  </div>
+</div>
+
+<script src="/js/projectModal.js"></script>
 
 <th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
 </body>

@@ -1,0 +1,51 @@
+.searchbar .searchbox{
+    display: flex;
+    margin: auto;
+}
+.searchbar .searchbox .search{
+    height: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.searchbar form{
+    margin: 0 auto;
+}
+.searchbar form button{
+    border: 1px solid #ddd;
+    color: black;
+}
+
+
+/*section */
+.section .table{
+    width: 80%;
+    margin: auto;
+}
+.section .table th{
+    margin:auto;
+}
+.section .table td{
+     text-align: center;
+}
+
+.section .paging{
+    margin: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+.section .paging .edge{
+    margin: auto 7px;
+
+    height: 2em;
+}
+.section .paging .move{
+     margin: auto 5px;
+
+     height: 2em;
+}
+.section .paging .btn{
+     margin: auto 0;
+
+     height: 2em;
+}

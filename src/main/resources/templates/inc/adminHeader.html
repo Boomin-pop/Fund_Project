@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<th:block th:fragment="adHeaderFragment">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 홈</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <link rel="stylesheet" href="/css/adminMain.css">
+</head>
+<body>
+<header>
+  <div class="header">
+    관리자 페이지
+  </div>
+  <nav>
+    <div>
+      <a href="/admin">관리자 홈</a>
+      <a href="/admin/category">카테고리 관리</a>
+      <a href="/admin/user">유저 관리</a>
+      <a href="/admin/service">서비스 관리</a>
+      <a href="/admin/project">프로젝트 관리</a>
+      <a href="/admin/board">게시판 수정</a>
+      <a href="/admin/transactionLog">기록 관리</a>
+      <a href="/admin/statistics">통계 관리</a>
+    </div>
+  </nav>
+</header>

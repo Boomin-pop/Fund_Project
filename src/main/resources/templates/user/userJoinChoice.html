@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/userJoinChoice.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" class="logo">
+            <img src="/imgs/kmong.svg" width="85px" height="26px" alt class="img">
+        </a>
+
+        <div class="main">
+            <h1>
+                크몽에서 어떤 서비스를<br>
+                이용하고 싶으세요?
+            </h1>
+
+            <p>
+                원하는 회원가입 유형을 선택하세요.<br>
+                의뢰인으로 가입후에도 전문가 등록이 가능합니다.
+            </p>
+
+            <div style="cursor: default;">
+                <h2>서비스를 의뢰하고 내 전문성을 판매하고 싶다면</h2>
+                <button role="button" th:onclick="|location.href='@{/user/userRegister}'|"class="joinBtn" >
+                    <span class="check">
+                        <img src="/imgs/check.png"  alt class="img">
+                    </span>
+                    <span style="font-weight: 600;">의뢰인 / 전문가로 가입</span>
+                </button>
+            </div>
+        
+    </div>
+</body>
+</html>
