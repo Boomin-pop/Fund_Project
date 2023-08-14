@@ -170,6 +170,61 @@ public class UserController {
         return n;
     }
 
+    @GetMapping("/myProfile")
+    public String myProfile(){
+        return "user/myProfile";
+    }
+    @RequestMapping("/userInfo")
+    public String userInfo(HttpSession session, Model m) {
+        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
+        m.addAttribute("userInfo", userInfo);
+        System.out.println(userInfo);
+
+
+        return "user/myProfile";
+    }
+
+    @RequestMapping("/userUpdate")
+    public String userUpdate(UserDTO dto) {
+        userService.userModify(dto);
+
+        return "redirect:/user/myProfile";
+    }
+
+    @GetMapping("/pwChange")
+    public String pwChange(HttpSession session, Model m) {
+        UserDTO loginInfo = (UserDTO) session.getAttribute("loginDto");
+        m.addAttribute("loginInfo", loginInfo);
+        System.out.println("loginInfo.getUserId() = " + loginInfo.getUserId());
+        return "user/pwChange";
+    }
+
+    @PostMapping("/pwCheck")
+    @ResponseBody
+    public String pwCheck(String pw, HttpSession session){
+        System.out.println("입력된 pw = " + pw);
+        String chkResult = "";
+        UserDTO dto = (UserDTO)session.getAttribute("loginDto");
+
+        String dbPw = dto.getUserPassword();
+        System.out.println("dbPw = " + dbPw);
+        if(dbPw.equals(pw)){
+            chkResult="ok";
+        }else{
+            chkResult="no";
+        }
+
+        return chkResult;
+    }
+
+    @PostMapping("/changePw")
+    @ResponseBody
+    public int changePw(@RequestBody UserDTO dto){
+        System.out.println("dto.getUserPassword() = " + dto.getUserPassword());
+        int n = userService.modifyPw(dto);
+
+        return n;
+    }
 
 
 }

@@ -17,7 +17,14 @@ public interface UserMapper {
 
     UserDTO userLogin(UserDTO dto);
 
+    UserDTO userInfo(UserDTO dto);
+
+    int userUpdate(UserDTO dto);
+
     String findId(UserDTO dto);
 
     int findPw(String uid, String uEmail, String tempPw);
+
+    int updatePw(UserDTO dto);
+
 }

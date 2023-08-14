@@ -16,7 +16,7 @@
         <img src="/imgs/kmong.svg" width="85px" height="26px" alt class="img">
     </a>
 
-        <form class="main" onSubmit="submitChk()" action="/user/userInsert" method="POST">
+        <form class="main" onSubmit="submitChk()" th:action="@{/user/userInsert}" method="POST">
             <h1>딱 이것만 체크하면 가입완료!</h1>
 
             <div class="join">

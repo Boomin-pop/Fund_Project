@@ -62,6 +62,7 @@ public class UserServiceImpl implements UserService {
 
         // 아이디와 일치하는 회원정보를 DTO에 담아서 가져옴
         UserDTO loginDTO= umapper.userLogin(dto);
+        System.out.println("loginDTO = " + loginDTO);
 
         if(loginDTO != null){ // 일치하는 아이디가 있는 경우
             String inputPw= dto.getUserPassword(); // 사용자가 입력한 비번
@@ -75,6 +76,16 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public UserDTO userInfo(UserDTO dto) {
+        return umapper.userInfo(dto);
+    }
+
+    @Override
+    public int userModify(UserDTO dto) {
+        return umapper.userUpdate(dto);
     }
 
     @Override
@@ -111,4 +122,11 @@ public class UserServiceImpl implements UserService {
 
         return n;
     }
+
+    @Override
+    public int modifyPw(UserDTO dto) {
+        int n = umapper.updatePw(dto);
+        return n;
+    }
+
 }
