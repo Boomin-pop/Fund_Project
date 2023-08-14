@@ -19,6 +19,11 @@ public interface AdminCategoryMapper {
 
     List<AdminCategoryDTO> categoryList();
     AdminCategoryDTO categoryView(int cid);
-
+    int insertCategory(AdminCategoryDTO cdto);
+    int maxId();
+    int modifyCategory(AdminCategoryDTO cdto);
+    void checkUp(int id);
+    int removeCategory(int cid);
+    int removeCategoryU(int cid);
 
 }

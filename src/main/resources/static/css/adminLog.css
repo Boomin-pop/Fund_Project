@@ -1,21 +1,3 @@
-.searchbar .searchbox{
-    display: flex;
-    margin: auto;
-}
-.searchbar .searchbox .search{
-    height: 2em;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-.searchbar form{
-    margin: 0 auto;
-}
-.searchbar form button{
-    border: 1px solid #ddd;
-    color: black;
-}
-
-
 /*section */
 .section .table{
     width: 80%;

@@ -11,13 +11,13 @@
             <div class="searchbox">
                 <form id="form-transac" action="">
                     <input id="id" type="search" placeholder="아이디" class="search">
-                    <input type="button" value="검색" class="search" th:onclick="pageMove(1)"/>
-                    <select class="search" id="by" th:onchange="pageMove(1)">
+                    <input type="button" value="검색" class="search" th:onclick="pageMoveT(1)"/>
+                    <select class="search" id="by" th:onchange="pageMoveT(1)">
                         <option value="transactionId">거래 아이디 순</option>
                         <option value="transactionTransTime">거래 시간 순</option>
                         <option value="transactionPrice">거래 금액 순</option>
                     </select>
-                    <select class="search" id="ud" th:onchange="pageMove(1)">
+                    <select class="search" id="ud" th:onchange="pageMoveT(1)">
                         <option value="asc">오름차순</option>
                         <option value="desc">내림차순</option>
                     </select>
@@ -30,7 +30,6 @@
                 <input type="button" value="접속 기록" onclick="location.href='/admin/signLog'"/>
             </div>
             <div class="section">
-                1/10
                 <table class="table">
                     <thead>
                         <tr class="thead">
@@ -54,17 +53,17 @@
                     </tr>
                 </table>
                 <div class="paging">
-                    <input class="edge" type="button" th:onclick="pageMove(1)" value="처음">
-                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.prevPage}]])" value="<">
+                    <input class="edge" type="button" th:onclick="pageMoveT(1)" value="처음">
+                    <input class="move" type="button" th:onclick="pageMoveT([[${LogPage.prevPage}]])" value="<">
 
                     <th:block  th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}">
                         <input class="btn" th:with="start = ${LogPage.startPage}, end = ${LogPage.endPage}"
                                th:each="pageButton : ${#numbers.sequence(start, end)}"
-                        type="button" th:onclick="pageMove([[${pageButton}]])" th:value=${pageButton}>
+                        type="button" th:onclick="pageMoveT([[${pageButton}]])" th:value=${pageButton}>
                     </th:block>
 
-                    <input class="move" type="button" th:onclick="pageMove([[${LogPage.nextPage}]])" value=">">
-                    <input class="edge" type="button" th:onclick="pageMove([[${LogPage.pageTotalNum}]])" value="마지막">
+                    <input class="move" type="button" th:onclick="pageMoveT([[${LogPage.nextPage}]])" value=">">
+                    <input class="edge" type="button" th:onclick="pageMoveT([[${LogPage.pageTotalNum}]])" value="마지막">
                 </div>
 
             </div>

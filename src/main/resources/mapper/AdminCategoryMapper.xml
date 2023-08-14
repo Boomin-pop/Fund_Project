@@ -39,4 +39,26 @@
     <select id="categoryView" resultType="com.kmong.kmongdemo.domain.AdminCategoryDTO">
         SELECT * FROM category WHERE categoryId = #{cid}
     </select>
+    <insert id="insertCategory" parameterType="com.kmong.kmongdemo.domain.AdminCategoryDTO">
+        INSERT INTO category(categoryName, categoryUpperId, categoryRefund, serviceTypeId1, serviceTypeId2, serviceTypeId3, serviceTypeId4, serviceTypeId5, serviceTypeId6, serviceTypeId7, serviceTypeId8)
+        VALUES(#{categoryName}, #{categoryUpperId}, #{categoryRefund}, #{serviceTypeId1}, #{serviceTypeId2}, #{serviceTypeId3}, #{serviceTypeId4}, #{serviceTypeId5}, #{serviceTypeId6}, #{serviceTypeId7}, #{serviceTypeId8})
+    </insert>
+    <select id="maxId" resultType="int">
+        SELECT MAX(categoryId) FROM category
+    </select>
+    <update id="modifyCategory" parameterType="com.kmong.kmongdemo.domain.AdminCategoryDTO">
+        UPDATE category SET categoryName = #{categoryName}, categoryUpperId = #{categoryUpperId}, categoryRefund = #{categoryRefund},
+        serviceTypeId1 = #{serviceTypeId1}, serviceTypeId2 = #{serviceTypeId2}, serviceTypeId3 = #{serviceTypeId3}, serviceTypeId4 = #{serviceTypeId4}, serviceTypeId5 = #{serviceTypeId5}, serviceTypeId6 = #{serviceTypeId6}, serviceTypeId7 = #{serviceTypeId7}, serviceTypeId8 = #{serviceTypeId8}
+        WHERE categoryId = #{categoryId}
+    </update>
+    <update id="checkUp">
+        UPDATE category SET categoryUpperId = #{id}
+        WHERE categoryId = #{id}
+    </update>
+    <delete id="removeCategory" >
+        DELETE FROM category WHERE categoryId = #{cid}
+    </delete>
+    <delete id="removeCategoryU" >
+        DELETE FROM category WHERE categoryUpperId = #{cid}
+    </delete>
 </mapper>

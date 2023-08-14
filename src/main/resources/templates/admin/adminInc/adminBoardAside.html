@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<th:block th:fragment="adBoardAsideFragment">
+    <div class="aside">
+        <h4>게시판 카테고리 관리</h4>
+        <div id="cat-list">
+            <div th:each="cat : ${bclist}" class="category">
+                <div class="cat-head">
+                    <div class="cat-name"><h5 th:text="${cat.boardCategoryName}"></h5></div>
+                    <input type="button" value="보기" class="btn-view mrz" th:onclick="showSection([[${cat.boardCategoryId}]], this)">
+                    <input type="button" value="삭제" class="btn-delete" th:onclick="removeCategory([[${cat.boardCategoryId}]])">
+                </div>
+                <div th:id="'sec-list'+${cat.boardCategoryId}" class="section">
+                </div>
+            </div>
+        </div>
+        <div class="insert-bar">
+            <input type="text" class="b-cat-name" id="b-cat-name" placeholder="카테고리 추가">
+            <input type="button" class="btn-add" value="추가" th:onclick="addCategory()">
+        </div>
+        <div  class="insert-bar">
+            <select id="b-sec-category" style="margin-left: auto;">
+                <option value="0">카테고리 선택</option>
+                <option th:each="cat : ${bclist}" th:value="${cat.boardCategoryId}" th:text="${cat.boardCategoryName}"></option>
+            </select>
+            <input type="text" class="b-sec-name" id="b-sec-name" placeholder="섹션 추가">
+            <input type="button" class="btn-add" value="추가" th:onclick="addSection()">
+        </div>
+    </div>
+</th:block>
