@@ -10,20 +10,37 @@
 
     <insert id="userInsert" parameterType="UserDTO">
         INSERT INTO user(userId, userPassword, userName,
-        userNickname, userEmail, userTel, userJobId, userRegdate)
-        VALUES( #{userId},
+        userNickname, userEmail, userTel, userJobId)
+        VALUES(#{userId},
         #{userPassword},
         #{userName},
         #{userNickname},
         #{userEmail},
         #{userTel},
-        #{userJobId},
-        #{userRegdate}
+        #{userJobId}
         )
     </insert>
 
     <select id="idCheck" resultType="userDTO">
         SELECT * FROM user WHERE userId=#{userId}
     </select>
+
+    <select id="nicknameCheck" resultType="userDTO">
+        SELECT * FROM user WHERE userNickname=#{userNickname}
+    </select>
+
+    <select id="userLogin" resultType="userDTO">
+        SELECT userId, userPassword, UserName FROM user WHERE userId=#{userId}
+    </select>
+
+    <!-- ifnull()는 오라클의 nvl()과 같다.	-->
+    <select id="findId" resultType="String">
+        SELECT IFNULL(userId, 0) FROM user WHERE userName = #{userName} AND userTel = #{userTel}
+    </select>
+
+    <update id="findPw" parameterType="Map">
+        UPDATE user SET userPassword=#{param3}
+        WHERE userId= #{param1} AND userEmail = #{param2}
+    </update>
 
 </mapper>

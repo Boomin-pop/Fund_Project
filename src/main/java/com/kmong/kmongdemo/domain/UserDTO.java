@@ -22,5 +22,7 @@ public class UserDTO {
 
     private Timestamp userRegdate;
 
+    private String userDelete;
+
 
 }

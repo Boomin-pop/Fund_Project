@@ -1,0 +1,91 @@
+text:invalid {
+    border-color: red;
+}
+
+textarea {
+    resize: none;
+}
+
+.project {
+    border: 1px solid #000;
+    display: flex;
+    padding: 13px;
+    margin-bottom: 20px;
+}
+
+.project .sector01 {
+    border: 1px solid #000;
+    flex: 1;
+}
+
+
+#title {
+    width: 393px;
+}
+
+.project .sector02 {
+    border: 1px solid #000;
+    flex: 6;
+}
+
+.project .sector03 {
+    border: 1px solid #000;
+    flex: 1.5;
+}
+
+.project .sector04 {
+    border: 1px solid #000;
+    flex: 1.5;
+    float: right;
+}
+
+.modal-content {
+    width: 920px;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.progress {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+.modal-body {
+    height: 600px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.input-area {
+    flex: 7;
+}
+
+.view-area {
+    margin-left: 30px;
+    padding-left: 20px;
+    border-left: 1px solid black;
+    flex: 3;
+}
+
+.view-area > h6 {
+    color: #888888;
+    font-size: small;
+}
+
+.view-area > input {
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+#tip {
+    background-color: #F7FBFF;
+}
+#tip::placeholder {
+    color: #2165B4;
+    font-weight: bolder;
+    font-size: small;
+}
+

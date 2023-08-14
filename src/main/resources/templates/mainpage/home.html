@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 -->
+<th:block th:replace="inc/header :: headerFragment"></th:block>
+<!-- 헤더에 넣을 부분
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+ -->
+<link href="/css/home.css" rel="stylesheet"/>
+<script src="/js/home_slick.js"></script>
+
+<div class="main container mt-3" style="height:1200px">
+    <section class="content-02 ">
+        <div class="inner-wrap">
+            <div class="event">
+                <ul class="slide">
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="1"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="2"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="3"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="4"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="5"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="6"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="7"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="8"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="9"></li>
+                    <li class="slide_item"><img src="https://kmong.com/_next/image?url=https%3A%2F%2Fd2v80xjmx68n4w.cloudfront.net%2Fassets%2Fimages%2Fcurated_contents%2FwnlQ1_curated_content_item_main_desktop_1366.png&w=2880&q=75" alt="10"></li>
+                </ul>
+            </div>
+            <div class="left_button"></div>
+            <div class="right_button"></div>
+        </div>
+        <div class="pagination_button"></div>
+    </section>
+
+    <section class="recommend container">
+        <h4>이런 카테고리는 어때요</h4>
+        <ul>
+            <li>
+                <span>IT·프로그래밍</span><br>
+                <strong>PC·웹 프로그램</strong>
+            </li>
+            <li>
+                <span>IT·프로그래밍</span><br>
+                <strong>PC·웹 프로그램</strong>
+            </li>
+            <li>
+                <span>IT·프로그래밍</span><br>
+                <strong>PC·웹 프로그램</strong>
+            </li>
+            <li>
+                <span>IT·프로그래밍</span><br>
+                <strong>PC·웹 프로그램</strong>
+            </li>
+            <li>
+                <span>IT·프로그래밍</span><br>
+                <strong>PC·웹 프로그램</strong>
+            </li>
+        </ul>
+    </section>
+
+    <section class="popularity container">
+        <h4>다른 회원들이 많이 구매하고 있어요</h4>
+        <div class="container">
+            <a href="">
+                <div class="thumbnail">
+                    <img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/Nxz3D1689137084.jpg" alt="">
+                </div>
+                <div>
+                    <h3>인스타유령이 많아서 발끈한 명문대생이 관리해 드립니다.</h3>
+                    <div class="price">600,000원~</div>
+                </div>
+            </a>
+            <a href="">
+                <div class="thumbnail">
+                    <img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/Nxz3D1689137084.jpg" alt="">
+                </div>
+                <div>
+                    <h3>인스타유령이 많아서 발끈한 명문대생이 관리해 드립니다.</h3>
+                    <div class="price">600,000원~</div>
+                </div>
+            </a>
+            <a href="">
+                <div class="thumbnail">
+                    <img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/Nxz3D1689137084.jpg" alt="">
+                </div>
+                <div>
+                    <h3>인스타유령이 많아서 발끈한 명문대생이 관리해 드립니다.</h3>
+                    <div class="price">600,000원~</div>
+                </div>
+            </a>
+            <a href="">
+                <div class="thumbnail">
+                    <img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/Nxz3D1689137084.jpg" alt="">
+                </div>
+                <div>
+                    <h3>인스타유령이 많아서 발끈한 명문대생이 관리해 드립니다.</h3>
+                    <div class="price">600,000원~</div>
+                </div>
+            </a>
+            <a href="">
+                <div class="thumbnail">
+                    <img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/Nxz3D1689137084.jpg" alt="">
+                </div>
+                <div>
+                    <h3>인스타유령이 많아서 발끈한 명문대생이 관리해 드립니다.</h3>
+                    <div class="price">600,000원~</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="rating container">
+        <h2>크몽 전문가 순위</h2>
+        <p>상위 카테고리에서 가장 많이 판매한 인기 전문가에요.</p>
+        <div class="inner-wrap d-flex justify-content-around">
+            <div class="rating01">
+                <div class="first">
+                    <h3>카테고리01</h3>
+                    <div>내용</div>
+                </div>
+                <div class="other">
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                </div>
+            </div>
+            <div class="rating02">
+                <div class="first">
+                    <h3>카테고리02</h3>
+                    <div>내용</div>
+                </div>
+                <div class="other">
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                </div>
+            </div>
+            <div class="rating03">
+                <div class="first">
+                    <h3>카테고리03</h3>
+                    <div>내용</div>
+                </div>
+                <div class="other">
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                    <hr>
+                    <div>내용</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!-- 푸터 -->
+<th:block th:replace="inc/footer :: footerFragment"></th:block>
+</html>

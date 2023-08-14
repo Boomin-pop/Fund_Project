@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<!-- 헤더 -->
+<th:block th:replace="inc/header :: headerFragment"></th:block>
+<link rel="stylesheet" href="/css/projectRequest.css">
+
+
+<div class="container mt-3" style="height:1200px;">
+    <div class="container p-5 border text-center" style="width: 845px">
+        <th:block th:if="${list} == null">
+            <h1 class="mb-5">kmong projectRuest Test</h1>
+        </th:block>
+        <th:block th:each="list:${list}">
+            <div class="project border mb-3">
+                <div class="sector01">img</div>
+                <div class="sector02">
+                    <span th:text="${list.projectRequestNo}"></span>
+                    <span th:text="${list.projectRequestCategory}">개발</span>
+                    <div><span th:text="${list.projectRequestTitle}">개발</span></div>
+                </div>
+                <div class="sector03">
+                    <div th:text="${list.projectRequestBudget}">예산</div>
+                </div>
+                <div class="sector04">
+                    <a th:href="@{/project/deleteProject(no=${list.projectRequestNo})}" class="btn btn-danger">삭제</a>
+                    <button class="btn btn-secondary" disabled th:if="${list.projectRequestApprove}==0">승인대기</button>
+                    <button class="btn btn-primary" th:if="${list.projectRequestApprove}==1">승인완료</button>
+                    <button class="btn btn-secondary" disabled th:if="${list.projectRequestApprove}==2">승인 반려</button>
+                </div>
+            </div>
+        </th:block>
+        <button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#myModal">
+            프로젝트 의뢰하기
+        </button>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">프로젝트 등록</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <!-- 분야 선택 -->
+            <form id="requestForm" onsubmit="chk()" action="/project/request" method="POST">
+                <div class="progress">
+                    <div class="progress-bar bg-warning" style="width: 0%">
+                        <div class="progress-value"></div>
+                        <input type="hidden" id="progressVal" value="" readonly>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="input-area" style="overflow: auto">
+                        <div class="" id="step1">
+                            <h1>필요한 업무를 설명해주세요.</h1>
+                            <h4>관련분야 선택</h4>
+                            <select name="category" id="category">
+                                <option value="" selected="selected">카테고리 선택</option>
+                                <option value="cat1">카테고리01</option>
+                                <option value="cat2">카테고리02</option>
+                                <option value="cat3">카테고리03</option>
+                                <option value="cat4">카테고리04</option>
+                            </select>
+                            <h4>필요한 서비스의 제목을 작성해주세요</h4>
+                            <input type="text" id="title" name="title" minlength="8" placeholder="예)OOO분야의 솔루션을 요청드립니다">
+                            <p id="title-chk" name="title-chk"></p>
+                        </div>
+
+                        <!-- 준비 상황 -->
+                        <div class="" id="step2" style="display: none">
+                            <h4>필요한 업무를 설명해주세요.</h4>
+                            <input type="radio" id="idea" name="work" value="idea">
+                            <label for="idea">아이디어만 있음</label><br>
+                            <input type="radio" id="planning" name="work" value="planning">
+                            <label for="planning">기획서 보유</label><br>
+                            <input type="radio" id="design" name="work" value="design">
+                            <label for="design">디자인 보유</label><br>
+                            <input type="radio" id="environment" name="work" value="environment">
+                            <label for="environment">개발환경 보유</label>
+                        </div>
+
+                        <!-- 개발 요청사항 -->
+                        <div class="" id="step3" style="display: none; overflow: auto">
+                            <h4>개발을 요청하실 의뢰사항을 구체적으로 적어주세요</h4>
+                            <textarea name="requested" id="requested" minlength="20" maxlength="1000" cols="50" rows="10"></textarea><br>
+                            <p id="requested-chk" name="title-chk"></p>
+                            <textarea id="tip" name="tip" cols="50" rows="18" disabled placeholder="아래 내용을 상세히 입력해 주시면, 더 적합한 전문가를 만날 수 있습니다.
+
+1. 프로젝트 개요
+프로젝트 목적, 타겟 고객, 진행 계획 등
+
+2. 상세 업무 내용
+프로그램/서비스 용도, 주요 기능, 메뉴 구성, 작업 분량, 필요한 조건 등
+
+3. 희망 기술 & 관련 경험
+사용을 희망하는 기술 또는 개발스택
+필요한 특정 분야 또는 개발 경험
+
+4. 유의 사항
+지원자 필수 요건, 희망 계약 방식 등
+
+5. 참고 서비스/사이트
+디자인, 기능 등 참고 서비스/사이트 기재
+
+※ 관련 자료 > 하단 첨부파일 업로드" style="resize: none; display: none;"></textarea>
+                        </div>
+
+                        <!-- 프로젝트 예산 -->
+                        <div class="" id="step4" style="display: none">
+                            <h4>프로젝트 예산을 기제해주세요</h4>
+                            <input type="number" id="budget" name="budget" placeholder="최소 10,000원"> 원
+                        </div>
+
+                        <!-- 마감일자 -->
+                        <div class="" id="step5" style="display: none">
+                            <h4>모집 마감 일자를 선택해주세요</h4>
+                            <input type="date" id="wanted" name="wanted" min="" placeholder="선택해주세요" required>
+                            <h4>프로젝트 마감 일자를 선택해주세요</h4>
+                            <input type="date" id="close" name="close" min="" required>
+                            <h4>작업 기간을 입력해주세요(일단위)</h4>
+                            <input type="number" id="term" name="term" min="1" max="9999">
+                            <p id="term-chk" name="title-chk"></p>
+                        </div>
+
+
+                        <!-- 등록 완료 -->
+                        <div class="" id="step6" style="display: none">
+                            <h1>프로젝트 등록 완료</h1>
+                        </div>
+                    </div>
+
+                    <div class="view-area">
+                        <h6>카테고리</h6>
+                        <input type="text" id="category-v" disabled>
+                        <h6>제목</h6>
+                        <input type="text" id="title-v" disabled>
+                        <h6>업무</h6>
+                        <input type="text" id="work-v" disabled>
+                        <h6>요구사항</h6>
+                        <!--                        <input type="text" id="requested-v" disabled style="overflow: scroll">-->
+                        <textarea name="" id="requested-v" cols="21" rows="5" style="overflow: auto"></textarea>
+                        <h6>예산</h6>
+                        <input type="text" id="budget-v" disabled>원
+                        <h6>모집 마감일</h6>
+                        <input type="text" id="wanted-v" disabled>
+                        <h6>프로젝트 마감일</h6>
+                        <input type="text" id="close-v" disabled>
+                        <h6>작업기간</h6>
+                        <input type="text" id="term-v" disabled>일
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="prevBtn" class="btn btn-success">이전</button>
+                    <button type="button" id="nextBtn" class="btn btn-success">다음</button>
+                    <button type="submit" id="submit" class="btn btn-primary" disabled="true">등록</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/projectRequest.js"></script>
+</script>
+
+<!-- 푸터 -->
+<th:block th:replace="inc/footer :: footerFragment"></th:block>
+</body>
+</html>

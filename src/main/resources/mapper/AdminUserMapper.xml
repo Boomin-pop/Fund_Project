@@ -8,9 +8,28 @@
         SELECT * FROM user
     </select>
 
+    <select id="userDeleteLists" resultType="UserDTO">
+        SELECT * FROM user WHERE NOT userDelete IS NULL
+    </select>
+
     <select id="userInfo" resultType="UserDTO">
         SELECT * FROM user WHERE userId=#{userId}
     </select>
 
+    <update id="userModify">
+        UPDATE user SET userPassword=#{userPassword}, userName=#{userName}, userNickname=#{userNickname}, userEmail=#{userEmail}, userTel=#{userTel}, userJobId=#{userJobId} WHERE userId=#{userId}
+    </update>
+
+    <update id="userDeleteR">
+        UPDATE user SET userDelete=#{userDelete} WHERE userId=#{userId}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM user WHERE userId=#{userId}
+    </delete>
+
+    <update id="userCancle">
+        UPDATE user SET userDelete = NULL WHERE userId=#{userId}
+    </update>
 
 </mapper>

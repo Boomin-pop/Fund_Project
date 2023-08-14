@@ -16,11 +16,15 @@ public class AdminUserController {
 
     @GetMapping("/admin/user")
     public String adminUser(Model model){
+
         List<UserDTO> userLists = adminUserService.userLists();
         model.addAttribute("userLists", userLists);
+        List<UserDTO> userDeleteLists=adminUserService.userDeleteLists();
+        model.addAttribute("userDeleteLists", userDeleteLists);
 
         return "admin/adminUser";
     }
+
 
     @GetMapping("/admin/user/{userId}")
     public @ResponseBody UserDTO adminUserInfo(@PathVariable("userId") String userId, Model model){
@@ -28,4 +32,38 @@ public class AdminUserController {
         return userInfo;
     }
 
+    @PutMapping("/admin/user/{userId}")
+    public @ResponseBody String aminUserModify(@RequestBody UserDTO userDTO){
+        adminUserService.userModify(userDTO);
+//        adminUserService.userCancle(userDTO);
+        return null;
+    }
+
+    @PostMapping("/admin/user/{userId}")
+    public @ResponseBody String adminUserDeleteR(@RequestBody UserDTO userDTO){
+        adminUserService.userDeleteR(userDTO);
+        return null;
+    }
+
+    @PostMapping("/admin/user/delete")
+    public @ResponseBody String deleteUser(
+            @RequestBody List<UserDTO> list){
+
+        for (UserDTO userDTO : list){
+            System.out.println("dto = " + userDTO);
+            adminUserService.deleteUser(userDTO);
+//            adminUserService.deleteUser(str);
+//            System.out.println("str" + str);
+        }
+        return null;
+    }
+
+    @PostMapping("/admin/user/cancle")
+    public @ResponseBody String userCancle(@RequestBody List<UserDTO> list){
+        for (UserDTO userDTO : list){
+            adminUserService.userCancle(userDTO);
+        }
+        return null;
+    }
 }
+
