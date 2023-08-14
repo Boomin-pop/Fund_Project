@@ -4,10 +4,13 @@ import com.kmong.kmongdemo.domain.*;
 import com.kmong.kmongdemo.service.AdminBoardService;
 import com.kmong.kmongdemo.service.AdminLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -15,6 +18,8 @@ import java.util.List;
 public class AdminBoardController {
     @Autowired
     private AdminBoardService abservice;
+    @Autowired
+    FileStore fileStore = new FileStore();
 
     // 카테고리 페이지로 이동 - 직업 카테고리, 비즈니스 카테고리, 분야 카테고리 리스트 전달
     @GetMapping("/board")
@@ -85,10 +90,31 @@ public class AdminBoardController {
         return "admin/adminBoardRegister";
     }
     @PostMapping("/board/insert")
-    public String insertBoard(BoardDTO bdto){
-        System.out.println("bdto = " + bdto);
+    public String insertBoard(BoardDTO bdto) throws IOException {
+        String imgFile1 = fileStore.storeFile(bdto.getImgFile1());
+        String imgFile2 = fileStore.storeFile(bdto.getImgFile2());
+        String imgFile3 = fileStore.storeFile(bdto.getImgFile3());
+
+        bdto.setBoardImg1(imgFile1);
+        bdto.setBoardImg2(imgFile2);
+        bdto.setBoardImg3(imgFile3);
+
+        int n = abservice.insertBoard(bdto);
 
         return "redirect:/admin/board";
     }
-}
+    @GetMapping("/board/view")
+    public String viewBoard(Model model, @RequestParam("bid") int bid){
+        List<BoardCategoryDTO> bclist = abservice.categoryList();
+        BoardDTO board = abservice.getBoard(bid);
 
+        model.addAttribute("bclist", bclist);
+        model.addAttribute("board", board);
+        return "/admin/adminBoardView";
+    }
+    @GetMapping("/board/delete")
+    public String deleteBoard(@RequestParam("bid") int bid){
+        int n = abservice.delBoard(bid);
+        return "redirect:/admin/board";
+    }
+}

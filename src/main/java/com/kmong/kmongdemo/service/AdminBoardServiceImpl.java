@@ -49,4 +49,17 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     public List<BoardDTO> boardList(int startIndex, int pageSize, String query, String title, int cid) {
         return abmapper.boardList(startIndex, pageSize, query, title, cid);
     }
+    @Override
+    public int insertBoard(BoardDTO bdto) {
+        System.out.println("bdto = " + bdto);
+        return abmapper.insertBoard(bdto);
+    }
+    @Override
+    public BoardDTO getBoard(int bid) {
+        return abmapper.getBoard(bid);
+    }
+    @Override
+    public int delBoard(int bid) {
+        return abmapper.delBoard(bid);
+    }
 }

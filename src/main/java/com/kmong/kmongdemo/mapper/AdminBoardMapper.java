@@ -18,4 +18,7 @@ public interface AdminBoardMapper {
 
     int boardCount();
     List<BoardDTO> boardList(int startIndex, int pageSize, String query, String title, int cid);
+    int insertBoard(BoardDTO bdto);
+    BoardDTO getBoard(int bid);
+    int delBoard(int bid);
 }
