@@ -1,11 +1,9 @@
-
 let serviceObject= {
     init: function () {
         $("select[name=serviceTopCat]").on("change", () => {
             this.serviceTypeChk();
         });
-
-        //   $("#serviceTitle").on("change", ()=>{
+      //   $("#serviceTitle").on("change", ()=>{
       //       console.log("제목입력 포착")
       //       this.serviceTitleChk();
       //   });
@@ -47,7 +45,7 @@ let serviceObject= {
             data:JSON.stringify(code),
             contentType:"application/json; charset=utf-8",
             success: function(data){
-                console.log("불러온 데이터 : " +data.length);
+                console.log("불러온 데이터 : " +data);
                 let str = "";
                 let serviceTypeDiv = document.getElementById("serviceTypeDiv");
                 ServiceType = document.getElementById("serviceType");
@@ -58,22 +56,23 @@ let serviceObject= {
 
                     // for(i=0; i< data.length; i++){
                     data.forEach(row => {
+
                         let serviceTypeCode = row.serviceTypeCode;
                         let serviceTypeName = row.serviceTypeName;
                         let mandatoryInput = row.mandatoryInput;
                         console.log("forEach 코드 : " + serviceTypeCode + ", 타입명 : " + serviceTypeName + ", 필수입력 : " + mandatoryInput);
                         if (mandatoryInput == 1) {
-                            str += '<div class="serviceType d-flex px-3 my-4" name="serviceType" style="width:650px; height:100px; line-height:100px">'
+                            str += '<div class="serviceType requiredBorder d-flex px-3 my-4" name="serviceTypeReq" style="width:800px; height:100px; line-height:100px">'
                                 + '<div style="width:150px; height:50px; color:red;">'
                                 + '<span name="typeName" value="' + serviceTypeCode + '" style="color:black">' + serviceTypeName + '</span>*</div>'
 
-                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" name="typeInput"  style="width:500px; height:50px; line-height:50px" required placeholder="입력해주세요."></div>'
+                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" name="typeInput"  style="width:550px; height:50px; line-height:50px" value="" required placeholder="입력해주세요."></div>'
                                 + '</div>'
                         }
                         if(mandatoryInput != 1) {
-                            str += '<div class="serviceType d-flex px-3 my-4" name="serviceType" id="serviceType" style="width:650px; height:100px; line-height:100px">'
-                                + '<div style="width:150px; height:50px; line-height:50px"><p name="typeName" value="' + serviceTypeCode + '">' + serviceTypeName + '</p></div>'
-                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" name="typeInput"  style="width:500px; height:50px; line-height:50px" placeholder="입력해주세요."></div>'
+                            str += '<div class="serviceType d-flex px-3 my-4" name="serviceType" id="serviceType" style="width:800px; height:100px; line-height:100px">'
+                                + '<div style="width:150px; height:50px;><span name="typeName" value="' + serviceTypeCode + '">' + serviceTypeName + '</span></div>'
+                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" name="typeInput"  style="width:550px; height:50px; line-height:50px" value="" placeholder="입력해주세요."></div>'
                                 + '</div>'
                         }
                         if(serviceTypeCode=null){
@@ -81,20 +80,6 @@ let serviceObject= {
                         }
                         ServiceType.innerHTML = str;
                     })
-                    var keyHeight=data.length*100;
-                    let svcKeywordArea = document.getElementById("svcKeywordArea");
-                    console.log("keyHeight : "+keyHeight);
-                    let svcKeywordArea2 = $("#svcKeyWordArea");
-
-                    //svcKeywordArea.style.height="'keyHeight*100'+px";
-                   // $("#svcKeywordArea").style.height="'keyHeight*100'+px";
-                  //  $("#svcKeywordArea").style.height='keyHeight+"px"';
-                  //   console.log("높이 : "+svcKeywordArea2.style.marginTop);
-                  //   console.log("높이 : "+svcKeywordArea.style.marginTop);
-
-                    $("#svcKeywordArea").css({
-                        marginTop : keyHeight+'px'
-                    });
             },
             error:function(error){
                 let serviceTypeDiv = document.getElementById("serviceTypeDiv");
