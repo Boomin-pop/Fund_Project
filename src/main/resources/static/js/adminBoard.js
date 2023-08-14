@@ -59,6 +59,3 @@ function pageMove(page){
 
     location.href="board?page=" + page + "&by=" + by + "&ud=" + ud + "&title=" + title + "&cid=" + category;
 }
-function pageMoveR(){
-    ;
-}

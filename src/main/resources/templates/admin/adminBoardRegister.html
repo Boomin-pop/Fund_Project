@@ -14,25 +14,25 @@
 
             </div>
             <div class="section">
-                <form action="/admin/board/insert" method="post">
+                <form name="board" action="/admin/board/insert" method="post" enctype="multipart/form-data">
                     <div style="display:flex">
                         <h4>게시글 쓰기</h4>
                         <input type="submit" class="btn-move" value="등록">
                     </div>
                     <div>
-                        <select id="cat" th:onchange="">
+                        <select id="cat" th:onchange="sectionList(this.value)">
                             <option value="0">카테고리</option>
                             <option th:each="cat : ${bclist}" th:value="${cat.boardCategoryId}" th:text="${cat.boardCategoryName}"></option>
                         </select>
-                        <select>
+                        <select id="sec-list" name="boardSectionId">
                             <option value="0">섹션</option>
                         </select>
                         <input type="text" placeholder="제목" name="boardTitle">
                     </div>
                     <textarea placeholder="내용" name="boardContent"></textarea>
-                    <input type="text" placeholder="이미지1" name="boardImg1">
-                    <input type="text" placeholder="이미지2" name="boardImg1">
-                    <input type="text" placeholder="이미지3" name="boardImg1">
+                    <input type="file" placeholder="이미지1" name="boardImg1">
+                    <input type="file" placeholder="이미지2" name="boardImg1">
+                    <input type="file" placeholder="이미지3" name="boardImg1">
                 </form>
             </div>
         </div>
@@ -42,14 +42,26 @@
 </body>
 </html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="/js/adminBoard.js"></script>
-<script src="/js/adminBoardAjax.js"></script>
 <script>
-window.onload = () => {
-    document.getElementById("title").value = "[[${title}]]";
-    document.getElementById("by").value = "[[${by}]]";
-    document.getElementById("ud").value = "[[${ud}]]";
-    document.getElementById("cat").value = "[[${cid}]]";
+function sectionList(cid){
+    $.ajax({
+        url: '/admin/board/section/list',
+        type: 'post',
+        data: JSON.stringify(cid),
+        contentType:'application/json; charset-utf-8',
+        success: function(data){
+            let boardSectionHtml = '';
+            data.forEach(row => {
+                let name = row.boardSectionName;
+                let id = row.boardSectionId;
+                boardSectionHtml += '<option value="' + id + '" >' + name + '</option>';
+            })
+            document.querySelector('#sec-list').innerHTML = boardSectionHtml;
+        },
+        error: function(){
+            console.log("section load error");
+        }
+    })
 }
 </script>
 </html>

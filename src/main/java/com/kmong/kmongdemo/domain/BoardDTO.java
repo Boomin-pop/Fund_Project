@@ -14,7 +14,7 @@ public class BoardDTO {
     private Timestamp boardUploadTime;
     private String boardTitle;
     private String boardContent;
-    private String boardImg1;
-    private String boardImg2;
-    private String boardImg3;
+    private UploadFile boardImg1;
+    private UploadFile boardImg2;
+    private UploadFile boardImg3;
 }

@@ -80,7 +80,7 @@ public class AdminBoardController {
     @GetMapping("/board/register")
     public String registBoard(Model model){
         List<BoardCategoryDTO> bclist = abservice.categoryList();
-        model.addAttribute("bcList", bclist);
+        model.addAttribute("bclist", bclist);
 
         return "admin/adminBoardRegister";
     }
