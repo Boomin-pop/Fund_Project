@@ -137,13 +137,38 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/logout.do")
+    @GetMapping("/logout")
     public String userLogout(HttpSession session){
         session.invalidate();// 세션 초기화
         return "redirect:/";
     }
 
+    @GetMapping("/idpwFind")
+    public String idpwFind(String find, Model m){
+        m.addAttribute("find", find);
 
+        return "/user/idpwFind";
+    }
+
+    @PostMapping("/findId")
+    @ResponseBody
+    public String findId(UserDTO dto){
+        System.out.println("dto.getName() = " + dto.getUserName());
+        System.out.println("dto.getTel() = " + dto.getUserTel());
+
+        String resultId= userService.findId(dto);
+        System.out.println("resultId = " + resultId);
+
+        return resultId;
+    }
+
+    @PostMapping("/findPw")
+    @ResponseBody
+    public int findPw(String uid, String uEmail){
+        int n = userService.findPw(uid, uEmail);
+        System.out.println("n = " + n);
+        return n;
+    }
 
 
 

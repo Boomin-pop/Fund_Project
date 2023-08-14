@@ -10,7 +10,7 @@ function updateProgressBarAndSubmitButton() {
     let h = inputChk($('#term').val());
     let sum = a + b + c + d + e + f + g + h;
     $('.progress-bar').css('width', sum + '%');
-    $('.progress-value').html(sum+'%');
+    $('.progress-value').html(sum + '%');
     sum == 100 ? $('#submit').prop('disabled', false) : $('#submit').prop('disabled', true);
 }
 
@@ -32,7 +32,7 @@ $('#requested').on('propertychange change paste input', function () {
     updateProgressBarAndSubmitButton();
 });
 $('#budget').on('propertychange change paste input', function () {
-    $('#budget-v').val(addCommas($('#budget').val().replace(/[^0-9]/g,"")));
+    $('#budget-v').val(addCommas($('#budget').val().replace(/[^0-9]/g, "")));
     updateProgressBarAndSubmitButton();
 });
 $('#wanted').on('propertychange change paste input', function () {
@@ -52,6 +52,7 @@ $('#term').on('propertychange change paste input', function () {
 function inputChk(val) {
     return val ? 12.5 : 0;
 }
+
 
 // 다음, 이전버튼
 function showNextStep(next) {
@@ -128,10 +129,21 @@ modal.querySelector('.btn-close').addEventListener('click', function (event) {
         if (!isEmptyForm()) {
             if (!confirm('변경 사항이 저장되지 않을 수 있습니다. 정말로 닫으시겠습니까?')) {
                 event.preventDefault(); // 모달을 닫지 않도록 기본 동작을 막습니다.
+            } else {
+                clearFormInputs();
             }
         }
     }
 });
+
+function clearFormInputs() {
+    // 입력 요소들의 값을 초기화합니다.
+    $('input[type="text"]').val('');
+    $('textarea').val('');
+    $('input[type="radio"]').prop('checked', false);
+    $('select').prop('selectedIndex', 0); // 혹은 원하는 선택 인덱스로 설정
+    // 추가로 다른 입력 요소들도 초기화할 수 있습니다.
+}
 
 // 폼 필드가 수정되었는지 확인하는 함수
 function formIsDirty() {
@@ -154,7 +166,7 @@ function isEmptyForm() {
 }
 
 // 현재 날짜로부터 3일 뒤부터 선택 가능
-$(document).ready(function() {
+$(document).ready(function () {
     // 현재 날짜 구하기
     var currentDate = new Date();
 
@@ -169,6 +181,42 @@ $(document).ready(function() {
     $('#wanted').attr('min', formattedFiveDaysLater);
     $('#close').attr('min', formattedFiveDaysLater);
 });
+
+$('#requested').on('click', () => $('#tip').css('display', 'block'));
+$('#requested').focusout(() => $('#tip').css('display', 'none'));
+
+$(document).ready(function () {
+    $('#title').on('input', function () {
+        const inputVal = $(this).val();
+        const charCnt = inputVal.length;
+        if (charCnt < 8) {
+            $('#title-chk').css('display', 'block');
+            $('#title-chk').text('8글자 이상 입력하세요').css('color', 'red');
+        } else {
+            $('#title-chk').css('display', 'none');
+        }
+    });
+    $('#requested').on('input', function () {
+        const inputVal = $(this).val();
+        const charCnt = inputVal.length;
+        if (charCnt < 8) {
+            $('#requested-chk').css('display', 'block');
+            $('#requested-chk').text('20글자 이상 입력하세요').css('color', 'red');
+        } else {
+            $('#requested-chk').css('display', 'none');
+        }
+    });
+    $('#term').on('input', function () {
+        const inputVal = $(this).val();
+        if (inputVal < 1 || inputVal > 9999) {
+            $('#term-chk').css('display', 'block');
+            $('#term-chk').text('0 ~ 9999 사이로 입력하세요').css('color', 'red');
+        } else {
+            $('#term-chk').css('display', 'none');
+        }
+    });
+});
+
 
 /*  리펙토링 하기 전 코드
     $('#category').on('propertychange change paste input', function () {

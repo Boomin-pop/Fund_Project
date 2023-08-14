@@ -20,4 +20,5 @@ public class ProjectRequestDTO {
     private String projectRequestClose;
     private String projectRequestTerm;
     private Timestamp projectRequestUpload;
+    private int projectRequestApprove;
 }

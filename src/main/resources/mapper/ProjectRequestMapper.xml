@@ -13,4 +13,7 @@
         VALUES
         (#{category},#{title},#{work},#{requested},#{budget},#{wanted},#{close},#{term},#{id})
     </insert>
+    <delete id="delete">
+        DELETE FROM projectRequest WHERE projectRequestNo = #{no}
+    </delete>
 </mapper>

@@ -18,4 +18,9 @@ public interface UserService {
     UserDTO nicknameCheck(String userNickname);
 
     boolean userLogin(UserDTO dto, HttpServletRequest req);
+
+    String findId(UserDTO dto);
+
+    int findPw(String uid, String uEmail);
+
 }

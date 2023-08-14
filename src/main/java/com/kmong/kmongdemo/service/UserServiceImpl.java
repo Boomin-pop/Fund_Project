@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -71,5 +75,40 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public String findId(UserDTO dto) {
+        String resultId= umapper.findId(dto);
+
+        return resultId;
+    }
+
+    @Override
+    public int findPw(String uid, String uEmail) {
+        // 임시비밀번호
+        String tempPw = UUID.randomUUID().toString().substring(0,6);
+        MimeMessage mail = mailsender.createMimeMessage();
+
+        String mailContents = "<h3>임시 비밀번호 발급</h3></br>"
+                +"<h2>"+tempPw+"</h2>"
+                +"<p>로그인 후 마이페이지에서 비밀번호를 변경해주면 됩니다.</p>";
+
+        try {
+            mail.setSubject("크몽 [임시 비밀번호]", "utf-8");
+            mail.setText(mailContents, "utf-8", "html");
+
+            // 상대방 메일 셋팅
+            mail.addRecipient(Message.RecipientType.TO, new InternetAddress(uEmail));
+
+            mailsender.send(mail);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("tempPw = " + tempPw);
+        int n = umapper.findPw(uid, uEmail, tempPw);
+
+        return n;
     }
 }
