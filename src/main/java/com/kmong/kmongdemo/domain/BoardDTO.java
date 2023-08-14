@@ -17,6 +17,4 @@ public class BoardDTO {
     private UploadFile boardImg1;
     private UploadFile boardImg2;
     private UploadFile boardImg3;
-
-
 }
