@@ -66,6 +66,22 @@ nav div a:hover{
     margin: 10px;
     display: flex;
 }
+.searchbar .searchbox{
+    display: flex;
+    margin: auto;
+}
+.searchbar .searchbox .search{
+    height: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.searchbar form{
+    margin: 0 auto;
+}
+.searchbar form button{
+    border: 1px solid #ddd;
+    color: black;
+}
 .container .main{
     width:100%;
     display: flex;

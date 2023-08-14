@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/adminBoard.css" rel="stylesheet"/>
+
+<!-- 헤더 -->
+<th:block th:replace="inc/adminHeader :: adHeaderFragment"></th:block>
+<div class="body">
+    <div class="container">
+        <div class="searchbar">
+            <h2>게시판 관리</h2>
+        </div>
+        <div class="main">
+            <div class="aside">
+
+            </div>
+            <div class="section">
+                <form name="board" action="/admin/board/insert" method="post" enctype="multipart/form-data">
+                    <div style="display:flex">
+                        <h4>게시글 쓰기</h4>
+                        <input type="submit" class="btn-move" value="등록">
+                    </div>
+                    <div>
+                        <select id="cat" th:onchange="sectionList(this.value)">
+                            <option value="0">카테고리</option>
+                            <option th:each="cat : ${bclist}" th:value="${cat.boardCategoryId}" th:text="${cat.boardCategoryName}"></option>
+                        </select>
+                        <select id="sec-list" name="boardSectionId">
+                            <option value="0">섹션</option>
+                        </select>
+                        <input type="text" placeholder="제목" name="boardTitle">
+                    </div>
+                    <textarea placeholder="내용" name="boardContent"></textarea>
+                    <input type="file" placeholder="이미지1" name="boardImg1">
+                    <input type="file" placeholder="이미지2" name="boardImg1">
+                    <input type="file" placeholder="이미지3" name="boardImg1">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="inc/adminFooter :: adFooterFragment"></th:block>
+</body>
+</html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+function sectionList(cid){
+    $.ajax({
+        url: '/admin/board/section/list',
+        type: 'post',
+        data: JSON.stringify(cid),
+        contentType:'application/json; charset-utf-8',
+        success: function(data){
+            let boardSectionHtml = '';
+            data.forEach(row => {
+                let name = row.boardSectionName;
+                let id = row.boardSectionId;
+                boardSectionHtml += '<option value="' + id + '" >' + name + '</option>';
+            })
+            document.querySelector('#sec-list').innerHTML = boardSectionHtml;
+        },
+        error: function(){
+            console.log("section load error");
+        }
+    })
+}
+</script>
+</html>

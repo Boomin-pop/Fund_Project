@@ -1,9 +1,6 @@
 package com.kmong.kmongdemo.mapper;
 
-import com.kmong.kmongdemo.domain.AdminCategoryDTO;
-import com.kmong.kmongdemo.domain.AdminServiceTypeDTO;
-import com.kmong.kmongdemo.domain.JobDTO;
-import com.kmong.kmongdemo.domain.TransactionLogDTO;
+import com.kmong.kmongdemo.domain.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,4 +10,6 @@ public interface AdminLogMapper {
     int transactionCount();
     List<TransactionLogDTO> transactionList(int startIndex, int pageSize, String query, String id);
 
+    int signCount();
+    List<SignLogDTO> signList(int startIndex, int pageSize, String query, String id);
 }

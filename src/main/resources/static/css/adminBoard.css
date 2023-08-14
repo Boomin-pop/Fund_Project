@@ -1,0 +1,110 @@
+.searchbar{}
+
+.aside{}
+.aside .category{
+    margin: 4px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    border: 2px dashed #ababab;
+}
+.aside .cat-head{
+    display: flex;
+}
+.aside .cat-head .cat-name{
+    width: 50%;
+}
+.aside .cat-head .cat-name h5{
+    margin: 20px;
+}
+.aside .insert-bar{
+    margin: 5px;
+    background-color: #fefefe;
+    border: 2px solid #333333;
+
+    dsiplay: flex;
+}
+
+.section{}
+.section .table{
+    width: 80%;
+    margin: auto;
+}
+.section .table th{
+    margin:auto;
+}
+.section .table td{
+     text-align: center;
+}
+
+.section .paging{
+    margin: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+.section .paging .edge{
+    margin: auto 7px;
+
+    height: 2em;
+}
+.section .paging .move{
+     margin: auto 5px;
+
+     height: 2em;
+}
+.section .paging .btn{
+     margin: auto 0;
+
+     height: 2em;
+}
+
+.btn-view{
+    height: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+
+    background-color: #23cd23;
+    color: #ffffff;
+
+    border-radius: 10px;
+}
+.btn-delete{
+     height: 2em;
+     margin-top: auto;
+     margin-bottom: auto;
+
+     background-color: #de2323;
+     color: #ffffff;
+
+     border-radius: 10px;
+}
+.btn-add{
+     height: 2em;
+     margin-top: auto;
+     margin-bottom: auto;
+
+     background-color: #4343de;
+     color: #ffffff;
+
+     border-radius: 10px;
+}
+.btn-move{
+     height: 2em;
+     margin-top: auto;
+     margin-bottom: auto;
+     margin-left: auto;
+     margin-rigth: 30px;
+
+     background-color: #cbab23;
+     color: #ffffff;
+
+     border-radius: 10px;
+}
+
+.mrz{
+    margin-right: 0;
+}
+.mla{
+    margin-left: auto;
+}
