@@ -13,9 +13,11 @@
         border-top : 2px solid rgb(228, 229, 237);
         height:70px;
         position: fixed;
+        margin-top : 50px;
+        justify-content: center;
 
     }
-    .svcNextBtn{
+    .svcNextBtn, .serviceTempInput{
         margin-top:15px;
         background-color: white;
         border:1px solid rgb(228, 229, 237);
@@ -25,12 +27,12 @@
 <!--  바디  -->
 <div class="totalwrap">
     <!--    <aside th:replace="/inc/leftServiceInputNav :: asideFragment"></aside>-->
-    <div class="middlewrap d-flex m-auto w-90 h-90">
-    <aside class="side-container border-end" style="width:200px; margin-left:15%;">
+    <div class="middlewrap d-flex justify-content-center w-90 h-90">
+    <aside class="side-container border-end" style="width:200px;">
 
         <a href="#" id="btn-one" name="aside-btn">
             <div class="d-flex mt-5">
-                <table class="me-5">
+                <table>
                     <tr>
                         <td id="num1" style="border: 1px solid black; width:30px; height:30px; text-align:center;">1</td>
                         <td>ㅤ기본정보</td>
@@ -41,7 +43,7 @@
 
         <a href="#" id="btn-two" name="aside-btn">
             <div class="d-flex mt-4">
-                <table class="me-5">
+                <table>
                     <tr>
                         <td id="num2"  style="border: 1px solid black; width:30px; height:30px; text-align:center;">2</td>
                         <td>ㅤ가격설정</td>
@@ -52,7 +54,7 @@
 
         <a href="#" id="btn-three" name="aside-btn">
             <div class="d-flex mt-4">
-                <table class="me-5">
+                <table>
                     <tr>
                         <td id="num3" style="border: 1px solid black; width:30px; height:30px; text-align:center;">3</td>
                         <td>ㅤ서비스 설명</td>
@@ -63,7 +65,7 @@
 
         <a href="#" id="btn-four" name="aside-btn">
             <div class="d-flex mt-4">
-                <table class="me-5">
+                <table>
                     <tr>
                         <td id="num4" style="border: 1px solid black; width:30px; height:30px; text-align:center;">4</td>
                         <td>ㅤ이미지</td>
@@ -74,7 +76,7 @@
 
         <a href="#" id="btn-five" name="aside-btn">
             <div class="d-flex mt-4">
-                <table class="me-5">
+                <table>
                     <tr>
                         <td id="num5" style="border: 1px solid black; width:30px; height:30px; text-align:center;">5</td>
                         <td>ㅤ요청사항</td>
@@ -86,34 +88,35 @@
 
     <div class="contents-area d-block">
         <form class="form-join" method="post" enctype="multipart/form-data">
-            <div class="firstInput" id="firstInput" style="display:block; width:900px">
+            <div class="firstInput" id="firstInput" style="display:block; width:900px; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
                 <!--             <th:block layout:fragment="bodyPage1"></th:block>-->
                 <!--             <section th:replace="/service/serviceInput :: bodyPage1"></section>-->
             </div>
 
-            <div class="secondInput" id="secondInput" style="display:none; width:900px">
+            <div class="secondInput" id="secondInput" style="display:none; width:900px; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputTwo :: bodyPage2"></th:block>
             </div>
 
-            <div class="secondInput" id="thirdInput" style="display:none; width:900px">
+            <div class="secondInput" id="thirdInput" style="display:none; width:900px; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputThree :: bodyPage3"></th:block>
             </div>
-            <div class="secondInput" id="forthInput" style="display:none; width:900px">
+            <div class="secondInput" id="forthInput" style="display:none; width:900px; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputFour :: bodyPage4"></th:block>
             </div>
-            <div class="secondInput" id="fifthInput" style="display:none; width:900px">
+            <div class="secondInput" id="fifthInput" style="display:none; width:900px; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputFive :: bodyPage5"></th:block>
             </div>
         </form>
     </div>  <!--contents-area-->
+    </div> <!--middle wrap-->
         <footer class="ServiceInputFooterArea container-fluid sticky-bottom">
-            <div class="emptyAside" style="border:3px solid red; width:200px; margin-left:15%"></div>
+            <div class="emptyAside" style="width:200px;"></div>
             <div style="padding-left:850px">
-                <button class="svcNextBtn">다음</button>
+                <button class="serviceTempInput rounded">저장</button>
+                <button class="svcNextBtn rounded">다음</button>
             </div>
         </footer>
-    </div> <!--middle wrap-->
 </div><!--total wrap-->
 
 

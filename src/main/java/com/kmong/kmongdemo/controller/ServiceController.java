@@ -34,7 +34,7 @@ public class ServiceController {
     }
 
     @PostMapping("/chkedServiceType")
-    public  @ResponseBody List<ServiceTypeDTO> chkedServiceType(@RequestBody CategoryDTO cDto){
+    public  @ResponseBody List<ServiceTypeDTO> chkedServiceType(@RequestBody CategoryDTO cDto, Model model){
 
         String code = cDto.getServiceTopCatCode();
           System.out.println("code = " + code);

@@ -5,25 +5,30 @@
 
 <!--<th:block layout:fragment="bodyPage1">-->
 <th:block th:fragment="bodyPage1">
-<div class="container shadow-sm w-50% p-5 rounded mt-4">
-
-        <div class="form-group">
+    <style>
+        /*#serviceTitle{width: 700px;}*/
+    </style>
+    <div class="container shadow-sm p-5 rounded mt-4 d-block" style="width:inherit">
+        <div class="form-group d-flex border border-secondary rounded pt-4" style="width:800px; height:75px;">
+        <div><p style="width: 150px; height:25px; line-height: 25px; text-align:center">제목</p></div>
 <!--          <div class="firstPage">  -->
-            <div><p><b>제목</b></p></div>
+
             <div>
-                <input type="text" class="form-control" name="serviceTitle" id="serviceTitle"
-                       placeholder="서비스를 잘 드러낼 수 있는 제목을 입력해 주세요." required>
+                <input type="text" class="form-control" name="serviceTitle" id="serviceTitle" style="width:550px; height:25px; border:0;"  onchange="keyCount(this)"
+                       placeholder="입력하세요" required>
 <!--                <input type="hidden" name="titleCheck" id="titleCheck" value="false">-->
             </div>
+<!--       <div class="charCounter" name="charCounter" style="height:50px; line-height:35px;"> </div>-->
+        <div class="charCounter" name="charCounter" id="charCounter" style="height:25px; line-height:25px;" > 0/30</div>
+        </div>
             <div id="titleAlert" style="display:none;">
                 <p style="color:red;"><b>최소 10글자 이상, 30이하로 입력해주세요.</b></p>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div><p><b>1차 카테고리</b></p></div>
+        <div class="form-group d-flex border border-secondary rounded pt-4" style="width:800px; height:75px;">
+            <div><p style="width: 200px; height:25px; line-height: 25px;  text-align:center">카테고리</p></div>
             <div>
-                <select class="serviceTopCat" name="serviceTopCat" id="serviceTopCat">
+                <select class="serviceTopCat" name="serviceTopCat" id="serviceTopCat" style="width:550px; height:25px;">
                     <option value=0>- 선택해 주세요 -</option>
                     <option value="" disabled>----------------------</option>
                     <th:block th:each="topCat : ${topCatList}">
@@ -31,44 +36,61 @@
                     </th:block>
                 </select>
             </div>
+
 <!--            <input type="hidden" name="topCatCheck" id="topCatCheck" value="false">-->
             <div id="TopCatAlert" style="display:none;">
                 <p style="color:red;"><b>상위 카테고리를 선택해 주세요.</b></p>
             </div>
         </div>
+        <div class="d-block mb-5 pb-5">
+             <div class="form-group" id="serviceTypeDiv" style="display:none; width:800px; height:75px;">
+                 이거 보이나 시작점
+                  <div class="d-flex">
+<!--            <div><p style="width: 150px; height:25px; line-height: 25px; margin-top : 60px; text-align:center">카테고리</p></div>-->
 
-        <div class="form-group" id="serviceTypeDiv" style="display:none;">
-            <p><b>서비스 타입</b></p>
-            <div class="serviceType" name="serviceType" id="serviceType">
-                <div> <p name="typeName"></p></div>
-        <input type="text" name="typeInput" style="width:300px;"/>
-</div>
-</div>
-<div id="SrvTypeAlert" style="display:none;">
-    <p style="color:red;"><b>필수 서비스 타입을 설정해주세요</b></p>
-</div>
-<div class="mt-5">
-    <span>검색 키워드ㅤㅤㅤ</span><input type="text" name="keywordInput" style="width:500px; line-height:50px; border:0" placeholder="키워드 입력"/><span>0/5</span><button>추가</button>
-</div>
-<a>다음</a>
-<button type="submit" id="btn-save" class="btn btn-success btn-lg">저장</button>
-<button type="submit" id="btn-next" class="btn btn-success btn-lg">다음</button>
+                     <div class="serviceType" name="serviceType" id="serviceType">
+                          <div> <p name="typeName"></p></div>
+                          <input type="text" name="typeInput" style="width:300px;"/>
+                     </div>
+                 </div>
+                 <div class="mt-5 mb-5 pb-5 d-flex svcKeywordArea/">
+                     <span>검색 키워드</span><input type="text" name="keywordInput" style="width:500px; line-height:50px; border:0" placeholder="키워드 입력"/><span>0/5</span><button>추가</button>
+                 </div>
+                 이거 보이나 끝점
+             </div>
+        </div>
 
+    </div>
+    <div id="SrvTypeAlert" style="display:none;">
+        <p style="color:red;"><b>필수 서비스 타입을 설정해주세요</b></p>
+    </div>
+
+    </div>
 </div>
-</div>
+    </div>
 <script src="/js/service.js"></script>
 <script>
     let titleChk = "";
     let topCatChk = "";
     let srvTypeChk = "";
+    // let charCounter=$("div[name=charCounter]");
+    //let serviceTitle = $("#serviceTitle");
+    function keyCount(keyNum){
+        console.log("keynum : "+keyNum.value);
+        console.log(document.getElementById("charCounter").textContent);
+        document.getElementById("charCounter").textContent="  "+keyNum.value.length+"/30";
+        console.log("servicetitle : "+document.getElementById("serviceTitle").value.length);
+
+    }
 
     $(document).ready(function (){
         let serviceTypeArea = $(".serviceType");
-        let serviceTitle = $("#serviceTitle");
+        // let serviceTitle = $("#serviceTitle");
         let titleAlert = $("#titleAlert");
         let btnSave = $("#btn-save");
         let btnNext = $("#btn-next");
         let serviceTopCat =$("select[name=serviceTopCat]");
+        let charCounter=$("div[name=charCounter]");
 
         // let typeInputdiv = $("div[name=typeInputdiv]");
         // let typeInput =$("input[name=typeInput]:required");
@@ -83,14 +105,21 @@
         // console.log(typeInput);
         //
         // console.log(typeInput.length);
+        // serviceTitle.on("keyup", function (){
+        //     charCounter.innerText=' '+serviceTitle.val().length+'/30';
+        //     console.log("charCounter: "+charCounter.innerText);
+        //     console.log("serviceTitle : "+serviceTitle.val().length);
+        // });
 
-        serviceTitle.on("change", function(){
-            if (serviceTitle.val().length < 30 || serviceTitle.val().length > 10) {
-                document.getElementById("titleAlert").style.display='none';
-                titleChk = "true";
-                console.log("제목 작성여부 : "+titleChk);
-            }
-            });
+
+        // serviceTitle.on("change", function(){
+        //
+        //     if (serviceTitle.val().length < 30 || serviceTitle.val().length > 10) {
+        //         document.getElementById("titleAlert").style.display='none';
+        //         titleChk = "true";
+        //         console.log("제목 작성여부 : "+titleChk);
+        //     }
+        //     });
 
       //  카테고리 선택 유효성 검사
         serviceTopCat.on("change", function (){
@@ -101,6 +130,8 @@
             console.log("topcatsel : " + topCatSel.val());
             if(topCatSel.val().trim()!="" || topCatSel.val().length>3){
                 document.getElementById("TopCatAlert").style.display='none';
+                document.getElementById("serviceTypeDiv").style.display="block";
+
                 topCatChk="true";
                 console.log("카테고리 선택 여부 : "+topCatChk);
             }
