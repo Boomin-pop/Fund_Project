@@ -1,20 +1,20 @@
 //update
 function update(){
     let chk = [];
-    $( "input[name = 'user']:checked").each(function (){
-        chk.push({userId:$(this).val()});
+    $( "input[name = 'No']:checked").each(function (){
+        chk.push({projectRequestNo:$(this).val()});
         console.log(chk)
     })
 
     $.ajax({
-        url: "/admin/user/delete",
+        url: "/admin/project/delete",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(chk),
         success : function (result){
             console.log(result);
             alert("업데이트 완료");
-            location.replace("/admin/user");
+            location.replace("/admin/project");
         },
         error: function (error){
             alert(error)
@@ -26,20 +26,20 @@ function update(){
 //cancle
 function cancle(){
     let chk = [];
-    $( "input[name = 'user']:checked").each(function (){
-        chk.push({userId:$(this).val()});
+    $( "input[name = 'No']:checked").each(function (){
+        chk.push({projectRequestNo:$(this).val()});
         console.log(chk)
     })
 
     $.ajax({
-        url: "/admin/user/cancle",
+        url: "/admin/project/cancle",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(chk),
         success : function (result){
             console.log(result);
             alert("업데이트 취소 완료");
-            location.replace("/admin/user");
+            location.replace("/admin/project");
         },
         error: function (error){
             alert(error)
@@ -53,24 +53,26 @@ function admission(){
 
 // modal1
 let modal1 = document.getElementById("Modal1");
-// let userId = document.getElementById("userId").val();
 
-function btn1(userId) {
+function btn1(projectRequestNo) {
     $.ajax({
-        url: "/admin/user/"+userId,
+        url: "/admin/project/"+projectRequestNo,
         type: "get",
         success : function (data) {
             modal1.style.display = "block";
             console.log(data);
-            document.getElementById("name1").value = data.userName;
-            document.getElementById("id1").value = data.userId;
-            document.getElementById("pw1").value = data.userPassword;
-            document.getElementById("nick1").value = data.userNickname;
-            document.getElementById("email1").value = data.userEmail;
-            // document.getElementById("bir").value = data.userbir;
-            document.getElementById("tel1").value = data.userTel;
-            document.getElementById("job1").value = data.userJobId;
-            // document.getElementById("reg").value = data.userRegdate;
+            document.getElementById("no1").textContent = data.projectRequestNo;
+            document.getElementById("category1").value = data.projectRequestCategory;
+            document.getElementById("projectName1").value = data.projectRequestTitle;
+            document.getElementById("work1").value = data.projectRequestWork;
+            document.getElementById("request1").value = data.projectRequestRequest;
+            document.getElementById("budget1").value = data.projectRequestBudget;
+            // document.getElementById("wanted1").value = data.;
+            // document.getElementById("close1").value = data.;
+            document.getElementById("requestTerm1").value = data.projectRequestTerm;
+            document.getElementById("userId1").value = data.userId;
+            document.getElementById("upload1").textContent = data.projectRequestUpload;
+            document.getElementById("approve1").textContent = data.projectRequestApprove;
         },
         error: function (error) {
             alert(error);
@@ -81,27 +83,26 @@ function span1(){
     modal1.style.display = "none";
 }
 function modify1(){
-    let userId = document.getElementById("id1").value;
-    let name1 = document.getElementById("name1").value;
-    let pw1 = document.getElementById("pw1").value;
-    let nick1 = document.getElementById("nick1").value;
-    let email1 = document.getElementById("email1").value;
-    // let bir1 = document.getElementById("bir1").value;
-    let tel1 = document.getElementById("tel1").value;
-    let job1 = document.getElementById("job1").value;
-    // let reg1 = document.getElementById("reg1").value;
-
+    let no1 = document.getElementById("no1").value;
+    let category1 = document.getElementById("category1").value;
+    let projectName1 = document.getElementById("projectName1").value;
+    let work1 = document.getElementById("work1").value;
+    let request1 = document.getElementById("request1").value;
+    let budget1 = document.getElementById("budget1").value;
+    // let wanted1 = document.getElementById("wanted1").value;
+    // let close1 = document.getElementById("close1").value;
+    let requestTerm1 = document.getElementById("requestTerm1").value;
     $.ajax({
-        url: "/admin/user/"+ userId,
+        url: "/admin/project/"+ no1,
         type: "put",
         contentType: "application/json; charset=utf-8",
         dataType: "text",
-        data: JSON.stringify({userId: userId, userName: name1, userPassword:pw1, userNickname:nick1, userEmail:email1, userTel:tel1, userJobId:job1}),
+        data: JSON.stringify({projectRequestCategory: category1, projectRequestTitle: projectName1, projectRequestWork:work1, projectRequestRequest:request1, projectRequestBudget:budget1, projectRequestTerm:requestTerm1}),
         success : function (data){
             modal1.style.display = "none";
             console.log(data);
             alert("수정완료");
-            location.replace("/admin/user");
+            location.replace("/admin/project");
         },
         error: function (error){
             alert(error)
@@ -112,22 +113,25 @@ function modify1(){
 
 // modal2
 let modal2 = document.getElementById("Modal2");
-function btn2(userId){
+function btn2(projectRequestNo){
     $.ajax({
-        url: "/admin/user/"+userId,
+        url: "/admin/project/"+projectRequestNo,
         type: "get",
         success : function (data) {
             modal2.style.display = "block";
             console.log(data);
-            document.getElementById("name2").textContent = data.userName;
-            document.getElementById("id2").textContent = data.userId;
-            document.getElementById("pw2").textContent = data.userPassword;
-            document.getElementById("nick2").textContent = data.userNickname;
-            document.getElementById("email2").textContent = data.userEmail;
-            // document.getElementById("bir").textContent = data.userbir;
-            document.getElementById("tel2").textContent = data.userTel;
-            document.getElementById("job2").textContent = data.userJobId;
-            // document.getElementById("reg").value = data.userRegdate;
+            document.getElementById("no2").textContent = data.projectRequestNo;
+            document.getElementById("category2").textContent = data.projectRequestCategory;
+            document.getElementById("projectName2").textContent = data.projectRequestTitle;
+            document.getElementById("work2").textContent = data.projectRequestWork;
+            document.getElementById("request2").textContent = data.projectRequestRequest;
+            document.getElementById("budget2").textContent = data.projectRequestBudget;
+            document.getElementById("wanted2").textContent = data.projectRequestWanted;
+            document.getElementById("close2").textContent = data.projectRequestClose;
+            document.getElementById("requestTerm2").textContent = data.projectRequestTerm;
+            document.getElementById("userId2").textContent = data.userId;
+            document.getElementById("upload2").textContent = data.projectRequestUpload;
+            document.getElementById("approve2").textContent = data.projectRequestApprove;
         },
         error: function (error) {
             alert(error);
@@ -140,16 +144,17 @@ function span2(){
 
 //modal3
 let modal3=document.getElementById("Modal3");
-function btn3(userId){
+function btn3(projectRequestNo){
     $.ajax({
-        url: "/admin/user/"+userId,
+        url: "/admin/project/"+projectRequestNo,
         type: "get",
         success : function (data){
             modal3.style.display="block";
             console.log(data);
-            document.getElementById("name3").textContent=data.userName;
-            document.getElementById("id3").textContent=data.userId;
-            document.getElementById("delete").value=data.userDelete;
+            document.getElementById("no3").textContent=data.projectRequestNo;
+            document.getElementById("userId3").textContent=data.userId;
+            document.getElementById("projectName3").textContent=data.projectRequestTitle;
+            document.getElementById("delete").value=data.projectDelete;
         },
         error: function (error){
             alert(error);
@@ -161,19 +166,19 @@ function span3(){
 }
 function modify2(){
     modal3.style.display = "none";
-    let userId = document.getElementById("id3").textContent;
+    let no = document.getElementById("no3").textContent;
     let del = document.getElementById("delete").value;
     $.ajax({
-        url: "/admin/user/"+ userId,
+        url: "/admin/project/"+ no,
         type: "post",
         contentType: "application/json; charset=utf-8",
         dataType: "text",
-        data: JSON.stringify({userId: userId, userDelete: del}),
+        data: JSON.stringify({userId: no, userDelete: del}),
         success : function (data){
             modal1.style.display = "none";
             console.log(data);
             alert("삭제 실행");
-            location.replace("/admin/user");
+            location.replace("/admin/project");
         },
         error: function (error){
             alert(error)
