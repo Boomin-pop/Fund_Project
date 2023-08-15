@@ -1,4 +1,4 @@
-function login(){
+    function login(){
     var userId = $("#userId").val();
     var userPassword = $("#userPassword").val();
 
@@ -12,5 +12,5 @@ function login(){
         userPassword.select();
         return false;
     }
-        alert("로그인에 성공했습니다.")
+
 }

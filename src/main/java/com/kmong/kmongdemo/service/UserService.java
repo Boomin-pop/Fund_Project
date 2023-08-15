@@ -21,6 +21,10 @@ public interface UserService {
 
     UserDTO userInfo(UserDTO dto);
 
+    void userRemove(UserDTO dto);
+
+    JobDTO getJobInfo(int jobId);
+
     int userModify(UserDTO dto);
 
     String findId(UserDTO dto);

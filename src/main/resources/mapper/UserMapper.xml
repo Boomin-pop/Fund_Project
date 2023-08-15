@@ -46,17 +46,19 @@
 
     <update id="updatePw">
         UPDATE user SET userPassword=#{userPassword} WHERE userId=#{userId}
-<!--        UPDATE user SET userPassword=#{pw} WHERE userId=#{userId}-->
+        <!--        UPDATE user SET userPassword=#{pw} WHERE userId=#{userId}-->
     </update>
+
+    <delete id="userDelete">
+        DELETE FROM user WHERE userId = #{userId}
+    </delete>
 
     <select id="userInfo" resultType="userDTO">
         SELECT * FROM user WHERE userId = #{userId}
     </select>
 
     <update id="userUpdate">
-        UPDATE user SET userId=#{userId}, userPassword=#{userPassword},
-        userName=#{userName}, userNickname=#{userNickname},
-        userEmail=#{userEmail},userTel=#{userTel},userJobId=#{userJobId}
+        UPDATE user SET userId=#{userId}, userEmail=#{userEmail},userTel=#{userTel},userJobId=#{userJobId}
         WHERE userId=#{userId}
     </update>
 

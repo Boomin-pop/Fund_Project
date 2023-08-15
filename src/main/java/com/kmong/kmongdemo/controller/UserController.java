@@ -2,6 +2,7 @@ package com.kmong.kmongdemo.controller;
 
 import com.kmong.kmongdemo.domain.JobDTO;
 import com.kmong.kmongdemo.domain.UserDTO;
+import com.kmong.kmongdemo.service.JobService;
 import com.kmong.kmongdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,11 +28,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JobService jobService;
+
     @GetMapping("/joinMethod")
     public String userJoin() {
 
-    return "/user/userJoinMethod";
-}
+        return "/user/userJoinMethod";
+    }
 
     @GetMapping("/joinChoice")
     public String userJoin2(){
@@ -170,26 +174,58 @@ public class UserController {
         return n;
     }
 
-    @GetMapping("/myProfile")
-    public String myProfile(){
-        return "user/myProfile";
-    }
-    @RequestMapping("/userInfo")
+    @GetMapping("/userInfo")
     public String userInfo(HttpSession session, Model m) {
-        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
-        m.addAttribute("userInfo", userInfo);
-        System.out.println(userInfo);
+        UserDTO userInfo = (UserDTO) session.getAttribute("loginDto");
 
+        // 유저의 직업 정보 가져오기
+        JobDTO jobInfo = jobService.getJobInfo(userInfo.getUserJobId());
+
+        List<JobDTO> jobList = userService.jobList();
+        m.addAttribute("jobList", jobList);
+        // 유저 정보에 직업 정보 설정
+        userInfo.setJobInfo(jobInfo);
+
+        m.addAttribute("userInfo", userInfo);
+
+        System.out.println("userInfo : " + userInfo);
 
         return "user/myProfile";
     }
 
     @RequestMapping("/userUpdate")
-    public String userUpdate(UserDTO dto) {
+    public String userUpdate(HttpSession session, UserDTO dto) {
         userService.userModify(dto);
 
-        return "redirect:/user/myProfile";
+        UserDTO userInfo = (UserDTO) session.getAttribute("loginDto");
+        session.setAttribute("loginDto", dto);
+
+        System.out.println("dto = " + dto);
+//        return "redirect:/";
+        return "/user/myProfile";
     }
+
+    @GetMapping("/userUnregister")
+    public String userUnregister(HttpSession session, Model m){
+        UserDTO userInfo = (UserDTO) session.getAttribute("loginDto");
+
+        m.addAttribute("userInfo", userInfo);
+
+        System.out.println("userInfo = " + userInfo);
+
+        return "user/userDelete";
+    }
+
+    @RequestMapping("/userDelete")
+    public String userDelete(HttpSession session, UserDTO dto) {
+        UserDTO userInfo = (UserDTO) session.getAttribute("loginDto");
+        userService.userRemove(dto);
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
 
     @GetMapping("/pwChange")
     public String pwChange(HttpSession session, Model m) {

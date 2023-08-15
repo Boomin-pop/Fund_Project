@@ -25,8 +25,9 @@
       <hr style="margin: 0; border: none; background-color: rgb(0 0 0 / 12%);
                 background-color: #303441; height: 2px;  margin-top: 20px; margin-bottom: 20px;">
 
-      <a href="/user/myProfile" class="side">나의 정보</a>
-      <a href="#" class="side" style="background-color:#eee">비밀번호 설정</a>
+      <a th:href="@{/user/userInfo}" class="side">나의 정보</a>
+      <a th:href="@{/user/pwChange}" class="side" style="background-color:#eee">비밀번호 설정</a>
+      <a th:href="@{/user/userUnregister}" class="side">회원탈퇴</a>
     </aside>
     <div class="content" style="margin-left: 24px; flex: 1;">
       <h1>비밀번호 변경</h1>
@@ -36,7 +37,7 @@
         <div style="display:none;">
           <th:block th:each="user : ${loginInfo}">
 
-          <input type="text" id="userId" th:value="${user.userId}">
+            <input type="text" id="userId" th:value="${user.userId}">
 
           </th:block>
 

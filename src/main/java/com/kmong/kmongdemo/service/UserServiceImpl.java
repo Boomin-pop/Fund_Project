@@ -79,8 +79,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO userInfo(UserDTO dto) {
+    public UserDTO userInfo(UserDTO dto){
         return umapper.userInfo(dto);
+    }
+
+    @Override
+    public void userRemove(UserDTO dto) {
+        umapper.userDelete(dto);
+    }
+
+    @Override
+    public JobDTO getJobInfo(int jobId) {
+        return jmapper.jobInfo(jobId);
     }
 
     @Override
