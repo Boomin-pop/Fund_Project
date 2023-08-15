@@ -1,13 +1,13 @@
 //update
-function update(){
+function update1(){
     let chk = [];
-    $( "input[name = 'No']:checked").each(function (){
+    $( "input[name = 'no1']:checked").each(function (){
         chk.push({projectRequestNo:$(this).val()});
         console.log(chk)
     })
 
     $.ajax({
-        url: "/admin/project/delete",
+        url: "/admin/project/delete1",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(chk),
@@ -22,17 +22,61 @@ function update(){
     });
 }
 
-
-//cancle
-function cancle(){
+function update2(){
     let chk = [];
-    $( "input[name = 'No']:checked").each(function (){
+    $( "input[name = 'no2']:checked").each(function (){
         chk.push({projectRequestNo:$(this).val()});
         console.log(chk)
     })
 
     $.ajax({
-        url: "/admin/project/cancle",
+        url: "/admin/project/delete2",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(chk),
+        success : function (result){
+            console.log(result);
+            alert("업데이트 완료");
+            location.replace("/admin/project");
+        },
+        error: function (error){
+            alert(error)
+        }
+    });
+}
+
+//cancle
+function cancle1(){
+    let chk = [];
+    $( "input[name = 'no1']:checked").each(function (){
+        chk.push({projectRequestNo:$(this).val()});
+        console.log(chk)
+    })
+
+    $.ajax({
+        url: "/admin/project/cancle1",
+        type: "post",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(chk),
+        success : function (result){
+            console.log(result);
+            alert("업데이트 취소 완료");
+            location.replace("/admin/project");
+        },
+        error: function (error){
+            alert(error)
+        }
+    });
+}
+function cancle2(){
+    let chk = [];
+    $( "input[name = 'no2']:checked").each(function (){
+        chk.push({projectRequestNo:$(this).val()});
+        console.log(chk)
+    })
+
+    $.ajax({
+        url: "/admin/project/cancle2",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(chk),
@@ -47,8 +91,24 @@ function cancle(){
     });
 }
 // admission
-function admission(){
-    alert("승인하시겠습니까?")
+function admission(projectRequestNo){
+    let A = document.getElementById("A").value;
+    $.ajax({
+        url: "/admin/project/approve"+projectRequestNo,
+        type: "put",
+        contentType: "application/json; charset=utf-8",
+        dataType: "text",
+        data: JSON.stringify({projectRequestApprove: A}),
+        success : function (data){
+            modal1.style.display = "none";
+            console.log(data);
+            alert("승인 처리");
+            location.replace("/admin/project");
+        },
+        error: function (error){
+            alert(error)
+        }
+    });
 }
 
 // modal1
@@ -173,7 +233,7 @@ function modify2(){
         type: "post",
         contentType: "application/json; charset=utf-8",
         dataType: "text",
-        data: JSON.stringify({userId: no, userDelete: del}),
+        data: JSON.stringify({projectRequestNo: no, projectRequestDelete: del}),
         success : function (data){
             modal1.style.display = "none";
             console.log(data);

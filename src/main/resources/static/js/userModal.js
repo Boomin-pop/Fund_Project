@@ -7,7 +7,7 @@ function update(){
     })
 
     $.ajax({
-        url: "/admin/user/delete",
+        url: "admin/user/delete",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(chk),
