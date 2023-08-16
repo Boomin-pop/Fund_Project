@@ -24,8 +24,8 @@
         <h3>프로젝트 관리</h3>
         <div class="table1">
           <table>
-            <button class="update" onclick="update()">업데이트</button>
-            <button class="cancle" onclick="cancle()">취소</button>
+            <button class="update" onclick="update1()">업데이트</button>
+            <button class="cancle" onclick="cancle1()">취소</button>
             <thead>
             <tr>
               <th>승인</th>
@@ -35,7 +35,7 @@
             <th:block th:each="pr : ${projectAdmissionLists}">
             <tr>
               <td>
-                <input type="checkbox" id="test4" name="">
+                <input type="checkbox" id="test4" name="no1" th:value="${pr.projectRequestNo}">
                 <label for="test4" th:text="${pr.userId}">의뢰인 아이디</label>
                 <label for="test4" th:text="${pr.projectRequestTitle}">프로젝트 명</label>
               </td>
@@ -46,8 +46,8 @@
         </div>
         <div class="table1">
           <table>
-            <button class="update" onclick="update()">업데이트</button>
-            <button class="cancle" onclick="cancle()">취소</button>
+            <button class="update" onclick="update2()">업데이트</button>
+            <button class="cancle" onclick="cancle2()">취소</button>
             <thead>
             <tr>
               <th>삭제</th>
@@ -56,7 +56,7 @@
             <tbody>
             <th:block th:each="pr : ${projectDeleteLists}">
             <tr>
-              <td><input type="checkbox" id="test5" name="">
+              <td><input type="checkbox" id="test5" name="no2" th:value="${pr.projectRequestNo}">
                 <label for="test5" th:text="${pr.userId}">의뢰인 아이디</label>
                 <label for="test5" th:text="${pr.projectRequestTitle}">프로젝트 명</label>
                 <label for="test5" th:text="${pr.projectRequestDelete}">삭제 사유</label>
@@ -89,7 +89,7 @@
             <td th:text="${pr.projectRequestBudget}">예산</td>
             <td th:text="${pr.projectRequestWanted}">모집 마감일</td>
             <td><button class="change" th:onclick="btn1([[${pr.projectRequestNo}]])">변경</button></td>
-            <td th:text="${pr.projectRequestApprove}">승인 여부</td>
+            <td id="A" th:text="${pr.projectRequestApprove}">승인 여부</td>
             <td><button class="data" th:onclick="btn2([[${pr.projectRequestNo}]])">정보 확인</button></td>
             <td><button class="delete" th:onclick="btn3([[${pr.projectRequestNo}]])">삭제</button></td>
             <td><button class="admission" th:onclick="admission([[${pr.projectRequestNo}]])">승인</button></td>

@@ -48,7 +48,17 @@ public class AdminProjectRequestServiceImpl implements AdminProjectRequestServic
     }
 
     @Override
-    public int projectCancle(ProjectRequestDTO projectRequestDTO) {
-        return adminProjectRequestMapper.projectCancle(projectRequestDTO);
+    public int projectCancle1(ProjectRequestDTO projectRequestDTO) {
+        return adminProjectRequestMapper.projectCancle1(projectRequestDTO);
+    }
+
+    @Override
+    public int projectCancle2(ProjectRequestDTO projectRequestDTO) {
+        return adminProjectRequestMapper.projectCancle2(projectRequestDTO);
+    }
+
+    @Override
+    public int projectApprove(ProjectRequestDTO projectRequestDTO) {
+        return adminProjectRequestMapper.projectApprove(projectRequestDTO);
     }
 }

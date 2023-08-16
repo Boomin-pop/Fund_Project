@@ -19,5 +19,9 @@ public interface AdminProjectRequestService {
 
     int deleteProject(ProjectRequestDTO projectRequestDTO);
 
-    int projectCancle(ProjectRequestDTO projectRequestDTO);
+    int projectCancle1(ProjectRequestDTO projectRequestDTO);
+
+    int projectCancle2(ProjectRequestDTO projectRequestDTO);
+
+    int projectApprove(ProjectRequestDTO projectRequestDTO);
 }

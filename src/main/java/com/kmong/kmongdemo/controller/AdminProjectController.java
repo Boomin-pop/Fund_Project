@@ -46,8 +46,8 @@ public class AdminProjectController {
         return null;
     }
 
-    @PostMapping("/admin/project/delete")
-    public @ResponseBody String deleteProject(@RequestBody List<ProjectRequestDTO> list){
+    @PostMapping("/admin/project/delete1")
+    public @ResponseBody String deleteProject1(@RequestBody List<ProjectRequestDTO> list){
 
         for(ProjectRequestDTO projectRequestDTO : list){
             prService.deleteProject(projectRequestDTO);
@@ -56,12 +56,35 @@ public class AdminProjectController {
         return null;
     }
 
-    @PostMapping("admin/project/cancle")
-    public @ResponseBody String projectCancle(@RequestBody List<ProjectRequestDTO> list){
+    @PostMapping("/admin/project/delete2")
+    public @ResponseBody String deleteProject2(@RequestBody List<ProjectRequestDTO> list){
+
+        for(ProjectRequestDTO projectRequestDTO : list){
+            prService.deleteProject(projectRequestDTO);
+        }
+
+        return null;
+    }
+
+    @PostMapping("admin/project/cancle1")
+    public @ResponseBody String projectCancle1(@RequestBody List<ProjectRequestDTO> list){
         for (ProjectRequestDTO projectRequestDTO : list){
-            prService.projectCancle(projectRequestDTO);
+            prService.projectCancle1(projectRequestDTO);
         }
         return null;
     }
 
+    @PostMapping("admin/project/cancle2")
+    public @ResponseBody String projectCancle2(@RequestBody List<ProjectRequestDTO> list){
+        for (ProjectRequestDTO projectRequestDTO : list){
+            prService.projectCancle2(projectRequestDTO);
+        }
+        return null;
+    }
+
+    @PutMapping("/admin/project/approve/{projectRequestNo}")
+    public @ResponseBody String projectApprove(@RequestBody ProjectRequestDTO projectRequestDTO){
+        prService.projectApprove(projectRequestDTO);
+        return null;
+    }
 }
