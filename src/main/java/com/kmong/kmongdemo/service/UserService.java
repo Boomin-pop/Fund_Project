@@ -19,8 +19,20 @@ public interface UserService {
 
     boolean userLogin(UserDTO dto, HttpServletRequest req);
 
+    UserDTO userInfo(UserDTO dto);
+
+    void userRemove(UserDTO dto);
+
+    JobDTO getJobInfo(int jobId);
+
+    int userModify(UserDTO dto);
+
     String findId(UserDTO dto);
 
     int findPw(String uid, String uEmail);
+
+    int modifyPw(UserDTO dto);
+
+
 
 }

@@ -1,0 +1,159 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #fff;
+}
+
+header{
+    display: flex;
+    height: 66px;
+    z-index: 20;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(228, 229, 237);
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+nav{
+    height: 74px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 1200px;
+    margin: 0px auto;
+    padding: 0px 16px;
+    justify-content: space-between;
+}
+
+.container{
+    width: 100%;
+}
+
+.main{
+    display: flex;
+    width: 1200px;
+    padding: 0 16px;
+    margin: 40px auto;
+    min-height: 600px;
+}
+
+.sidebar{
+    width: 300px;
+    padding: 20px;
+    float: left;
+}
+
+.side{
+    text-decoration: none;
+    color: #303441;
+    cursor: pointer;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.content h1{
+    font-size: 18px;
+    color: #303441;
+    font-weight: bold;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 700px;
+}
+.information{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    flex: 1;
+}
+
+.info{
+    display: flex;
+    margin-bottom: 8px;
+    position: relative;
+    align-items: center;
+}
+
+.input{
+    width: 90%;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    display: inline-flex;
+    flex-direction: row;
+    overflow: hidden;
+    cursor: text;
+    background-color: rgb(255, 255, 255);
+    color: rgb(48, 52, 65);
+    height: 42px;
+    font-size: 15px;
+    padding: 0px 14px;
+    min-width: 64px;
+}
+
+.inputbox{
+    outline: none;
+    flex: 1;
+    width: 100%;
+    background-image: none;
+    box-sizing: border-box;
+    font-size: inherit;
+    border: none;
+    font-weight: inherit;
+    background-color: transparent;
+    text-align: left;
+    color: inherit;
+}
+
+.jobbox{
+    width: 95%;
+    border: 1px solid rgb(228, 229, 237);
+    border-radius: 4px;
+    display: inline-flex;
+    flex-direction: row;
+    overflow: hidden;
+    cursor: text;
+    background-color: rgb(255, 255, 255);
+    color: rgb(48, 52, 65);
+    height: 42px;
+    font-size: 15px;
+    padding: 0px 14px;
+    min-width: 64px;
+}
+
+.button{
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 42px;
+    font-size: 15px;
+    padding: 0px 22px;
+    min-width: 64px;
+    background-color: rgb(255, 212, 0);
+    border-color: rgb(255, 212, 0);
+    color: rgb(48, 52, 65);
+    font-weight: 600;
+}

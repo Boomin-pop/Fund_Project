@@ -30,7 +30,8 @@
     </select>
 
     <select id="userLogin" resultType="userDTO">
-        SELECT userId, userPassword, UserName FROM user WHERE userId=#{userId}
+        SELECT userId, userPassword, userName, userNickname, userEmail, userTel,
+        userJobId FROM user WHERE userId=#{userId}
     </select>
 
     <!-- ifnull()는 오라클의 nvl()과 같다.	-->
@@ -41,6 +42,24 @@
     <update id="findPw" parameterType="Map">
         UPDATE user SET userPassword=#{param3}
         WHERE userId= #{param1} AND userEmail = #{param2}
+    </update>
+
+    <update id="updatePw">
+        UPDATE user SET userPassword=#{userPassword} WHERE userId=#{userId}
+        <!--        UPDATE user SET userPassword=#{pw} WHERE userId=#{userId}-->
+    </update>
+
+    <delete id="userDelete">
+        DELETE FROM user WHERE userId = #{userId}
+    </delete>
+
+    <select id="userInfo" resultType="userDTO">
+        SELECT * FROM user WHERE userId = #{userId}
+    </select>
+
+    <update id="userUpdate">
+        UPDATE user SET userId=#{userId}, userEmail=#{userEmail},userTel=#{userTel},userJobId=#{userJobId}
+        WHERE userId=#{userId}
     </update>
 
 </mapper>
