@@ -1,6 +1,7 @@
 package com.kmong.kmongdemo.controller;
 
 import com.kmong.kmongdemo.domain.CategoryDTO;
+import com.kmong.kmongdemo.domain.ServiceDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeDTO;
 import com.kmong.kmongdemo.service.ServiceService;
@@ -27,11 +28,21 @@ public class ServiceController {
 
     @GetMapping("/serviceReg")
     public String serviceInput(Model model, HttpSession session) {
+        String splId = (String)session.getAttribute("splId");
+        System.out.println("전문가 id : "+splId);
         List<CategoryDTO> topCatList = serviceService.topCatList();
       //  System.out.println("topCatList = " + topCatList);
+        model.addAttribute("splId", splId);
         model.addAttribute("topCatList", topCatList);
         return "service/serviceBody";
     }
+
+    @PostMapping("/serviceInsert")
+    public String serviceInput(ServiceDTO serviceDTO){
+        return null;
+    }
+
+
 
     @PostMapping("/chkedServiceType")
     public  @ResponseBody List<ServiceTypeDTO> chkedServiceType(@RequestBody CategoryDTO cDto, Model model){

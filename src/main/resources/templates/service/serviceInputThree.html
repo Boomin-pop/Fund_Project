@@ -22,10 +22,12 @@
         .thirdServiceTextInput > label{
             display:flex;
             font-weight: bolder;
-            width: 200px;
+            width: 150px;
             justify-content: end;
             line-height:50px;
             margin-right : 50px;
+            margin-left : 0;
+            padding-left : 0;
         }
 
         .thirdTextArea{
@@ -80,6 +82,7 @@
         .modal-footer{
             display:inline;
             text-align: center;
+            /*margin-bottom : 200px;*/
         }
 
         .modal-footer > button {
@@ -87,12 +90,13 @@
             height: 50px;
             background-color: white;
             border:1px solid #dddddd;
+
         }
 
     </style>
 
-    <div class="container shadow-sm w-50% p-5 rounded mt-4">
-
+    <div class="container shadow-sm rounded mt-4" style="width:inherit;">
+        <div class="pt-4 justify-content-center" style="width:800px;">
         <div class="form-group thirdServiceTextInput">
             <label for="summernote1" >서비스 설명</label>
             <textarea id="summernote1" class="thirdTextArea" name="thirdTextArea"></textarea>
@@ -110,10 +114,11 @@
             <textarea id="summernote3" class="thirdTextArea" name="thirdTextArea"></textarea>
         </div>
         <div class="thirdTextTracer"><p>0/최소 100자</p></div>
-        <div class="thirdServiceTextInput">
+            <div class="thirdServiceTextInput">
             <label for="trdInpBtn">취소 및 환불 규정</label>
-            <button class="trdRegulationBtn" id="trdInpBtn" data-bs-toggle="modal" data-bs-target="#trdShowModal">취소 및 환불 규정 보기</button>
+            <button class="trdRegulationBtn" id="trdInpBtn" data-bs-toggle="modal" data-bs-target="#trdShowModal" >취소 및 환불 규정 보기</button>
         </div>
+            <div class="emptyArea" style="height:100px;"></div>
         <div class="modal fade" id="trdShowModal" tabindex="-1" aria-labelledby="RegulationLabelOnModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
@@ -141,6 +146,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 <!--    Modal Area    -->
