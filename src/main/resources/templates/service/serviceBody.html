@@ -17,7 +17,7 @@
         justify-content: center;
 
     }
-    .svcNextBtn, .serviceTempInput{
+    .svcNextBtn, .serviceTempInput, .serviceFinalSubmit{
         margin-top:15px;
         background-color: white;
         border:1px solid rgb(228, 229, 237);
@@ -87,7 +87,8 @@
     </aside>
 
     <div class="contents-area d-block">
-        <form class="form-join" method="post" enctype="multipart/form-data">
+<!--        <form class="form-join" method="post" enctype="multipart/form-data">-->
+        <form class="form-join"  th:action="@{/controller/serviceInsert}" method="post" enctype="multipart/form-data">
             <div class="firstInput" id="firstInput" style="display:block; width:90%; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
                 <!--             <th:block layout:fragment="bodyPage1"></th:block>-->
@@ -114,6 +115,7 @@
             <div style="padding-left:850px">
                 <button class="serviceTempInput rounded" id="btnSave">저장</button>
                 <button class="svcNextBtn rounded" id="btnNext">다음</button>
+                <button type="submit" class="serviceFinalSubmit" id="serviceFinalSubmit" style="display:none">제출</button>
             </div>
         </footer>
     </div> <!--middle wrap-->

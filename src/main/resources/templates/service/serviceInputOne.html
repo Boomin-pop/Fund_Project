@@ -119,7 +119,7 @@
 
         serviceTitle.on("change", function(){
 
-            if (serviceTitle.val().length < 30 || serviceTitle.val().length > 10) {
+            if (serviceTitle.val().length < 31 && serviceTitle.val().length > 9) {
                 document.getElementById("titleAlert").style.display='none';
                 titleChk = "true";
                 document.getElementById("redBorder1").style.border='1px solid gray';
@@ -129,7 +129,7 @@
 
       //  카테고리 선택 유효성 검사
         serviceTopCat.on("change", function (){
-
+                topCatChk="false";
             // console.log(typeInput.length());
             // console.log(typeInput.length);
             let topCatSel = $("select[name=serviceTopCat] > option:selected");

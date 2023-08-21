@@ -10,15 +10,6 @@
             font-weight: bolder;
         }
 
-        .imgUploadBox{
-            border:1px solid #dddddd;
-            width:251px;
-            height:186px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-        }
 
         .imgUploadTipModal{
             color: rgb(11, 82, 167);
@@ -45,6 +36,7 @@
         }
 
         .imgUpBtn{
+            margin-top : 50px;
             padding: 5px;
             border:1px solid #dddddd;
             text-align: center;
@@ -85,21 +77,69 @@
             cursor:pointer;
             margin:10px;
         }
+        #imgMainBox{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            float-wrap: revert;
+            z-index: 2;
+            width: 271px; height: 206px;
+        }
+        .deleteHere{
 
+            position: relative;
+            z-index:3;
+        }
+        .deleteHere.img{
+
+            position: relative;
+            z-index: 4;
+        }
+
+        .deleteIcon{
+            padding: 0;
+            margin : 0;
+            position: relative;
+            z-index:5;
+            top : 166px; right : 30px;
+            font-family: 'Noto Emoji', sans-serif;
+            text-align: center;
+            justify-content: center;
+            line-height: 60px;
+            font-size: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid gray;
+            border-radius: 10px;
+            float : right;
+        }
+
+        .positionFixedArea{
+            /*position: absolute;*/
+        }
+
+        .imgViewSpace{
+            width:251px; height:186px;
+        }
 
     </style>
-    <div class="container shadow-sm rounded mt-4" style="width:inherit">
-        <div class="pt-4 pb-5" style="width:800px; height:75px;">
-        <div class="form-group">
-        <div class="mainImgTitle"><p>메인이미지등록(필수)</p><p>0/1</p></div>
-            <div class="imgUploadBox" id="imgMainBox"><label for="mainImg"><div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div>
-            <input type="file" name="mainImg" id="mainImg" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload.png" style="width:88px; height:64px;"></label></div>
+    <div class="container mt-4" style="width:inherit;">
+        <div class="positionFixedArea pt-4 pb-5" style="width:800px; height:75px;">
+        <div class="form-group" style="height: 300px;">
+        <div class="mainImgTitle"> <p>메인이미지등록(필수)</p><div id="mainImgCount"> 0/1</div></div>
+            <div class="imgUploadBox" id="imgMainBox" name="imgMainBox" style="border:1px solid white"><label for="mainImg" id="mainLabel" name="mainLabel" class="mainLabel"><div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div><div class="deleteIcon"  id="mainImgDelete" style="visibility: hidden">🗑️</div><input type="file" name="mainImg" id="mainImg" style="display:none" onchange="previewImg(this)"><div class="deleteHere" id="deleteHere"><img class="imgViewSpace" id="mainImgWindow" src="/imgs/imageupload2.png" ></div></label></div>
         </div>
+        <div id="mainImgAlert" style="display:none;">
+            <p style="color:red;"><b>최소 1개의 이미지를 등록해주세요.</b></p>
+        </div>
+
 
         <div class="imgUploadTipModal" id="fthTip1" style="display: none;">
             <div class="fthModalwrapper">
                 <div clas><h4>TIP</h4></div>
-                <div class="ms-5"><img src="/imgs/modalTipImg.png"></div>
+                <div class="ms-5"><img class="imgViewSpace" src="/imgs/modalTipImg.png"></div>
                 <div class="imgModalTipTxtArea" >
                    <p>• 이미지 권장 사이즈: 652 x 488px (4:3 비율)<br>
                        <b>• 사용 제한 이미지</b>
@@ -118,17 +158,16 @@
 <!--                  상세 이미지                            -->
 
         <div class="form-group">
-            <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p>0/9</p></div>
+            <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p id="subImgCount">0/9</p></div>
             <div class="detailCardArea" id="detailImgUpload" >
                 <div class="detailImgCard" id="imgCardSec1" >
-                    <label class="cardLabel">
-                            <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">
-                    </label>
+                    <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="file1"  style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>
+
 <!--                    <label class="cardLabel">-->
-<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">-->
+<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img class="imgViewSpace" src="/imgs/imageupload2.png" >-->
 <!--                    </label>-->
 <!--                    <label class="cardLabel">-->
-<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload2.png" style="width:251px; height:186px;">-->
+<!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img class="imgViewSpace" src="/imgs/imageupload2.png" >-->
 <!--                    </label>-->
                  </div>
                 <div class="detailImgCard" id="imgCardSec2" ></div>
@@ -136,7 +175,7 @@
 
                 <!--                    <label class="cardLabel">-->
                 <!--                        <div class="imgUploadBox">-->
-                <!--                            <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img src="/imgs/imageupload.png" style="width:88px; height:64px;">-->
+                <!--                            <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img class="imgViewSpace" src="/imgs/imageupload.png" style="width:88px; height:64px;">-->
                 <!--                         </div>-->
                 <!--                     </label>-->
                 <!--                </div>-->
@@ -161,10 +200,10 @@
         </div>
 
         <div class="form-group">
-            <div class="mainImgTitle"><p>동영상등록(선택)</p><p>0/6</p></div>
+            <div class="mainImgTitle"><p>동영상등록(미지원)</p><p>0/6</p></div>
             <div class="vidUploadBox" id="vidUpBtn">
                 <label>
-                <div class="vidUpload">비디오 업로드
+                <div class="vidUpload" style="color:gray">비디오 업로드(미지원)
                     <input type="file" name="vid" style="display:none">
                 </div>
                 </label>
@@ -190,167 +229,319 @@
     </div>
 
 <script>
-    let imgbox = $(".imgUploadBox");
-    let vidUploadBox = $(".vidUploadBox");
-    var cnt =1;
-    // function fileAppend(){
-    //     if(cnt%3 == 0) {
-    //         console.log("카드 돌아감 현재 cnt : "+cnt)
-    //         var appendedDetailImg = '</div><div class="detailImgCard">'
-    //         + '<label class="cardLabel"><div class="imgUploadBox">'
-    //         + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
-    //         + '<img src="/imgs/imageupload2.png" style="width:88px; height:64px;">'
-    //         + '</div></label>';
-    //         $(".detailImgCard").append(appendedDetailImg);
-    //         cnt++;
-    //         console.log("cnt : "+cnt);
-    //     }else{
-    //         console.log("카드 안돌아감 현재 cnt : "+cnt)
-    //         var appendedDetailImg = '<label class="cardLabel"><div class="imgUploadBox">'
-    //             + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
-    //             + '<img src="/imgs/imageupload2.png" style="width:88px; height:64px;">'
-    //             + '</div></label>';
-    //         $(".detailImgCard").append(appendedDetailImg);
-    //         cnt++;
-    //         console.log("cnt : "+cnt);
-    //     }
-    // }
+    let imgTagSource = "";
+    let mainImgInputChk="";
+    var mainImgCnt = 0;
+    var subImgCnt = 0;
 
-    function fileAppend(){
+    var cnt = 1;
+        $(document).ready(function () {
+            let mainImgInputChk = "";
 
-        cnt++;
-        // if(cnt > 0 && cnt%3 === 0) {
-        //     console.log("새로운 라인 cnt : "+cnt)
-        //     var appendedDetailImg = '닫혀라 좀'
-        //         + '</div>닫히는 구간 <div class="detailImgCard" style="border:3px solid red">닫고 열음'
-        //         + '<label class="cardLabel">'
-        //         + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
-        //         + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
-        //         + '</label> 나눠서 넣은 첫번째';
-        //     $(".detailImgCard").append(appendedDetailImg);
-        //
-        //     console.log("cnt : "+cnt);
-        // }
-        // else{
-        //     console.log("동일 라인 현재 cnt : "+cnt)
-        //     var appendedDetailImg = '<label class="cardLabel">'
-        //         + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
-        //         + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
-        //         + '</label>';
-        //     $(".detailImgCard").append(appendedDetailImg);
-        //
-        //     console.log("cnt : "+cnt);
-        // }
-        var appendedDetailImg = '<label class="cardLabel">'
-            + '<input type="file" class="concealedInput" name="file'+cnt+'" style="display:none" onchange="previewImg(this)">'
-            + '<img src="/imgs/imageupload2.png" style="width:251px; height:186px;">'
-            + '</label>';
+            var imgMainBox =  document.getElementById("imgMainBox");
+            var detailImgUpload = document.getElementById("detailImgUpload");
+            var imgUpBtn = document.getElementById("imgUpBtn");
+            var vidUpBtn = document.getElementById("vidUpBtn");
+            var fthTip1 = document.getElementById("fthTip1");
+            var fthTip2 = document.getElementById("fthTip2");
+            var fthTip3 = document.getElementById("fthTip3");
 
-        if(cnt < 4){
-            $("#imgCardSec1").append(appendedDetailImg);
-        }
-        if(cnt>3 && cnt<7){
-            $("#imgCardSec2").append(appendedDetailImg);
-        }
-        if(cnt>6 && cnt<10){
-            $("#imgCardSec3").append(appendedDetailImg);
-        }
+            var deleteIcon = document.getElementById("deleteIcon");
+            var imgUploadBox = $(".imgUploadBox");
+            let vidUploadBox = $(".vidUploadBox");
 
-    }
 
-    function previewImg(pic){
-        console.log("pic의 firstChild는?" +pic.firstChild);
-        console.log("pic의 이름 : " + pic.name)
-        console.log("pic : "+pic);
-        console.log("pic의 노드네임 : "+pic.nodeName);
-        console.log("sibling의 nodeName : "+pic.nextSibling.nodeName);
-        // console.log("sibling의 시블링의 노드네임 : "+pic.nextSibling.nextSibling.nodeName);
-        console.log("pic.files : "+pic.files);
-        var imgTag = pic.nextSibling;  //
+               // imgUploadBox.on("mouseover", function(){
+             $(document).on("mouseover", ".imgUploadBox", function(){
+             var label = this.firstChild;
+             var upBtn = this.firstChild.firstChild;
+             var delBtn = this.firstChild.firstChild.nextSibling;
+             var imgInput = this.firstChild.firstChild.nextSibling.nextSibling;
+             var delARea = this.firstChild.lastChild;
+             var imgSrc = this.firstChild.lastChild.firstChild;
+             var nameAttribute = $(this).attr("name");
+             var deleteIcon = $(this).find('.deleteIcon');
 
-        // fileAppend();
+                console.log("이것의 아이디 : "+this.id);
+                console.log("이것의 이름스페이스 : "+this.namespace);
+                console.log("이것의 이름 : "+this.name);
+                console.log("이것의 nodevalue : "+this.nodeValue);
+                console.log("이것의 클래스네임 : "+this.className);
+                // console.log("이것의 name = "+this.getAttribute('name'));
+                 console.log(nameAttribute);
 
-        if(pic.files && pic.files[0]){
-            // filereader = 자바스크립트 라이브러리 객체
-            var fileReader = new FileReader();
-            //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
-            fileReader.onload = function(e){
-                imgTag.height=251;
-                imgTag.width=186;
-                // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
-                imgTag.src = e.target.result;
-                if(pic.name!="mainImg"){
-                    fileAppend();
+                if(this.id==="imgMainBox"){
+
+                if(imgTagSource.length<100){
+                    console.log("메인 이미지 없음")
+                    imgSrc.style.display='none';
+                    upBtn.style.display='block';
+                    //this.style.border='3px solid rgb(250, 250, 250)';
+                    // delBtn.style.display = 'none';
+                  //  deleteIcon.hide();
+                    $(this).find('.deleteIcon').css('visibility', 'hidden');
+
                 }
+
+                if(imgTagSource.length>100){
+                    console.log("메인 이미지 있음")
+                    console.log("메인이미지 tagSource : "+imgTagSource.length);
+                    imgSrc.style.display='block';
+                    // delBtn.style.display='block';
+                    //deleteIcon.show();
+                   // $("#mainImgWindow").style.border='0px solid white';
+                    document.getElementById("mainImgWindow").style.border=0;
+                    $(this).find('.deleteIcon').css('visibility', 'visible');
+
+                }
+                    fthTip1.style.display='block';
+                    fthTip2.style.display='none';
+                    fthTip3.style.display='none';
+                }
+                 if(this.id!="imgMainBox") {
+                     if (imgSrc.src.length < 100) {
+                         console.log("서브 이미지 없음");
+                         // delBtn.style.display = 'none';
+                         //deleteIcon.hide();
+                         $(this).find('.deleteIcon').css('visibility', 'hidden');
+                     }
+                     if (imgSrc.src.length > 100) {
+                         console.log("서브이미지 소스길이 : " + imgSrc.src.length)
+                         console.log("서브 이미지 있음");
+                         // delBtn.style.display='block';
+                        // deleteIcon.show();
+                         $(this).find('.deleteIcon').css('visibility', 'visible'); // Show delete icon
+
+
+
+                         fthTip1.style.display = 'none';
+                         fthTip2.style.display = 'block';
+                         fthTip3.style.display = 'none';
+                     }
+                 }
+
+            });
+
+            $(document).on("mouseout", ".imgUploadBox", function(){
+                var label = this.firstChild;
+                var upBtn = this.firstChild.firstChild;
+                var delBtn = this.firstChild.firstChild.nextSibling;
+                var imgInput = this.firstChild.firstChild.nextSibling.nextSibling;
+                var delARea = this.firstChild.lastChild;
+                var imgSrc = this.firstChild.lastChild.firstChild;
+                var subdelBtn = this.firstChild.firstChild;
+                var deleteIcon = $(this).find('.deleteIcon');
+
+
+                if(this.id==="imgMainBox"){
+            //    this.firstChild.lastChild.style.display='block';
+                    this.style.border='1px solid white';
+                    imgSrc.style.display='block';
+                    upBtn.style.display='none';
+                    //delBtn.style.display='none';
+                   // deleteIcon.hide();
+                    $(this).find('.deleteIcon').css('visibility', 'hidden'); // Hide delete icon
+
+
+                }
+                if(this.id!="imgMainBox"){
+                    imgSrc.style.display='block';
+                    //delBtn.style.display='none';
+                   // deleteIcon.hide();
+                    $(this).find('.deleteIcon').css('visibility', 'hidden'); // Hide delete icon
+
+                }
+            });
+
+            detailImgUpload.addEventListener("mouseover", function(){
+                fthTip1.style.display='none';
+                fthTip2.style.display='block';
+                fthTip3.style.display='none';
+            });
+
+            vidUpBtn.addEventListener("mouseover", function(){
+                fthTip1.style.display='none';
+                fthTip2.style.display='none';
+                fthTip3.style.display='block';
+            });
+
+            $(document).on("click", ".deleteIcon", function(){
+                var inputArea = this.nextSibling;
+                var deleteIcon = this.closest('div');
+                var deleteArea = this.nextSibling.nextSibling;
+                var imgSrc = this.nextSibling.nextSibling.firstChild;
+                var parentId = this.closest('div').id;
+                console.log("가장 가까운 부모  here.div.id : "+this.closest('div').id);
+                console.log("가장 가까운 부모  here.div.id : "+parentId.id);
+                console.log("here.firstchild : "+this.firstChild.nodeName);
+                console.log("here.lastChild : "+this.lastChild.nodeName);
+
+                console.log("삭제 다음 형제의 노드이름" + this.nextSibling.nextSibling.nodeName);
+                console.log("인풋 아니야? "+inputArea.nodeName);
+
+               // deleteArea.empty();
+               //  console.log("여기가 뭐길래 안지워질까 : "+this.nextSibling.nextSibling.nodeName);
+               //  console.log("여기가 뭐길래 안지워질까 : "+this.nextSibling.nextSibling.className);
+               //  $("this.nextSibling.nextSibling").empty();
+
+                //deleteArea.firstChild.remove();
+                //deleteArea.append('<img class="imgViewSpace" src="/imgs/imageupload2.png" >');
+                console.log("이미지 소스 길이 : " + imgSrc.src.length);
+                imgSrc.src = "/imgs/imageupload2.png";
+                if(parentId=="mainImgDelete"){
+                    console.log("메인 이미지를 삭제함!!!")
+                    imgTagSource = "";
+                    mainImgCnt = 0;
+                    mainImgCount();
+                    mainImgInputChk = "false";
+                }
+                if(parentId!="mainImgDelete"){
+                    console.log("서브 이미지를 삭제함")
+                    subImgCnt--;
+                    subImgCount();
+                }
+            })
+
+    });
+
+
+
+        function fileAppend() {
+
+            cnt++;
+
+            var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="file'+cnt+'"  style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
+
+            if (cnt < 4) {$("#imgCardSec1").append(appendedDetailImg);}
+            if (cnt > 3 && cnt < 7) {$("#imgCardSec2").append(appendedDetailImg);}
+            if (cnt > 6 && cnt < 10) {$("#imgCardSec3").append(appendedDetailImg);}
+            // var imgCardSec = "#imgCardSec1"; // Default section
+            //
+            // if (cnt > 3 && cnt < 7) {
+            //     imgCardSec = "#imgCardSec2";
+            // }
+            // if (cnt > 6 && cnt < 9) {
+            //     imgCardSec = "#imgCardSec3";
+            // }
+
+//            $(imgCardSec).append(appendedDetailImg);
+        }
+
+        function previewImg(pic) {
+            console.log("pic의 이름 : " + pic.name)
+            console.log("pic : " + pic);
+            console.log("pic의 노드네임 : " + pic.nodeName);
+            console.log("pic의 sibling의 nodeName : " + pic.nextSibling.firstChild.nodeName);
+            // console.log("sibling의 시블링의 노드네임 : "+pic.nextSibling.nextSibling.nodeName);
+            console.log("pic.files : " + pic.files);
+            // if (pic.name == "mainImg") {
+            //     pic.nextSibling.firstChild.height = 251;
+            //     pic.nextSibling.width = 186;
+            // }
+            var imgTag = pic.nextSibling.firstChild;  //
+
+            // fileAppend();
+
+            if (pic.files && pic.files[0]) {
+                // filereader = 자바스크립트 라이브러리 객체
+                var fileReader = new FileReader();
+                //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
+                fileReader.onload = function (e) {
+                    imgTag.height = 251;
+                    imgTag.width = 186;
+                    // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
+                    imgTag.src = e.target.result;
+                    if (pic.name == "mainImg") {
+                        imgTagSource = imgTag.src;
+                        console.log("이미지 업로드!!!")
+                        console.log("이미지태그소스의 길이 : "+imgTagSource.length);
+
+                        // console.log("imgTag.src : "+imgTag.src);
+                        // console.log("imgTagSource : "+imgTagSource);
+                        // console.log("imgTagSource의 길이는? : "+imgTagSource.length);
+                        document.getElementById("imgMainBox").style.border = '1px solid white';
+                        document.getElementById("mainImgAlert").style.display = 'none';
+                        mainImgInputChk = "true"; }
+                    if(pic.name=="mainImg"){
+                        mainImgCnt ++;
+                        console.log("preview func mainImgCnt : "+mainImgCnt)
+                        mainImgCount();
+                    }
+
+                    if (pic.name != "mainImg") {
+                        fileAppend();
+                        subImgCnt ++;
+                        subImgCount();
+                    }
+                    }
+                   fileReader.readAsDataURL(pic.files[0]);
+                // 파일의 종류는 크게 2가지
+                //1. 바이너리 파일 : 데이터를 있는 그대로 읽고 쓰는 파일
+                //2. 텍스트 파일 : 데이터를 문자로 변환한 파일
+                // base64는 6비트 기반 이걸 8비트(아스키코드) 기반 텍스트로 손실없이 안전하게 인코딩함.
+                // 바이너리 데이터의 훼손없이 정확하게 데이터를 전달할 수 있다.
+
+                //불러온 바이너리 파일을 http 메시지 규격에 맞는 base64 형식으로 변환
 
             }
 
-            // 파일의 종류는 크게 2가지
-            //1. 바이너리 파일 : 데이터를 있는 그대로 읽고 쓰는 파일
-            //2. 텍스트 파일 : 데이터를 문자로 변환한 파일
-            // base64는 6비트 기반 이걸 8비트(아스키코드) 기반 텍스트로 손실없이 안전하게 인코딩함.
-            // 바이너리 데이터의 훼손없이 정확하게 데이터를 전달할 수 있다.
+        };
 
-            //불러온 바이너리 파일을 http 메시지 규격에 맞는 base64 형식으로 변환
-            fileReader.readAsDataURL(pic.files[0]);
+    function mainImgCount(){
+        console.log("mainImgCnt1 : "+mainImgCnt);
+       // console.log("mainImgCnt2 : "+document.getElementById("mainImgCount"));
+        console.log("mainImgCnt3 : "+document.getElementById("mainImgCount").textContent);
+
+        document.getElementById("mainImgCount").textContent=mainImgCnt+"/1";
+        if(mainImgCnt>=2){
+            mainImgCnt--
         }
+    };
 
+    function subImgCount(){
+        console.log("subImgCnt : "+subImgCnt)
+        document.getElementById("subImgCount").innerText=subImgCnt+"/9";
     };
 
 
-
-    $(document).ready(function () {
-        var imgMainBox =  document.getElementById("imgMainBox");
-        var detailImgUpload = document.getElementById("detailImgUpload");
-        var imgUpBtn = document.getElementById("imgUpBtn");
-        var vidUpBtn = document.getElementById("vidUpBtn");
-        var fthTip1 = document.getElementById("fthTip1");
-        var fthTip2 = document.getElementById("fthTip2");
-        var fthTip3 = document.getElementById("fthTip3");
-
-        //  $("#imgMainBox").on("mouseover", function(){
-
-        // $(".concealedInput").on("change", function(){
         //
-        // });
-
-
-
-        imgMainBox.addEventListener("mouseover", function(){
-            console.log("imgMainBox이름 : "+imgMainBox.name);
-            console.log("imgMainBox의 노드이름 : "+imgMainBox.nodeName);
-            console.log("first name"+imgMainBox.firstChild.name);
-            console.log("first node name"+imgMainBox.firstChild.nodeName);
-            console.log("last name"+imgMainBox.lastChild.name);
-            console.log("last node name"+imgMainBox.lastChild.nodeName);
-
-            imgMainBox.firstChild.lastChild.style.display='none';
-
-            imgUpBtn.style.display='block';
-            fthTip1.style.display='block';
-            fthTip2.style.display='none';
-            fthTip3.style.display='none';
-        });
-
-        imgMainBox.addEventListener("mouseout", function(){
-            imgMainBox.firstChild.lastChild.style.display='block';
-            imgUpBtn.style.display='none';
-        });
-
-        detailImgUpload.addEventListener("mouseover", function(){
-            fthTip1.style.display='none';
-            fthTip2.style.display='block';
-            fthTip3.style.display='none';
-        });
-
-        vidUpBtn.addEventListener("mouseover", function(){
-            fthTip1.style.display='none';
-            fthTip2.style.display='none';
-            fthTip3.style.display='block';
-        });
-
-
-    })
+        // function fileRemove(here) {
+        //     var inputArea = here.nextSibling;
+        //     var deleteIcon = here.closest('div');
+        //     var deleteArea = here.nextSibling.nextSibling;
+        //     var imgSrc = here.nextSibling.nextSibling.firstChild;
+        //     var parentId = here.closest('div').id;
+        //   //  console.log("가장 가까운 부모 : "+$(this).closest('div').attr('id'));
+        //    // console.log("가장 가까운 부모 : "+here.closest('div').attr('id'));
+        //    // console.log("가장 가까운 부모 : "+$(this).closest('div').id);
+        //     console.log("가장 가까운 부모  here.div.id : "+here.closest('div').id);
+        //     //console.log("가장 가까운 부모의 부모의 아이디 : "+here.parents());
+        //    // console.log("가장 가까운 부모 : "+$(this).closest('div').className);
+        //
+        //     console.log("here.name / nodename"+here.name);
+        //     console.log("here.name / nodename"+here.nodeName);
+        //     console.log("here.name / nodename"+here.lastChild.nextSibling);
+        //     console.log("here.firstchild : "+here.firstChild.nodeName);
+        //     console.log("here.lastChild : "+here.lastChild.nodeName);
+        //
+        //     console.log("삭제 다음 형제의 노드이름" + here.nextSibling.nextSibling.Nodename);
+        //     console.log("인풋 아니야? "+inputArea.nodeName);
+        //
+        //     // here.nextSibling.nextSibling.disabled = true;
+        //      deleteArea.empty();
+        //     //here.nextSibling.nextSibling.empty();
+        //     deleteArea.firstChild.remove();
+        //     console.log("delete존 클래스네임 : "+here.nextSibling.nextSibling.className);
+        //     console.log("delete존 클래스네임 : "+deleteArea.className);
+        //     deleteArea.append('<img class="imgViewSpace" src="/imgs/imageupload2.png" >');
+        //     console.log("이미지 소스 길이 : " + imgSrc.src.length);
+        //     imgSrc.src = "";
+        //     if(parentId=="mainImgDelete"){
+        //         imgTagSource = "";
+        //         mainImgInputChk = "false";
+        //     }
+        //     // here.nextSibling.nextSibling.disabled = false;
+        // }
 
 
 </script>
