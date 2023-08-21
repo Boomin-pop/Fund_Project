@@ -94,115 +94,115 @@ let serviceObject= {
         })
     },
 
-    serviceFinalSubmit: function(){
-        alert("서비스 등록 요청!");
-        let serviceDTO={
-            splID:
-            serviceStatus:
-            serviceTitle:
-            serviceTopCatCode:
-            serviceTopCatName:
-            serviceType1:
-            serviceType2:
-            serviceType3:
-            serviceType4:
-            serviceType5:
-            serviceType6:
-            serviceType7:
-            serviceType8:
-            serviceType9:
-            serviceType10:
-            keywordIsExist:
-            keyword1:
-            keyword2:
-            keyword3:
-            keyword4:
-            keyword5:
-            priceTitle:
-            priceExplain:
-            priceNumber:
-            serviceDuration:
-            serviceModNum:
-
-            AddOptExist1:
-            AddOptTitle1:
-            AddOPtExplain1:
-            AddOptPrice1:
-            AddOptDay1:
-
-            AddOptExist2:
-            AddOptTitle2:
-            AddOPtExplain2:
-            AddOptPrice2:
-            AddOptDay2:
-
-            AddOptExist3:
-            AddOptTitle3:
-            AddOPtExplain3:
-            AddOptPrice3:
-            AddOptDay3:
-
-            AddOptExist4:
-            AddOptTitle4:
-            AddOPtExplain4:
-            AddOptPrice4:
-            AddOptDay4:
-
-            AddOptExist5:
-            AddOptTitle5:
-            AddOPtExplain5:
-            AddOptPrice5:
-            AddOptDay5:
-
-            AddOptExist6:
-            AddOptTitle6:
-            AddOPtExplain6:
-            AddOptPrice6:
-            AddOptDay6:
-
-            AddOptExist7:
-            AddOptTitle7:
-            AddOPtExplain7:
-            AddOptPrice7:
-            AddOptDay7:
-
-            AddOptExist8:
-            AddOptTitle8:
-            AddOPtExplain8:
-            AddOptPrice8:
-            AddOptDay8:
-
-            AddOptExist9:
-            AddOptTitle9:
-            AddOPtExplain9:
-            AddOptPrice9:
-            AddOptDay9:
-
-            AddOptExist10:
-            AddOptTitle10:
-            AddOPtExplain10
-            AddOptPrice10:
-            AddOptDay10:
-
-            serviceExplain:
-            serviceProcedur
-            clientPreps:
-            mainImg:
-
-            subImgExist:
-            subImg1:
-            subImg2:
-            subImg3:
-            subImg4:
-            subImg5:
-            subImg6:
-            subImg7:
-            subImg8:
-            subImg9:
-
-
-        }
-    }
+    // serviceFinalSubmit: function(){
+    //     alert("서비스 등록 요청!");
+    //     let serviceDTO={
+    //         splID:
+    //         serviceStatus:
+    //         serviceTitle:
+    //         serviceTopCatCode:
+    //         serviceTopCatName:
+    //         serviceType1:
+    //         serviceType2:
+    //         serviceType3:
+    //         serviceType4:
+    //         serviceType5:
+    //         serviceType6:
+    //         serviceType7:
+    //         serviceType8:
+    //         serviceType9:
+    //         serviceType10:
+    //         keywordIsExist:
+    //         keyword1:
+    //         keyword2:
+    //         keyword3:
+    //         keyword4:
+    //         keyword5:
+    //         priceTitle:
+    //         priceExplain:
+    //         priceNumber:
+    //         serviceDuration:
+    //         serviceModNum:
+    //
+    //         AddOptExist1:
+    //         AddOptTitle1:
+    //         AddOPtExplain1:
+    //         AddOptPrice1:
+    //         AddOptDay1:
+    //
+    //         AddOptExist2:
+    //         AddOptTitle2:
+    //         AddOPtExplain2:
+    //         AddOptPrice2:
+    //         AddOptDay2:
+    //
+    //         AddOptExist3:
+    //         AddOptTitle3:
+    //         AddOPtExplain3:
+    //         AddOptPrice3:
+    //         AddOptDay3:
+    //
+    //         AddOptExist4:
+    //         AddOptTitle4:
+    //         AddOPtExplain4:
+    //         AddOptPrice4:
+    //         AddOptDay4:
+    //
+    //         AddOptExist5:
+    //         AddOptTitle5:
+    //         AddOPtExplain5:
+    //         AddOptPrice5:
+    //         AddOptDay5:
+    //
+    //         AddOptExist6:
+    //         AddOptTitle6:
+    //         AddOPtExplain6:
+    //         AddOptPrice6:
+    //         AddOptDay6:
+    //
+    //         AddOptExist7:
+    //         AddOptTitle7:
+    //         AddOPtExplain7:
+    //         AddOptPrice7:
+    //         AddOptDay7:
+    //
+    //         AddOptExist8:
+    //         AddOptTitle8:
+    //         AddOPtExplain8:
+    //         AddOptPrice8:
+    //         AddOptDay8:
+    //
+    //         AddOptExist9:
+    //         AddOptTitle9:
+    //         AddOPtExplain9:
+    //         AddOptPrice9:
+    //         AddOptDay9:
+    //
+    //         AddOptExist10:
+    //         AddOptTitle10:
+    //         AddOPtExplain10
+    //         AddOptPrice10:
+    //         AddOptDay10:
+    //
+    //         serviceExplain:
+    //         serviceProcedur
+    //         clientPreps:
+    //         mainImg:
+    //
+    //         subImgExist:
+    //         subImg1:
+    //         subImg2:
+    //         subImg3:
+    //         subImg4:
+    //         subImg5:
+    //         subImg6:
+    //         subImg7:
+    //         subImg8:
+    //         subImg9:
+    //
+    //
+    //     }
+    // }
 
 
 
