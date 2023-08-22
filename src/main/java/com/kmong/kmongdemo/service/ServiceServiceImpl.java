@@ -61,7 +61,7 @@ public class ServiceServiceImpl implements ServiceService{
         String savePath = "/static/imgs";
         String realPath = mhr.getServletContext().getRealPath(savePath);
         System.out.println(realPath);
-        int maxSize = 1024*1024*10; // 1kb * 1kb = 1MB*10 = 10MB
+        int maxSize = 1024*1024*500; // 1kb * 1kb = 1MB*10 = 10MB
         Map map = new HashMap();
         Enumeration<String> enu = mhr.getParameterNames();
         while(enu.hasMoreElements()) {
@@ -122,6 +122,74 @@ public class ServiceServiceImpl implements ServiceService{
             map.put(fileParamName, originName);
 
             serviceMapper.serviceInput(map);
+        }
+    }
+
+    @Override
+    public void serviceTempSave(MultipartHttpServletRequest mhr) {
+        String savePath = "/temporary/imgs";
+        String realPath = mhr.getServletContext().getRealPath(savePath);
+        int maxSize = 1024*1024*10; // 1kb * 1kb = 1MB*10 = 10MB
+        Map map = new HashMap();
+        Enumeration<String> enu = mhr.getParameterNames();
+        while(enu.hasMoreElements()) {
+            String paramName = enu.nextElement();
+            String paramValue = mhr.getParameter(paramName);
+
+            System.out.println(paramName +":"+paramValue);
+            map.put(paramName, paramValue);
+        }
+
+        // 파일
+        Iterator<String> iter= mhr.getFileNames();
+        //List<String> fileList = new ArrayList<String>();
+
+        while(iter.hasNext()) {
+            String fileParamName = iter.next();
+            System.out.println("fileParamName : " + fileParamName);
+
+            // MultipartFile : 파일정보를 갖고 있는 객체
+            MultipartFile mFile= mhr.getFile(fileParamName);
+
+            String originName = mFile.getOriginalFilename();
+            System.out.println("originName : " + originName);
+
+            File file = new File(realPath +"\\"+ fileParamName);
+            System.out.println("file = " + file);
+            if(mFile.getSize() !=0) { // 업로드된 경우
+                if(!file.exists()) { // 파일이 존재하지 않으면 최초로 한번만 실행
+                    if(file.getParentFile().mkdir()) { // savePath에 지정된 폴더(fileRepo) 생성
+                        try {
+                            file.createNewFile();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } // 임시파일 생성
+                    }//if
+                }//if
+
+                File uploadFile = new File(realPath +"\\"+originName);
+
+                // 중복시 파일명 대체
+                if(uploadFile.exists()) {
+                    originName = System.currentTimeMillis()+"_"+originName;
+                    uploadFile = new File(realPath +"\\"+originName);
+                }	// if
+                // 실제 파일 업로드하기
+                try {
+                    mFile.transferTo(uploadFile);
+                } catch (IllegalStateException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                //fileList.add(originName);
+            }
+            map.put(fileParamName, originName);
+
+            serviceMapper.serviceTempSave(map);
         }
     }
 

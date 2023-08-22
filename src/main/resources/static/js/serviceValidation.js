@@ -1,17 +1,9 @@
 let serviceBodyBtn = {
     init: function () {
-        $("#btnSave").on("click", () => {
-            if(document.getElementById("num1").innerText=='V'){
-                this.firstInputValid(); console.log("1번째 세이브 버튼 클릭!"); return}
-            if(document.getElementById("num2").innerText=='V'){
-                this.secondInputValid(); console.log("2번째 세이브 버튼 클릭!"); return}
-            if(document.getElementById("num3").innerText=='V'){
-                this.thirdInputValid(); console.log("3번째 세이브 버튼 클릭!"); return}
-            if(document.getElementById("num4").innerText=='V'){
-                this.fourthInputValid(); console.log("4번째 세이브 버튼 클릭!"); return}
-            if(document.getElementById("num5").innerText=='V'){
-                this.firstInputValid(); console.log("5번째 세이브 버튼 클릭!"); return}
-        });
+        // $("#btnSave").on("click", () => {
+        //     if(document.getElementById("num1").innerText=='V'){
+        //         this.firstInputValid(); console.log("1번째 세이브 버튼 클릭!"); return}
+        // });
 
         $("#btnNext").on("click", () => {
             if(document.getElementById("num1").innerText==='V'){
@@ -27,9 +19,14 @@ let serviceBodyBtn = {
             if(document.getElementById("num4").innerText==='V'){
                 //this.firstInputValid(); this.firstInputValid(); this.secondInputValid(); this.thirdInputValid();
                 this.fourthInputValid(); console.log("4번째 다음 버튼 클릭!"); return}
-            if(document.getElementById("num5").innerText==='V'){
-                this.fifthInputValid(); console.log("5번째 다음 버튼 클릭!"); return}
         });
+        $("#serviceRegReq").on("click", () => {
+            this.fifthInputValid(); return;
+        })
+        $("#svcSubmitMidBtn").on("click", function(){
+            this.fifthInputValid(); return;
+
+        })
 
         $("#btn-one").on("click", ()=>{this.firstBtn(); return});
         $("#btn-two").on("click", ()=>{this.firstInputValid(); return});
@@ -47,7 +44,7 @@ let serviceBodyBtn = {
         let serviceTypeArea = $(".serviceType");
         let serviceTitle = $("#serviceTitle");
         let titleAlert = $("#titleAlert");
-        let btnSave = $("#btn-save");
+        //let btnSave = $("#btn-save");
         let btnNext = $("#btn-next");
         let serviceTopCat =$("select[name=serviceTopCat]");
         let charCounter=$("div[name=charCounter]");
@@ -242,7 +239,7 @@ let serviceBodyBtn = {
             && servicePriceNumberChk == "true" && serviceDurationChk == "true" && svcModificationNumChk == "true" && mainImgInputChk== "true"){
         console.log("네 번째 유효성 검사 통과!!!");
         //this.fifthInputValid();
-        document.getElementById("btnSave").style.display='none';
+        //document.getElementById("btnSave").style.display='none';
         document.getElementById("btnNext").style.display='none';
         document.getElementById("serviceFinalSubmit").style.display='block';
 
@@ -254,9 +251,11 @@ let serviceBodyBtn = {
     fifthInputValid:function (){
         if (topCatChk == "true" && titleChk == "true" && srvTypeChk == "true" && priceTitleInputChk == "true" && priceExplainChk == "true"
             && servicePriceNumberChk == "true" && serviceDurationChk == "true" && svcModificationNumChk == "true" && mainImgInputChk == "true") {
-            console.log("다섯번째 유효성 검사 통과!!!");
 
-        };
+            console.log("다섯번째 유효성 검사 통과!!!");
+            $("#finalSubmitModal").show();
+            return;
+        }else{return};
     },
 
     firstBtn:function (){
@@ -366,6 +365,4 @@ let serviceBodyBtn = {
     }
 
 }
-
-
 serviceBodyBtn.init();

@@ -38,10 +38,10 @@
         .thirdTextTracer{
             display:flex;
             justify-content: end;
+            color:#dddddd;
         }
 
-        .thirdTextTracer > p{
-            color:#dddddd;
+        .thirdTextTracer{
         }
 
         .trdRegulationBtn{
@@ -101,19 +101,19 @@
             <label for="serviceExplain" >서비스 설명</label>
             <textarea id="serviceExplain" class="thirdTextArea" name="serviceExplain" onchange="keyCount8(this)"></textarea>
         </div>
-        <div class="thirdTextTracer" id="serviceExplainTracer"><p>0/최대 100자</p></div>
+        <div class="thirdTextTracer" id="serviceExplainTracer">0/최대 100자</div>
 
         <div class="form-group thirdServiceTextInput">
             <label for="serviceProcedure">서비스 제공절차</label>
             <textarea id="serviceProcedure" class="thirdTextArea" name="serviceProcedure" onchange="keyCount9(this)"></textarea>
         </div>
-        <div class="thirdTextTracer" id="serviceProcedureTracer"><p>0/최대 100자</p></div>
+        <div class="thirdTextTracer" id="serviceProcedureTracer">0/최대 100자</div>
 
         <div class="form-group thirdServiceTextInput">
             <label for="clientPreps">의뢰인 준비사항</label>
             <textarea id="clientPreps" class="thirdTextArea" name="clientPreps" onchange="keyCount10(this)"></textarea>
         </div>
-        <div class="thirdTextTracer" id="clientPrepsTracer"><p>0/최대 100자</p></div>
+        <div class="thirdTextTracer" id="clientPrepsTracer">0/최대 100자</div>
             <div class="thirdServiceTextInput">
             <label for="trdInpBtn">취소 및 환불 규정</label>
             <button class="trdRegulationBtn" id="trdInpBtn" data-bs-toggle="modal" data-bs-target="#trdShowModal" >취소 및 환불 규정 보기</button>
@@ -157,21 +157,16 @@
 
 
     <script>
-        function keyCount8(keyNum) {
-            document.getElementById("serviceExplainTracer").textContent = keyNum.value.length + "/최대 100자"; }
-        function keyCount9(keyNum) {
-            document.getElementById("serviceProcedureTracer").textContent = keyNum.value.length + "/최대 100자"; }
-        function keyCount10(keyNum) {
-            document.getElementById("clientPrepsTracer").textContent = keyNum.value.length + "/최대 100자"; }
-
-        var testBtn = function (context) {
-            var ui = $.summernote.ui;
-            var notBtn = ui.button({contents: '서비스 설명'});
-         //   notBtn.style.border='0, none, white';
-            return notBtn.render();
-        }
+        function keyCount8(keyNum1) {
+            document.getElementById("serviceExplainTracer").textContent = keyNum1.value.length + "/최대 100자"; }
+        function keyCount9(keyNum2) {
+            document.getElementById("serviceProcedureTracer").textContent = keyNum2.value.length + "/최대 100자"; }
+        function keyCount10(keyNum3) {
+            document.getElementById("clientPrepsTracer").textContent = keyNum3.value.length + "/최대 100자"; }
 
         $(document).ready(function() {
+
+
             // $("textarea[name=thirdTextArea]").summernote({
             //     toolbar: [
             //      //   ['mybutton', ['test']],

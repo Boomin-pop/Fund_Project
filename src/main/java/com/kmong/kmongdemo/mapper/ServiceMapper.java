@@ -19,4 +19,6 @@ public interface ServiceMapper {
     ServiceTypeChkDTO serviceTypeChkList(String code);
 
     void serviceInput(Map map);
+
+    void serviceTempSave(Map map);
 }

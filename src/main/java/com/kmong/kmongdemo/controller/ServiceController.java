@@ -41,9 +41,14 @@ public class ServiceController {
     public String serviceInput(MultipartHttpServletRequest mhr){
         System.out.println("인풋 요청 컨트롤러!!");
         serviceService.serviceInput(mhr);
-
         return "service/serviceInputComplete";
     }
+
+//    @PostMapping("/temporarySave")
+//    public void temporarySave(MultipartHttpServletRequest mhr){
+//        System.out.println("임시 저장 요청");
+//        serviceService.serviceTempSave(mhr);
+//    }
 
 
 
