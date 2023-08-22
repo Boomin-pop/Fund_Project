@@ -29,6 +29,7 @@ let serviceObject= {
 
 
     serviceTypeChk: function () {
+        var serviceTypeCnt = 0;
         let ServiceType;
         let code={
             serviceTopCatCode : $("select[name=serviceTopCat] > option:selected").val()
@@ -60,23 +61,25 @@ let serviceObject= {
 
                     // for(i=0; i< data.length; i++){
                     data.forEach(row => {
-
+                        serviceTypeCnt++;
                         let serviceTypeCode = row.serviceTypeCode;
                         let serviceTypeName = row.serviceTypeName;
                         let mandatoryInput = row.mandatoryInput;
                         console.log("forEach 코드 : " + serviceTypeCode + ", 타입명 : " + serviceTypeName + ", 필수입력 : " + mandatoryInput);
+                        console.log("idTest : serviceType"+serviceTypeCnt);
+
                         if (mandatoryInput == 1) {
                             str += '<div class="serviceType requiredBorder d-flex px-3 my-4" name="serviceTypeReq" style="width:800px; height:100px; line-height:100px">'
                                 + '<div style="width:150px; height:50px; color:red;">'
                                 + '<span name="typeName" value="' + serviceTypeCode + '" style="color:black">' + serviceTypeName + '</span>*</div>'
 
-                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" name="typeInput"  style="width:550px; height:50px; line-height:50px" value="" required placeholder="입력해주세요."></div>'
+                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" class="typeInput" name="serviceType'+serviceTypeCnt+'"  style="width:550px; height:50px; line-height:50px" value="" required placeholder="serviceType'+serviceTypeCnt+'"></div>'
                                 + '</div>'
                         }
                         if(mandatoryInput != 1) {
                             str += '<div class="serviceType d-flex px-3 my-4" name="serviceType" id="serviceType" style="width:800px; height:100px; line-height:100px">'
                                 + '<div style="width:150px; height:50px;><span name="typeName" value="' + serviceTypeCode + '">' + serviceTypeName + '</span></div>'
-                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" name="typeInput"  style="width:550px; height:50px; line-height:50px" value="" placeholder="입력해주세요."></div>'
+                                + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" class="typeInput" name="serviceType'+serviceTypeCnt+'"  style="width:550px; height:50px; line-height:50px" value="" placeholder="serviceType'+serviceTypeCnt+'"></div>'
                                 + '</div>'
                         }
                         if(serviceTypeCode=null){

@@ -160,8 +160,9 @@
         <div class="form-group">
             <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p id="subImgCount">0/9</p></div>
             <div class="detailCardArea" id="detailImgUpload" >
+                <div type="hidden" id="subImgExist" value="0"></div>
                 <div class="detailImgCard" id="imgCardSec1" >
-                    <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="file1"  style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>
+                    <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg1" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>
 
 <!--                    <label class="cardLabel">-->
 <!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img class="imgViewSpace" src="/imgs/imageupload2.png" >-->
@@ -233,6 +234,7 @@
     let mainImgInputChk="";
     var mainImgCnt = 0;
     var subImgCnt = 0;
+    var subImgExist = 0;
 
     var cnt = 1;
         $(document).ready(function () {
@@ -345,6 +347,7 @@
 
                 }
                 if(this.id!="imgMainBox"){
+                   document.getElementById("subImgExist").value="1";
                     imgSrc.style.display='block';
                     //delBtn.style.display='none';
                    // deleteIcon.hide();
@@ -410,7 +413,7 @@
 
             cnt++;
 
-            var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="file'+cnt+'"  style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
+            var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg'+cnt+'" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
 
             if (cnt < 4) {$("#imgCardSec1").append(appendedDetailImg);}
             if (cnt > 3 && cnt < 7) {$("#imgCardSec2").append(appendedDetailImg);}

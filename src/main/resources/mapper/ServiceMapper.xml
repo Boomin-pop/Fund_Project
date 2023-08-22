@@ -17,5 +17,15 @@
 
     </select>
 
+    <insert id="serviceInput" parameterType="map">
+        INSERT INTO TemporaryServiceInfo(splID, serviceStatus, serviceTitle, serviceTopCatCode, serviceType1, serviceType2, serviceType3, serviceType4,serviceType5,
+        serviceType6, serviceType7, serviceType8, serviceType9, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
+        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist)
+        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCatCode}, #{serviceType1}, #{serviceType2}, #{serviceType3}, #{serviceType4}, #{serviceType5},
+        #{serviceType6}, #{serviceType7}, #{serviceType8}, #{serviceType9}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
+        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist})
+
+    </insert>
+
 
 </mapper>

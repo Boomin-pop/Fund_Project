@@ -50,14 +50,15 @@
 <!--            <div><p style="width: 150px; height:25px; line-height: 25px; margin-top : 60px; text-align:center">카테고리</p></div>-->
                 <div class="serviceType" name="serviceType" id="serviceType">
                     <div> <p name="typeName"></p></div>
-                    <input type="text" name="typeInput" style="width:300px;"/>
+                    <input type="text" class="typeInput" style="width:300px;"/>
                 </div>
             </div>
             <div id="SrvTypeAlert" style="display:none;">
                 <p style="color:red;"><b>필수 서비스 타입을 설정해주세요</b></p>
             </div>
             <div class="mt-3 d-flex">
-                <span style="width:150px; margin-right:20px">검색 키워드ㅤㅤㅤ</span><input type="text" name="keywordInput" style="width:470px; line-height:50px; border:0" value="" placeholder="키워드 입력"/>
+                <input type="hidden" id="keywordIsExist" value="0";>
+                <span style="width:150px; margin-right:20px">검색 키워드(미지원)ㅤㅤ</span><input type="text" name="keywordInput" style="width:470px; line-height:50px; border:0" value="" placeholder="키워드 입력"/>
                 <span style="width:50px; line-height: 50px">0/5</span><button style="width:50px">추가</button>
             </div>
         </div>
@@ -98,7 +99,7 @@
 
 
         // let typeInputdiv = $("div[name=typeInputdiv]");
-         let typeInput =$("input[name=typeInput]:required");
+         let typeInput =$(".typeInput:required");
       //  let serviceType = $("div[name=serviceType]");
 
 

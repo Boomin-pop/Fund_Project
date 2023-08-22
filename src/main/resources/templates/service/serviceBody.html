@@ -88,7 +88,11 @@
 
     <div class="contents-area d-block">
 <!--        <form class="form-join" method="post" enctype="multipart/form-data">-->
-        <form class="form-join"  th:action="@{/controller/serviceInsert}" method="post" enctype="multipart/form-data">
+        <form class="form-join" method="post" enctype="multipart/form-data">
+            <div class="hiddenServiceBody">
+                <div type="hidden" id="splID" value="testID"></div>
+                <div type="hidden" id="serviceStatus" value="승인대기"></div>
+            </div>
             <div class="firstInput" id="firstInput" style="display:block; width:90%; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
                 <!--             <th:block layout:fragment="bodyPage1"></th:block>-->

@@ -1,6 +1,7 @@
 package com.kmong.kmongdemo.mapper;
 
 import com.kmong.kmongdemo.domain.CategoryDTO;
+import com.kmong.kmongdemo.domain.ServiceDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,4 +17,6 @@ public interface ServiceMapper {
     //Map<String, String> serviceTypeList();
 
     ServiceTypeChkDTO serviceTypeChkList(String code);
+
+    void serviceInput(Map map);
 }

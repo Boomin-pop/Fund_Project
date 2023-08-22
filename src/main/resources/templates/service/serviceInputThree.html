@@ -98,22 +98,22 @@
     <div class="container shadow-sm rounded mt-4" style="width:inherit;">
         <div class="pt-4 justify-content-center" style="width:800px;">
         <div class="form-group thirdServiceTextInput">
-            <label for="summernote1" >서비스 설명</label>
-            <textarea id="summernote1" class="thirdTextArea" name="thirdTextArea"></textarea>
+            <label for="serviceExplain" >서비스 설명</label>
+            <textarea id="serviceExplain" class="thirdTextArea" name="serviceExplain" onchange="keyCount8(this)"></textarea>
         </div>
-        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
+        <div class="thirdTextTracer" id="serviceExplainTracer"><p>0/최대 100자</p></div>
 
         <div class="form-group thirdServiceTextInput">
-            <label for="summernote2">서비스 제공절차</label>
-            <textarea id="summernote2" class="thirdTextArea" name="thirdTextArea"></textarea>
+            <label for="serviceProcedure">서비스 제공절차</label>
+            <textarea id="serviceProcedure" class="thirdTextArea" name="serviceProcedure" onchange="keyCount9(this)"></textarea>
         </div>
-        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
+        <div class="thirdTextTracer" id="serviceProcedureTracer"><p>0/최대 100자</p></div>
 
         <div class="form-group thirdServiceTextInput">
-            <label for="summernote3">의뢰인 준비사항</label>
-            <textarea id="summernote3" class="thirdTextArea" name="thirdTextArea"></textarea>
+            <label for="clientPreps">의뢰인 준비사항</label>
+            <textarea id="clientPreps" class="thirdTextArea" name="clientPreps" onchange="keyCount10(this)"></textarea>
         </div>
-        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
+        <div class="thirdTextTracer" id="clientPrepsTracer"><p>0/최대 100자</p></div>
             <div class="thirdServiceTextInput">
             <label for="trdInpBtn">취소 및 환불 규정</label>
             <button class="trdRegulationBtn" id="trdInpBtn" data-bs-toggle="modal" data-bs-target="#trdShowModal" >취소 및 환불 규정 보기</button>
@@ -157,6 +157,13 @@
 
 
     <script>
+        function keyCount8(keyNum) {
+            document.getElementById("serviceExplainTracer").textContent = keyNum.value.length + "/최대 100자"; }
+        function keyCount9(keyNum) {
+            document.getElementById("serviceProcedureTracer").textContent = keyNum.value.length + "/최대 100자"; }
+        function keyCount10(keyNum) {
+            document.getElementById("clientPrepsTracer").textContent = keyNum.value.length + "/최대 100자"; }
+
         var testBtn = function (context) {
             var ui = $.summernote.ui;
             var notBtn = ui.button({contents: '서비스 설명'});
@@ -180,7 +187,7 @@
             // });
 
 
-            $('#summernote1').summernote({
+            $('#serviceExplain').summernote({
                 placeholder:' 전문가 소개 (경력과 이력), 작업 가능 분야, 작업 제공 절차, 서비스 특징에 대해서 의뢰인이 이해하기 쉽도록 정확하게 작성해 주세요.\n' +
                     '• 외부 연락처 (전화번호, 카톡ID, 이메일, 외부링크 등)는 노출하실 수 없습니다.\n' +
                     '• 안드로이드 OS에서는 글자 크기 조절 및 정렬 기능을 제외한 에디터 기능만 지원되며, 나머지 기능은 추후 지원 예정입니다.',
@@ -195,7 +202,7 @@
             });
 
 
-          $('#summernote2').summernote({
+          $('#serviceProcedure').summernote({
               toolbar: [
                   ['style', ['style']],
                   ['style', ['bold', 'italic', 'underline']],
@@ -209,7 +216,7 @@
 
           });
 
-          $('#summernote3').summernote({
+          $('#clientPreps').summernote({
               toolbar: [
                   ['style', ['style']],
                   ['style', ['bold', 'italic', 'underline']],

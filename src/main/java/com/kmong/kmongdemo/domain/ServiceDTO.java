@@ -1,94 +1,120 @@
 package com.kmong.kmongdemo.domain;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ServiceDTO {
     private int serviceID;
     private String splID;
     private String serviceStatus;
     private String serviceTitle;
     private String serviceTopCatCode;
-    private String serviceTopCatName;
     private String serviceType1;
     private String serviceType2;
     private String serviceType3;
     private String serviceType4;
-    private String serviceType5;
-    private String serviceType6;
-    private String serviceType7;
-    private String serviceType8;
-    private String serviceType9;
-    private String serviceType10;
+
+    @Builder.Default
+    private String serviceType5 = "";
+    @Builder.Default
+    private String serviceType6 = "";
+    @Builder.Default
+    private String serviceType7 = "";
+    @Builder.Default
+    private String serviceType8 = "";
+    @Builder.Default
+    private String serviceType9 = "";
+    @Builder.Default
+    private String serviceType10 = "";
+    
 
     private int keywordIsExist;
+    
+    @Builder.Default
+    private String keyword1 = "";
+    @Builder.Default
+    private String keyword2 = "";
+    @Builder.Default
+    private String keyword3 = "";
+    @Builder.Default
+    private String keyword4 = "";
+    @Builder.Default
+    private String keyword5 = "";
 
-    private String keyword1;
-    private String keyword2;
-    private String keyword3;
-    private String keyword4;
-    private String keyword5;
     private String priceTitle;
     private String priceExplain;
     private int priceNumber;
     private int serviceDuration;
     private int serviceModNum;
 
-    private int AddOptExist1;
+    @Builder.Default
+    private int AddOptExist1 = 0;
     private String AddOptTitle1;
     private String AddOPtExplain1;
     private int AddOptPrice1;
     private int AddOptDay1;
 
-    private int AddOptExist2;
+    @Builder.Default
+    private int AddOptExist2 = 0;
     private String AddOptTitle2;
     private String AddOPtExplain2;
     private int AddOptPrice2;
     private int AddOptDay2;
-
-    private int AddOptExist3;
+    @Builder.Default
+    private int AddOptExist3 = 0;
     private String AddOptTitle3;
     private String AddOPtExplain3;
     private int AddOptPrice3;
     private int AddOptDay3;
 
-    private int AddOptExist4;
+    @Builder.Default
+    private int AddOptExist4 = 0;
     private String AddOptTitle4;
     private String AddOPtExplain4;
     private int AddOptPrice4;
     private int AddOptDay4;
 
-    private int AddOptExist5;
+    @Builder.Default
+    private int AddOptExist5 = 0;
     private String AddOptTitle5;
     private String AddOPtExplain5;
     private int AddOptPrice5;
     private int AddOptDay5;
 
-    private int AddOptExist6;
+    @Builder.Default
+    private int AddOptExist6 = 0;
     private String AddOptTitle6;
     private String AddOPtExplain6;
     private int AddOptPrice6;
     private int AddOptDay6;
 
-    private int AddOptExist7;
+    @Builder.Default
+    private int AddOptExist7 = 0;
     private String AddOptTitle7;
     private String AddOPtExplain7;
     private int AddOptPrice7;
     private int AddOptDay7;
 
-    private int AddOptExist8;
+    @Builder.Default
+    private int AddOptExist8 = 0;
     private String AddOptTitle8;
     private String AddOPtExplain8;
     private int AddOptPrice8;
     private int AddOptDay8;
 
-    private int AddOptExist9;
+    @Builder.Default
+    private int AddOptExist9 = 0;
     private String AddOptTitle9;
     private String AddOPtExplain9;
     private int AddOptPrice9;
     private int AddOptDay9;
 
-    private int AddOptExist10;
+    @Builder.Default
+    private int AddOptExist10 = 0;
     private String AddOptTitle10;
     private String AddOPtExplain10;
     private int AddOptPrice10;
