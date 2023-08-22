@@ -52,7 +52,7 @@ let serviceBodyBtn = {
         let serviceTopCat =$("select[name=serviceTopCat]");
         let charCounter=$("div[name=charCounter]");
         let topCatSel = $("select[name=serviceTopCat] > option:selected");
-        let typeInput = $("input[name=typeInput]:required");
+        let typeInput = $(".typeInput:required");
         let topCat = document.getElementById("serviceTopCat");
         let selectedCat = (topCat.options[topCat.selectedIndex].value);
         let srvCnt = 0;

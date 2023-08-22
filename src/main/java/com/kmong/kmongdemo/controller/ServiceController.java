@@ -27,19 +27,22 @@ public class ServiceController {
     private ServiceService serviceService;
 
     @GetMapping("/serviceReg")
-    public String serviceInput(Model model, HttpSession session) {
-        String splId = (String)session.getAttribute("splId");
-        System.out.println("전문가 id : "+splId);
+    public String serviceInput(Model model) {
+      //  String splId = (String)session.getAttribute("splId");
+        //System.out.println("전문가 id : "+splId);
         List<CategoryDTO> topCatList = serviceService.topCatList();
       //  System.out.println("topCatList = " + topCatList);
-        model.addAttribute("splId", splId);
+      //  model.addAttribute("splId", splId);
         model.addAttribute("topCatList", topCatList);
         return "service/serviceBody";
     }
 
-    @PostMapping("/serviceInsert")
-    public String serviceInput(ServiceDTO serviceDTO){
-        return null;
+    @PostMapping("/serviceReg")
+    public String serviceInput(MultipartHttpServletRequest mhr){
+        System.out.println("인풋 요청 컨트롤러!!");
+        serviceService.serviceInput(mhr);
+
+        return "service/serviceInputComplete";
     }
 
 

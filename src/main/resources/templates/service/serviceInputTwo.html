@@ -56,7 +56,7 @@
                       <p name="typeName" >제목<span class="redDot"> *</span></p>
                   </div>
                   <div>
-                  <input type="text" id="priceTitle" value=""  style="width:600px; height:50px; line-height:50px" onchange="keyCount2(this)" minlength="2" maxlength="20" placeholder="가격 옵션의 이름을 입력해주세요." required>
+                  <input type="text" id="priceTitle" name="priceTitle" value=""  style="width:600px; height:50px; line-height:50px" onchange="keyCount2(this)" minlength="2" maxlength="20" placeholder="가격 옵션의 이름을 입력해주세요." required>
                   </div>
                   <div class="charCounter" id="priceTitleCharCounter">0/20</div>
               </div>
@@ -71,7 +71,7 @@
                       <p name="typeName">설명<span class="redDot"> *</span></p>
                   </div>
                   <div>
-                      <input type="text" id="priceExplain" value="" style="width:600px; height:100px; line-height:100px" onchange="keyCount3(this)" placeholder="제공하는 서비스 내용을 입력해주세요." minlength="10" maxlength="60" required>
+                      <input type="text" id="priceExplain" name="priceExplain" value="" style="width:600px; height:100px; line-height:100px" onchange="keyCount3(this)" placeholder="제공하는 서비스 내용을 입력해주세요." minlength="10" maxlength="60" required>
                   </div>
                   <div class="charCounter" id="priceContentsCharCounter">0/60</div>
               </div>
@@ -86,7 +86,7 @@
                       <p name="typeName">금액(VAT 포함)<span class="redDot"> *</span></p>
                   </div>
                   <div style="padding-right: 30px">
-                      <input type="number" id="servicePriceNumber" value="" style="width:600px; height:50px; line-height:50px" placeholder="금액을 입력해 주세요. (최소 1000원)" min="1000" max="10000000000" required>
+                      <input type="number" id="servicePriceNumber" name="servicePriceNumber" value="" style="width:600px; height:50px; line-height:50px" placeholder="금액을 입력해 주세요. (최소 1000원)" min="1000" max="10000000000" required>
                   </div>
 <!--                  <div style="color:white">0/00</div>-->
               </div>
@@ -102,7 +102,7 @@
                   </div>
 <!--                  <div style="padding-right: 30px">-->
                       <div>
-                      <input type="number" id="serviceDuration" value="" style="width:600px; height:50px; line-height:50px" placeholder="작업 기간을 입력해주세요. (최대 120일)" min="1" max="120" required>
+                      <input type="number" id="serviceDuration" name="serviceDuration" value="" style="width:600px; height:50px; line-height:50px" placeholder="작업 기간을 입력해주세요. (최대 120일)" min="1" max="120" required>
                   </div>
                   <div>일</div>
 <!--                  <div style="color:white">0/00</div>-->
@@ -118,7 +118,7 @@
                           <p name="typeName">수정 횟수<span class="redDot"> *</span></p>
                       </div>
                       <div style="padding-right: 30px">
-                          <input type="number" id="svcModificationNum" value="" style="width:600px; height:50px; line-height:50px" placeholder="수정 횟수를 입력해주세요.(최대 15회)" min="0" max="15" required>
+                          <input type="number" id="svcModificationNum" name="svcModificationNum" value="" style="width:600px; height:50px; line-height:50px" placeholder="수정 횟수를 입력해주세요.(최대 15회)" min="0" max="15" required>
                       </div>
 <!--                      <div style="color:white">0/00</div>-->
                   </div>
@@ -152,29 +152,29 @@
     let serviceDuration = $("#serviceDuration");
     let svcModificationNum = $("#svcModificationNum");
 
-    var cnt = 0;
+    var cnt = 1;
     var addForm = '<div class="tailor-option">'
         + '<div class="mt-5 d-flex" onclick="chk(this)"><p class="me-auto"><b>맞춤옵션</b></p>'
-        + '<input type="checkbox" style="width:25px;" checked></div>'
+        + '<input type="checkbox" name="AddOptExist'+cnt+'" style="width:25px;" checked></div>'
         + '<div class="tailored"><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>제목</b></p></div>'
-        + '<div class="tailedInput"><input type="text" name="added_Input" placeholder="제목을 입력해주세요"><span>경우</span></div>'
+        + '<div class="tailedInput"><input type="text" name="added_Input" name="AddOptTitle'+cnt+'" placeholder="제목을 입력해주세요"><span>경우</span></div>'
         + '</div><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>설명</b></p></div>'
-        + '<div class="tailedInput"><input type="text" name="added_Input" placeholder="설명을 입력해주세요"></div>'
+        + '<div class="tailedInput"><input type="text" name="added_Input" name="AddOPtExplain'+cnt+'" placeholder="설명을 입력해주세요"></div>'
         + '</div><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>추가금액</b></p></div>'
-        + '<div class="tailedInputS"><input type="text" name="added_Input" placeholder="최소 1,000"><span>원 추가시</span></div>'
+        + '<div class="tailedInputS"><input type="text" name="added_Input" name="AddOptPrice'+cnt+'" placeholder="최소 1,000"><span>원 추가시</span></div>'
         + '</div><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>추가작업일</b></p></div>'
-        + '<div class="tailedInputS"><input type="text" name="added_Input" placeholder="최대 30일"><span>일 추가</span></div>'
+        + '<div class="tailedInputS"><input type="text" name="added_Input" name="AddOptDay'+cnt+'" placeholder="최대 30일"><span>일 추가</span></div>'
         + '</div></div></div>';
 
     $(".addbtn").on("click", function () {
         $(".appendArea").append(addForm);
         cnt++;
         console.log("cnt값:" + cnt);
-        if (cnt === 10) {
+        if (cnt === 11) {
             document.getElementById("addbtn").style.display = 'none';
         }
     })
