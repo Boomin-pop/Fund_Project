@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<body>
+
 <!-- 헤더 -->
 <th:block th:replace="/inc/header :: headerFragment"></th:block>
 <style>
@@ -24,6 +24,7 @@
         width:55px; height:40px;
     }
 </style>
+<body>
 <!--  바디  -->
 <div class="totalwrap">
     <!--    <aside th:replace="/inc/leftServiceInputNav :: asideFragment"></aside>-->
@@ -87,11 +88,11 @@
     </aside>
 
     <div class="contents-area d-block">
-<!--        <form class="form-join" method="post" enctype="multipart/form-data">-->
         <form class="form-join" method="post" enctype="multipart/form-data">
-            <div class="hiddenServiceBody">
-                <div type="hidden" id="splID" value="testID"></div>
-                <div type="hidden" id="serviceStatus" value="승인대기"></div>
+<!--        <form class="form-join" action="#" th:action="@{/serviceReg}" method="post" enctype="multipart/form-data">-->
+            <div class="form-group hiddenServiceBody">
+                <input type="hidden" name="splID" value="testID">testID</input>
+                <input type="hidden" name="serviceStatus" value="승인대기">승인대기</input>
             </div>
             <div class="firstInput" id="firstInput" style="display:block; width:90%; margin-bottom: 10%;">
                 <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
@@ -113,161 +114,32 @@
                 <th:block th:replace="/service/serviceInputFive :: bodyPage5"></th:block>
             </div>
         </form>
+
     </div>  <!--contents-area-->
-        <footer class="ServiceInputFooterArea container-fluid sticky-bottom">
+        <div class="ServiceInputFooterArea container-fluid sticky-bottom">
             <div class="emptyAside" style="width:200px;"></div>
             <div style="padding-left:850px">
-                <button class="serviceTempInput rounded" id="btnSave">저장</button>
-                <button class="svcNextBtn rounded" id="btnNext">다음</button>
-                <button type="submit" class="serviceFinalSubmit" id="serviceFinalSubmit" style="display:none">제출</button>
+                <!--<button class="serviceTempInput rounded" id="btnSave" type="submit" name="action" value="temporarySave" th:action="@{/temporarySave}">저장</button>-->
+                <button class="svcNextBtn rounded" id="btnNext" type="button">다음</button>
+                <button class="svcSubmitMidBtn" id="svcSubmitMidBtn" type="button" style="display:none">제출하기</button>
             </div>
-        </footer>
+        </div>
     </div> <!--middle wrap-->
+
 </div><!--total wrap-->
 
-
-
 <!-- 푸터 -->
-
 </body>
 <script src="/js/serviceValidation.js"></script>
-<!--<script>-->
-<!--    // let btnOne = $("#btn-one");-->
-<!--    // let btnTwo = $("#btn-two");-->
-<!--    // let btnThree = $("#btn-three");-->
-<!--    // let btnFour = $("#btn-four");-->
-<!--    // let btnFive = $("#btn-five");-->
-<!--    //let firstInput = $("#firstInput");-->
-<!--    // var firstBtn = firstBtn();-->
-<!--    // var secondBtn = secondBtn;-->
-<!--    // var thirdBtn = thirdBtn;-->
-<!--    // var fourthBtn = fourthBtn;-->
-<!--    // var fifthBtn = fifthBtn;-->
+<script>
+    // $(document).ready(function(){
+    //     $("#btnSave").click(function () {
+    //         $("form").attr("action", "/service/temporarySave");
+    //     });
+    //     $("#serviceFinalSubmit").click(function(){
+    //         $("form").attr("action", "/service/serviceReg");
+    //     })
+    // })
+</script>
 
-
-<!--    // init:function(){-->
-<!--    //     btnOne.on("click", function(){-->
-<!--    //         this.-->
-<!--    //     })-->
-<!--    //-->
-<!--    // }-->
-<!--    $(document).ready(function (){-->
-<!--        // btnOne.on("click", function(){-->
-<!--        //    firstBtn();-->
-<!--            //firstInput.style.display='none';-->
-<!--            // document.getElementByName("aside-btn").style.fontWeight='normal';-->
-
-<!--            // document.getElementById("btn-one").style.fontWeight='bolder';-->
-<!--            // document.getElementById("btn-two").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-three").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-four").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-five").style.fontWeight='normal';-->
-<!--            //-->
-<!--            //-->
-<!--            // document.getElementById("num1").innerText='V';-->
-<!--            // document.getElementById("num2").innerText='2';-->
-<!--            // document.getElementById("num3").innerText='3';-->
-<!--            // document.getElementById("num4").innerText='4';-->
-<!--            // document.getElementById("num5").innerText='5';-->
-<!--            //-->
-<!--            //-->
-<!--            // document.getElementById("firstInput").style.display='block';-->
-<!--            // document.getElementById("secondInput").style.display='none';-->
-<!--            // document.getElementById("thirdInput").style.display='none';-->
-<!--            // document.getElementById("forthInput").style.display='none';-->
-<!--            // document.getElementById("fifthInput").style.display='none';-->
-
-<!--       // })-->
-
-<!--        // btnTwo.on("click", function(){-->
-<!--        //     secondBtn();-->
-<!--            // document.getElementsByName("aside-btn").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-one").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-two").style.fontWeight='bolder';-->
-<!--            // document.getElementById("btn-three").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-four").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-five").style.fontWeight='normal';-->
-<!--            //-->
-<!--            // document.getElementById("num1").innerText='1';-->
-<!--            // document.getElementById("num2").innerText='V';-->
-<!--            // document.getElementById("num3").innerText='3';-->
-<!--            // document.getElementById("num4").innerText='4';-->
-<!--            // document.getElementById("num5").innerText='5';-->
-<!--            //-->
-<!--            // document.getElementById("firstInput").style.display='none';-->
-<!--            // document.getElementById("secondInput").style.display='block';-->
-<!--            // document.getElementById("thirdInput").style.display='none';-->
-<!--            // document.getElementById("forthInput").style.display='none';-->
-<!--            // document.getElementById("fifthInput").style.display='none';-->
-<!--        // })-->
-<!--        //-->
-<!--        // btnThree.on("click", function(){-->
-<!--        //     thirdBtn();-->
-<!--            //document.getElementsByName("aside-btn").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-one").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-two").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-three").style.fontWeight='bolder';-->
-<!--            // document.getElementById("btn-four").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-five").style.fontWeight='normal';-->
-<!--            //-->
-<!--            // document.getElementById("num1").innerText='1';-->
-<!--            // document.getElementById("num2").innerText='2';-->
-<!--            // document.getElementById("num3").innerText='V';-->
-<!--            // document.getElementById("num4").innerText='4';-->
-<!--            // document.getElementById("num5").innerText='5';-->
-<!--            //-->
-<!--            // document.getElementById("firstInput").style.display='none';-->
-<!--            // document.getElementById("secondInput").style.display='none';-->
-<!--            // document.getElementById("thirdInput").style.display='block';-->
-<!--            // document.getElementById("forthInput").style.display='none';-->
-<!--            // document.getElementById("fifthInput").style.display='none';-->
-<!--     //   })-->
-
-<!--        // btnFour.on("click", function(){-->
-<!--        //     fourthBtn();-->
-<!--            //  document.getElementsByName("aside-btn").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-one").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-two").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-three").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-four").style.fontWeight='bolder';-->
-<!--            // document.getElementById("btn-five").style.fontWeight='normal';-->
-<!--            //-->
-<!--            // document.getElementById("num1").innerText='1';-->
-<!--            // document.getElementById("num2").innerText='2';-->
-<!--            // document.getElementById("num3").innerText='3';-->
-<!--            // document.getElementById("num4").innerText='V';-->
-<!--            // document.getElementById("num5").innerText='5';-->
-<!--            //-->
-<!--            // document.getElementById("firstInput").style.display='none';-->
-<!--            // document.getElementById("secondInput").style.display='none';-->
-<!--            // document.getElementById("thirdInput").style.display='none';-->
-<!--            // document.getElementById("forthInput").style.display='block';-->
-<!--            // document.getElementById("fifthInput").style.display='none';-->
-<!--        // })-->
-<!--        //-->
-<!--        // btnFive.on("click", function(){-->
-<!--        //     fifthBtn();-->
-<!--            //   document.getElementsByName("aside-btn").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-one").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-two").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-three").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-four").style.fontWeight='normal';-->
-<!--            // document.getElementById("btn-five").style.fontWeight='bolder';-->
-<!--            //-->
-<!--            // document.getElementById("num1").innerText='1';-->
-<!--            // document.getElementById("num2").innerText='2';-->
-<!--            // document.getElementById("num3").innerText='3';-->
-<!--            // document.getElementById("num4").innerText='4';-->
-<!--            // document.getElementById("num5").innerText='V';-->
-<!--            //-->
-<!--            // document.getElementById("firstInput").style.display='none';-->
-<!--            // document.getElementById("secondInput").style.display='none';-->
-<!--            // document.getElementById("thirdInput").style.display='none';-->
-<!--            // document.getElementById("forthInput").style.display='none';-->
-<!--            // document.getElementById("fifthInput").style.display='block';-->
-<!--       // })-->
-<!--    });-->
-
-
-<!--</script>-->
 </html>

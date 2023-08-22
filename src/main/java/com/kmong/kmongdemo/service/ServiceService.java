@@ -19,4 +19,6 @@ public interface ServiceService {
       List<ServiceTypeDTO> serviceTypeList();
 
       void serviceInput(MultipartHttpServletRequest mhr);
+
+    void serviceTempSave(MultipartHttpServletRequest mhr);
 }

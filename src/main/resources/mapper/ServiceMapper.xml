@@ -18,13 +18,20 @@
     </select>
 
     <insert id="serviceInput" parameterType="map">
-        INSERT INTO TemporaryServiceInfo(splID, serviceStatus, serviceTitle, serviceTopCatCode, serviceType1, serviceType2, serviceType3, serviceType4,serviceType5,
+        INSERT INTO serviceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceType1, serviceType2, serviceType3, serviceType4,serviceType5,
         serviceType6, serviceType7, serviceType8, serviceType9, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
-        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist)
-        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCatCode}, #{serviceType1}, #{serviceType2}, #{serviceType3}, #{serviceType4}, #{serviceType5},
+        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist, subImg1, subImg2, subImg3, subImg4, subImg5, subImg6, subImg7, subImg8, subImg9)
+        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceType1}, #{serviceType2}, #{serviceType3}, #{serviceType4}, #{serviceType5},
         #{serviceType6}, #{serviceType7}, #{serviceType8}, #{serviceType9}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
-        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist})
-
+        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist}, #{subImg1}, #{subImg2}, #{subImg3}, #{subImg4}, #{subImg5}, #{subImg6}, #{subImg7}, #{subImg8}, #{subImg9})
+    </insert>
+    <insert id="serviceTempSave" parameterType="map">
+        INSERT INTO TemporaryServiceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceType1, serviceType2, serviceType3, serviceType4,serviceType5,
+        serviceType6, serviceType7, serviceType8, serviceType9, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
+        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist, subImg1, subImg2, subImg3, subImg4, subImg5, subImg6, subImg7, subImg8, subImg9)
+        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceType1}, #{serviceType2}, #{serviceType3}, #{serviceType4}, #{serviceType5},
+        #{serviceType6}, #{serviceType7}, #{serviceType8}, #{serviceType9}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
+        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist}, #{subImg1}, #{subImg2}, #{subImg3}, #{subImg4}, #{subImg5}, #{subImg6}, #{subImg7}, #{subImg8}, #{subImg9}))
     </insert>
 
 
