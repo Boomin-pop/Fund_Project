@@ -32,6 +32,24 @@
     width:100%;
     border:1px solid black;
 }
+.category-kind .cat-box #category-list .higher-category{
+    margin:5px;
+    background-color: #eeeeee;
+    border: 2px dashed #888888;
+    border-radius: 15px;
+}
+.category-kind .cat-box #category-list .higher-category .div{
+    width: 95%; height: 40px;
+    margin: 5px; padding: 5px;
+    margin-bottom: -5px;
+
+    box-sizing: border-box;
+
+    display:flex;
+}
+.category-kind .cat-box #category-list .higher-category .div h5{
+    margin:0;
+}
 .category-kind .cat-box .a{
     background-color: #d3d3d3;
     border-radius: 40px;

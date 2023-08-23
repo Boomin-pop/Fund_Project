@@ -9,6 +9,7 @@ import java.util.Properties;
 @Configuration
 public class MailConfig {
 
+    //    @Bean(name="mailSender")
     @Bean
     public JavaMailSender getJavaMailSender() {
 
@@ -24,8 +25,8 @@ public class MailConfig {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("offtinsonamu@gmail.com");
-        mailSender.setPassword("zqpuythwewnpvair");
+        mailSender.setUsername("donghyun0623@gmail.com");
+        mailSender.setPassword("arpwbhjvxqfdytbm");
         mailSender.setDefaultEncoding("utf-8");
         mailSender.setJavaMailProperties(properties);
 

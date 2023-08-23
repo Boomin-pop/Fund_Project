@@ -18,4 +18,17 @@
         ${query}
         LIMIT #{startIndex}, #{pageSize}
     </select>
+
+    <select id="signCount" resultType="int">
+        SELECT COUNT(*) FROM signLog
+    </select>
+    <!--    list 가져오기-->
+    <select id="signList" resultType="com.kmong.kmongdemo.domain.SignLogDTO">
+        SELECT * FROM signLog
+        <if test="id != ''">
+            WHERE signUserId LIKE '%${id}%' OR transactionSellerId LIKE '%${id}%'
+        </if>
+        ${query}
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
 </mapper>

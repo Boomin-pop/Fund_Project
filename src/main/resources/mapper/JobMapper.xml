@@ -8,4 +8,9 @@
         SELECT * FROM Job
     </select>
 
+    <select id="jobInfo" parameterType="int" resultType="com.kmong.kmongdemo.domain.JobDTO">
+        SELECT * FROM Job WHERE jobId = #{jobId}
+    </select>
+
+
 </mapper>

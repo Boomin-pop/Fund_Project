@@ -67,6 +67,7 @@ function showNextStep(next) {
     targetStep.css('display', 'block');
 }
 
+
 $('#nextBtn').on("click", function () {
     showNextStep(true);
 });
@@ -180,12 +181,9 @@ $(document).ready(function () {
     // 필요한 input 엘리먼트에 최소 날짜 설정
     $('#wanted').attr('min', formattedFiveDaysLater);
     $('#close').attr('min', formattedFiveDaysLater);
-});
 
-$('#requested').on('click', () => $('#tip').css('display', 'block'));
-$('#requested').focusout(() => $('#tip').css('display', 'none'));
+    ////////////////////////////////////////////////////////////////
 
-$(document).ready(function () {
     $('#title').on('input', function () {
         const inputVal = $(this).val();
         const charCnt = inputVal.length;
@@ -215,7 +213,101 @@ $(document).ready(function () {
             $('#term-chk').css('display', 'none');
         }
     });
+
+    ///////////////////////////////////////////////////////////////
+
+    $.ajax({
+        url: '/header/categoryList',
+        type: 'GET',
+        success: function (data) {
+            let catarr = [];
+            let categoryHtml = '<option value="" selected="selected">카테코리 선택</option>';
+            let categoryCnt = 1;
+            data.forEach(item => {
+                let categoryName = item.serviceTopCatName;
+                // console.log(categoryName);
+                catarr.push(categoryName);
+                categoryHtml += '<option value="' + categoryName + '">';
+                categoryHtml += categoryName;
+                categoryHtml += '</option>';
+            })
+            // console.log(catarr);
+            document.querySelector('#category').innerHTML = categoryHtml;
+            for (let i = 0; i < 5; i++) {
+                document.querySelector('#cat' + (i + 1)).innerHTML = catarr[i];
+            }
+
+        },
+        error: function () {
+            console.log('출력실패')
+        }
+    });
+
 });
+
+$('#requested').on('click', () => $('#tip').css('display', 'block'));
+$('#requested').focusout(() => $('#tip').css('display', 'none'));
+
+// $(document).ready(function () {
+//     $('#title').on('input', function () {
+//         const inputVal = $(this).val();
+//         const charCnt = inputVal.length;
+//         if (charCnt < 8) {
+//             $('#title-chk').css('display', 'block');
+//             $('#title-chk').text('8글자 이상 입력하세요').css('color', 'red');
+//         } else {
+//             $('#title-chk').css('display', 'none');
+//         }
+//     });
+//     $('#requested').on('input', function () {
+//         const inputVal = $(this).val();
+//         const charCnt = inputVal.length;
+//         if (charCnt < 8) {
+//             $('#requested-chk').css('display', 'block');
+//             $('#requested-chk').text('20글자 이상 입력하세요').css('color', 'red');
+//         } else {
+//             $('#requested-chk').css('display', 'none');
+//         }
+//     });
+//     $('#term').on('input', function () {
+//         const inputVal = $(this).val();
+//         if (inputVal < 1 || inputVal > 9999) {
+//             $('#term-chk').css('display', 'block');
+//             $('#term-chk').text('0 ~ 9999 사이로 입력하세요').css('color', 'red');
+//         } else {
+//             $('#term-chk').css('display', 'none');
+//         }
+//     });
+// });
+//
+// $(document).ready(function () {
+//     $.ajax({
+//         url: '/header/categoryList',
+//         type: 'GET',
+//         success: function (data) {
+//             let catarr = [];
+//             let categoryHtml = '<option value="" selected="selected">카테코리 선택</option>';
+//             let categoryCnt = 1;
+//             data.forEach(item => {
+//                 let categoryName = item.serviceTopCatName;
+//                 // console.log(categoryName);
+//                 catarr.push(categoryName);
+//                 categoryHtml += '<option value="'+categoryName+'">';
+//                 categoryHtml += categoryName;
+//                 categoryHtml += '</option>';
+//             })
+//             // console.log(catarr);
+//             document.querySelector('#category').innerHTML = categoryHtml;
+//             for (let i = 0; i < 5; i++) {
+//                 document.querySelector('#cat' + (i+1)).innerHTML = catarr[i];
+//             }
+//
+//         },
+//         error: function () {
+//             console.log('출력실패')
+//         }
+//     });
+// });
 
 
 /*  리펙토링 하기 전 코드

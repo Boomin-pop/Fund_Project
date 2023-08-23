@@ -14,3 +14,6 @@ create table projectRequest (
     constraint projectRequestApprove check (projectRequestApprove >= 0 AND projectRequestApprove <=2) -- projectRequestApprove 에 대한 제약조건
     -- foreign key(userId) references user(userId)
 );
+
+-----삭제 사유 추가
+alter table projectRequest add projectRequestDelete varchar(50);

@@ -8,4 +8,7 @@ import java.util.List;
 @Mapper
 public interface JobMapper {
     List<JobDTO> jobList();
+
+    JobDTO jobInfo(int jobId);
+
 }

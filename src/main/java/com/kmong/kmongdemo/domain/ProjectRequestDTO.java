@@ -21,4 +21,8 @@ public class ProjectRequestDTO {
     private String projectRequestTerm;
     private Timestamp projectRequestUpload;
     private int projectRequestApprove;
+
+//    삭제 사유 추가
+    private String projectRequestDelete;
+    private String userId;
 }

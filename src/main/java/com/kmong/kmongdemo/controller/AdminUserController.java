@@ -35,10 +35,10 @@ public class AdminUserController {
     @PutMapping("/admin/user/{userId}")
     public @ResponseBody String aminUserModify(@RequestBody UserDTO userDTO){
         adminUserService.userModify(userDTO);
-//        adminUserService.userCancle(userDTO);
         return null;
     }
 
+//    삭제 사유
     @PostMapping("/admin/user/{userId}")
     public @ResponseBody String adminUserDeleteR(@RequestBody UserDTO userDTO){
         adminUserService.userDeleteR(userDTO);

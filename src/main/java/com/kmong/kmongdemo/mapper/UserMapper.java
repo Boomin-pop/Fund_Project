@@ -16,4 +16,18 @@ public interface UserMapper {
     UserDTO nicknameCheck(String userNickname);
 
     UserDTO userLogin(UserDTO dto);
+
+    UserDTO userInfo(UserDTO dto);
+
+    int userUpdate(UserDTO dto);
+
+    void userDelete(UserDTO dto);
+
+    String findId(UserDTO dto);
+
+    int findPw(String uid, String uEmail, String tempPw);
+
+    int updatePw(UserDTO dto);
+
+
 }

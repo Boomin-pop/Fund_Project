@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/pwChange.css">
+</head>
+<header>
+  <nav>
+    <a href="/" class="logo">
+      <img src="/imgs/kmong.svg" style="width: 85px; height: 26px;" alt class="img">
+    </a>
+  </nav>
+</header>
+
+<body>
+<div class="container">
+  <div class="main">
+    <aside class="sidebar">
+      <p style="font-size: 18px; color: #303441; font-weight: 600;">계정 설정</p>
+
+      <hr style="margin: 0; border: none; background-color: rgb(0 0 0 / 12%);
+                background-color: #303441; height: 2px;  margin-top: 20px; margin-bottom: 20px;">
+
+      <a th:href="@{/user/userInfo}" class="side">나의 정보</a>
+      <a th:href="@{/user/pwChange}" class="side" style="background-color:#eee">비밀번호 설정</a>
+      <a th:href="@{/user/userUnregister}" class="side">회원탈퇴</a>
+    </aside>
+    <div class="content" style="margin-left: 24px; flex: 1;">
+      <h1>비밀번호 변경</h1>
+
+      <form style="margin-top: 20px; padding: 40px; border: 1px solid rgb(228, 229, 237);
+                display: flex; flex-direction: column;"  th:action="@{/user/changePw}" method="POST">
+        <div style="display:none;">
+          <th:block th:each="user : ${loginInfo}">
+
+            <input type="text" id="userId" th:value="${user.userId}">
+
+          </th:block>
+
+        </div>
+        <section class="currentPw" >
+          <label class="info">
+            <span style="font-size: 15px; font-weight: 600; color: #555969;">현재 비밀번호</span>
+          </label>
+
+          <div class="input">
+            <input type="text" class="inputbox"
+                   id="pw" name="pw" placeholder="기존 비밀번호를 입력해주세요.">
+          </div>
+
+
+        </section>
+        <section class="changePw" style="margin-top: 32px;">
+          <label class="info">
+            <span style="font-size: 15px; font-weight: 600; color: #555969;">새 비밀번호</span>
+          </label>
+          <label class="info">
+            <span style="font-size: 15px; font-weight: 600; color: #555969;">한번 더 입력해주세요</span>
+          </label>
+          <div class="input">
+            <input type="text" class="inputbox"
+                   id="newPw" name="newPw" placeholder="변경할 입력해주세요.">
+          </div>
+          <div class="input">
+            <input type="text" class="inputbox"
+                   id="newPwConfirm" name="newPwConfirm" placeholder="변경할 비밀번호를 한번더 입력해주세요.">
+          </div>
+          <p id="pwChkMsg"></p>
+        </section>
+        <div style="margin-top: 20px; display: flex;">
+          <div style="flex-grow: 1;"></div>
+
+          <button type="button" class="button" id="pwChangeBtn" >
+            <span>변경하기</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="/js/pwChange.js"></script>
+</body>
+</html>
