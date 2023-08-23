@@ -7,9 +7,19 @@
     <h1>kmong test home</h1>
     <button><a class="nav-link" href="/service/serviceReg">서비스 등록</a></button>
     <button><a class="nav-link" href="/mainpage">메인페이지</a></button>
-</div>
-<div>
+    <th:block th:each="svcList : ${serviceList}">
+        <div class="card m-2">
+            <div class="card-body">
+                <!-- 경로변수 사용하기 : localhost:8888/post/5-->
+                <a th:href="@{/service/{serviceID}(serviceID=${svcList.serviceID})}" style="text-decoration: none">
+                    <img th:src="@{/static/imgs/{mainImg}(mainImg=${svcList.mainImg})}" style="width:212px; height:160px;">
+                    <h4 class="card-title" th:text="${svcList.serviceTitle}"></h4>
+                    <h5 th:text="${svcList.servicePriceNumber}"></h5>
+                </a>
+            </div>
+        </div>
 
+</th:block>
 </div>
 <!-- 푸터 -->
 <th:block th:replace="inc/footer :: footerFragment"></th:block>

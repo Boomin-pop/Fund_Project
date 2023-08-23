@@ -1,12 +1,10 @@
 package com.kmong.kmongdemo.service;
 
-import com.kmong.kmongdemo.domain.CategoryDTO;
+import com.kmong.kmongdemo.domain.ServiceCategoryDTO;
 import com.kmong.kmongdemo.domain.ServiceDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeDTO;
 import com.kmong.kmongdemo.mapper.ServiceMapper;
-import org.apache.commons.fileupload.UploadContext;
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +12,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.*;
 
 @Service
@@ -25,9 +22,14 @@ public class ServiceServiceImpl implements ServiceService{
     private ServiceMapper serviceMapper;
 
     @Override
-    public List<CategoryDTO> topCatList() {
+    public List<ServiceCategoryDTO> topCatList() {
        // System.out.println(serviceMapper.topCatList());
         return serviceMapper.topCatList();
+    }
+
+    @Override
+    public List<ServiceDTO> serviceList(){
+        return serviceMapper.serviceList();
     }
 
     @Override
@@ -122,6 +124,7 @@ public class ServiceServiceImpl implements ServiceService{
             map.put(fileParamName, originName);
 
             serviceMapper.serviceInput(map);
+            serviceMapper.dbCleaner();
         }
     }
 
@@ -193,7 +196,14 @@ public class ServiceServiceImpl implements ServiceService{
         }
     }
 
+    @Override
+    public List<ServiceDTO> serviceInfo(int serviceID) {
+        return serviceMapper.serviceInfo(serviceID);
+    }
+
 }
+
+
 
 //    @Override
 //    public Map<String, Integer> serviceTypeMandList(){

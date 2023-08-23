@@ -1,6 +1,6 @@
 package com.kmong.kmongdemo.controller;
 
-import com.kmong.kmongdemo.domain.CategoryDTO;
+import com.kmong.kmongdemo.domain.ServiceDTO;
 import com.kmong.kmongdemo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +12,14 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    @Autowired
+    ServiceService serviceService;
 
     @GetMapping("/")
-    public String home(){
+    public String home(Model model){
+        List<ServiceDTO> serviceList = serviceService.serviceList();
+        model.addAttribute("serviceList", serviceList);
+
         return "home";
     }
 

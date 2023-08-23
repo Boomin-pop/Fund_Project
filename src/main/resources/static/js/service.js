@@ -69,15 +69,16 @@ let serviceObject= {
                         console.log("idTest : serviceType"+serviceTypeCnt);
 
                         if (mandatoryInput == 1) {
-                            str += '<div class="serviceType requiredBorder d-flex px-3 my-4" name="serviceTypeReq" style="width:800px; height:100px; line-height:100px">'
+                            str += '<input type="hidden" name="serviceTypeName'+serviceTypeCnt+'" value="'+serviceTypeName+'">'
+                                + '<div class="serviceType requiredBorder d-flex px-3 my-4" name="serviceTypeReq" style="width:800px; height:100px; line-height:100px">'
                                 + '<div style="width:150px; height:50px; color:red;">'
                                 + '<span name="typeName" value="' + serviceTypeCode + '" style="color:black">' + serviceTypeName + '</span>*</div>'
-
                                 + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" class="typeInput" name="serviceType'+serviceTypeCnt+'"  style="width:550px; height:50px; line-height:50px" value="" required placeholder="serviceType'+serviceTypeCnt+'"></div>'
                                 + '</div>'
                         }
                         if(mandatoryInput != 1) {
-                            str += '<div class="serviceType d-flex px-3 my-4" name="serviceType" id="serviceType" style="width:800px; height:100px; line-height:100px">'
+                            str += '<input type="hidden" name="serviceTypeName'+serviceTypeCnt+'" value="'+serviceTypeName+'">'
+                                + '<div class="serviceType d-flex px-3 my-4" name="serviceType" id="serviceType" style="width:800px; height:100px; line-height:100px">'
                                 + '<div style="width:150px; height:50px;><span name="typeName" value="' + serviceTypeCode + '">' + serviceTypeName + '</span></div>'
                                 + '<div class="typeInputdiv" name="typeInputdiv"><input type="text" class="typeInput" name="serviceType'+serviceTypeCnt+'"  style="width:550px; height:50px; line-height:50px" value="" placeholder="serviceType'+serviceTypeCnt+'"></div>'
                                 + '</div>'

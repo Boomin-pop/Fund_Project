@@ -12,22 +12,47 @@ public class ServiceDTO {
     private String splID;
     private String serviceStatus;
     private String serviceTitle;
-    private String serviceTopCatCode;
+    private String serviceTopCat;
+    private String serviceTopCatName;
+    private String serviceTypeName1;
     private String serviceType1;
+    private String serviceTypeName2;
     private String serviceType2;
+    private String serviceTypeName3;
     private String serviceType3;
-    private String serviceType4;
 
     @Builder.Default
+    private String serviceTypeName4 = "";
+    @Builder.Default
+    private String serviceType4 = "";
+
+    @Builder.Default
+    private String serviceTypeName5 = "";
+    @Builder.Default
     private String serviceType5 = "";
+
+    @Builder.Default
+    private String serviceTypeName6 = "";
     @Builder.Default
     private String serviceType6 = "";
+
+    @Builder.Default
+    private String serviceTypeName7 = "";
     @Builder.Default
     private String serviceType7 = "";
+
+    @Builder.Default
+    private String serviceTypeName8 = "";
     @Builder.Default
     private String serviceType8 = "";
+
+    @Builder.Default
+    private String serviceTypeName9 = "";
     @Builder.Default
     private String serviceType9 = "";
+
+    @Builder.Default
+    private String serviceTypeName10 = "";
     @Builder.Default
     private String serviceType10 = "";
     
@@ -47,9 +72,9 @@ public class ServiceDTO {
 
     private String priceTitle;
     private String priceExplain;
-    private int priceNumber;
+    private int servicePriceNumber;
     private int serviceDuration;
-    private int serviceModNum;
+    private int svcModificationNum;
 
     @Builder.Default
     private int AddOptExist1 = 0;

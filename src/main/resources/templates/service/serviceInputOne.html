@@ -33,12 +33,14 @@
             <div><p style="width: 150px; height:25px; line-height: 25px;  text-align:center">카테고리<span class="redDot">*</span></p></div>
             <div>
                 <select class="serviceTopCat" name="serviceTopCat" id="serviceTopCat" style="width:550px; height:25px;">
+
                     <option value=0>- 선택해 주세요 -</option>
                     <option value="" disabled>----------------------</option>
                     <th:block th:each="topCat : ${topCatList}">
                         <option name="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>
                     </th:block>
                 </select>
+                <input type="hidden" name="serviceTopCatName" id="serviceTopCatName" value="">
             </div>
         </div>
         <div id="TopCatAlert" style="display:none;">
@@ -67,6 +69,7 @@
        </div>
     </div>
     <div class="emptyArea" style="margin-bottom: 500px; height: 400px"></div>
+    <!-- Button trigger modal -->
 
 <script src="/js/service.js"></script>
 <script>
@@ -141,6 +144,8 @@
                 document.getElementById("redBorder2").style.border='1px solid gray';
                 topCatChk="true";
                 console.log("카테고리 선택 여부 : "+topCatChk);
+                document.getElementById("serviceTopCatName").value=topCatSel.text();
+                console.log("serviceTopCatName's value= "+ topCatSel.text());
             }
 
             if(topCatSel.value==0){

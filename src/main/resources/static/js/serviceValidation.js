@@ -20,13 +20,13 @@ let serviceBodyBtn = {
                 //this.firstInputValid(); this.firstInputValid(); this.secondInputValid(); this.thirdInputValid();
                 this.fourthInputValid(); console.log("4번째 다음 버튼 클릭!"); return}
         });
-        $("#serviceRegReq").on("click", () => {
-            this.fifthInputValid(); return;
-        })
-        $("#svcSubmitMidBtn").on("click", function(){
-            this.fifthInputValid(); return;
+        $("#serviceRegReq").on("click", function() {
+                serviceBodyBtn.fifthInputValid(); console.log("마지막 모달 호출"); return;
+        });
 
-        })
+        $("#svcSubmitMidBtn").on("click", function(){
+                serviceBodyBtn.fifthInputValid(); console.log("마지막 모달 호출"); return;
+        });
 
         $("#btn-one").on("click", ()=>{this.firstBtn(); return});
         $("#btn-two").on("click", ()=>{this.firstInputValid(); return});
@@ -71,7 +71,6 @@ let serviceBodyBtn = {
             for(let i=0; i<allTypeInput.length; i++){
                 allTypeInput.item(i).style.border='1px solid gray';
             }
-
         }
         // console.log(selectedCat);
         console.log("탑카테고리 선택된 것의 value : "+topCatSel.val());
@@ -199,15 +198,12 @@ let serviceBodyBtn = {
             console.log("수정 횟수 작성여부 : "+svcModificationNumChk);
         }
 
-
-
         if(priceTitleInputChk == "true" && priceExplainChk == "true" && servicePriceNumberChk == "true" && serviceDurationChk == "true" && svcModificationNumChk == "true"){
             console.log("두번째 유효성 검사 통과!!!");
             //this.thirdInputValid();
             this.thirdBtn();
         }else{return};
        // }else{ this.thirdBtn();};
-
     },
 
     thirdInputValid:function (){
@@ -222,7 +218,6 @@ let serviceBodyBtn = {
     },
 
     fourthInputValid:function (){
-
         if(imgTagSource.length>100){
             console.log(imgTagSource.length);
             mainImgInputChk="true";
@@ -241,11 +236,10 @@ let serviceBodyBtn = {
         //this.fifthInputValid();
         //document.getElementById("btnSave").style.display='none';
         document.getElementById("btnNext").style.display='none';
-        document.getElementById("serviceFinalSubmit").style.display='block';
+        document.getElementById("svcSubmitMidBtn").style.display='block';
 
         this.fifthBtn();
         }else{return};
-
     },
 
     fifthInputValid:function (){
@@ -253,7 +247,9 @@ let serviceBodyBtn = {
             && servicePriceNumberChk == "true" && serviceDurationChk == "true" && svcModificationNumChk == "true" && mainImgInputChk == "true") {
 
             console.log("다섯번째 유효성 검사 통과!!!");
-            $("#finalSubmitModal").show();
+            // $("#finalSubmitModal").show();
+             $("#finalSubmitModal").modal("show");
+            //document.getElementById("finalSubmitModal").style.display='block';
             return;
         }else{return};
     },
