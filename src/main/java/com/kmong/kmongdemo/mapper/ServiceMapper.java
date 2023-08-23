@@ -1,6 +1,6 @@
 package com.kmong.kmongdemo.mapper;
 
-import com.kmong.kmongdemo.domain.CategoryDTO;
+import com.kmong.kmongdemo.domain.ServiceCategoryDTO;
 import com.kmong.kmongdemo.domain.ServiceDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
 import com.kmong.kmongdemo.domain.ServiceTypeDTO;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Mapper
 public interface ServiceMapper {
-    List<CategoryDTO> topCatList();
+    List<ServiceCategoryDTO> topCatList();
 
     List<ServiceTypeDTO> serviceTypeList();
     //Map<String, String> serviceTypeList();
@@ -21,4 +21,10 @@ public interface ServiceMapper {
     void serviceInput(Map map);
 
     void serviceTempSave(Map map);
+
+    void dbCleaner();
+
+    List<ServiceDTO> serviceInfo(int serviceID);
+
+    List<ServiceDTO> serviceList();
 }

@@ -1,11 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--// 리뷰 남길 때 별 클릭시 label for"hidden checkbox" 선택 label 내부 img=별-->
+<!--//http://www.rustyparadise.com/conding/107138-->
+<!-- 헤더 -->
 <body>
-    // 리뷰 남길 때 별 클릭시 label for"hidden checkbox" 선택 label 내부 img=별
-    //http://www.rustyparadise.com/conding/107138
+<th:block th:replace="/inc/header :: headerFragment"></th:block>
+<style>
+    .svcTitleZone > p{
+        font-size: 20px;
+        font-weight: bolder;}
+
+    .priceNumber{
+        font-size: 18px;
+        font-weight: bolder;
+    }
+    .installmentInfo{
+        margin-bottom: 12px;
+    }
+    .priceTitle{
+        font-size: 14px;
+        font-weight: bolder;
+    }
+
+</style>
+<div class="d-flex justify-content-around">
+    <div></div>
+    <div class="thwrapper">
+      <th:block th:each="svcInfo : ${serviceInfo}">
+        <div><p name="catNameZone" th:text="${svcInfo.serviceTopCatName}"></p></div>
+         <div class="svcWholeSec d-flex" >
+           <div class="svcMainBody me-5">
+             <div class="MainImgArea"><img th:src="@{/static/imgs/{mainImg}(mainImg=${svcInfo.mainImg})}" style="width:652px; height:488px;"></div>
+<!--        <option name="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>-->
+           </div>
+
+        <aside class="asideArea d-block ms-5" style="width:470px">
+            <div class="svcTitleZone"><p name="svcTitleZone" th:text="${svcInfo.serviceTitle}"></p></div>
+            <div class="priceInfoArea d-block">
+                <div class="priceTabZone d-flex justify-content-around border"><p>STANDARAD</p><p>DELUXE</p><p>PREMIUM</p></div>
+            <div class="d-block border" >
+                <div class="priceNumber" th:text="${svcInfo.servicePriceNumber}+원"></div>
+                <div class="installmentInfo">무이자 할부 혜택🛈</div>
+                <div class="priceTitle" th:text="${svcInfo.priceTitle}"></div>
+                <div><p th:text="${svcInfo.priceExplain}"></p></div>
+                <div class="d-flex justify-content-between"><p>작업일</p><p th:text="${svcInfo.serviceDuration}+일"></p></div>
+                <div class="d-flex justify-content-between"><p>수정횟수</p><p th:text="${svcInfo.svcModificationNum}+일"></p></div>
+                <div class="d-flex flex-column justify-content-center align-items-center mt-5"  style="height:100px">
+
+                      <button type="button" class="btn btn-warning" style="width:420px; height: 52px;">구매하기</button>
+                      <a>가격 비교하기</a>
+                    </div>
+
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName1}"></p></div>
+                <div><p th:text="${svcInfo.serviceType1}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName2}"></p></div>
+                <div><p th:text="${svcInfo.serviceType2}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName3}"></p></div>
+                <div><p th:text="${svcInfo.serviceType3}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName4}"></p></div>
+                <div><p th:text="${svcInfo.serviceType4}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName5}"></p></div>
+                <div><p th:text="${svcInfo.serviceType5}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName6}"></p></div>
+                <div><p th:text="${svcInfo.serviceType6}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName7}"></p></div>
+                <div><p th:text="${svcInfo.serviceType7}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName8}"></p></div>
+                <div><p th:text="${svcInfo.serviceType8}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName9}"></p></div>
+                <div><p th:text="${svcInfo.serviceType9}"></p></div>
+            </div>
+            <div class="d-block">
+                <div><p th:text="${svcInfo.serviceTypeName10}"></p></div>
+                <div><p th:text="${svcInfo.serviceType10}"></p></div>
+            </div>
+        </div>
+
+        </aside>
+        </div>
+
+
+    </th:block>
+    </div>
+    <div></div>
+</div>
+
+<!-- 푸터 -->
+<footer th:replace="/inc/footer :: footerFragment"></footer>
 </body>
+
 </html>

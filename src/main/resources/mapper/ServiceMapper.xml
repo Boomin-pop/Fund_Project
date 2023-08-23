@@ -4,8 +4,17 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kmong.kmongdemo.mapper.ServiceMapper">
+    <select id="serviceList" resultType="serviceDTO">
+        SELECT serviceID, splID, serviceStatus, serviceTitle, servicePriceNumber, serviceTopCat, serviceTopCatName, mainImg
+        FROM serviceInfo
+    </select>
+
     <select id="topCatList" resultType="categoryDTO">
         SELECT * FROM serviceTopCat
+    </select>
+
+    <select id="serviceInfo" resultType="serviceDTO">
+        SELECT * FROM serviceInfo where serviceID=#{serviceID}
     </select>
 
     <select id="serviceTypeChkList" resultType="com.kmong.kmongdemo.domain.ServiceTypeChkDTO">
@@ -18,11 +27,11 @@
     </select>
 
     <insert id="serviceInput" parameterType="map">
-        INSERT INTO serviceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceType1, serviceType2, serviceType3, serviceType4,serviceType5,
-        serviceType6, serviceType7, serviceType8, serviceType9, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
+        INSERT INTO serviceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceTopCatName, serviceTypeName1, serviceType1, serviceTypeName2, serviceType2, serviceTypeName3, serviceType3, serviceTypeName4, serviceType4, serviceTypeName5, serviceType5,
+        serviceTypeName6, serviceType6, serviceTypeName7, serviceType7, serviceTypeName8, serviceType8, serviceTypeName9, serviceType9, serviceTypeName10, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
         serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist, subImg1, subImg2, subImg3, subImg4, subImg5, subImg6, subImg7, subImg8, subImg9)
-        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceType1}, #{serviceType2}, #{serviceType3}, #{serviceType4}, #{serviceType5},
-        #{serviceType6}, #{serviceType7}, #{serviceType8}, #{serviceType9}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
+        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceTopCatName}, #{serviceTypeName1}, #{serviceType1}, #{serviceTypeName2}, #{serviceType2}, #{serviceTypeName3}, #{serviceType3}, #{serviceTypeName4}, #{serviceType4}, #{serviceTypeName5}, #{serviceType5},
+        #{serviceTypeName6}, #{serviceType6}, #{serviceTypeName7}, #{serviceType7}, #{serviceTypeName8}, #{serviceType8}, #{serviceTypeName9}, #{serviceType9}, #{serviceTypeName10}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
         #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist}, #{subImg1}, #{subImg2}, #{subImg3}, #{subImg4}, #{subImg5}, #{subImg6}, #{subImg7}, #{subImg8}, #{subImg9})
     </insert>
     <insert id="serviceTempSave" parameterType="map">
@@ -33,6 +42,12 @@
         #{serviceType6}, #{serviceType7}, #{serviceType8}, #{serviceType9}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
         #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist}, #{subImg1}, #{subImg2}, #{subImg3}, #{subImg4}, #{subImg5}, #{subImg6}, #{subImg7}, #{subImg8}, #{subImg9}))
     </insert>
+
+    <delete id="dbCleaner">
+        DELETE s1 FROM serviceInfo s1 LEFT JOIN (SELECT MAX(serviceID) AS maxServiceID FROM serviceInfo GROUP BY serviceTitle) s2
+        ON s1.serviceID = s2.maxServiceID WHERE s2.maxServiceID IS NULL;
+    </delete>
+
 
 
 </mapper>
