@@ -11,7 +11,7 @@ drop table serviceBasicInfo;
 
 create table serviceBasicInfo(
 	serviceNo int primary key not null auto_increment,
-	splId varchar(50) not null,
+	splID varchar(50) not null,
 	serviceTopCatCode varchar(30) not null,
 	serviceTopCatName varchar(100) not null,
     serviceStatus varchar(100) not null default '승인대기'

@@ -68,8 +68,10 @@
 
        </div>
     </div>
+
     <div class="emptyArea" style="margin-bottom: 500px; height: 400px"></div>
     <!-- Button trigger modal -->
+
 
 <script src="/js/service.js"></script>
 <script>
@@ -79,10 +81,10 @@
     // let charCounter=$("div[name=charCounter]");
     //let serviceTitle = $("#serviceTitle");
     function keyCount(keyNum){
-        console.log("keynum : "+keyNum.value);
+        console.log("serviceTitle : "+keyNum.value);
         console.log(document.getElementById("charCounter").textContent);
         document.getElementById("charCounter").textContent="  "+keyNum.value.length+"/30";
-        console.log("servicetitle : "+document.getElementById("serviceTitle").value.length);
+        console.log("RealkeyNum : "+document.getElementById("serviceTitle").value.length);
         if(keyNum.value.length>30){
             document.getElementById("charCounter").style.color='red';
         }else{document.getElementById("charCounter").style.color='black';}

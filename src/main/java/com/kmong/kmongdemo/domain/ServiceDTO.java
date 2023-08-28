@@ -151,6 +151,9 @@ public class ServiceDTO {
     private String mainImg;
 
     private int subImgExist;
+    private int subImgQty;
+
+    private String subImg;
     private String subImg1;
     private String subImg2;
     private String subImg3;

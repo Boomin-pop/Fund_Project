@@ -26,28 +26,45 @@
 
     </select>
 
-    <insert id="serviceInput" parameterType="map">
+<!--    <insert id="serviceInput" parameterType="map">-->
+<!--        INSERT INTO serviceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceTopCatName, serviceTypeName1, serviceType1, serviceTypeName2, serviceType2, serviceTypeName3, serviceType3, serviceTypeName4, serviceType4, serviceTypeName5, serviceType5,-->
+<!--        serviceTypeName6, serviceType6, serviceTypeName7, serviceType7, serviceTypeName8, serviceType8, serviceTypeName9, serviceType9, serviceTypeName10, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,-->
+<!--        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist, subImg1, subImg2, subImg3, subImg4, subImg5, subImg6, subImg7, subImg8, subImg9)-->
+<!--        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceTopCatName}, #{serviceTypeName1}, #{serviceType1}, #{serviceTypeName2}, #{serviceType2}, #{serviceTypeName3}, #{serviceType3}, #{serviceTypeName4}, #{serviceType4}, #{serviceTypeName5}, #{serviceType5},-->
+<!--        #{serviceTypeName6}, #{serviceType6}, #{serviceTypeName7}, #{serviceType7}, #{serviceTypeName8}, #{serviceType8}, #{serviceTypeName9}, #{serviceType9}, #{serviceTypeName10}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},-->
+<!--        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist}, #{subImg1}, #{subImg2}, #{subImg3}, #{subImg4}, #{subImg5}, #{subImg6}, #{subImg7}, #{subImg8}, #{subImg9})-->
+<!--    </insert>-->
+<!--    <insert id="serviceInput" parameterType="map">-->
+<!--        INSERT INTO serviceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceType1, serviceType2, serviceType3, serviceType4,serviceType5,-->
+<!--        serviceType6, serviceType7, serviceType8, serviceType9, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,-->
+<!--        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist, subImg)-->
+<!--        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceType1}, #{serviceType2}, #{serviceType3}, #{serviceType4}, #{serviceType5},-->
+<!--        #{serviceType6}, #{serviceType7}, #{serviceType8}, #{serviceType9}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},-->
+<!--        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps},  #{subImgExist}, #{mainImg}, #{subImg})-->
+<!--    </insert>-->
+
+    <insert id="serviceTextInput" parameterType="map">
         INSERT INTO serviceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceTopCatName, serviceTypeName1, serviceType1, serviceTypeName2, serviceType2, serviceTypeName3, serviceType3, serviceTypeName4, serviceType4, serviceTypeName5, serviceType5,
-        serviceTypeName6, serviceType6, serviceTypeName7, serviceType7, serviceTypeName8, serviceType8, serviceTypeName9, serviceType9, serviceTypeName10, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
-        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist, subImg1, subImg2, subImg3, subImg4, subImg5, subImg6, subImg7, subImg8, subImg9)
-        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceTopCatName}, #{serviceTypeName1}, #{serviceType1}, #{serviceTypeName2}, #{serviceType2}, #{serviceTypeName3}, #{serviceType3}, #{serviceTypeName4}, #{serviceType4}, #{serviceTypeName5}, #{serviceType5},
-        #{serviceTypeName6}, #{serviceType6}, #{serviceTypeName7}, #{serviceType7}, #{serviceTypeName8}, #{serviceType8}, #{serviceTypeName9}, #{serviceType9}, #{serviceTypeName10}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
-        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist}, #{subImg1}, #{subImg2}, #{subImg3}, #{subImg4}, #{subImg5}, #{subImg6}, #{subImg7}, #{subImg8}, #{subImg9})
-    </insert>
-    <insert id="serviceTempSave" parameterType="map">
-        INSERT INTO TemporaryServiceInfo(splID, serviceStatus, serviceTitle, serviceTopCat, serviceType1, serviceType2, serviceType3, serviceType4,serviceType5,
-        serviceType6, serviceType7, serviceType8, serviceType9, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
-        serviceExplain, serviceProcedure, clientPreps, mainImg, subImgExist, subImg1, subImg2, subImg3, subImg4, subImg5, subImg6, subImg7, subImg8, subImg9)
-        values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceType1}, #{serviceType2}, #{serviceType3}, #{serviceType4}, #{serviceType5},
-        #{serviceType6}, #{serviceType7}, #{serviceType8}, #{serviceType9}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
-        #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{mainImg}, #{subImgExist}, #{subImg1}, #{subImg2}, #{subImg3}, #{subImg4}, #{subImg5}, #{subImg6}, #{subImg7}, #{subImg8}, #{subImg9}))
-    </insert>
+                serviceTypeName6, serviceType6, serviceTypeName7, serviceType7, serviceTypeName8, serviceType8, serviceTypeName9, serviceType9, serviceTypeName10, serviceType10, priceTitle, priceExplain, servicePriceNumber, serviceDuration, svcModificationNum,
+                serviceExplain, serviceProcedure, clientPreps, subImgExist, subImgQty, mainImg)
+                values(#{splID}, #{serviceStatus}, #{serviceTitle}, #{serviceTopCat}, #{serviceTopCatName}, #{serviceTypeName1}, #{serviceType1}, #{serviceTypeName2}, #{serviceType2}, #{serviceTypeName3}, #{serviceType3}, #{serviceTypeName4}, #{serviceType4}, #{serviceTypeName5}, #{serviceType5},
+                #{serviceTypeName6}, #{serviceType6}, #{serviceTypeName7}, #{serviceType7}, #{serviceTypeName8}, #{serviceType8}, #{serviceTypeName9}, #{serviceType9}, #{serviceTypeName10}, #{serviceType10}, #{priceTitle}, #{priceExplain}, #{servicePriceNumber}, #{serviceDuration},
+                #{svcModificationNum}, #{serviceExplain}, #{serviceProcedure}, #{clientPreps}, #{subImgExist}, #{subImgQty}, #{subImgExist})
+            </insert>
 
-    <delete id="dbCleaner">
-        DELETE s1 FROM serviceInfo s1 LEFT JOIN (SELECT MAX(serviceID) AS maxServiceID FROM serviceInfo GROUP BY serviceTitle) s2
-        ON s1.serviceID = s2.maxServiceID WHERE s2.maxServiceID IS NULL;
-    </delete>
+            <update id="serviceImgInput" parameterType="map">
+                UPDATE serviceInfo SET mainImg=#{mainImg}, subImg1=#{subImg1}, subImg2=#{subImg2}, subImg3=#{subImg3},
+                subImg4=#{subImg4}, subImg5=#{subImg5}, subImg6=#{subImg6}, subImg7=#{subImg7}, subImg8=#{subImg8}, subImg9=#{subImg9}
+                WHERE splID=#{splID} AND serviceTitle=#{serviceTitle}
+            </update>
 
 
 
-</mapper>
+            <delete id="dbCleaner">
+                DELETE s1 FROM serviceInfo s1 LEFT JOIN (SELECT MAX(serviceID) AS maxServiceID FROM serviceInfo GROUP BY serviceTitle) s2
+                ON s1.serviceID = s2.maxServiceID WHERE s2.maxServiceID IS NULL;
+            </delete>
+
+
+
+        </mapper>
