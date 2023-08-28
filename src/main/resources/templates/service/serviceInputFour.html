@@ -129,7 +129,7 @@
         <div class="positionFixedArea pt-4 pb-5" style="width:800px; height:75px;">
         <div class="form-group" style="height: 300px;">
         <div class="mainImgTitle"> <p>메인이미지등록(필수)</p><div id="mainImgCount"> 0/1</div></div>
-            <div class="imgUploadBox" id="imgMainBox" name="imgMainBox" style="border:1px solid white"><label for="mainImg" id="mainLabel" name="mainLabel" class="mainLabel"><div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div><div class="deleteIcon"  id="mainImgDelete" style="visibility: hidden">🗑️</div><input type="file" name="mainImg" id="mainImg" style="display:none" onchange="previewImg(this)"><div class="deleteHere" id="deleteHere"><img class="imgViewSpace" id="mainImgWindow" src="/imgs/imageupload2.png" ></div></label></div>
+            <div class="imgUploadBox" id="imgMainBox" name="imgMainBox" style="border:1px solid white"><label for="mainImg" id="mainLabel" name="mainLabel" class="mainLabel"><div class="imgUpBtn" id="imgUpBtn" style="display:none">📤 이미지 업로드</div><div class="deleteIcon"  id="mainImgDelete" style="visibility: hidden">🗑️</div><input type="file" name="mainImg" id="mainImg" style="display:none" onchange="previewImg(this)" accept="image/gif, image/jpeg, image/png, image/bmp"><div class="deleteHere" id="deleteHere"><img class="imgViewSpace" id="mainImgWindow" src="/imgs/imageupload2.png" ></div></label></div>
         </div>
         <div id="mainImgAlert" style="display:none;">
             <p style="color:red;"><b>최소 1개의 이미지를 등록해주세요.</b></p>
@@ -158,11 +158,13 @@
 <!--                  상세 이미지                            -->
 
         <div class="form-group">
+            <input type="hidden" name="subImgQty" id="subImgQty" value="">
             <div class="mainImgTitle"><p>상세이미지등록(선택)</p><p id="subImgCount">0/9</p></div>
             <div class="detailCardArea" id="detailImgUpload" >
                 <input type="hidden" id="subImgExist" name="subImgExist" value="0"></input>
                 <div class="detailImgCard" id="imgCardSec1" >
-                    <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg1" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>
+                    <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg1" style="display:none" onchange="previewImg(this)" accept="image/gif; image/jpeg; image/png; image/bmp;"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>
+<!--                    <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>-->
 
 <!--                    <label class="cardLabel">-->
 <!--                        <input type="file" class="concealedInput" name="file" style="display:none" onchange="previewImg(this)"><img class="imgViewSpace" src="/imgs/imageupload2.png" >-->
@@ -336,7 +338,7 @@
 
                 if(this.id==="imgMainBox"){
             //    this.firstChild.lastChild.style.display='block';
-                    this.style.border='1px solid white';
+                   // this.style.border='1px solid white';
                     imgSrc.style.display='block';
                     upBtn.style.display='none';
                     //delBtn.style.display='none';
@@ -387,8 +389,10 @@
 
                 //deleteArea.firstChild.remove();
                 //deleteArea.append('<img class="imgViewSpace" src="/imgs/imageupload2.png" >');
-                console.log("이미지 소스 길이 : " + imgSrc.src.length);
+                console.log("삭제 전 이미지 소스 길이 : " + imgSrc.src.length);
                 imgSrc.src = "/imgs/imageupload2.png";
+                console.log("삭제 후 이미지 소스 길이 : " + imgSrc.src.length);
+
                 if(parentId=="mainImgDelete"){
                     console.log("메인 이미지를 삭제함!!!")
                     imgTagSource = "";
@@ -412,7 +416,8 @@
 
             cnt++;
 
-            var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg'+cnt+'" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
+            var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg'+cnt+'" style="display:none" onchange="previewImg(this)" accept="image/gif, image/jpeg, image/png, image/bmp"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
+          //  var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
 
             if (cnt < 4) {$("#imgCardSec1").append(appendedDetailImg);}
             if (cnt > 3 && cnt < 7) {$("#imgCardSec2").append(appendedDetailImg);}
@@ -504,6 +509,8 @@
     function subImgCount(){
         console.log("subImgCnt : "+subImgCnt)
         document.getElementById("subImgCount").innerText=subImgCnt+"/9";
+        document.getElementById("subImgQty").value=subImgCnt;
+        console.log("subImgQty = "+document.getElementById("subImgQty").value);
     };
 
 

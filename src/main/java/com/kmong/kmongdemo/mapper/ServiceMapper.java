@@ -1,9 +1,6 @@
 package com.kmong.kmongdemo.mapper;
 
-import com.kmong.kmongdemo.domain.ServiceCategoryDTO;
-import com.kmong.kmongdemo.domain.ServiceDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeDTO;
+import com.kmong.kmongdemo.domain.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,4 +24,8 @@ public interface ServiceMapper {
     List<ServiceDTO> serviceInfo(int serviceID);
 
     List<ServiceDTO> serviceList();
+
+    int serviceTextInput(Map txtMap);
+
+    void serviceImgInput(Map imgMap);
 }

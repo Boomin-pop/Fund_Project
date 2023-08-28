@@ -1,12 +1,10 @@
 package com.kmong.kmongdemo.controller;
 
-import com.kmong.kmongdemo.domain.ServiceCategoryDTO;
-import com.kmong.kmongdemo.domain.ServiceDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeDTO;
+import com.kmong.kmongdemo.domain.*;
 import com.kmong.kmongdemo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,15 +37,104 @@ public class ServiceController {
     @GetMapping("/{serviceID}")
     public String serviceInfo(@PathVariable int serviceID, Model model){
         List<ServiceDTO> serviceInfo = serviceService.serviceInfo(serviceID);
+       
         model.addAttribute("serviceInfo", serviceInfo);
         return "service/serviceView";
     }
 
+    // @PostMapping("/serviceReg")
+    //    public String serviceInput(MultipartHttpServletRequest mhr){
+    //        System.out.println("인풋 요청 컨트롤러!!");
+    //        serviceService.serviceInput(mhr);
+    //
+    //        return "redirect:serviceInputComplete";
+    //    }
+
+
     @PostMapping("/serviceReg")
+   // public String serviceInput(MultipartHttpServletRequest mhr, Map txtMap, Map imgMap){
     public String serviceInput(MultipartHttpServletRequest mhr){
-        System.out.println("인풋 요청 컨트롤러!!");
-        serviceService.serviceInput(mhr);
-        return "redirect:serviceInputComplete";
+        System.out.println("Request Process Commence!!!");
+        String savePath = "/static/imgs";
+        String getSplID = mhr.getParameter("splID");
+        String getServiceTitle = mhr.getParameter("serviceTitle");
+        System.out.println("splIDTest = " + getSplID);
+        Map txtMap = new HashMap();
+        Map imgMap = new HashMap();
+        int Result = 0;
+        String realPath = mhr.getServletContext().getRealPath(savePath);
+        System.out.println(realPath);
+        int maxSize = 1024 * 1024 * 500; // 1kb * 1kb = 1MB*10 = 10MB
+        Enumeration<String> enu = mhr.getParameterNames();
+        while (enu.hasMoreElements()) {
+            String paramName = enu.nextElement();
+            String paramValue = mhr.getParameter(paramName);
+            System.out.println(paramName + ":" + paramValue);
+            txtMap.put(paramName, paramValue);
+        }
+        //String splIDAfter = (String) txtMap.get("splID");
+//        System.out.println("splIDAfter = " + splIDAfter);
+
+            // 이유는 모르겠으나 Enumeration에서 splID와 serviceTitle을 읽어오지 못함.
+//            txtMap.put("splID", getSplID);
+//            txtMap.put("serviceTitle", getServiceTitle);
+
+        Result = serviceService.serviceTextInput(txtMap);
+        System.out.println("(0=faild, 1orHigher=Succed)Result = " + Result);
+        if(Result>0){
+            System.out.println("Begin Input Images!!!");
+            Iterator<String> iter = mhr.getFileNames();
+            imgMap.put("splID", getSplID);
+            imgMap.put("serviceTitle", getServiceTitle);
+            while(iter.hasNext()) {
+                String fileParamName = iter.next();
+                System.out.println("fileParamName : " + fileParamName);
+
+                // MultipartFile : 파일정보를 갖고 있는 객체
+                MultipartFile mFile= mhr.getFile(fileParamName);
+
+                String originName = mFile.getOriginalFilename();
+                System.out.println("originName : " + originName);
+
+                File file = new File(realPath +"\\"+ fileParamName);
+                System.out.println("file = " + file);
+                if(mFile.getSize() !=0) { // 업로드된 경우
+                    if(!file.exists()) { // 파일이 존재하지 않으면 최초로 한번만 실행
+                        if(file.getParentFile().mkdir()) { // savePath에 지정된 폴더(fileRepo) 생성
+                            try {
+                                file.createNewFile();
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } // 임시파일 생성
+                        }//if
+                    }//if
+
+                    File uploadFile = new File(realPath +"\\"+originName);
+
+                    // 중복시 파일명 대체
+                    if(uploadFile.exists()) {
+                        originName = System.currentTimeMillis()+"_"+originName;
+                        uploadFile = new File(realPath +"\\"+originName);
+                    }	// if
+                    // 실제 파일 업로드하기
+                    try {
+                        mFile.transferTo(uploadFile);
+                    } catch (IllegalStateException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    //fileList.add(originName);
+                }
+                imgMap.put(fileParamName, originName);
+            }
+
+            serviceService.serviceImgInput(imgMap);
+        }
+            return "redirect:serviceInputComplete";
     }
 
     @GetMapping("serviceInputComplete")

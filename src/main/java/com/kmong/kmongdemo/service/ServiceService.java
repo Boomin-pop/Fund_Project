@@ -1,12 +1,11 @@
 package com.kmong.kmongdemo.service;
 
-import com.kmong.kmongdemo.domain.ServiceCategoryDTO;
-import com.kmong.kmongdemo.domain.ServiceDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeDTO;
+import com.kmong.kmongdemo.domain.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 
 public interface ServiceService {
@@ -17,11 +16,16 @@ public interface ServiceService {
 
       List<ServiceTypeDTO> serviceTypeList();
 
-      void serviceInput(MultipartHttpServletRequest mhr);
+//      void serviceInput(MultipartHttpServletRequest mhr);
 
     void serviceTempSave(MultipartHttpServletRequest mhr);
 
     List<ServiceDTO> serviceInfo(int serviceID);
 
     List<ServiceDTO> serviceList();
+
+    int serviceTextInput(Map txtMap);
+
+    void serviceImgInput(Map imgMap);
+
 }

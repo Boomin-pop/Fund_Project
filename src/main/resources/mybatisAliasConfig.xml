@@ -11,6 +11,8 @@
         <typeAlias type="com.kmong.kmongdemo.domain.JobDTO" alias="JobDTO"/>
         <typeAlias type="com.kmong.kmongdemo.domain.ServiceTypeDTO" alias="stDTO"/>
         <typeAlias type="com.kmong.kmongdemo.domain.ServiceDTO" alias="serviceDTO"/>
+        <typeAlias type="com.kmong.kmongdemo.domain.ServiceInfoDTO" alias="serviceInfoDTO"/>
+        <typeAlias type="com.kmong.kmongdemo.domain.ServiceSubImgDTO" alias="serviceSubImgDTO"/>
 
 
     </typeAliases>
