@@ -1,18 +1,16 @@
 package com.kmong.kmongdemo.controller;
 
-import com.kmong.kmongdemo.domain.CategoryDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeChkDTO;
-import com.kmong.kmongdemo.domain.ServiceTypeDTO;
+import com.kmong.kmongdemo.domain.*;
 import com.kmong.kmongdemo.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -26,25 +24,140 @@ public class ServiceController {
     private ServiceService serviceService;
 
     @GetMapping("/serviceReg")
-    public String serviceInput(Model model, HttpSession session) {
-        List<CategoryDTO> topCatList = serviceService.topCatList();
+    public String serviceInput(Model model) {
+      //  String splId = (String)session.getAttribute("splId");
+        //System.out.println("전문가 id : "+splId);
+        List<ServiceCategoryDTO> topCatList = serviceService.topCatList();
       //  System.out.println("topCatList = " + topCatList);
+      //  model.addAttribute("splId", splId);
         model.addAttribute("topCatList", topCatList);
         return "service/serviceBody";
     }
 
+    @GetMapping("/{serviceID}")
+    public String serviceInfo(@PathVariable int serviceID, Model model){
+        List<ServiceDTO> serviceInfo = serviceService.serviceInfo(serviceID);
+       
+        model.addAttribute("serviceInfo", serviceInfo);
+        return "service/serviceView";
+    }
+
+    // @PostMapping("/serviceReg")
+    //    public String serviceInput(MultipartHttpServletRequest mhr){
+    //        System.out.println("인풋 요청 컨트롤러!!");
+    //        serviceService.serviceInput(mhr);
+    //
+    //        return "redirect:serviceInputComplete";
+    //    }
+
+
+    @PostMapping("/serviceReg")
+   // public String serviceInput(MultipartHttpServletRequest mhr, Map txtMap, Map imgMap){
+    public String serviceInput(MultipartHttpServletRequest mhr){
+        System.out.println("Request Process Commence!!!");
+        String savePath = "/static/imgs";
+        String getSplID = mhr.getParameter("splID");
+        String getServiceTitle = mhr.getParameter("serviceTitle");
+        System.out.println("splIDTest = " + getSplID);
+        Map txtMap = new HashMap();
+        Map imgMap = new HashMap();
+        int Result = 0;
+        String realPath = mhr.getServletContext().getRealPath(savePath);
+        System.out.println(realPath);
+        int maxSize = 1024 * 1024 * 500; // 1kb * 1kb = 1MB*10 = 10MB
+        Enumeration<String> enu = mhr.getParameterNames();
+        while (enu.hasMoreElements()) {
+            String paramName = enu.nextElement();
+            String paramValue = mhr.getParameter(paramName);
+            System.out.println(paramName + ":" + paramValue);
+            txtMap.put(paramName, paramValue);
+        }
+        //String splIDAfter = (String) txtMap.get("splID");
+//        System.out.println("splIDAfter = " + splIDAfter);
+
+            // 이유는 모르겠으나 Enumeration에서 splID와 serviceTitle을 읽어오지 못함.
+//            txtMap.put("splID", getSplID);
+//            txtMap.put("serviceTitle", getServiceTitle);
+
+        Result = serviceService.serviceTextInput(txtMap);
+        System.out.println("(0=faild, 1orHigher=Succed)Result = " + Result);
+        if(Result>0){
+            System.out.println("Begin Input Images!!!");
+            Iterator<String> iter = mhr.getFileNames();
+            imgMap.put("splID", getSplID);
+            imgMap.put("serviceTitle", getServiceTitle);
+            while(iter.hasNext()) {
+                String fileParamName = iter.next();
+                System.out.println("fileParamName : " + fileParamName);
+
+                // MultipartFile : 파일정보를 갖고 있는 객체
+                MultipartFile mFile= mhr.getFile(fileParamName);
+
+                String originName = mFile.getOriginalFilename();
+                System.out.println("originName : " + originName);
+
+                File file = new File(realPath +"\\"+ fileParamName);
+                System.out.println("file = " + file);
+                if(mFile.getSize() !=0) { // 업로드된 경우
+                    if(!file.exists()) { // 파일이 존재하지 않으면 최초로 한번만 실행
+                        if(file.getParentFile().mkdir()) { // savePath에 지정된 폴더(fileRepo) 생성
+                            try {
+                                file.createNewFile();
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } // 임시파일 생성
+                        }//if
+                    }//if
+
+                    File uploadFile = new File(realPath +"\\"+originName);
+
+                    // 중복시 파일명 대체
+                    if(uploadFile.exists()) {
+                        originName = System.currentTimeMillis()+"_"+originName;
+                        uploadFile = new File(realPath +"\\"+originName);
+                    }	// if
+                    // 실제 파일 업로드하기
+                    try {
+                        mFile.transferTo(uploadFile);
+                    } catch (IllegalStateException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    //fileList.add(originName);
+                }
+                imgMap.put(fileParamName, originName);
+            }
+
+            serviceService.serviceImgInput(imgMap);
+        }
+            return "redirect:serviceInputComplete";
+    }
+
+    @GetMapping("serviceInputComplete")
+    public String serviceInputComplete(){
+
+        return "service/serviceInputComplete";
+    }
+//    @PostMapping("/temporarySave")
+//    public void temporarySave(MultipartHttpServletRequest mhr){
+//        System.out.println("임시 저장 요청");
+//        serviceService.serviceTempSave(mhr);
+//    }
+
+
+
     @PostMapping("/chkedServiceType")
-    public  @ResponseBody List<ServiceTypeDTO> chkedServiceType(@RequestBody CategoryDTO cDto, Model model){
+    public  @ResponseBody List<ServiceTypeDTO> chkedServiceType(@RequestBody ServiceCategoryDTO cDto, Model model){
 
         String code = cDto.getServiceTopCatCode();
           System.out.println("code = " + code);
           ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
             System.out.println("서비스타입 체크된 코드들 = " + stcDTO +"\n");
-            //List<ServiceTypeDTO> = serviceService.serviceTypeList();
-            //Map<String, String> serviceTypeList = new HashMap<>();
-        //Map<String, String> serviceTypeList = serviceService.serviceTypeList();
         List<ServiceTypeDTO> serviceTypeList = serviceService.serviceTypeList();
-        //System.out.println("serviceTypeList = " + serviceTypeList);
         List<ServiceTypeDTO> chkedTypeList = new ArrayList<>();
         Map<String, String> chkedServiceType = new HashMap<>();
         try {
@@ -109,84 +222,5 @@ public class ServiceController {
         return (List<ServiceTypeDTO>) chkedTypeList;
     }
 
-    //파일 업로드시 필요한 api : Apache Commons FileUpload
-    @PostMapping("/upload.do")
-    public @ResponseBody Map upload(MultipartHttpServletRequest mhr,
-                         HttpServletRequest request) throws IOException {
 
-        String repo = "resources/imgs";
-
-        // 서버의 실제 물리경로 얻어오기
-        String savePath = request.getServletContext().getRealPath("")+ File.separator+repo;
-        //separator = 운영체제에 따라 경로(//리눅스, \\윈도우)를 다르게 써줌.
-
-        System.out.println(savePath);
-
-        Map map = new HashMap();
-
-        // 파라미터로 넘어온 mhr파일의 정보를 확인해볼 수 있음.
-        Enumeration<String> enu = mhr.getParameterNames();
-        //mhr의 특징 : 텍스트파일, 바이너리 파일에 대한 정보를 모두 얻어올 수 있다.
-        // 2개의 정보를 동시에 받기위해 mhr을 사용하는 것
-
-        // 일반 텍스트 파일의 파라미터명(key), 해당 파라미터명의 value값을 가져옴
-        while(enu.hasMoreElements()) {
-            String paramName = enu.nextElement();
-            String paramValue = mhr.getParameter(paramName);
-
-            System.out.println(paramName + ":" + paramValue);
-            // 파라미터 키값과 밸류값( id:test name:홍길동 )을 저장함
-            map.put(paramName, paramValue);
-        }
-
-        //파일에 대한 정보
-        // 이터레이터 돌리는 법 : hasNext()
-        Iterator<String> iter = mhr.getFileNames();
-        List<String> fileList = new ArrayList<String>();
-        while(iter.hasNext()) {
-            String fileParamName = iter.next();
-            System.out.println("fileParamName : "+fileParamName);
-
-
-            //파일의 파라미터이름을 가져오면 MultipartFile 타입으로 파일의 정보를 가져올 수 있음/
-            //MultipartFile = 파일 정보를 갖고 있는 객체
-            MultipartFile mFile = mhr.getFile(fileParamName);
-            // 이 객체만 있으면 파일의 이름과 크기등도 알 수 있음.
-
-            //실제 올릴때 파일이름
-            String originName = mFile.getOriginalFilename();
-            System.out.println("originName : "+ originName);
-
-            File file = new File(savePath + "\\" + fileParamName);
-            // 이렇게 생성한 파일객체를 이용해
-            if(mFile.getSize() !=0) { // 해당 파일이 실제 업로드된 경우
-                if(!file.exists()) { // 실제 이 경로에 파일이 존재하지 않으면 최초로 한번만 실행
-                    if(file.getParentFile().mkdir()) {     //디렉토리를 만들면 exists가 true 리턴
-                        //savePath에 지정된 폴더(fileRepo)생성
-                        file.createNewFile(); //임시파일 생성.
-                    } // if getParent
-                }  // if exists
-
-                File uploadFile = new File(savePath + "\\" +originName);
-
-                //중복처리 중복시 파일명 대체
-                if(uploadFile.exists()) {
-                    originName = System.currentTimeMillis()+"_"+originName;
-                    uploadFile = new File(savePath + "\\" +originName);
-                }
-
-                // 실제 파일을 업로드 하기
-                mFile.transferTo(uploadFile);
-                fileList.add(originName);
-            } // if getsize
-
-        }
-
-        map.put("fileList", fileList);  // 파일리스트 추가
-
-        //텍스트 + 파일리스트 2개 다 map에 담아 보낸 것
-
-
-        return map;
-    }
 }

@@ -8,7 +8,8 @@ create table Job(
 drop table AdminServiceType;
 create table AdminServiceType(
 	serviceTypeId int primary key auto_increment,
-    serviceTypeName varchar(50) not null
+    serviceTypeName varchar(50) not null,
+    serviceTypeMandatory int
 );
 
 drop table category;

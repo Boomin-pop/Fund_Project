@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFragment"></th:block>
+<div class="d-flex justify-content-around" style="height:800px">
+<div></div>
+        <div class="d-flex flex-column justify-content-center align-items-center" style="width:700px; text-align:center; background-color:rgb(250, 250, 250)"; >
+                <h1 class="my-5"><b>작성 완료!</b></h1>
+                <button style="width:300px; height: 100px"><a class="nav-link" href="/">메인페이지</a></button>
+        </div>
+<div></div>
+</div>
+<footer th:replace="/inc/footer :: footerFragment"></footer>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <th:block th:fragment="bodyPage2">
 <style>
     .appendArea{
-        width:900px;
+        width:800px;
     }
 
     .tailored{
@@ -23,75 +23,114 @@
     }
 
     .tailedInput > input{
-        width:590px;
+        width:490px;
         border:0;
         background-color: rgb(250, 250, 252);
     }
 
+    .tailedInputS > input{
+        width : 200px;
+        border : 0;
+        background-color: rgb(250, 250, 252);
+    }
+
+    #addbtn{
+        cursor: pointer;
+    }
+
+    .serviceType2{
+        width:800px; height:100px; line-height:100px;
+        border: 1px solid gray;
+    }
+
+
 </style>
-<div class="container shadow-sm w-50% p-5 rounded mt-4">
+<div class="container shadow-sm rounded mt-4" style="width:inherit">
          <div><p><b>가격정보</b></p></div>
       <div class="standard">
           <h6><b>STANDARD<hr></b></h6>
 
-          <div class="form-group">
-              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
-                  <div style="width:200px; height:50px; line-height:100px">
-                      <p name="typeName" value="priceTitle">제목</p>
+          <div class="form-group" >
+              <div class="serviceType2 d-flex px-3 my-4" id="redBorder3">
+                  <div style="width:150px; height:50px; line-height:100px">
+                      <p name="typeName" >제목<span class="redDot"> *</span></p>
                   </div>
                   <div>
-                  <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                  <input type="text" id="priceTitle" name="priceTitle" value=""  style="width:600px; height:50px; line-height:50px" onchange="keyCount2(this)" minlength="2" maxlength="20" placeholder="가격 옵션의 이름을 입력해주세요." required>
                   </div>
+                  <div class="charCounter" id="priceTitleCharCounter">0/20</div>
               </div>
+          </div>
+          <div id="priceTitleAlert" style="display:none;">
+              <p style="color:red;"><b>가격 옵션의 이름을 입력해주세요.(2~20자)</b></p>
           </div>
 
           <div class="form-group">
-              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
-                  <div style="width:200px; height:50px; line-height:100px">
-                      <p name="typeName" value="priceExplain">설명</p>
+              <div class="serviceType3 px-3 my-4 d-flex" id="redBorder4" style=" width:800px; height:150px; line-height:150px; border: 1px solid gray;">
+                  <div style="width:150px; height:100px; line-height:150px">
+                      <p name="typeName">설명<span class="redDot"> *</span></p>
                   </div>
                   <div>
-                      <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                      <input type="text" id="priceExplain" name="priceExplain" value="" style="width:600px; height:100px; line-height:100px" onchange="keyCount3(this)" placeholder="제공하는 서비스 내용을 입력해주세요." minlength="10" maxlength="60" required>
                   </div>
+                  <div class="charCounter" id="priceContentsCharCounter">0/60</div>
               </div>
+          </div>
+          <div id="priceExplainAlert" style="display:none;">
+              <p style="color:red;"><b>가격 옵션의 설명을 입력해주세요.(10~60자)</b></p>
+          </div>
+
+          <div class="form-group" >
+              <div class="serviceType2 d-flex px-3 my-4" id="redBorder5">
+                  <div style="width:150px; height:50px; line-height:100px">
+                      <p name="typeName">금액(VAT 포함)<span class="redDot"> *</span></p>
+                  </div>
+                  <div style="padding-right: 30px">
+                      <input type="number" id="servicePriceNumber" name="servicePriceNumber" value="" style="width:600px; height:50px; line-height:50px" placeholder="금액을 입력해 주세요. (최소 1000원)" min="1000" max="10000000000" required>
+                  </div>
+<!--                  <div style="color:white">0/00</div>-->
+              </div>
+          </div>
+          <div id="priceNumberAlert" style="display:none;">
+              <p style="color:red;"><b>가격을 입력해 주세요.(1000원~100억)</b></p>
           </div>
 
           <div class="form-group">
-              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
-                  <div style="width:200px; height:50px; line-height:100px">
-                      <p name="typeName" value="priceExplain">금액(VAT 포함)</p>
+              <div class="serviceType2 d-flex px-3 my-4" id="redBorder6">
+                  <div style="width:150px; height:50px; line-height:100px">
+                      <p name="typeName">작업 기간<span class="redDot"> *</span></p>
                   </div>
-                  <div>
-                      <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+<!--                  <div style="padding-right: 30px">-->
+                      <div>
+                      <input type="number" id="serviceDuration" name="serviceDuration" value="" style="width:600px; height:50px; line-height:50px" placeholder="작업 기간을 입력해주세요. (최대 120일)" min="1" max="120" required>
                   </div>
+                  <div>일</div>
+<!--                  <div style="color:white">0/00</div>-->
               </div>
           </div>
-
-          <div class="form-group">
-              <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
-                  <div style="width:200px; height:50px; line-height:100px">
-                      <p name="typeName" value="priceExplain">작업 기간</p>
-                  </div>
-                  <div>
-                      <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
-                  </div>
-              </div>
+          <div id="serviceDurationAlert" style="display:none;">
+              <p style="color:red;"><b>작업 기간을 입력해주세요.(최대 120일)</b></p>
           </div>
 
               <div class="form-group">
-                  <div class="serviceType d-flex border border-secondary px-3 my-4" name="serviceType" style="width:900px; height:100px; line-height:100px">
-                      <div style="width:200px; height:50px; line-height:100px">
-                          <p name="typeName" value="priceExplain">수정 횟수</p>
+                  <div class="serviceType2 d-flex px-3 my-4" id="redBorder7">
+                      <div style="width:150px; height:50px; line-height:100px">
+                          <p name="typeName">수정 횟수<span class="redDot"> *</span></p>
                       </div>
-                      <div>
-                          <input type="text" name="typeInput"  style="width:700px; height:50px; line-height:50px" placeholder="입력해주세요.">
+                      <div style="padding-right: 30px">
+                          <input type="number" id="svcModificationNum" name="svcModificationNum" value="" style="width:600px; height:50px; line-height:50px" placeholder="수정 횟수를 입력해주세요.(최대 15회)" min="0" max="15" required>
                       </div>
+<!--                      <div style="color:white">0/00</div>-->
                   </div>
               </div>
+          <div id="svcModNumAlert" style="display:none;">
+              <p style="color:red;"><b>서비스 기간내 수정 가능한 횟수를 입력해주세요.</b></p>
+          </div>
+
         <div class="addPrcOpt">
             <div><p><b>추가 옵션</b></p></div>
             <div class="appendArea"></div>
-            <div class="addbtn border border-secondary p-2 h-50 mt-5" id="addbtn"><b>+ 맞춤옵션 추가</b></div>
+            <div class="addbtn border border-secondary p-2 h-50 mt-5" id="addbtn" style="width:800px"><b>+ 맞춤옵션 추가</b></div>
 
         </div>
 
@@ -102,48 +141,158 @@
     </div>
 </div>
 <script>
-    function chk(obj) {
+    let priceTitleInputChk = "";
+    let priceExplainChk = "";
+    let servicePriceNumberChk = "";
+    let serviceDurationChk = "";
+    let svcModificationNumChk = "";
+    let priceTitle = $("#priceTitle");
+    let priceExplain = $("#priceExplain");
+    let servicePriceNumber = $("#servicePriceNumber");
+    let serviceDuration = $("#serviceDuration");
+    let svcModificationNum = $("#svcModificationNum");
 
-        if(obj.lastChild.checked==false)
-           {obj.lastChild.checked=true;}
-        else{obj.lastChild.checked=false;}
+    var cnt = 1;
+    var addForm = '<div class="tailor-option">'
+        + '<div class="mt-5 d-flex" onclick="chk(this)"><p class="me-auto"><b>맞춤옵션</b></p>'
+        + '<input type="checkbox" name="AddOptExist'+cnt+'" style="width:25px;" checked></div>'
+        + '<div class="tailored"><div class="d-flex">'
+        + '<div class="tailedTitle"><p name="added_title"><b>제목</b></p></div>'
+        + '<div class="tailedInput"><input type="text" class="added_Input" name="AddOptTitle'+cnt+'" placeholder="제목을 입력해주세요"><span>경우</span></div>'
+        + '</div><div class="d-flex">'
+        + '<div class="tailedTitle"><p name="added_title"><b>설명</b></p></div>'
+        + '<div class="tailedInput"><input type="text" class="added_Input" name="AddOPtExplain'+cnt+'" placeholder="설명을 입력해주세요"></div>'
+        + '</div><div class="d-flex">'
+        + '<div class="tailedTitle"><p name="added_title"><b>추가금액</b></p></div>'
+        + '<div class="tailedInputS"><input type="text" class="added_Input" name="AddOptPrice'+cnt+'" placeholder="최소 1,000"><span>원 추가시</span></div>'
+        + '</div><div class="d-flex">'
+        + '<div class="tailedTitle"><p name="added_title"><b>추가작업일</b></p></div>'
+        + '<div class="tailedInputS"><input type="text" class="added_Input" name="AddOptDay'+cnt+'" placeholder="최대 30일"><span>일 추가</span></div>'
+        + '</div></div></div>';
 
-        if(obj.nextSibling.style.display==='none')
-           {obj.nextSibling.style.display='block';}
-        else{obj.nextSibling.style.display='none';}
+    $(".addbtn").on("click", function () {
+        $(".appendArea").append(addForm);
+        cnt++;
+        console.log("cnt값:" + cnt);
+        if (cnt === 11) {
+            document.getElementById("addbtn").style.display = 'none';
+        }
+    })
+
+    function keyCount2(keyNum) {
+        document.getElementById("priceTitleCharCounter").textContent = "  " + keyNum.value.length + "/20";
+        if (keyNum.value.length > 20) {document.getElementById("priceTitleCharCounter").style.color = 'red';
+        } else {document.getElementById("priceContentsCharCounter").style.color = 'black';}
     }
 
-    $(document).ready(function (){
-        var cnt = 0;
-        var addForm = '<div class="tailor-option">'
-            +'<div class="mt-5 d-flex" onclick="chk(this)"><p class="me-auto"><b>맞춤옵션</b></p>'
-            +'<input type="checkbox" style="width:25px;" checked></div>'
-            +'<div class="tailored"><div class="d-flex">'
-            +'<div class="tailedTitle"><p name="added_title"><b>제목</b></p></div>'
-            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="제목을 입력해주세요"><span>경우</span></div>'
-            +'</div><div class="d-flex">'
-            +'<div class="tailedTitle"><p name="added_title"><b>설명</b></p></div>'
-            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="설명을 입력해주세요"></div>'
-            +'</div><div class="d-flex">'
-            +'<div class="tailedTitle"><p name="added_title"><b>추가금액</b></p></div>'
-            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="최소 1,000"><span>추가시</span></div>'
-            +'</div><div class="d-flex">'
-            +'<div class="tailedTitle"><p name="added_title"><b>추가작업일</b></p></div>'
-            +'<div class="tailedInput"><input type="text" name="added_Input" placeholder="최대 30일"><span>일 추가</span></div>'
-            +'</div></div></div>';
+    function keyCount3(keyNum) {
+        document.getElementById("priceContentsCharCounter").textContent = "  " + keyNum.value.length + "/60";
+        if (keyNum.value.length > 60) {document.getElementById("priceContentsCharCounter").style.color = 'red';
+        } else {document.getElementById("priceContentsCharCounter").style.color = 'black';}
+    }
 
-        $(".addbtn").on("click", function (){
-            $(".appendArea").append(addForm);
-            cnt++;
-            console.log("cnt값:"+cnt);
-            if(cnt===10){
-                document.getElementById("addbtn").style.display='none';
-            }
+    function chk(obj) {
+
+        if (obj.lastChild.checked == false) {
+            obj.lastChild.checked = true;
+        } else {
+            obj.lastChild.checked = false;
+        }
+
+        if (obj.nextSibling.style.display === 'none') {
+            obj.nextSibling.style.display = 'block';
+        } else {
+            obj.nextSibling.style.display = 'none';
+        }
+    }
+
+    priceTitle.on("change", function () {
+        if (priceTitle.val().length < 20 && priceTitle.val().length > 1) {
+            document.getElementById("priceTitleAlert").style.display='none';
+            priceTitleInputChk = "true";
+            document.getElementById("redBorder3").style.border='1px solid gray';
+            console.log("가격옵션 제목 작성여부 : "+priceTitleInputChk);
+        }
+        if (priceTitle.val().length > 20 || priceTitle.val().length < 2 ) {
+            document.getElementById("priceTitleAlert").style.display='block';
+            priceTitleInputChk = "false";
+            document.getElementById("redBorder3").style.border='3px solid red';
+            console.log("가격옵션 제목 작성여부 : "+priceTitleInputChk);
+        }
+
+    });
+
+    priceExplain.on("change", function (){
+        if (priceExplain.val().length <= 60 && priceExplain.val().length >= 10) {
+            document.getElementById("priceExplainAlert").style.display='none';
+            priceExplainChk = "true";
+            document.getElementById("redBorder4").style.border='1px solid gray';
+            console.log("가격옵션 내용 작성여부 : "+priceExplainChk);
+        }
+        if (priceExplain.val().length > 60 || priceExplain.val().length < 10) {
+            document.getElementById("priceExplainAlert").style.display='block';
+            priceExplainChk = "false";
+            document.getElementById("redBorder4").style.border='3px solid red';
+            console.log("가격옵션 내용 작성여부 : "+priceExplainChk);
+        }
+
+    });
+
+    servicePriceNumber.on("change", function (){
+        if(servicePriceNumber.val()<10000000001 && servicePriceNumber.val()>999){
+            console.log("기입한 액수 : " + servicePriceNumber);
+            document.getElementById("priceNumberAlert").style.display='none';
+            servicePriceNumberChk = "true";
+            document.getElementById("redBorder5").style.border='1px solid gray';
+            console.log("가격옵션 금액 작성여부 : "+servicePriceNumberChk);
+        }
+        if(servicePriceNumber.val()>10000000000 || servicePriceNumber.val()<1000){
+            console.log("기입한 액수 : " + servicePriceNumber);
+        document.getElementById("priceNumberAlert").style.display='block';
+            servicePriceNumberChk = "false";
+            document.getElementById("redBorder5").style.border='3px solid red';
+            console.log("가격옵션 금액 작성여부 : "+servicePriceNumberChk);
+        }
+
+
+    });
+
+    serviceDuration.on("change", function (){
+        if(serviceDuration.val()<121 && serviceDuration.val()>0){
+            document.getElementById("serviceDurationAlert").style.display='none';
+            serviceDurationChk  = "true";
+            document.getElementById("redBorder6").style.border='1px solid gray';
+            console.log("서비스 기간 작성여부 : "+serviceDurationChk);
+        }
+        if(serviceDuration.val()>120 || serviceDuration.val()<1){
+            document.getElementById("serviceDurationAlert").style.display='block';
+            serviceDurationChk  = "false";
+            document.getElementById("redBorder6").style.border='3px solid red';
+            console.log("서비스 기간 작성여부 : "+serviceDurationChk);
+        }
+    });
+
+    svcModificationNum.on("change", function (){
+        if(svcModificationNum.val()<16 && svcModificationNum.val()>0){
+            document.getElementById("svcModNumAlert").style.display='none';
+            svcModificationNumChk = "true";
+            document.getElementById("redBorder7").style.border='1px solid gray';
+            console.log("서비스 기간 작성여부 : "+svcModificationNumChk);
+        }
+        if(svcModificationNum.val()>15 || svcModificationNum.val()<1){
+            document.getElementById("svcModNumAlert").style.display='block';
+            svcModificationNumChk = "false";
+            document.getElementById("redBorder7").style.border='3px solid red';
+            console.log("서비스 기간 작성여부 : "+svcModificationNumChk);
+        }
+    });
+
+        $(document).ready(function () {
+
+
+
         })
 
-
-
-    })
 
 </script>
 

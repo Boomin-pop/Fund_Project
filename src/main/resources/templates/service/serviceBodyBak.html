@@ -1,3 +1,24 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--&lt;!&ndash; 헤더 &ndash;&gt;-->
+<!--<th:block th:replace="/inc/header :: headerFragment"></th:block>-->
+<!--&lt;!&ndash;  바디  &ndash;&gt;-->
+<!--<body>-->
+<!--<div class="d-flex" style="width:80%">-->
+<!--    <th:block th:replace="/inc/leftServiceInputNav :: asideFragment"></th:block>-->
+
+<!--    &lt;!&ndash; 본문 &ndash;&gt;-->
+<!--    <th:block th:replace="/service/serviceInput :: bodyPage1"></th:block>-->
+
+
+
+
+<!--</div>-->
+<!--&lt;!&ndash; 푸터 &ndash;&gt;-->
+<!--<th:block th:replace="/inc/footer :: footerFragment"></th:block>-->
+
+<!--================================================================================-->
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <body>
@@ -10,11 +31,11 @@
 </style>
 <!--  바디  -->
 <div class="d-flex" style="width:80%">
-<!--    <aside th:replace="/inc/leftServiceInputNav :: asideFragment"></aside>-->
+    <!--    <aside th:replace="/inc/leftServiceInputNav :: asideFragment"></aside>-->
 
-    <aside class="side-container border-end" style="width:200px; margin-left:30%">
+    <aside class="side-container border-end" style="width:200px; margin-left:30%;">
 
-        <a href="#" id="btn-one" name="aside-btn">
+        <button id="btn-one" class="left-btns" onclick="choice(this)">
             <div class="d-flex mt-5">
                 <table class="me-5">
                     <tr>
@@ -23,20 +44,20 @@
                     </tr>
                 </table>
             </div>
-        </a>
+        </button>
 
-        <a href="#" id="btn-two" name="aside-btn">
+        <button id="btn-two" class="left-btns" onclick="choice(this)">
             <div class="d-flex mt-4">
-                <table class="me-5">
+                <table class="me-5" style="font-weight:bolder">
                     <tr>
                         <td id="num2"  style="border: 1px solid black; width:30px; height:30px; text-align:center;">2</td>
                         <td>ㅤ가격설정</td>
                     </tr>
                 </table>
             </div>
-        </a>
+        </button>
 
-        <a href="#" id="btn-three" name="aside-btn">
+        <button id="btn-three" class="left-btns" onclick="choice(this)">
             <div class="d-flex mt-4">
                 <table class="me-5">
                     <tr>
@@ -45,9 +66,9 @@
                     </tr>
                 </table>
             </div>
-        </a>
+        </button>
 
-        <a href="#" id="btn-four" name="aside-btn">
+        <button id="btn-four" class="left-btns" onclick="choice(this)">
             <div class="d-flex mt-4">
                 <table class="me-5">
                     <tr>
@@ -56,9 +77,9 @@
                     </tr>
                 </table>
             </div>
-        </a>
+        </button>
 
-        <a href="#" id="btn-five" name="aside-btn">
+        <button id="btn-five" class="left-btns" onclick="choice(this)">
             <div class="d-flex mt-4">
                 <table class="me-5">
                     <tr>
@@ -67,147 +88,149 @@
                     </tr>
                 </table>
             </div>
-        </a>
+        </button>
     </aside>
 
     <div class="contents-area">
         <form class="form-join">
 
-        <div class="firstInput" id="firstInput" style="display:block;">
-       <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
-<!--             <th:block layout:fragment="bodyPage1"></th:block>-->
-<!--             <section th:replace="/service/serviceInput :: bodyPage1"></section>-->
-      </div>
+            <div class="svcInput btn-one" id="firstInput" style="display:block;">
+                <th:block th:replace="/service/serviceInputOne :: bodyPage1"></th:block>
+                <!--             <th:block layout:fragment="bodyPage1"></th:block>-->
+                <!--             <section th:replace="/service/serviceInput :: bodyPage1"></section>-->
+            </div>
 
-      <div class="secondInput" id="secondInput" style="display:none;">
-          <th:block th:replace="/service/serviceInputTwo :: bodyPage2"></th:block>
-      </div>
+            <div class="svcInput btn-two" id="secondInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputTwo :: bodyPage2"></th:block>
+            </div>
 
-    <div class="secondInput" id="thirdInput" style="display:none;">
-        <th:block th:replace="/service/serviceInputThree :: bodyPage3"></th:block>
-    </div>
-    <div class="secondInput" id="forthInput" style="display:none;">
-        <th:block th:replace="/service/serviceInputFour :: bodyPage4"></th:block>
-    </div>
-    <div class="secondInput" id="fifthInput" style="display:none;">
-        <th:block th:replace="/service/serviceInputFive :: bodyPage5"></th:block>
-    </div>
+            <div class="svcInput btn-three" id="thirdInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputThree :: bodyPage3"></th:block>
+            </div>
+            <div class="svcInput btn-four" id="forthInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputFour :: bodyPage4"></th:block>
+            </div>
+            <div class="svcInput btn-five" id="fifthInput" style="display:none;">
+                <th:block th:replace="/service/serviceInputFive :: bodyPage5"></th:block>
+            </div>
         </form>
     </div>
 </div>
 
 
-    <!-- 푸터 -->
-    <footer th:replace="/inc/footer :: footerFragment"></footer>
+<!-- 푸터 -->
+<footer th:replace="/inc/footer :: footerFragment"></footer>
 
-</body>
+
 <script>
-    let btnOne = $("#btn-one");
-    let btnTwo = $("#btn-two");
-    let btnThree = $("#btn-three");
-    let btnFour = $("#btn-four");
-    let btnFive = $("#btn-five");
-    let firstInput = $("#firstInput");
+    // let btnOne = $("#btn-one");
+    // let btnTwo = $("#btn-two");
+    // let btnThree = $("#btn-three");
+    // let btnFour = $("#btn-four");
+    // let btnFive = $("#btn-five");
+    // let firstInput = $("#firstInput");
+
+    function choice(ojt) {
+        console.log(ojt.id);
+        let btns = document.querySelectorAll(".left-btns");
+        for (let i = 0; i < btns.length; i++) {
+            btns.item(i).style.color='black';
+        }
+        ojt.style.color="blue";
+        let svcInput = document.querySelectorAll(".svcInput");
+        console.log("svcInput : "+svcInput);
+        console.log("svcInput length : "+svcInput.length);
+        for (let j = 0; j < svcInput.length; j++){
+            console.log("svcInput j : "+ svcInput.item(j));
+            svcInput.item(j).style.display='none';
+        }
+        document.querySelector("."+ojt.id).style.display='block';
+    }
 
 
-    $(document).ready(function (){
-        btnOne.on("click", function(){
-            //firstInput.style.display='none';
-            // document.getElementByName("aside-btn").style.fontWeight='normal';
+    // $(document).ready(function (){
+    //     btnOne.on("click", function(){
+    //         //firstInput.style.display='none';
+    //         document.getElementById("btn-one").style.fontWeight='bolder';
+    //         document.getElementById("btn-two").style.fontWeight='normal';
+    //         document.getElementById("btn-three").style.fontWeight='normal';
+    //         document.getElementById("btn-four").style.fontWeight='normal';
+    //         document.getElementById("btn-five").style.fontWeight='normal';
+    //
+    //         document.getElementById("num1").innerText='V';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         // 이거 깔끔하게 쓰는법 아시는분?
+    //         document.getElementById("firstInput").style.display='block';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='none';
+    //
+    //     })
+    //
+    //     btnTwo.on("click", function(){
+    //         //firstInput.style.display='none';
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='V';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='block';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='none';
+    //     })
+    //
+    //     btnThree.on("click", function(){
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='V';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='block';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='none';
+    //     })
+    //
+    //     btnFour.on("click", function(){
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='V';
+    //         document.getElementById("num5").innerText='5';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='block';
+    //         document.getElementById("fifthInput").style.display='none';
+    //     })
+    //
+    //     btnFive.on("click", function(){
+    //         document.getElementById("num1").innerText='1';
+    //         document.getElementById("num2").innerText='2';
+    //         document.getElementById("num3").innerText='3';
+    //         document.getElementById("num4").innerText='4';
+    //         document.getElementById("num5").innerText='V';
+    //
+    //         document.getElementById("firstInput").style.display='none';
+    //         document.getElementById("secondInput").style.display='none';
+    //         document.getElementById("thirdInput").style.display='none';
+    //         document.getElementById("forthInput").style.display='none';
+    //         document.getElementById("fifthInput").style.display='block';
+    //     })
+    // })
 
-            document.getElementById("btn-one").style.fontWeight='bolder';
-            document.getElementById("btn-two").style.fontWeight='normal';
-            document.getElementById("btn-three").style.fontWeight='normal';
-            document.getElementById("btn-four").style.fontWeight='normal';
-            document.getElementById("btn-five").style.fontWeight='normal';
-
-
-            document.getElementById("num1").innerText='V';
-            document.getElementById("num2").innerText='2';
-            document.getElementById("num3").innerText='3';
-            document.getElementById("num4").innerText='4';
-            document.getElementById("num5").innerText='5';
-
-
-            // 이거 깔끔하게 쓰는법 아시는분?
-            document.getElementById("firstInput").style.display='block';
-            document.getElementById("secondInput").style.display='none';
-            document.getElementById("thirdInput").style.display='none';
-            document.getElementById("forthInput").style.display='none';
-            document.getElementById("fifthInput").style.display='none';
-
-        })
-
-        btnTwo.on("click", function(){
-           // document.getElementsByName("aside-btn").style.fontWeight='normal';
-            document.getElementById("btn-two").style.fontWeight='bolder';
-
-            document.getElementById("num1").innerText='1';
-            document.getElementById("num2").innerText='V';
-            document.getElementById("num3").innerText='3';
-            document.getElementById("num4").innerText='4';
-            document.getElementById("num5").innerText='5';
-
-            document.getElementById("firstInput").style.display='none';
-            document.getElementById("secondInput").style.display='block';
-            document.getElementById("thirdInput").style.display='none';
-            document.getElementById("forthInput").style.display='none';
-            document.getElementById("fifthInput").style.display='none';
-        })
-
-        btnThree.on("click", function(){
-            //document.getElementsByName("aside-btn").style.fontWeight='normal';
-            document.getElementById("btn-three").style.fontWeight='bolder';
-
-
-            document.getElementById("num1").innerText='1';
-            document.getElementById("num2").innerText='2';
-            document.getElementById("num3").innerText='V';
-            document.getElementById("num4").innerText='4';
-            document.getElementById("num5").innerText='5';
-
-            document.getElementById("firstInput").style.display='none';
-            document.getElementById("secondInput").style.display='none';
-            document.getElementById("thirdInput").style.display='block';
-            document.getElementById("forthInput").style.display='none';
-            document.getElementById("fifthInput").style.display='none';
-        })
-
-        btnFour.on("click", function(){
-          //  document.getElementsByName("aside-btn").style.fontWeight='normal';
-            document.getElementById("btn-four").style.fontWeight='bolder';
-
-
-            document.getElementById("num1").innerText='1';
-            document.getElementById("num2").innerText='2';
-            document.getElementById("num3").innerText='3';
-            document.getElementById("num4").innerText='V';
-            document.getElementById("num5").innerText='5';
-
-            document.getElementById("firstInput").style.display='none';
-            document.getElementById("secondInput").style.display='none';
-            document.getElementById("thirdInput").style.display='none';
-            document.getElementById("forthInput").style.display='block';
-            document.getElementById("fifthInput").style.display='none';
-        })
-
-        btnFive.on("click", function(){
-         //   document.getElementsByName("aside-btn").style.fontWeight='normal';
-            document.getElementById("btn-five").style.fontWeight='bolder';
-
-            document.getElementById("num1").innerText='1';
-            document.getElementById("num2").innerText='2';
-            document.getElementById("num3").innerText='3';
-            document.getElementById("num4").innerText='4';
-            document.getElementById("num5").innerText='V';
-
-            document.getElementById("firstInput").style.display='none';
-            document.getElementById("secondInput").style.display='none';
-            document.getElementById("thirdInput").style.display='none';
-            document.getElementById("forthInput").style.display='none';
-            document.getElementById("fifthInput").style.display='block';
-        })
-    })
 
 </script>
+</body>
 </html>

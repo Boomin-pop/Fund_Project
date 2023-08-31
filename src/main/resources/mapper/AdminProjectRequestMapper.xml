@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kmong.kmongdemo.mapper.AdminProjectRequestMapper">
+    <select id="projectLists" resultType="ProjectRequestDTO">
+        SELECT * FROM projectRequest
+    </select>
+
+    <select id="projectAdmissionLists" resultType="ProjectRequestDTO">
+        SELECT * FROM projectRequest WHERE projectRequestApprove = 1
+    </select>
+
+    <select id="projectDeleteLists" resultType="ProjectRequestDTO">
+        SELECT * FROM projectRequest WHERE NOT projectRequestDelete IS NULL
+    </select>
+
+    <select id="projectInfo" resultType="ProjectRequestDTO">
+        SELECT * FROM projectRequest WHERE projectRequestNo=#{projectRequestNo}
+    </select>
+
+    <update id="projectModify">
+        UPDATE projectRequest SET projectRequestCategory=#{projectRequestCategory} , projectRequestTitle=#{projectRequestTitle} , projectRequestWork=#{projectRequestWork} , projectRequestRequest=#{projectRequestRequest} , projectRequestBudget=#{projectRequestBudget} , projectRequestWanted=#{projectRequestWanted} , projectRequestClose=#{projectRequestClose} , projectRequestTerm=#{projectRequestTerm} WHERE projectRequestNo=#{projectRequestNo}
+    </update>
+
+    <update id="projectDeleteR">
+        UPDATE projectRequest SET projectRequestDelete=#{projectRequestDelete} WHERE projectRequestNo=#{projectRequestNo}
+    </update>
+
+    <delete id="deleteProject">
+        DELETE FROM projectRequest WHERE projectRequestNo=#{projectRequestNo}
+    </delete>
+
+    <update id="projectCancle1">
+        UPDATE projectRequest SET projectRequestApprove = 0 WHERE projectRequestNo=#{projectRequestNo}
+    </update>
+
+    <update id="projectCancle2">
+        UPDATE projectRequest SET projectRequestDelete = NULL WHERE projectRequestNo=#{projectRequestNo}
+    </update>
+
+    <update id="projectApprove">
+        UPDATE projectRequest SET projectRequestApprove = 1 WHERE projectRequestNo=#{projectRequestNo}
+    </update>
+
+</mapper>

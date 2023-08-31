@@ -22,10 +22,12 @@
         .thirdServiceTextInput > label{
             display:flex;
             font-weight: bolder;
-            width: 200px;
+            width: 150px;
             justify-content: end;
             line-height:50px;
             margin-right : 50px;
+            margin-left : 0;
+            padding-left : 0;
         }
 
         .thirdTextArea{
@@ -36,10 +38,10 @@
         .thirdTextTracer{
             display:flex;
             justify-content: end;
+            color:#dddddd;
         }
 
-        .thirdTextTracer > p{
-            color:#dddddd;
+        .thirdTextTracer{
         }
 
         .trdRegulationBtn{
@@ -80,6 +82,7 @@
         .modal-footer{
             display:inline;
             text-align: center;
+            /*margin-bottom : 200px;*/
         }
 
         .modal-footer > button {
@@ -87,33 +90,35 @@
             height: 50px;
             background-color: white;
             border:1px solid #dddddd;
+
         }
 
     </style>
 
-    <div class="container shadow-sm w-50% p-5 rounded mt-4">
+    <div class="container shadow-sm rounded mt-4" style="width:inherit;">
+        <div class="pt-4 justify-content-center" style="width:800px;">
+        <div class="form-group thirdServiceTextInput">
+            <label for="serviceExplain" >서비스 설명</label>
+            <textarea id="serviceExplain" class="thirdTextArea" name="serviceExplain" onchange="keyCount8(this)"></textarea>
+        </div>
+        <div class="thirdTextTracer" id="serviceExplainTracer">최대 100자</div>
 
         <div class="form-group thirdServiceTextInput">
-            <label for="summernote1" >서비스 설명</label>
-            <textarea id="summernote1" class="thirdTextArea" name="thirdTextArea"></textarea>
+            <label for="serviceProcedure">서비스 제공절차</label>
+            <textarea id="serviceProcedure" class="thirdTextArea" name="serviceProcedure" onchange="keyCount9(this)"></textarea>
         </div>
-        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
+        <div class="thirdTextTracer" id="serviceProcedureTracer">최대 100자</div>
 
         <div class="form-group thirdServiceTextInput">
-            <label for="summernote2">서비스 제공절차</label>
-            <textarea id="summernote2" class="thirdTextArea" name="thirdTextArea"></textarea>
+            <label for="clientPreps">의뢰인 준비사항</label>
+            <textarea id="clientPreps" class="thirdTextArea" name="clientPreps" onchange="keyCount10(this)"></textarea>
         </div>
-        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
-
-        <div class="form-group thirdServiceTextInput">
-            <label for="summernote3">의뢰인 준비사항</label>
-            <textarea id="summernote3" class="thirdTextArea" name="thirdTextArea"></textarea>
-        </div>
-        <div class="thirdTextTracer"><p>0/최소 100자</p></div>
-        <div class="thirdServiceTextInput">
+        <div class="thirdTextTracer" id="clientPrepsTracer">최대 100자</div>
+            <div class="thirdServiceTextInput">
             <label for="trdInpBtn">취소 및 환불 규정</label>
-            <button class="trdRegulationBtn" id="trdInpBtn" data-bs-toggle="modal" data-bs-target="#trdShowModal">취소 및 환불 규정 보기</button>
+            <button class="trdRegulationBtn" id="trdInpBtn" data-bs-toggle="modal" data-bs-target="#trdShowModal" >취소 및 환불 규정 보기</button>
         </div>
+            <div class="emptyArea" style="height:100px;"></div>
         <div class="modal fade" id="trdShowModal" tabindex="-1" aria-labelledby="RegulationLabelOnModal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
@@ -142,6 +147,7 @@
             </div>
         </div>
     </div>
+    </div>
 
 <!--    Modal Area    -->
     <!-- Button trigger modal -->
@@ -151,15 +157,80 @@
 
 
     <script>
-        var testBtn = function (context) {
-            var ui = $.summernote.ui;
-            var notBtn = ui.button({contents: '서비스 설명'});
-         //   notBtn.style.border='0, none, white';
-            return notBtn.render();
-        }
+        function keyCount8(keyNum1) {
+            document.getElementById("serviceExplainTracer").textContent = keyNum1.value.length + "/최대 100자"; }
+        function keyCount9(keyNum2) {
+            document.getElementById("serviceProcedureTracer").textContent = keyNum2.value.length + "/최대 100자"; }
+        function keyCount10(keyNum3) {
+            document.getElementById("clientPrepsTracer").textContent = keyNum3.value.length + "/최대 100자"; }
+
 
         $(document).ready(function() {
-            // $("textarea[name=thirdTextArea]").summernote({
+            function SummernoteInput(element, placeholder, max, callbackMax) {
+                $(element).summernote({
+                    toolbar: [
+                        ['style', ['style', 'bold', 'italic', 'underline']],['para', ['paragraph']]
+                    ],
+                    placeholder,
+                    height:300,
+                        width:600,
+                        dialogsInBody: true,
+                        lang: 'ko-KR',
+                    callbacks: {
+                        onKeydown: function(e) {
+                            var t = e.currentTarget.innerText;
+                            if (t.length >= max) {
+                                //delete key
+                                if (e.keyCode != 8)
+                                    e.preventDefault();
+                                // add other keys ...
+                            }
+                        },
+                        onKeyup: function(e) {
+                            var t = e.currentTarget.innerText;
+                            if (typeof callbackMax == 'function') {
+                                callbackMax(max - t.length);
+                            }
+                        },
+                        onPaste: function(e) {
+                            var t = e.currentTarget.innerText;
+                            var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                            e.preventDefault();
+                            var all = t + bufferText;
+                            document.execCommand('insertText', false, all.trim().substring(0, 100));
+                            if (typeof callbackMax == 'function') {
+                                callbackMax(max - t.length);
+                            }
+                        }
+                    }
+                });
+            }// SUMMERNOTE
+
+            $(function(){
+                SummernoteInput('#serviceExplain', '• 전문가 소개 (경력과 이력), 작업 가능 분야, 작업 제공 절차, 서비스 특징에 대해서 의뢰인이 이해하기 쉽도록 정확하게 작성해 주세요.\r\n\r\n' +
+                '• 외부 연락처 (전화번호, 카톡ID, 이메일, 외부링크 등)는 노출하실 수 없습니다.\r\n\r\n' +
+                '• 안드로이드 OS에서는 글자 크기 조절 및 정렬 기능을 제외한 에디터 기능만 지원되며, 나머지 기능은 추후 지원 예정입니다.', 100, function(max) {
+                    $('#serviceExplainTracer').text(max+'자')
+                });
+            });
+
+            $(function(){
+                SummernoteInput('#serviceProcedure', '• 상담, 결제, 1차 결과물, 중간 수정 반영, 구매확정 등 의뢰인이 서비스가 어떻게 진행되는지 알 수 있도록 서비스 진행과정에 대해서 작성해주세요.',
+                  100, function(max) {
+                    $('#serviceProcedureTracer').text(max+'자')
+                });
+            });
+
+            $(function(){
+                SummernoteInput('#clientPreps', '• 상담 전 또는 작업 착수 전에 의뢰인이 미리 준비해야 하는 사항에 대해서 작성해주세요.',
+                    100, function(max) {
+                        $('#clientPrepsTracer').text(max+'자')
+                    });
+            });
+
+
+
+                // $("textarea[name=thirdTextArea]").summernote({
             //     toolbar: [
             //      //   ['mybutton', ['test']],
             //         ['style', ['style']],
@@ -174,46 +245,41 @@
             // });
 
 
-            $('#summernote1').summernote({
-                placeholder:' 전문가 소개 (경력과 이력), 작업 가능 분야, 작업 제공 절차, 서비스 특징에 대해서 의뢰인이 이해하기 쉽도록 정확하게 작성해 주세요.\n' +
-                    '• 외부 연락처 (전화번호, 카톡ID, 이메일, 외부링크 등)는 노출하실 수 없습니다.\n' +
-                    '• 안드로이드 OS에서는 글자 크기 조절 및 정렬 기능을 제외한 에디터 기능만 지원되며, 나머지 기능은 추후 지원 예정입니다.',
-                toolbar: [
-                            ['style', ['style']],
-                            ['style', ['bold', 'italic', 'underline']],
-                            ['para', ['paragraph']]
-                        ],
-                height:300,
-                width:600,
-                lang: 'ko-KR'
-            });
-
-
-          $('#summernote2').summernote({
-              toolbar: [
-                  ['style', ['style']],
-                  ['style', ['bold', 'italic', 'underline']],
-                  ['para', ['paragraph']]
-              ],
-              height:300,
-              width:600,
-              lang: 'ko-KR',
-              placeholder:' • 상담, 결제, 1차 결과물, 중간 수정 반영, 구매확정 등 의뢰인이 서비스가 어떻게 진행되는지 알 수 있도록 서비스 진행과정에 대해서 작성해주세요.'
-
-
-          });
-
-          $('#summernote3').summernote({
-              toolbar: [
-                  ['style', ['style']],
-                  ['style', ['bold', 'italic', 'underline']],
-                  ['para', ['paragraph']]
-              ],
-              height:300,
-              width:600,
-              lang: 'ko-KR',
-              placeholder:'• 상담 전 또는 작업 착수 전에 의뢰인이 미리 준비해야 하는 사항에 대해서 작성해주세요.\n'
-          });
+          //   $('#serviceExplain').summernote({
+          //       placeholder:' 전문가 소개 (경력과 이력), 작업 가능 분야, 작업 제공 절차, 서비스 특징에 대해서 의뢰인이 이해하기 쉽도록 정확하게 작성해 주세요.\n' +
+          //           '• 외부 연락처 (전화번호, 카톡ID, 이메일, 외부링크 등)는 노출하실 수 없습니다.\n' +
+          //           '• 안드로이드 OS에서는 글자 크기 조절 및 정렬 기능을 제외한 에디터 기능만 지원되며, 나머지 기능은 추후 지원 예정입니다.',
+          //       toolbar: [
+          //           ['style', ['style', 'bold', 'italic', 'underline']],['para', ['paragraph']]
+          //               ],
+          //       height:300,
+          //       width:600,
+          //       lang: 'ko-KR'
+          //   });
+          //
+          // $('#serviceProcedure').summernote({
+          //     toolbar: [
+          //         ['style', ['style']],
+          //         ['style', ['bold', 'italic', 'underline']],
+          //         ['para', ['paragraph']]
+          //     ],
+          //     height:300,
+          //     width:600,
+          //     lang: 'ko-KR',
+          //     placeholder:' • 상담, 결제, 1차 결과물, 중간 수정 반영, 구매확정 등 의뢰인이 서비스가 어떻게 진행되는지 알 수 있도록 서비스 진행과정에 대해서 작성해주세요.'
+          // });
+          //
+          //   $('#clientPreps').summernote({
+          //     toolbar: [
+          //         ['style', ['style']],
+          //         ['style', ['bold', 'italic', 'underline']],
+          //         ['para', ['paragraph']]
+          //     ],
+          //     height:300,
+          //     width:600,
+          //     lang: 'ko-KR',
+          //     placeholder:'• 상담 전 또는 작업 착수 전에 의뢰인이 미리 준비해야 하는 사항에 대해서 작성해주세요.\n'
+          // });
 
 
 

@@ -9,3 +9,12 @@ create table transactionLog(
     transactionKind varchar(20)
 );
 
+drop table signLog;
+create table signLog(
+	signId int primary key auto_increment,
+    signUserId varchar(50),
+    signRegDate date,
+    signLogTime timestamp,
+    signKind varchar(20)
+);
+

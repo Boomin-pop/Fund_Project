@@ -7,7 +7,7 @@ function update(){
     })
 
     $.ajax({
-        url: "/admin/user/delete",
+        url: "admin/user/delete",
         type: "post",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(chk),
@@ -124,10 +124,8 @@ function btn2(userId){
             document.getElementById("pw2").textContent = data.userPassword;
             document.getElementById("nick2").textContent = data.userNickname;
             document.getElementById("email2").textContent = data.userEmail;
-            // document.getElementById("bir").textContent = data.userbir;
             document.getElementById("tel2").textContent = data.userTel;
             document.getElementById("job2").textContent = data.userJobId;
-            // document.getElementById("reg").value = data.userRegdate;
         },
         error: function (error) {
             alert(error);

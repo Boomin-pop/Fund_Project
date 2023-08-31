@@ -23,7 +23,7 @@ public class ProjectRequestController {
     public String requestForm(HttpSession session, Model model) {
         ArrayList<ProjectRequestDTO> list = prService.projectList(session.getId());
 
-        System.out.println("list = " + list);
+//        System.out.println("list = " + list);
 
         model.addAttribute("list", list);
 
@@ -39,7 +39,7 @@ public class ProjectRequestController {
 
     @GetMapping("/deleteProject")
     public String deleteProject(int no) {
-        System.out.println("no = " + no);
+//        System.out.println("no = " + no);
         prService.delete(no);
 
         return "redirect:/project/request";
