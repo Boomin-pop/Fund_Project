@@ -2,8 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <!--// 리뷰 남길 때 별 클릭시 label for"hidden checkbox" 선택 label 내부 img=별-->
 <!--//http://www.rustyparadise.com/conding/107138-->
-<!-- 헤더 -->
-<th:block th:replace="/inc/header :: headerFragment"></th:block>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
@@ -14,6 +13,12 @@
     .svcMainBody{
         width: 710px;
     }
+    .catNameZone{
+        font-weight: bolder;
+        margin-left: 50px;
+    }
+
+
     .svcTitleZone > p{
         font-size: 20px;
         font-weight: bolder;}
@@ -63,19 +68,78 @@
         justify-content: center;
     }
 
+    .midHead{
+        width: 652px;
+        background-color: #FAFAFC;
+    }
+
+    .midHead > li{
+
+    }
+
+    .ratingArea{
+        height: 60px;
+        margin : 0 50px;
+        line-height: 60px;
+        font-weight: bolder;
+    }
+
+    .starArea{
+        font-size: 22px;
+        color: #e4e5ed;
+        font-weight: bolder;
+    }
+
+    .priceTabZone{
+        height: 48px;
+        line-height: 48px;
+        font-weight: bolder;
+    }
+
 </style>
+<!-- 헤더 -->
+<th:block th:replace="/inc/header :: headerFragment"></th:block>
 <div class="d-flex justify-content-around">
     <div></div>
     <div class="thwrapper">
       <th:block th:each="svcInfo : ${serviceInfo}">
-        <div><p name="catNameZone" th:text="${svcInfo.serviceTopCatName}"></p></div>
+        <div class="ms-4"><p name="catNameZone ms-5 fw-bolder" th:text="${svcInfo.serviceTopCatName}"></p></div>
          <div class="svcWholeSec d-flex" >
            <div class="svcMainBody me-5">
              <div class="MainImgArea"><img th:src="@{/static/imgs/{mainImg}(mainImg=${svcInfo.mainImg})}" style="width:652px; height:488px;"></div>
 <!--        <option name="selectedCat" th:value="${topCat.serviceTopCatCode}" th:text="${topCat.serviceTopCatName}"></option>-->
-               <div class="mainTabArea mt-5">
+            <div class="ratingArea d-flex justify-content-center my-5">
+                <div class="starArea me-3">☆☆☆☆☆ </div><div class="ratingScore me-3"> 0.0</div><div class="reviewCounter">리뷰 0건</div>
+            </div>
 
-                    <div class="portFolioArea" th:if="${svcInfo.subImgExist == 1} and ${svcInfo.subImgQty > 0}">
+               <!-- The scrollable area -->
+               <div data-bs-spy="scroll" data-bs-target="#midHeaderArea" data-bs-offset="50" style="position: relative;">
+
+                   <!-- The navbar - The <a> elements are used to jump to a section in the scrollable area -->
+                   <nav class="navbar navbar-expand sticky-top ms-4" id="midHeaderArea">
+
+                       <ul class="navbar-nav nav-tabs row ms-1 midHead" role="tablist">
+                           <li class="nav-item col">
+                               <a class="nav-link" href="#portFolioArea">포트폴리오</a>
+                           </li>
+                           <li class="nav-item col">
+                               <a class="nav-link" href="#summerOutputArea">서비스 설명</a>
+                           </li>
+                           <li class="nav-item col">
+                               <a class="nav-link" href="#innerPriceInfoArea">가격 정보</a>
+                           </li>
+                           <li class="nav-item col">
+                               <a class="nav-link" href="#serviceCancel">취소·환불</a>
+                           </li>
+                           <li class="nav-item col">
+                               <a class="nav-link" href="#reviewArea">서비스 평가</a>
+                           </li>
+                       </ul>
+                   </nav>
+
+
+               <div class="mainTabArea mt-5">
+                    <div class="portFolioArea" id="portFolioArea" th:if="${svcInfo.subImgExist == 1} and ${svcInfo.subImgQty > 0}">
                         <div class="d-flex justify-content start ms-4"><b><p>포트폴리오(<span th:text="${svcInfo.subImgQty}"></span>)</p></b></div>
                             <!-- Carousel -->
                             <div class="subImgArea d-flex" id="subImgArea">
@@ -148,59 +212,71 @@
                        </div>
                    <div class="portFolioArea" th:if="${svcInfo.subImgExist == 0} or ${svcInfo.subImgQty==0}" style="display: none"></div>
 
+                    <div class="summerOutputArea" id="summerOutputArea">
+                       <div class="my-5">
+                           <div class="fw-bolder" style="font-size: 18px">서비스 설명</div>
+                           <div th:utext="${svcInfo.serviceExplain}"></div>
+                       </div>
+                       <hr>
+                       <div class="my-5">
+                           <div class="fw-bolder" style="font-size: 18px">서비스 제공절차</div>
+                           <div th:utext="${svcInfo.serviceProcedure}"></div>
+                       </div>
+                       <hr>
+                       <div class="my-5">
+                           <div class="fw-bolder" style="font-size: 18px">의뢰인 준비사항</div>
+                           <div th:utext="${svcInfo.clientPreps}"></div>
+                       </div>
+                        <hr>
+                    </div>
 
-                   <div class="my-5"><div>서비스 설명</div><div th:text="${svcInfo.serviceExplain}"></div></div>
-                   <hr>
-                   <div class="my-5"><div>서비스 제공절차</div><div th:text="${svcInfo.serviceProcedure}"></div></div>
-                   <hr>
-                   <div class="my-5"><div>의뢰인 준비사항</div><div th:text="${svcInfo.clientPreps}"></div></div>
-                   <hr>
                    <div class="d-block my-5">
-                       <div><p th:text="${svcInfo.serviceTypeName1}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName1}"></p></div>
                        <div><p th:text="${svcInfo.serviceType1}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName2}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName2}"></p></div>
                        <div><p th:text="${svcInfo.serviceType2}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName3}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName3}"></p></div>
                        <div><p th:text="${svcInfo.serviceType3}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName4}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName4}"></p></div>
                        <div><p th:text="${svcInfo.serviceType4}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName5}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName5}"></p></div>
                        <div><p th:text="${svcInfo.serviceType5}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName6}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName6}"></p></div>
                        <div><p th:text="${svcInfo.serviceType6}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName7}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName7}"></p></div>
                        <div><p th:text="${svcInfo.serviceType7}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName8}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName8}"></p></div>
                        <div><p th:text="${svcInfo.serviceType8}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName9}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName9}"></p></div>
                        <div><p th:text="${svcInfo.serviceType9}"></p></div>
                    </div>
                    <div class="d-block mb-5">
-                       <div><p th:text="${svcInfo.serviceTypeName10}"></p></div>
+                       <div class="fw-bolder"><p th:text="${svcInfo.serviceTypeName10}"></p></div>
                        <div><p th:text="${svcInfo.serviceType10}"></p></div>
                    </div>
                    <hr>
-                   <div class="priceInfoArea2">
-                       <div class="my-3"><b>가격정보</b></div>
+                   <div class="innerPriceInfoArea my-5" id="innerPriceInfoArea">
+                       <hr class="my-5">
+                       <div class="mt-5 mb-3"><b>가격정보</b></div>
                        <table class="table border-top">
                            <thead>
-                           <tr>
+                           <tr class="text-center">
                                <th scope="col" style="width:120px"></th>
                                <th scope="col"><div class="d-block" style="width:177px"><div>STANDARD</div><div>0원(미지원)</div></div></th>
                                <th scope="col"><div class="d-block" style="width:177px"><div>DELUXE</div><div th:text="${svcInfo.servicePriceNumber}+원"></div></div></th>
@@ -208,7 +284,7 @@
                            </tr>
                            </thead>
                            <tbody>
-                           <tr>
+                           <tr class="text-center">
                                <th scope="row"><div style="margin-top:50%">패키지 설명</div></th>
                                <td style="width:177px"></td>
                                <td style="width:177px"><div class="d-block pt-3 pe-3">
@@ -217,29 +293,29 @@
                                </div></td>
                                <td style="width:177px"></td>
                            </tr>
-                           <tr>
+                           <tr class="text-center">
                                <th scope="row">작업일</th>
                                <td></td>
                                <td><div th:text="${svcInfo.serviceDuration}+일"></div></td>
                                <td></td>
                            </tr>
-                           <tr>
+                           <tr class="text-center">
                                <th scope="row">수정횟수</th>
                                <td></td>
-                               <td colspan="2"><div th:text="${svcInfo.svcModificationNum}+일"></div></td>
+                               <td><div th:text="${svcInfo.svcModificationNum}+일"></div></td>
                                <td></td>
                            </tr>
-                           <tr>
+                           <tr class="text-center">
                                <th></th>
-                               <td></td>
-                               <td><button type="button" class="btn btn-warning">구매</button></td>
-                               <td></td>
+                               <td><button type="button" class="btn btn-secondary" style="width:153px" disabled>구매</button></td>
+                               <td><button type="button" class="btn btn-warning" style="width:153px">구매</button></td>
+                               <td><button type="button" class="btn btn-secondary" style="width:153px" disabled>구매</button></td>
                            </tr>
                            </tbody>
                        </table>
                    </div>
 
-                   <div class="ServiceCancel">
+                   <div class="serviceCancel" id="serviceCancel">
                        <h5>취소 및 환불 규정</h5><br><br>
 
                        가. 기본 환불 규정<br>
@@ -257,9 +333,13 @@
                        총 작업량의 1/2 경과 후 : 반환하지 않음<br>
                    </div>
 
+                   <div>
+                       <div>리뷰</div>
+                       
+                   </div>
 
-
-               </div> <!--mainTabArea-->
+                 </div> <!--mainTabArea-->
+               </div> <!-- scrollSpyingArea-->
            </div> <!--svcMainBody-->
 
         <aside class="asideArea d-block ms-5" style="width:470px">
@@ -276,7 +356,7 @@
                 <div class="d-flex flex-column justify-content-center align-items-center mt-3 text-center"  style="height:100px">
 
                       <button type="button" class="btn btn-warning mb-3" style="width:420px; height: 52px;">구매하기</button>
-                      <a href="#" style="width:420px; text-decoration:none; color:black">가격 비교하기</a>
+                      <a href="#innerPriceInfoArea" style="width:420px; text-decoration:none; color:black">가격 비교하기</a>
                     </div>
             </div>
                 <div class="d-flex border mt-3 p-4"><img src="/imgs/ic_escro.png" style="width:30px; height:37px"><p class="mx-3 fs-6 fw-bold">서비스 제공이 완료된 이후에 전문가에게 결제 대금이 전달됩니다.</p></div>
@@ -308,6 +388,12 @@
 
 
 <script src="/js/slick.js"></script>
+<script>
+    $(document).ready(function(){
+        // $("#stickyTopHead").style.position="relative";
+        document.getElementById("stickyTopHead").style.position="relative";
+    })
+</script>
 <!--<script type="text/javascript">-->
 <!--    $('.subImgArea').noConflict();-->
 <!--    $(document).ready(function() {-->

@@ -157,11 +157,7 @@ public class ServiceController {
           System.out.println("code = " + code);
           ServiceTypeChkDTO stcDTO = serviceService.serviceTypeChkList(code);
             System.out.println("서비스타입 체크된 코드들 = " + stcDTO +"\n");
-            //List<ServiceTypeDTO> = serviceService.serviceTypeList();
-            //Map<String, String> serviceTypeList = new HashMap<>();
-        //Map<String, String> serviceTypeList = serviceService.serviceTypeList();
         List<ServiceTypeDTO> serviceTypeList = serviceService.serviceTypeList();
-        //System.out.println("serviceTypeList = " + serviceTypeList);
         List<ServiceTypeDTO> chkedTypeList = new ArrayList<>();
         Map<String, String> chkedServiceType = new HashMap<>();
         try {

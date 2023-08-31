@@ -1,0 +1,375 @@
+------------==== root 권한에서 ====-------------------
+
+create database kmongDB;
+create user 'kmong'@'localhost' identified by '1234';
+grant all privileges on kmongDB.* to 'kmong'@'localhost';
+
+-------- === 후 User and privileages -> kmong 선택 -> administrative roles 탭 -> DBA 체크  ----------
+use kmongDB;
+
+drop table serviceInfo;
+create table serviceInfo(
+	serviceID int primary key auto_increment,
+	splID varchar(50) not null,
+    serviceStatus varchar(100) not null default '승인대기',
+	serviceTitle varchar(60) not null,
+    serviceTopCat varchar(30) not null,
+ 	serviceTopCatName varchar(100),
+    serviceTypeName1 varchar(100),
+    serviceType1 varchar(100),
+    serviceTypeName2 varchar(100),
+    serviceType2 varchar(100),
+    serviceTypeName3 varchar(100),
+    serviceType3 varchar(100),
+    serviceTypeName4 varchar(100) default "",
+    serviceType4 varchar(100) default "",
+    serviceTypeName5 varchar(100) default "",
+    serviceType5 varchar(100) default "",
+    serviceTypeName6 varchar(100) default "",
+    serviceType6 varchar(100) default "",
+    serviceTypeName7 varchar(100) default "",
+    serviceType7 varchar(100) default "",
+    serviceTypeName8 varchar(100) default "",
+    serviceType8 varchar(100) default "",
+    serviceTypeName9 varchar(100) default "",
+    serviceType9 varchar(100) default "",
+    serviceTypeName10 varchar(100) default "",
+    serviceType10 varchar(100) default "",
+
+    keywordIsExist int not null default 0,
+    keyword1 varchar(50) default "",
+    keyword2 varchar(50) default "",
+    keyword3 varchar(50) default "",
+    keyword4 varchar(50) default "",
+    keyword5 varchar(50) default "",
+
+    priceTitle varchar(40) not null,
+    priceExplain varchar(120) not null,
+    servicePriceNumber int not null,
+    serviceDuration int not null,
+    svcModificationNum int not null,
+    AddOptExist1 boolean not null default 0,
+    AddOptTitle1 varchar(40),
+    AddOPtExplain1 varchar(100),
+    AddOptPrice1 int,
+    AddOptDay1 int,
+	AddOptExist2 int not null default 0,
+    AddOptTitle2 varchar(40),
+    AddOPtExplain2 varchar(100),
+    AddOptPrice2 int,
+    AddOptDay2 int,
+    AddOptExist3 int not null default 0,
+    AddOptTitle3 varchar(40),
+    AddOPtExplain3 varchar(100),
+    AddOptPrice3 int,
+    AddOptDay3 int,
+    AddOptExist4 int not null default 0,
+    AddOptTitle4 varchar(40),
+    AddOPtExplain4 varchar(100),
+    AddOptPrice4 int,
+    AddOptDay4 int,
+    AddOptExist5 int not null default 0,
+    AddOptTitle5 varchar(40),
+    AddOPtExplain5 varchar(100),
+    AddOptPrice5 int,
+    AddOptDay5 int,
+    AddOptExist6 int not null default 0,
+    AddOptTitle6 varchar(40),
+    AddOPtExplain6 varchar(100),
+    AddOptPrice6 int,
+    AddOptDay6 int,
+    AddOptExist7 int not null default 0,
+    AddOptTitle7 varchar(40),
+    AddOPtExplain7 varchar(100),
+    AddOptPrice7 int,
+    AddOptDay7 int,
+    AddOptExist8 int not null default 0,
+    AddOptTitle8 varchar(40),
+    AddOPtExplain8 varchar(100),
+    AddOptPrice8 int,
+    AddOptDay8 int,
+    AddOptExist9 int not null default 0,
+    AddOptTitle9 varchar(40),
+    AddOPtExplain9 varchar(100),
+    AddOptPrice9 int,
+    AddOptDay9 int,
+    AddOptExist10 int not null default 0,
+    AddOptTitle10 varchar(40),
+    AddOPtExplain10 varchar(100),
+    AddOptPrice10 int,
+    AddOptDay10 int,
+    serviceExplain varchar(2000),
+    serviceProcedure varchar(2000),
+	clientPreps varchar(2000),
+    subImgExist int not null default 0,
+    subImgQty int default 0,
+    mainImg varchar(200) not null,
+    subImg1 varchar(200) default "",
+    subImg2 varchar(200) default "",
+    subImg3 varchar(200) default "",
+    subImg4 varchar(200) default "",
+    subImg5 varchar(200) default "",
+    subImg6 varchar(200) default "",
+    subImg7 varchar(200) default "",
+    subImg8 varchar(200) default "",
+    subImg9 varchar(200) default ""
+
+);
+
+select * from serviceInfo;
+
+drop table TemporaryServiceInfo;
+create table TemporaryServiceInfo(
+	serviceID int primary key auto_increment,
+	splID varchar(50),
+    serviceStatus varchar(100) default '승인대기',
+	serviceTitle varchar(60),
+    serviceTopCatCode varchar(30),
+-- 	serviceTopCatName varchar(100),
+    serviceType1 varchar(100),
+    serviceType2 varchar(100),
+    serviceType3 varchar(100),
+    serviceType4 varchar(100) default "",
+    serviceType5 varchar(100) default "",
+    serviceType6 varchar(100) default "",
+    serviceType7 varchar(100) default "",
+    serviceType8 varchar(100) default "",
+    serviceType9 varchar(100) default "",
+    serviceType10 varchar(100) default "",
+    keywordIsExist int default 0,
+    keyword1 varchar(50) default "",
+    keyword2 varchar(50) default "",
+    keyword3 varchar(50) default "",
+    keyword4 varchar(50) default "",
+    keyword5 varchar(50) default "",
+
+    priceTitle varchar(40),
+    priceExplain varchar(120),
+    servicePriceNumber int,
+    serviceDuration int,
+    svcModificationNum int,
+    AddOptExist1 int default 0,
+    AddOptTitle1 varchar(40),
+    AddOPtExplain1 varchar(100),
+    AddOptPrice1 int,
+    AddOptDay1 int,
+	AddOptExist2 int default 0,
+    AddOptTitle2 varchar(40),
+    AddOPtExplain2 varchar(100),
+    AddOptPrice2 int,
+    AddOptDay2 int,
+    AddOptExist3 int default 0,
+    AddOptTitle3 varchar(40),
+    AddOPtExplain3 varchar(100),
+    AddOptPrice3 int,
+    AddOptDay3 int,
+    AddOptExist4 int default 0,
+    AddOptTitle4 varchar(40),
+    AddOPtExplain4 varchar(100),
+    AddOptPrice4 int,
+    AddOptDay4 int,
+    AddOptExist5 int default 0,
+    AddOptTitle5 varchar(40),
+    AddOPtExplain5 varchar(100),
+    AddOptPrice5 int,
+    AddOptDay5 int,
+    AddOptExist6 int default 0,
+    AddOptTitle6 varchar(40),
+    AddOPtExplain6 varchar(100),
+    AddOptPrice6 int,
+    AddOptDay6 int,
+    AddOptExist7 int default 0,
+    AddOptTitle7 varchar(40),
+    AddOPtExplain7 varchar(100),
+    AddOptPrice7 int,
+    AddOptDay7 int,
+    AddOptExist8 int default 0,
+    AddOptTitle8 varchar(40),
+    AddOPtExplain8 varchar(100),
+    AddOptPrice8 int,
+    AddOptDay8 int,
+    AddOptExist9 int default 0,
+    AddOptTitle9 varchar(40),
+    AddOPtExplain9 varchar(100),
+    AddOptPrice9 int,
+    AddOptDay9 int,
+    AddOptExist10 int default 0,
+    AddOptTitle10 varchar(40),
+    AddOPtExplain10 varchar(100),
+    AddOptPrice10 int,
+    AddOptDay10 int,
+    serviceExplain varchar(200),
+    serviceProcedure varchar(200),
+	clientPreps varchar(200),
+    mainImg varchar(200),
+    subImgExist int default 0,
+    subImg1 varchar(200) default "",
+    subImg2 varchar(200) default "",
+    subImg3 varchar(200) default "",
+    subImg4 varchar(200) default "",
+    subImg5 varchar(200) default "",
+    subImg6 varchar(200) default "",
+    subImg7 varchar(200) default "",
+    subImg8 varchar(200) default "",
+    subImg9 varchar(200) default ""
+
+);
+select * from TemporaryServiceInfo;
+
+-- file1 varchar(200) default "",
+--     file2 varchar(200) default "",
+--     file3 varchar(200) default "",
+--     file4 varchar(200) default "",
+--     file5 varchar(200) default "",
+--     file6 varchar(200) default "",
+--     file7 varchar(200) default "",
+--     file8 varchar(200) default "",
+--     file9 varchar(200) default ""
+
+drop table serviceTopCat;
+create table serviceTopCat(
+	serviceTopCatCode varchar(30) primary key,
+    serviceTopCatName varchar(100) not null,
+    serviceTypeChkCount int not null,
+    serviceTypeChkCode varchar(30)
+	-- foreign key (serviceTypeChk) references serviceType(serviceTypeCode)
+);
+
+ drop table serviceTypeSeq;
+ create table serviceTypeSeq(
+ serviceTypeCode int not null auto_increment primary key);
+ select * from serviceTypeSeq;
+
+drop table serviceType;
+create table serviceType(
+	serviceTypeCode varchar(30) primary key DEFAULT '0',
+    serviceTypeName varchar(100) not null,
+    mandatoryInput int default 0
+    );
+    select * from serviceType;
+
+drop table serviceTypeChk;
+create table serviceTypeChk(
+	serviceTypeChkCode varchar(30) primary key,
+    serviceTypeCode1 varchar(30) default '',
+    serviceTypeCode2 varchar(30) default '',
+    serviceTypeCode3 varchar(30) default '',
+    serviceTypeCode4 varchar(30) default '',
+    serviceTypeCode5 varchar(30) default '',
+    serviceTypeCode6 varchar(30) default '',
+    serviceTypeCode7 varchar(30) default '',
+    serviceTypeCode8 varchar(30) default '',
+    serviceTypeCode9 varchar(30) default '',
+    serviceTypeCode10 varchar(30) default ''
+--    foreign key (serviceTypeChkCode) references serviceTopCat(serviceTypeChkCode)
+);
+
+insert into serviceTypeChk(
+	serviceTypeChkCode, serviceTypeCode1, serviceTypeCode2, serviceTypeCode3, serviceTypeCode4, serviceTypeCode5, serviceTypeCode6,  serviceTypeCode7,  serviceTypeCode8,  serviceTypeCode9,  serviceTypeCode10)
+ values	('tca01', 'stc01', 'stc02', 'stc13', 'stc14', 'stcl7', 'stcl8', '', '', '', ''),
+		('tca02', 'stc01', 'stc02', 'stc12', 'stc15', 'stcl7', 'stcl9', '', '', '', ''),
+		('tca03', 'stc01', 'stc02', 'stc11', 'stc15', 'stcl7', 'stcl9', 'stc27', 'stc31', '', ''),
+		('tca04', 'stc01', 'stc02', 'stc10', 'stc15', 'stc21', 'stc22', 'stc23', 'stc24', '', ''),
+		('tca05', 'stc01', 'stc02', 'stc23', 'stc15', 'stc27', 'stc28', 'stc31', '', '', ''),
+		('tca06', 'stc01', 'stc02', 'stc24', 'stc25', 'stc26', 'stc27', 'stc31', '', '', ''),
+		('tca07', 'stc01', 'stc02', 'stc25', 'stc15', 'stcl7', 'stcl8', 'stcl9', '', '', ''),
+		('tca08', 'stc01', 'stc02', 'stc26', 'stc15', 'stc27', 'stc13', 'stc19', 'stc31', 'stc32', 'stc33'),
+		('tca09', 'stc01', 'stc02', 'stc27', 'stc15', 'stc31', 'stc32', 'stc33', '', '', ''),
+		('tca10', 'stc01', 'stc02', 'stc28', 'stc15', 'stcl7', 'stcl9', 'stc21', '', '', ''),
+		('tca11', 'stc01', 'stc02', 'stc29', 'stc15', 'stc30', 'stc31', 'stc32', '', '', '')
+ ;
+
+    select * from serviceTypeChk;
+
+drop trigger serviceType_insert;
+
+DELIMITER $$
+CREATE TRIGGER serviceType_insert
+BEFORE INSERT ON serviceType
+FOR EACH ROW
+BEGIN
+INSERT INTO serviceTypeSeq VALUES (NULL);
+SET NEW.serviceTypeCode = CONCAT('stc', LPAD(LAST_INSERT_ID(), 2, '0'));
+END$$
+DELIMITER ;
+
+    insert into serviceType(
+		serviceTypeName, mandatoryInput
+    ) values
+--     ('기술수준', '초급', 'selbox');
+('기술수준', 1),
+('팀규모', 1),
+('플랫폼', 1),
+('기기', 0),
+('작업 분야', 1),
+('개발언어', 0),
+('라이브러리', 0),
+('프레임워크', 0),
+('데이터베이스', 0),
+('웹빌더 · CMS', 0),
+('채널', 1),
+('서비스', 1),
+('작업분야', 1),
+('업종', 0),
+('앱 분류', 1),
+('운영체제', 0),
+('앱 기능', 1),
+('애플리케이션 분류', 1),
+('기능설명', 0),
+('소프트웨어', 0),
+('작업 분야', 1),
+('AI엔진', 0),
+('노코드 카테고리', 0),
+('노코드 소프트웨어', 0),
+('노코드 플러그인', 0),
+('메타버스 플랫폼', 1),
+('블록체인 NFT 기능', 0),
+('데이터 형태', 1),
+('데이터 분야', 0),
+('데이터베이스 작업 분야', 1),
+('테스트', 0),
+('시작파일', 0),
+('변환파일', 0);
+
+select * from serviceType;
+
+insert into serviceTopCat(
+	serviceTopCatCode, serviceTopCatName, serviceTypeChkCount, serviceTypeChkCode)
+	values('tca01', '웹, 모바일 기획', 5, 'tca01'),
+('tca02', '기타 기획', 5, 'tca02'),
+('tca03', '홈페이지', 7, 'tca03'),
+('tca04', '랜딩페이지', 7, 'tca04'),
+('tca05', '프론트엔드 · 퍼블리싱', 5, 'tca05'),
+('tca06', '검색최적화 · SEO', 4, 'tca06'),
+('tca07', '애널리틱스', 4, 'tca07'),
+('tca08', '홈페이지 수정 · 유지보수', 8, 'tca08'),
+('tca09', '쇼핑몰', 7, 'tca09'),
+('tca10', '쇼핑몰 수정 · 유지보수', 8, 'tca10'),
+('tca11', '앱', 10, 'tca11'),
+('tca12', '앱 수정 · 유지보수', 10, 'tca12'),
+('tca13', '비지니스 애플리케이션', 10, 'tca13'),
+('tca14', 'PC · 웹 프로그램', 8, 'tca14'),
+('tca15', 'PC · 웹 프로그램 수정 유지보수', 9, 'tca15'),
+('tca16', 'PC · 웹 프로그램 업무자동화', 9, 'tca16'),
+('tca17', '백엔드 · 서버', 8, 'tca17'),
+('tca18', '봇 · 챗봇', 4, 'tca18'),
+('tca19', 'AI 애플리케이션 · ', 4, 'tca19'),
+('tca20', '게임 · AR · VR', 2, 'tca20'),
+('tca21', '노코드 · 로우코드', 5, 'tca21'),
+('tca22', '메타버스', 3, 'tca22'),
+('tca23', '블록체인 · NFT', 8, 'tca23'),
+('tca24', '데이터 구매 · 구축', 6, 'tca24'),
+('tca25', '데이터 마이닝 · 크롤링', 4, 'tca25'),
+('tca26', '데이터 전처리', 4, 'tca26'),
+('tca27', '데이터 라벨링', 6, 'tca27'),
+('tca28', '데이터 분석 시각화', 4, 'tca28'),
+('tca29', '인공지능 · 머신러닝', 4, 'tca29'),
+('tca30', '데이터베이스', 4, 'tca30'),
+('tca31', '하드웨어 · 임베디드', 4, 'tca31'),
+('tca32', '보안', 6, 'tca32'),
+('tca33', 'QA · 테스트', 5, 'tca33'),
+('tca34', '컴퓨터 기술지원', 3, 'tca34'),
+('tca35', '파일변환', 4, 'tca35'),
+('tca36', '기타', 2, 'tca36');
+
+select * from serviceTopCat;

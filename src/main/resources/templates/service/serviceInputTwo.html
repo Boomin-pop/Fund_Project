@@ -158,16 +158,16 @@
         + '<input type="checkbox" name="AddOptExist'+cnt+'" style="width:25px;" checked></div>'
         + '<div class="tailored"><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>제목</b></p></div>'
-        + '<div class="tailedInput"><input type="text" name="added_Input" name="AddOptTitle'+cnt+'" placeholder="제목을 입력해주세요"><span>경우</span></div>'
+        + '<div class="tailedInput"><input type="text" class="added_Input" name="AddOptTitle'+cnt+'" placeholder="제목을 입력해주세요"><span>경우</span></div>'
         + '</div><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>설명</b></p></div>'
-        + '<div class="tailedInput"><input type="text" name="added_Input" name="AddOPtExplain'+cnt+'" placeholder="설명을 입력해주세요"></div>'
+        + '<div class="tailedInput"><input type="text" class="added_Input" name="AddOPtExplain'+cnt+'" placeholder="설명을 입력해주세요"></div>'
         + '</div><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>추가금액</b></p></div>'
-        + '<div class="tailedInputS"><input type="text" name="added_Input" name="AddOptPrice'+cnt+'" placeholder="최소 1,000"><span>원 추가시</span></div>'
+        + '<div class="tailedInputS"><input type="text" class="added_Input" name="AddOptPrice'+cnt+'" placeholder="최소 1,000"><span>원 추가시</span></div>'
         + '</div><div class="d-flex">'
         + '<div class="tailedTitle"><p name="added_title"><b>추가작업일</b></p></div>'
-        + '<div class="tailedInputS"><input type="text" name="added_Input" name="AddOptDay'+cnt+'" placeholder="최대 30일"><span>일 추가</span></div>'
+        + '<div class="tailedInputS"><input type="text" class="added_Input" name="AddOptDay'+cnt+'" placeholder="최대 30일"><span>일 추가</span></div>'
         + '</div></div></div>';
 
     $(".addbtn").on("click", function () {
@@ -182,13 +182,13 @@
     function keyCount2(keyNum) {
         document.getElementById("priceTitleCharCounter").textContent = "  " + keyNum.value.length + "/20";
         if (keyNum.value.length > 20) {document.getElementById("priceTitleCharCounter").style.color = 'red';
-        } else {document.getElementById("charCounter").style.color = 'black';}
+        } else {document.getElementById("priceContentsCharCounter").style.color = 'black';}
     }
 
     function keyCount3(keyNum) {
         document.getElementById("priceContentsCharCounter").textContent = "  " + keyNum.value.length + "/60";
         if (keyNum.value.length > 60) {document.getElementById("priceContentsCharCounter").style.color = 'red';
-        } else {document.getElementById("charCounter").style.color = 'black';}
+        } else {document.getElementById("priceContentsCharCounter").style.color = 'black';}
     }
 
     function chk(obj) {

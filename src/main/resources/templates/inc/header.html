@@ -13,19 +13,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css">
 
-
     <link href="/css/main.css" rel="stylesheet"/>
+    <style>
+        .topYellowBar > h5, .topYellowBar > h6{
+            line-height: 48px;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
 
-    <div class="container-fluid d-flex" style="background-color: rgb(255, 212, 56)">
-        <div style="width:600px"></div>
-        <h2 class="me-auto"><b>전문가가 필요한 순간, 크몽</b></h2> <h4>신규가입하고 <b>10만원 쿠폰팩</b> 받아가세요!</h4>
-        <div style="width:600px"></div>
+    <div class="container-fluid d-flex justify-content-around topYellowBar" style="height:48px; line-height:48px; background-color: rgb(255, 212, 56)">
+<!--        <div style="width:600px"></div>-->
+<!--        <div class="d-flex justify-content-space-between aligns-item-center" style="line-height:48px;">-->
+        <h5><b>전문가가 필요한 순간, 크몽</b></h5> <h6>신규가입하고 <b>10만원 쿠폰팩</b> 받아가세요! ></h6>
+<!--    </div>-->
+<!--        <div style="width:600px"></div>-->
     </div>
 </div>
-<nav class="navbar navbar-expand-sm sticky-top">
+<nav class="navbar navbar-expand-sm" id="stickyTopHead" style="position:sticky; top:0px">
     <div class="container">
         <ul class="navbar-nav w-100">
             <li class="nav-item">
@@ -45,7 +51,7 @@
 
 <!--            <li class="nav-item" sec:authorize="isAnonymous()">-->
             <li class="nav-item">
-                <a class="nav-link" href="/user/joinMethod" style="background-color: yellow">회원가입</a>
+                <a class="nav-link bg-warning" href="/user/joinMethod">회원가입</a>
             </li>
                 <!-- security 구현 필요 -->
 <!--            <li class="nav-item ms-auto" sec:authorize="isAuthenticated()">-->
