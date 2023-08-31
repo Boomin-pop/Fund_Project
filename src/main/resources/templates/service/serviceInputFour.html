@@ -417,11 +417,12 @@
             cnt++;
 
             var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg'+cnt+'" style="display:none" onchange="previewImg(this)" accept="image/gif, image/jpeg, image/png, image/bmp"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
-          //  var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
 
             if (cnt < 4) {$("#imgCardSec1").append(appendedDetailImg);}
             if (cnt > 3 && cnt < 7) {$("#imgCardSec2").append(appendedDetailImg);}
             if (cnt > 6 && cnt < 10) {$("#imgCardSec3").append(appendedDetailImg);}
+
+            //  var appendedDetailImg = ' <div class="imgUploadBox" style="border:1px solid white"><label class="cardLabel"><div class="display:hidden"></div><div class="deleteIcon" style="visibility: hidden">🗑️</div><input type="file" class="concealedInput" name="subImg" style="display:none" onchange="previewImg(this)"><div class="deleteHere"><img class="imgViewSpace" src="/imgs/imageupload2.png" ></div></label></div>';
             // var imgCardSec = "#imgCardSec1"; // Default section
             //
             // if (cnt > 3 && cnt < 7) {
@@ -450,10 +451,10 @@
             // fileAppend();
 
             if (pic.files && pic.files[0]) {
-                // filereader = 자바스크립트 라이브러리 객체
-                var fileReader = new FileReader();
-                //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
-                fileReader.onload = function (e) {
+                var fileReader = new FileReader();                    // filereader = 자바스크립트 라이브러리 객체
+
+
+                fileReader.onload = function (e) {                       //onload = 불러오기 성공시 발동하는 이벤트	/  매개변수 e를 쓰는 익명함수
                     imgTag.height = 251;
                     imgTag.width = 186;
                     // 이벤트가 발생한 객체의 결과값 = 사진파일을 가져옴
@@ -462,10 +463,6 @@
                         imgTagSource = imgTag.src;
                         console.log("이미지 업로드!!!")
                         console.log("이미지태그소스의 길이 : "+imgTagSource.length);
-
-                        // console.log("imgTag.src : "+imgTag.src);
-                        // console.log("imgTagSource : "+imgTagSource);
-                        // console.log("imgTagSource의 길이는? : "+imgTagSource.length);
                         document.getElementById("imgMainBox").style.border = '1px solid white';
                         document.getElementById("mainImgAlert").style.display = 'none';
                         mainImgInputChk = "true"; }

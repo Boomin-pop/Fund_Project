@@ -2,7 +2,6 @@ package com.kmong.kmongdemo.controller;
 
 import com.kmong.kmongdemo.domain.AdminCategoryDTO;
 import com.kmong.kmongdemo.domain.AdminServiceTypeDTO;
-import com.kmong.kmongdemo.domain.CategoryDTO;
 import com.kmong.kmongdemo.domain.JobDTO;
 import lombok.RequiredArgsConstructor;
 
